@@ -60,6 +60,7 @@
         <Location left="884" top="317" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
+        <Member type="Method">void observe(UIEvent event)</Member>
       </Entity>
       <Entity type="Interface">
         <Name>IObserverView</Name>
@@ -67,6 +68,22 @@
         <Location left="321" top="529" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
+        <Member type="Method">void update()</Member>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Bei folgenden Ereignissen muss ObserverView informiert werden (Änderung Datenbestand):
+- UIModifyEvent
+- UIActionAddEvent
+- UIActionDeleteEvent
+
+Überlegung: 
+A) Push Observer: Bei Änderung einfach Event an View schicken -&gt; Sie übernimmt genau diese Änderung
+
+B) Pull Observer: Komplette View aktualisieren (vermeidet Fehler: Falls einmal Änderung vergessen werden würde, wäre diese trotzdem danach berücksichtigt) -&gt; Robustheit. 
+
+Wir entscheiden uns für B)</Text>
+        <Location left="10" top="645" />
+        <Size width="236" height="243" />
       </Entity>
     </Entities>
     <Relationships>
@@ -587,128 +604,76 @@
       <Entity type="Interface">
         <Name>IView</Name>
         <Access>Public</Access>
-        <Location left="503" top="149" />
+        <Location left="269" top="10" />
         <Size width="162" height="180" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Class">
         <Name>View</Name>
         <Access>Public</Access>
-        <Location left="503" top="367" />
-        <Size width="214" height="156" />
+        <Location left="298" top="233" />
+        <Size width="214" height="162" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private IModel model</Member>
         <Member type="Field">private IObserverController obsController</Member>
-        <Member type="Method">public void newMethod()</Member>
+        <Member type="Field">private UIMainFrame mainFrame</Member>
         <Member type="Constructor">public View(IModel model)</Member>
+        <Member type="Method">void update()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Interface">
         <Name>IModel</Name>
         <Access>Public</Access>
-        <Location left="268" top="241" />
+        <Location left="34" top="102" />
         <Size width="162" height="179" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Class">
-        <Name>UIFrame</Name>
-        <Access>Public</Access>
-        <Location left="981" top="162" />
-        <Size width="162" height="114" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>JFrame</Name>
-        <Access>Public</Access>
-        <Location left="1198" top="159" />
-        <Size width="162" height="77" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
         <Name>UIPanel</Name>
         <Access>Public</Access>
-        <Location left="1001" top="470" />
+        <Location left="634" top="1100" />
         <Size width="162" height="92" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>JPanel</Name>
-        <Access>Public</Access>
-        <Location left="1216" top="470" />
-        <Size width="162" height="77" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIProdukteinsatz</Name>
         <Access>Public</Access>
-        <Location left="603" top="614" />
-        <Size width="162" height="123" />
+        <Location left="770" top="625" />
+        <Size width="162" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private UITextField text</Member>
         <Member type="Constructor">public UIProdukteinsatz()</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>UITextfield</Name>
-        <Access>Public</Access>
-        <Location left="1001" top="795" />
-        <Size width="162" height="99" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>JTextfield</Name>
-        <Access>Public</Access>
-        <Location left="1216" top="795" />
-        <Size width="162" height="102" />
-        <Collapsed>False</Collapsed>
+        <Member type="Method">void update(IModel model)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIZielbestimmung</Name>
         <Access>Public</Access>
-        <Location left="785" top="614" />
-        <Size width="162" height="123" />
+        <Location left="974" top="625" />
+        <Size width="162" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private UITextField text</Member>
         <Member type="Constructor">public UIZielbestimmung()</Member>
+        <Member type="Method">void update(IModel model)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIProduktDaten</Name>
         <Access>Public</Access>
-        <Location left="345" top="625" />
-        <Size width="223" height="128" />
+        <Location left="333" top="625" />
+        <Size width="223" height="145" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private UILabel title</Member>
         <Member type="Field">private List&lt;UIProduktDatum&gt; produktDaten</Member>
         <Member type="Field">private UIButton add</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>UIButton</Name>
-        <Access>Public</Access>
-        <Location left="981" top="318" />
-        <Size width="162" height="77" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>JButton</Name>
-        <Access>Public</Access>
-        <Location left="1216" top="318" />
-        <Size width="162" height="77" />
-        <Collapsed>False</Collapsed>
+        <Member type="Method">void update(IModel model)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Interface">
         <Name>IObserverController</Name>
         <Access>Public</Access>
-        <Location left="268" top="447" />
+        <Location left="34" top="310" />
         <Size width="162" height="94" />
         <Collapsed>False</Collapsed>
         <Member type="Method">void observe(UIEvent event)</Member>
@@ -716,87 +681,110 @@
       <Entity type="Class">
         <Name>UIProduktDatum</Name>
         <Access>Public</Access>
-        <Location left="333" top="782" />
+        <Location left="333" top="826" />
         <Size width="234" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private UIButton delete</Member>
         <Member type="Field">private UITextfield name</Member>
-        <Member type="Field">private UIId id</Member>
-        <Member type="Field">private UIComponentList&lt;UIAttribut&gt; attribute</Member>
-        <Member type="Field">private UIComponentList&lt;UIId&gt; verweise</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>UIComponentList</Name>
-        <Access>Public</Access>
-        <Location left="949" top="946" />
-        <Size width="162" height="94" />
-        <Collapsed>False</Collapsed>
-        <Member type="Field">private List&lt;T&gt; components</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>UIAttribut</Name>
-        <Access>Public</Access>
-        <Location left="357" top="1058" />
-        <Size width="162" height="128" />
-        <Collapsed>False</Collapsed>
-        <Member type="Field">private UITextfield name</Member>
-        <Member type="Field">private UITextfield type</Member>
-        <Member type="Field">private UITextfield anzahl</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>UIId</Name>
-        <Access>Public</Access>
-        <Location left="731" top="850" />
-        <Size width="162" height="77" />
-        <Collapsed>False</Collapsed>
+        <Member type="Field">private UITextfield id</Member>
+        <Member type="Field">private UITextfield attribute</Member>
+        <Member type="Field">private UITextfield verweise</Member>
+        <Member type="Method">void update(IModel model)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIUmgebung</Name>
         <Access>Public</Access>
-        <Location left="1107" top="614" />
-        <Size width="162" height="123" />
+        <Location left="1177" top="625" />
+        <Size width="162" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private UITextField text</Member>
         <Member type="Constructor">public UIUmgebung()</Member>
+        <Member type="Method">void update(IModel model)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIProduktFunktionen</Name>
         <Access>Public</Access>
-        <Location left="139" top="625" />
-        <Size width="162" height="128" />
+        <Location left="34" top="625" />
+        <Size width="255" height="145" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private UILabel title</Member>
         <Member type="Field">private List&lt;UIProduktFunktion&gt; produktFunktionen</Member>
         <Member type="Field">private UIButton add</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>UILabel</Name>
-        <Access>Public</Access>
-        <Location left="1072" top="1075" />
-        <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Member type="Method">void update(IModel model)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIProduktFunktion</Name>
         <Access>Public</Access>
-        <Location left="68" top="782" />
+        <Location left="34" top="826" />
         <Size width="234" height="216" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">private UIId id</Member>
+        <Member type="Field">private UITextfield id</Member>
         <Member type="Field">private UIButton delete</Member>
         <Member type="Field">private UITextfield name</Member>
         <Member type="Field">private UITextfield quelle</Member>
         <Member type="Field">private UITextfield akteur</Member>
         <Member type="Field">private UITextfield beschreibung</Member>
-        <Member type="Field">private UIComponentList&lt;UIId&gt; verweise</Member>
+        <Member type="Field">private UITextfield verweise</Member>
+        <Member type="Method">void update(IModel model)</Member>
         <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIMainPanel</Name>
+        <Access>Public</Access>
+        <Location left="563" top="340" />
+        <Size width="255" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private UIProduktFunktionen panelFunktionen</Member>
+        <Member type="Field">private UIProduktDaten panelDaten</Member>
+        <Member type="Field">private UIProduktEinsatz panelProdukteinsatz</Member>
+        <Member type="Field">private UIZielbestimmung panelZielbestimmung</Member>
+        <Member type="Field">private UIUmgebung panelUmgebung</Member>
+        <Member type="Method">void update(IModel model)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIMainFrame</Name>
+        <Access>Public</Access>
+        <Location left="592" top="152" />
+        <Size width="217" height="122" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private UIMainPanel mainPanel</Member>
+        <Member type="Method">void update(IModel model)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIFrame</Name>
+        <Access>Public</Access>
+        <Location left="905" top="172" />
+        <Size width="163" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IObserverView</Name>
+        <Access>Public</Access>
+        <Location left="449" top="10" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void update()</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>UIUpdateable</Name>
+        <Access>Public</Access>
+        <Location left="974" top="340" />
+        <Size width="195" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void update(IModel model)</Member>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Sobald es eine Änderung im Model gibt, wird IObserverView#update aufgerufen. Daraufhin wird hierarchisch jede UI Komponente Stück für Stück aktualisiert.
+Jede Komponente aktualisiert sich anhand dem neuen Model und aktualisiert anschliessend alle Kind-Komponenten.
+z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diesen.</Text>
+        <Location left="1136" top="104" />
+        <Size width="252" height="207" />
       </Entity>
     </Entities>
     <Relationships>
@@ -804,69 +792,33 @@
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>583</X>
-          <Y>360</Y>
+          <X>349</X>
+          <Y>221</Y>
         </BendPoint>
       </Relationship>
-      <Relationship type="Generalization" first="3" second="4">
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
-      </Relationship>
-      <Relationship type="Generalization" first="5" second="6">
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
-      </Relationship>
-      <Relationship type="Generalization" first="7" second="5">
+      <Relationship type="Generalization" first="4" second="3">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>712</X>
-          <Y>588</Y>
+          <X>849</X>
+          <Y>778</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1082</X>
-          <Y>588</Y>
+          <X>701</X>
+          <Y>811</Y>
         </BendPoint>
       </Relationship>
-      <Relationship type="Generalization" first="8" second="9">
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
-      </Relationship>
-      <Relationship type="Association" first="7" second="8">
-        <Label>
-        </Label>
-        <StartOrientation>Vertical</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
-        <BendPoint relativeToStartShape="True">
-          <X>714</X>
-          <Y>787</Y>
-        </BendPoint>
-        <Direction>Unidirectional</Direction>
-        <AssociationType>Aggregation</AssociationType>
-      </Relationship>
-      <Relationship type="Generalization" first="10" second="5">
+      <Relationship type="Generalization" first="5" second="3">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>894</X>
-          <Y>589</Y>
+          <X>1061</X>
+          <Y>778</Y>
         </BendPoint>
-      </Relationship>
-      <Relationship type="Association" first="10" second="8">
-        <Label>
-        </Label>
-        <StartOrientation>Vertical</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
-        <BendPoint relativeToStartShape="True">
-          <X>877</X>
-          <Y>787</Y>
+        <BendPoint relativeToStartShape="False">
+          <X>699</X>
+          <Y>811</Y>
         </BendPoint>
-        <Direction>Unidirectional</Direction>
-        <AssociationType>Aggregation</AssociationType>
-      </Relationship>
-      <Relationship type="Generalization" first="12" second="13">
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
         <Label>
@@ -876,7 +828,7 @@
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="1" second="14">
+      <Relationship type="Association" first="1" second="7">
         <Label>
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
@@ -884,73 +836,229 @@
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
-      <Relationship type="Generalization" first="11" second="5">
+      <Relationship type="Generalization" first="6" second="3">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
-      </Relationship>
-      <Relationship type="Generalization" first="15" second="5">
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>583</X>
-          <Y>602</Y>
+          <X>465</X>
+          <Y>791</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>701</X>
+          <Y>791</Y>
         </BendPoint>
       </Relationship>
-      <Relationship type="Generalization" first="18" second="8">
-        <StartOrientation>Horizontal</StartOrientation>
+      <Relationship type="Generalization" first="8" second="3">
+        <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>918</X>
-          <Y>902</Y>
+          <X>479</X>
+          <Y>791</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>701</X>
+          <Y>790</Y>
         </BendPoint>
       </Relationship>
-      <Relationship type="Association" first="15" second="17">
+      <Relationship type="Generalization" first="9" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1281</X>
+          <Y>796</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>702</X>
+          <Y>791</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="10" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>178</X>
+          <Y>791</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>702</X>
+          <Y>791</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="11" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>183</X>
+          <Y>801</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>702</X>
+          <Y>792</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="10" second="11">
         <Label>
         </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
-        <BendPoint relativeToStartShape="False">
-          <X>445</X>
-          <Y>1024</Y>
-        </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="15" second="16">
+      <Relationship type="Association" first="6" second="8">
         <Label>
         </Label>
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
-        <AssociationType>Aggregation</AssociationType>
+        <AssociationType>Composition</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="15" second="18">
+      <Relationship type="Association" first="12" second="10">
         <Label>
         </Label>
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="12" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>592</X>
-          <Y>901</Y>
+          <X>705</X>
+          <Y>581</Y>
         </BendPoint>
-        <Direction>Unidirectional</Direction>
-        <AssociationType>Aggregation</AssociationType>
       </Relationship>
-      <Relationship type="Generalization" first="19" second="5">
-        <StartOrientation>Vertical</StartOrientation>
-        <EndOrientation>Vertical</EndOrientation>
-      </Relationship>
-      <Relationship type="Association" first="19" second="8">
+      <Relationship type="Association" first="12" second="6">
         <Label>
         </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
-        <BendPoint relativeToStartShape="False">
-          <X>1071</X>
-          <Y>764</Y>
-        </BendPoint>
         <Direction>Unidirectional</Direction>
-        <AssociationType>Aggregation</AssociationType>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="9">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="13" second="14">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="13" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="1" second="15">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>476</X>
+          <Y>204</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>476</X>
+          <Y>170</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="13" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>801</X>
+          <Y>299</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="12" second="16">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="9" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1279</X>
+          <Y>600</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="5" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1071</X>
+          <Y>596</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="4" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>868</X>
+          <Y>600</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="6" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>473</X>
+          <Y>600</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="10" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>195</X>
+          <Y>600</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="8" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>500</X>
+          <Y>595</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="11" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>213</X>
+          <Y>595</Y>
+        </BendPoint>
       </Relationship>
     </Relationships>
   </ProjectItem>
@@ -1094,9 +1202,23 @@
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Comment">
-        <Text>success wird durch den Controller im Falle einer erfolgreichen Änderung auf true gesetzt. Damit weiß die View, dass das Textfeld erfolgreich editiert wurde und der Fokus weitergegeben werden kann.</Text>
+        <Text>success wird durch den Controller im Falle einer erfolgreichen Änderung des Datenbestands auf true gesetzt. Damit weiß die View, dass das Textfeld erfolgreich editiert wurde und der Fokus weitergegeben werden kann.</Text>
         <Location left="490" top="211" />
         <Size width="234" height="112" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>Jedes einzelne Ereignis, welches der Anwender in der View ausführt (wie einen Button klicken oder ein Textfeld ändern), wird in Form eines UIEvents an den Controller gesendet, welcher dann darauf reagiert. 
+
+Da die View Events instanziiert und nicht die Reaktionen auf die verschiedenen Ereignisse kennt, enthält jedes UIEvent nur Informationen über die Aktion des Nutzers, nicht aber eine Reaktion des Controllers darauf. Nur der Controller selbst entscheidet, wie er auf Aktionen reagiert. Dieser verwendet ein Strategy Pattern (im Prinzip eine langweile Fallunterscheidung), um den konkreten Event-Typ zu identifizieren und dann entsprechend darauf zu reagieren.</Text>
+        <Location left="1244" top="42" />
+        <Size width="344" height="203" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>Falls ein ProduktDatum oder eine ProduktFunktion bearbeitet wird, wird sobald der Nutzer die Bearbeitung bestätigt ein UIModify[...]Event ausgeführt.
+Dieses enthält die ID des bestehenden Datums/der bestehenden Funktion, sowie eine komplett neue Instanz der Klasse, welche alle neu eingetragenen Werte beinhaltet (proposal).
+Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw.) und im Erfolgsfall die neuen Werte auf das bestehende Objekt übertragen.</Text>
+        <Location left="105" top="732" />
+        <Size width="303" height="155" />
       </Entity>
     </Entities>
     <Relationships>
@@ -1228,6 +1350,14 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
+      <Relationship type="Comment" first="18" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Comment" first="18" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
     </Relationships>
   </ProjectItem>
   <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
@@ -1338,6 +1468,130 @@
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Comment" first="6" second="5">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Components</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>JButton</Name>
+        <Access>Public</Access>
+        <Location left="772" top="167" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIButton</Name>
+        <Access>Public</Access>
+        <Location left="501" top="167" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JFrame</Name>
+        <Access>Public</Access>
+        <Location left="772" top="67" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIFrame</Name>
+        <Access>Public</Access>
+        <Location left="508" top="67" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UILabel</Name>
+        <Access>Public</Access>
+        <Location left="513" top="512" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JTextfield</Name>
+        <Access>Public</Access>
+        <Location left="772" top="388" />
+        <Size width="162" height="102" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JPanel</Name>
+        <Access>Public</Access>
+        <Location left="772" top="273" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UITextfield</Name>
+        <Access>Public</Access>
+        <Location left="501" top="388" />
+        <Size width="162" height="99" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIPanel</Name>
+        <Access>Public</Access>
+        <Location left="501" top="273" />
+        <Size width="162" height="92" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JLabel</Name>
+        <Access>Public</Access>
+        <Location left="772" top="512" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="1" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="3" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="7" second="5">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>696</X>
+          <Y>442</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>738</X>
+          <Y>442</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="6">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>688</X>
+          <Y>322</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>744</X>
+          <Y>322</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="9">
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
