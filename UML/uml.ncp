@@ -116,6 +116,8 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="5" second="6">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -130,6 +132,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="0">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -156,6 +160,8 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="3" second="7">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -166,6 +172,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="0">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -180,6 +188,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="2">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -198,14 +208,14 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Interface">
         <Name>IModel</Name>
         <Access>Public</Access>
-        <Location left="385" top="89" />
+        <Location left="365" top="172" />
         <Size width="162" height="111" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Class">
         <Name>Model</Name>
         <Access>Public</Access>
-        <Location left="317" top="249" />
+        <Location left="297" top="332" />
         <Size width="321" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">IObserverView obsView</Member>
@@ -222,37 +232,39 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataAnforderungssammlung</Name>
         <Access>Public</Access>
-        <Location left="644" top="405" />
+        <Location left="624" top="488" />
         <Size width="416" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private DataZielbestimmung zielbestimmung</Member>
         <Member type="Field">private DataProdukteinsatz produkteinsatz</Member>
         <Member type="Field">private List&lt;DataProduktFunktion&gt; produktFunktionen</Member>
         <Member type="Field">private List&lt;DataProduktDatum&gt; produktDaten</Member>
-        <Member type="Field">private IDataAufwandsabschaetzung aufwandsabschaetzung</Member>
+        <Member type="Field">private IDataFunctionPointAnalyse aufwandsabschaetzung</Member>
         <Member type="Constructor">public DataAnforderungssammlung(DataZielbestimmung zielbestimmung, DataProdukteinsatz produkteinsatz, List&lt;DataProduktFunktion&gt; produktFunktionen, List&lt;DataProduktDatum&gt; produktDaten, IDataAufwandsabschaetzung aufwandsabschaetzung)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Interface">
         <Name>IExporter</Name>
         <Access>Public</Access>
-        <Location left="1011" top="227" />
-        <Size width="397" height="117" />
+        <Location left="991" top="310" />
+        <Size width="536" height="145" />
         <Collapsed>False</Collapsed>
-        <Member type="Method">IDataAnforderungssammlung load(File f)</Member>
-        <Member type="Method">void save(IDataAnforderungssammlung anforderungsSammlung, File f)</Member>
+        <Member type="Method">IDataAnforderungssammlung loadAnforderungssammlung(File f)</Member>
+        <Member type="Method">void saveAnforderungssammlung(IDataAnforderungssammlung anforderungsSammlung, File f)</Member>
+        <Member type="Method">IDataFunctionPointAnalyse loadFunctionPointAnalyse(File f)</Member>
+        <Member type="Method">void saveFunctionPointAnalyse(IDataFunctionPointAnalyse analyse, File f)</Member>
       </Entity>
       <Entity type="Interface">
         <Name>IDataAnforderungssammlung</Name>
         <Access>Public</Access>
-        <Location left="690" top="271" />
+        <Location left="670" top="354" />
         <Size width="217" height="77" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Class">
         <Name>DataZielbestimmung</Name>
         <Access>Public</Access>
-        <Location left="368" top="815" />
+        <Location left="348" top="898" />
         <Size width="218" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public boolean writeText(String neuerText)</Member>
@@ -262,7 +274,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataProdukteinsatz</Name>
         <Access>Public</Access>
-        <Location left="317" top="690" />
+        <Location left="297" top="773" />
         <Size width="228" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public boolean writeText(String neuerText)</Member>
@@ -272,7 +284,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataText</Name>
         <Access>Public</Access>
-        <Location left="103" top="690" />
+        <Location left="82" top="773" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String text</Member>
@@ -284,7 +296,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataProduktFunktion</Name>
         <Access>Public</Access>
-        <Location left="853" top="667" />
+        <Location left="810" top="754" />
         <Size width="387" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String name</Member>
@@ -299,7 +311,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Interface">
         <Name>IIdentifiable</Name>
         <Access>Public</Access>
-        <Location left="1385" top="901" />
+        <Location left="1365" top="984" />
         <Size width="162" height="94" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public DataId getId()</Member>
@@ -307,7 +319,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataId</Name>
         <Access>Public</Access>
-        <Location left="1385" top="769" />
+        <Location left="1365" top="852" />
         <Size width="162" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String id</Member>
@@ -318,7 +330,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataProduktDatum</Name>
         <Access>Public</Access>
-        <Location left="912" top="922" />
+        <Location left="892" top="1005" />
         <Size width="374" height="162" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String name</Member>
@@ -331,7 +343,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataAttribut</Name>
         <Access>Public</Access>
-        <Location left="1371" top="1022" />
+        <Location left="1351" top="1105" />
         <Size width="176" height="145" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private Class type</Member>
@@ -343,7 +355,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>XMLExporter</Name>
         <Access>Public</Access>
-        <Location left="1080" top="389" />
+        <Location left="1069" top="488" />
         <Size width="401" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">IDataAnforderungssammlung load(File f)</Member>
@@ -353,7 +365,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Interface">
         <Name>IDataSchaetzKonfiguration</Name>
         <Access>Public</Access>
-        <Location left="30" top="405" />
+        <Location left="10" top="488" />
         <Size width="218" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">void load(File f)</Member>
@@ -362,14 +374,14 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Interface">
         <Name>IDataAufwandsabschaetzung</Name>
         <Access>Public</Access>
-        <Location left="602" top="1080" />
+        <Location left="582" top="1163" />
         <Size width="291" height="77" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Class">
         <Name>DataSchaetzKonfiguration</Name>
         <Access>Public</Access>
-        <Location left="48" top="549" />
+        <Location left="28" top="632" />
         <Size width="162" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">void load(File f)</Member>
@@ -379,12 +391,100 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataUmgebung</Name>
         <Access>Public</Access>
-        <Location left="403" top="955" />
+        <Location left="383" top="1038" />
         <Size width="218" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public boolean writeText(String neuerText)</Member>
         <Member type="Constructor">public DataUmgebung(String text)</Member>
         <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Model: Komplette Datenstruktur. Wird genau so auch gespeichert.</Text>
+        <Location left="671" top="161" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Class">
+        <Name>DataFunctionPointAnalyse</Name>
+        <Access>Public</Access>
+        <Location left="1842" top="565" />
+        <Size width="587" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Map&lt;IIdentifiable, IDataFunctionPointClassification&gt; map</Member>
+        <Member type="Field">private double realerAufwand</Member>
+        <Member type="Constructor">public DataFunctionPointAnalyse(Map&lt;IIdentifiable, IDataFunctionPointClassification&gt; map, double realerAufwand)</Member>
+        <Member type="Method">void init(List&lt;IIdentifiable&gt; list, IDataSchaetzKonfiguration gewichtsfaktoren)</Member>
+        <Member type="Method">double getRealerAufwand()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IDataFunctionPointAnalyse</Name>
+        <Access>Public</Access>
+        <Location left="1546" top="423" />
+        <Size width="399" height="118" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void init(List&lt;IIdentifiable&gt; list, IDataSchaetzKonfiguration gewichtsfaktoren)</Member>
+        <Member type="Method">double getRealerAufwand()</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IDataFunctionPointClassification</Name>
+        <Access>Public</Access>
+        <Location left="1870" top="754" />
+        <Size width="344" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">FPFunktionsTyp getFunktionsTyp()</Member>
+        <Member type="Method">FPKlassifizierung getKlassifizierung()</Member>
+        <Member type="Method">FPKomplexitaet getKomplexitaet()</Member>
+        <Member type="Method">void setFunktionsTyp(FPFunktionstyp typ)</Member>
+        <Member type="Method">boolean setKlassifizierung(FPKlassifizierung klassifizierung)</Member>
+        <Member type="Method">void setKomplexitaet(FPKomplexitaet komplexitaet)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>DataFunctionPointClassification</Name>
+        <Access>Public</Access>
+        <Location left="1842" top="984" />
+        <Size width="279" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private FunktionsTyp funktionstyp</Member>
+        <Member type="Field">private FPKlassifizierung klassifizierung</Member>
+        <Member type="Field">private FPKomplexitaet komplexitaet</Member>
+        <Member type="Method">FPFunktionsTyp getFunktionsTyp()</Member>
+        <Member type="Method">FPKlassifizierung getKlassifizierung()</Member>
+        <Member type="Method">FPKomplexitaet getKomplexitaet()</Member>
+        <Member type="Method">void setFunktionsTyp(FPFunktionstyp typ)</Member>
+        <Member type="Method">boolean setKlassifizierung(FPKlassifizierung klassifizierung)</Member>
+        <Member type="Method">void setKomplexitaet(FPKomplexitaet komplexitaet)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>FPFunktionsTyp</Name>
+        <Access>Public</Access>
+        <Location left="2373" top="754" />
+        <Size width="162" height="95" />
+        <Collapsed>False</Collapsed>
+        <Value>DATEN</Value>
+        <Value>TRANSAKTION</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>FPKlassifzierung</Name>
+        <Access>Public</Access>
+        <Location left="2373" top="866" />
+        <Size width="162" height="146" />
+        <Collapsed>False</Collapsed>
+        <Value>TRANSAKTION_EI</Value>
+        <Value>TRANSAKTION_EO</Value>
+        <Value>TRANSAKTION_EQ</Value>
+        <Value>DATEN_ILF</Value>
+        <Value>DATEN_ELF</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>FPKomplexitaet</Name>
+        <Access>Public</Access>
+        <Location left="2378" top="1033" />
+        <Size width="162" height="112" />
+        <Collapsed>False</Collapsed>
+        <Value>MITTEL</Value>
+        <Value>EINFACH</Value>
+        <Value>KOMPLEX</Value>
       </Entity>
     </Entities>
     <Relationships>
@@ -392,8 +492,8 @@ Wir entscheiden uns für B)</Text>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>468</X>
-          <Y>225</Y>
+          <X>448</X>
+          <Y>308</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Realization" first="2" second="4">
@@ -405,12 +505,12 @@ Wir entscheiden uns für B)</Text>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>968</X>
-          <Y>312</Y>
+          <X>948</X>
+          <Y>395</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>947</X>
-          <Y>312</Y>
+          <X>927</X>
+          <Y>395</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -424,69 +524,73 @@ Wir entscheiden uns für B)</Text>
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="2" second="6">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>788</X>
-          <Y>651</Y>
+          <X>768</X>
+          <Y>734</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="5">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>787</X>
-          <Y>646</Y>
+          <X>767</X>
+          <Y>729</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>573</X>
-          <Y>736</Y>
+          <X>553</X>
+          <Y>819</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="8" second="10">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="8">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>787</X>
-          <Y>646</Y>
+          <X>767</X>
+          <Y>729</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1162</X>
-          <Y>646</Y>
+          <X>1119</X>
+          <Y>733</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="11" second="12">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="11">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>788</X>
-          <Y>646</Y>
+          <X>768</X>
+          <Y>729</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>788</X>
-          <Y>941</Y>
+          <X>768</X>
+          <Y>1024</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -495,30 +599,28 @@ Wir entscheiden uns für B)</Text>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1354</X>
-          <Y>772</Y>
+          <X>1311</X>
+          <Y>859</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Realization" first="11" second="9">
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1311</X>
-          <Y>949</Y>
+          <X>1291</X>
+          <Y>1032</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="11" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1330</X>
-          <Y>928</Y>
+          <X>1310</X>
+          <Y>1011</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1352</X>
-          <Y>825</Y>
+          <X>1332</X>
+          <Y>908</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
@@ -527,38 +629,32 @@ Wir entscheiden uns für B)</Text>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1226</X>
-          <Y>364</Y>
+          <X>1215</X>
+          <Y>463</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="14">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="15">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>786</X>
-          <Y>646</Y>
+          <X>766</X>
+          <Y>729</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>665</X>
-          <Y>303</Y>
+          <X>645</X>
+          <Y>386</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -567,33 +663,39 @@ Wir entscheiden uns für B)</Text>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>133</X>
-          <Y>541</Y>
+          <X>113</X>
+          <Y>624</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Generalization" first="17" second="7">
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>290</X>
-          <Y>878</Y>
+          <X>269</X>
+          <Y>961</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="2" second="17">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>785</X>
-          <Y>646</Y>
+          <X>765</X>
+          <Y>729</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>602</X>
-          <Y>930</Y>
+          <X>582</X>
+          <Y>1013</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="19" second="20">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="22" second="21">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
     </Relationships>
   </ProjectItem>
@@ -786,6 +888,14 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         <Location left="1136" top="104" />
         <Size width="252" height="207" />
       </Entity>
+      <Entity type="Class">
+        <Name>UIFunctionPointPanel</Name>
+        <Access>Public</Access>
+        <Location left="1603" top="310" />
+        <Size width="181" height="150" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Realization" first="1" second="0">
@@ -821,16 +931,12 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="7">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -897,24 +1003,18 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="10" second="11">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="6" second="8">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -929,32 +1029,24 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="12" second="6">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="5">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="9">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -965,16 +1057,12 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="13" second="12">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="13">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1440,8 +1528,6 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="5" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -1452,16 +1538,12 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
