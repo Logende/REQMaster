@@ -5,4 +5,13 @@ import java.util.*;
 
 public interface IDataAnforderungssammlung {
 
+    DataProdukteinsatz getDataProdukteinsatz();
+
+    DataZielbestimmung getdataZielbestimmung();
+
+    List<DataProduktFunktion> getDataProkuktFunktion();
+
+    List<DataProduktDatum> getDataProduktDatum();
+
+    IDataFunctionPointAnalyse getIDataFunctionPointAnalyse();
 }
