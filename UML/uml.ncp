@@ -116,6 +116,8 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="5" second="6">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -130,6 +132,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="0">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -156,6 +160,8 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="3" second="7">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -166,6 +172,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="0">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -180,6 +188,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="2">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -201,6 +211,7 @@ Wir entscheiden uns für B)</Text>
         <Location left="365" top="172" />
         <Size width="162" height="111" />
         <Collapsed>False</Collapsed>
+        <Member type="Method">IDataAnforderungssammlung getIDataAnforderungssammlung()</Member>
       </Entity>
       <Entity type="Class">
         <Name>Model</Name>
@@ -247,9 +258,14 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Interface">
         <Name>IDataAnforderungssammlung</Name>
         <Access>Public</Access>
-        <Location left="670" top="354" />
-        <Size width="217" height="77" />
+        <Location left="681" top="206" />
+        <Size width="217" height="179" />
         <Collapsed>False</Collapsed>
+        <Member type="Method">DataProdukteinsatz getDataProdukteinsatz()</Member>
+        <Member type="Method">DataZielbestimmung getdataZielbestimmung()</Member>
+        <Member type="Method">List&lt;DataProduktFunktion&gt; getDataProkuktFunktion()</Member>
+        <Member type="Method">List&lt;DataProduktDatum&gt; getDataProduktDatum()</Member>
+        <Member type="Method">IDataFunctionPointAnalyse getIDataFunctionPointAnalyse()</Member>
       </Entity>
       <Entity type="Class">
         <Name>DataZielbestimmung</Name>
@@ -390,7 +406,7 @@ Wir entscheiden uns für B)</Text>
       </Entity>
       <Entity type="Comment">
         <Text>Model: Komplette Datenstruktur. Wird genau so auch gespeichert.</Text>
-        <Location left="671" top="161" />
+        <Location left="947" top="156" />
         <Size width="160" height="75" />
       </Entity>
       <Entity type="Class">
@@ -476,6 +492,11 @@ Wir entscheiden uns für B)</Text>
         <Value>EINFACH</Value>
         <Value>KOMPLEX</Value>
       </Entity>
+      <Entity type="Comment">
+        <Text>Die Klasse DataAnforderungssammlung und deren Subklassen verfügen über getter und setter Funktionen, um die gespeicherten Daten weitergeben zu können. Diese Funktionen wurden aus platzgründen in der Datrstellung weg gelassem.</Text>
+        <Location left="1310" top="677" />
+        <Size width="217" height="117" />
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Realization" first="1" second="0">
@@ -499,8 +520,8 @@ Wir entscheiden uns für B)</Text>
           <Y>395</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>927</X>
-          <Y>395</Y>
+          <X>938</X>
+          <Y>247</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -514,6 +535,8 @@ Wir entscheiden uns für B)</Text>
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="2" second="6">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -524,6 +547,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="5">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -538,12 +563,16 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="8" second="10">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="8">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -558,16 +587,12 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="11" second="12">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="11">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -598,8 +623,6 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="11" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -622,16 +645,12 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="14">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="15">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -642,13 +661,11 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>645</X>
-          <Y>386</Y>
+          <X>656</X>
+          <Y>238</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -670,8 +687,6 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="2" second="17">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -927,16 +942,12 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="7">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1003,24 +1014,18 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="10" second="11">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="6" second="8">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1035,32 +1040,24 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="12" second="6">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="5">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="9">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1071,16 +1068,12 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="13" second="12">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="13">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1546,8 +1539,6 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="5" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -1558,16 +1549,12 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1624,7 +1611,7 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>JTextfield</Name>
+        <Name>JTextField</Name>
         <Access>Public</Access>
         <Location left="772" top="388" />
         <Size width="162" height="102" />
