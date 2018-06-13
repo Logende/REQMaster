@@ -1,4 +1,4 @@
-package org.dhbw.stuttgart.ita16.reqmaster.events;
+/*package org.dhbw.stuttgart.ita16.reqmaster.events;
 
 public class UIModifyProduktFunktionEvent extends UIModifyEvent {
 
@@ -6,3 +6,4 @@ public class UIModifyProduktFunktionEvent extends UIModifyEvent {
 	private DataProduktFunktion proposal;
 
 }
+*/

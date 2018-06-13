@@ -1,4 +1,4 @@
-package org.dhbw.stuttgart.ita16.reqmaster.view;
+/*package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import java.io.*;
 import java.util.*;
@@ -26,3 +26,4 @@ public class UIMainFrame extends UIFrame implements UIUpdateable {
         return mainPanel;
     }
 }
+*/

@@ -10,7 +10,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 
 	private UITextField text;
 
-	public UIProdukteinsatz()
+    public UIProdukteinsatz()
 	{
 		super();
 		this.add(text=new UITextField());

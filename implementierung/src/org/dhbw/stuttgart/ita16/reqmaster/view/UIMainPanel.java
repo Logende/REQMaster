@@ -19,7 +19,7 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 	{
 		super();
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.add(panelProdukteinsatz=new UIProduktfunktionen());
+		this.add(panelFunktionen=new UIProduktFunktionen());
 		this.add(panelDaten=new UIProduktDaten());
 		this.add(panelProdukteinsatz=new UIProdukteinsatz());
 		this.add(panelZielbestimmung=new UIZielbestimmung());
