@@ -7,6 +7,10 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 
 import javax.swing.*;
 
+/**
+ * Grafikkomponente: legt Aufbau einer Anforderungssammlung TODO ist das richtig ?
+ */
+
 public class UIMainPanel extends UIPanel implements UIUpdateable {
 
 	private UIProduktFunktionen panelFunktionen;
@@ -15,6 +19,11 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 	private UIZielbestimmung panelZielbestimmung;
 	private UIUmgebung panelUmgebung;
 
+	/**
+	 * Konstruktor der Klasse
+	 * erstellt Instanzen der Klassen UIProduktFunktionen, UIProduktDaten, UIProdukteinsatz, UIZielbestimmung und UIUmgebung
+	 * und erscheint auf der Bildfläche
+	 */
 	public UIMainPanel()
 	{
 		super();
@@ -26,8 +35,15 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 		this.add(panelUmgebung=new UIUmgebung());
 		this.setVisible(true);
 	}
+
+	/**
+	 * updatet die Instanzen der Klassen UIProduktFunktionen, UIProduktDaten, UIProdukteinsatz, UIZielbestimmung und UIUmgebung
+	 * und validiert die eigeneKlasse
+	 * @param model
+	 */
 	public void update(IModel model)
 	{
+		//update Klassenvariablen
 		panelFunktionen.update(model);
 		panelDaten.update(model);
 		panelProdukteinsatz.update(model);

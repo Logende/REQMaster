@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/REQMaster.iml" filepath="$PROJECT_DIR$/.idea/REQMaster.iml" />
       <module fileurl="file://$PROJECT_DIR$/implementierung/implementierung.iml" filepath="$PROJECT_DIR$/implementierung/implementierung.iml" />
     </modules>
   </component>

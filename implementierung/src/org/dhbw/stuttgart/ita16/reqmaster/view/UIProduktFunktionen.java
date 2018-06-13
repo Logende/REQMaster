@@ -27,6 +27,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         title = new UILabel();
         produktFunktionen = new ArrayList<>();
         add = new UIButton();
+
         this.setBounds(10,60,80,200);
         // weitere Einstellungen
     }
