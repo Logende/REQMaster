@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-
+/**
+ * Die Klasse enthält alle Eingabefelder der Function-Ponit analyse, welche nicht zur Klasse UIFunktionenDaten oder UIGewichtsfaktoren gehören.
+ */
 public class UIControll extends UIPanel {
 
     private UIButton Aufwandanzeigen;
@@ -21,7 +23,11 @@ public class UIControll extends UIPanel {
 
 	public UIControll() {
 
+	    //Superklasse Konstruktor aufrufen
 		super();
+
+		//Die Klassenvariablen Instanziieren
+
         Aufwandanzeigen=new UIButton();
         Aufwandanzeigen.setText("Aufwand in FP anzeigen");
         this.add(Aufwandanzeigen);
