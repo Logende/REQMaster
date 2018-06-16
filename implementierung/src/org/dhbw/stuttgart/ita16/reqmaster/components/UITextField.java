@@ -13,5 +13,5 @@ public class UITextField extends JTextField {
     {
         super();
     }
-    //Platz fpr Programmspezifische anpassungen
+    //Platz für Programmspezifische anpassungen
 }

@@ -15,5 +15,5 @@ public class UIPanel extends JPanel {
     public UIPanel() {
         super();
     }
-    //Platz fpr Programmspezifische anpassungen
+    //Platz für Programmspezifische anpassungen
 }
