@@ -1,7 +1,5 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
 
 public class DataId {
 
@@ -13,6 +11,14 @@ public class DataId {
 
 	public String getId() {
 		return id;
+	}
+
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof DataId){
+			return this.id.equalsIgnoreCase(((DataId) o).id);
+		}
+		return false;
 	}
 
 }
