@@ -1,4 +1,4 @@
-package org.dhbw.stuttgart.ita16.reqmaster.model;
+/*package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import org.dhbw.stuttgart.ita16.reqmaster.view.IObserverView;
 
@@ -30,3 +30,4 @@ public class Model implements IModel {
 	}
 
 }
+*/

@@ -1,4 +1,4 @@
-package org.dhbw.stuttgart.ita16.reqmaster.model;
+/*package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import java.io.*;
 import java.util.*;
@@ -21,3 +21,4 @@ public class DataAnforderungssammlung implements IDataAnforderungssammlung {
 		this.aufwandsabschaetzung = aufwandsabschaetzung;
 	}
 }
+*/
