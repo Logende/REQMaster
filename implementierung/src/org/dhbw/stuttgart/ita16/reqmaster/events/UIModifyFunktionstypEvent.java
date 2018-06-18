@@ -1,17 +1,14 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
-import java.io.*;
-import java.util.*;
-import org.dhbw.stuttgart.ita16.reqmaster.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 public class UIModifyFunktionstypEvent extends UIModifyEvent {
 
-	private int id;
+	private DataId id;
 	private FPFunktionsTyp proposal;
 
 	//Konstruktor der Klasse
 	//Zuordnung der Variablen
-	public UIModifyFunktionstypEvent(int id, FPFunktionsTyp proposal) {
+	public UIModifyFunktionstypEvent(DataId id, FPFunktionsTyp proposal) {
 		this.id=id;
 	}
 
@@ -21,7 +18,7 @@ public class UIModifyFunktionstypEvent extends UIModifyEvent {
 	}
 
 	//getter
-	public int getID() {
+	public DataId getID() {
 		return id;
 	}
 }

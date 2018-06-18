@@ -4,19 +4,19 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
 public class UIModifyKlassifizierungEvent extends UIModifyEvent {
 
-	private int id;
+	private DataId id;
 	private FPKlassifizierung proposal;
 
-	public UIModifyKlassifizierungEvent(int id, FPKlassifizierung proposal) {
+	public UIModifyKlassifizierungEvent(DataId id, FPKlassifizierung proposal) {
 		this.id=id;
 		this.proposal=proposal;
 	}
 
-	public int getID() {
+	public DataId getID() {
 		return id;
 	}
 
-	public FPKlassifizierung getproposal() {
+	public FPKlassifizierung getProposal() {
 		return proposal;
 	}
 }

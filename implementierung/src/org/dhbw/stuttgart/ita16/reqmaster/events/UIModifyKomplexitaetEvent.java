@@ -1,24 +1,22 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
-import java.io.*;
-import java.util.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
 public class UIModifyKomplexitaetEvent extends UIModifyEvent {
 
-	private int id;
+	private DataId id;
 	private FPKomplexitaet proposal;
 
-	public int getID() {
+	public DataId getID() {
 		return id;
 	}
 
-	public UIModifyKomplexitaetEvent(int id, FPKomplexitaet proposal) {
+	public UIModifyKomplexitaetEvent(DataId id, FPKomplexitaet proposal) {
 		this.id=id;
 		this.proposal=proposal;
 	}
 
-	public FPKomplexitaet getproposal() {
+	public FPKomplexitaet getProposal() {
 		return proposal;
 	}
 

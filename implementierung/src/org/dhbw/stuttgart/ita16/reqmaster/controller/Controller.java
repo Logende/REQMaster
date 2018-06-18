@@ -130,6 +130,101 @@ public class Controller implements IObserverController, IController{
             }
         });
 
+        reactions.put(UIModifyFunktionstypEvent.class, (model, view, event)->{
+            UIModifyFunktionstypEvent e = (UIModifyFunktionstypEvent) event;
+            FPFunktionsTyp proposalPart = e.getProposal();
+            IIdentifiable iIdentifiable = model.getIDataAnforderungssammlung().getObject(e.getID());
+            IDataFunctionPointEinstufung current = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
+            IDataFunctionPointEinstufung proposal = new DataFunctionPointEinstufung(proposalPart, current.getKlassifizierung(), current.getKomplexitaet());
+            if(validator.isValid(model, current, proposal, iIdentifiable)){
+                current.modify(proposal);
+                e.setSuccess(true);
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        reactions.put(UIModifyKlassifizierungEvent.class, (model, view, event)->{
+            UIModifyKlassifizierungEvent e = (UIModifyKlassifizierungEvent) event;
+            FPKlassifizierung proposalPart = e.getProposal();
+            IIdentifiable iIdentifiable = model.getIDataAnforderungssammlung().getObject(e.getID());
+            IDataFunctionPointEinstufung current = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
+            IDataFunctionPointEinstufung proposal = new DataFunctionPointEinstufung(current.getFunktionstyp(), proposalPart, current.getKomplexitaet());
+            if(validator.isValid(model, current, proposal, iIdentifiable)){
+                current.modify(proposal);
+                e.setSuccess(true);
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        reactions.put(UIModifyKomplexitaetEvent.class, (model, view, event)->{
+            UIModifyKomplexitaetEvent e = (UIModifyKomplexitaetEvent) event;
+            FPKomplexitaet proposalPart = e.getProposal();
+            IIdentifiable iIdentifiable = model.getIDataAnforderungssammlung().getObject(e.getID());
+            IDataFunctionPointEinstufung current = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
+            IDataFunctionPointEinstufung proposal = new DataFunctionPointEinstufung(current.getFunktionstyp(), current.getKlassifizierung(), proposalPart);
+            if(validator.isValid(model, current, proposal, iIdentifiable)){
+                current.modify(proposal);
+                e.setSuccess(true);
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        reactions.put(UIModifyRealerAufwand.class, (model, view, event)->{
+            UIModifyRealerAufwand e = (UIModifyRealerAufwand) event;
+            double proposal = e.getProposal();
+            if(validator.isValid(model, proposal)){
+                model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setRealerAufwand(proposal);
+                e.setSuccess(true);
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        reactions.put(UIModifyGewichtsfaktorenEvent.class, (model, view, event)->{
+            UIModifyGewichtsfaktorenEvent e = (UIModifyGewichtsfaktorenEvent) event;
+            IDataSchaetzKonfiguration proposal = e.getProposal();
+            if(validator.isValid(model, proposal)){
+                model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setSchaetzKonfiguration(proposal);
+                e.setSuccess(true);
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        //ACTION
+        reactions.put(UIActionFPAufwandAnzeigenEvent.class, (model, view, event)->{
+            //TODO
+            return false;
+        });
+
+        reactions.put(UIActionFPGewichtsfaktorenOptimierenEvent.class, (model, view, event)->{
+            //TODO
+            return true;
+        });
+
+        reactions.put(UIActionFPAufwandAnzeigenMannmonateEvent.class, (model, view, event)->{
+            //TODO
+            return false;
+        });
+
+        //MENU
+        reactions.put(UIActionMenuLoadEvent.class, (model, view, event)->{
+            //TODO
+            return false;
+        });
+
+        reactions.put(UIActionMenuSaveEvent.class, (model, view, event)->{
+            //TODO
+            return false;
+        });
     }
 
     @Override

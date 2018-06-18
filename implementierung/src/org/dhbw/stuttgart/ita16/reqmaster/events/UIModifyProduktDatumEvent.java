@@ -3,10 +3,6 @@ package org.dhbw.stuttgart.ita16.reqmaster.events;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IIdentifiable;
 
-/**
- * legt den typ eines Events des User Interface fest
- * und speichert dessen relavente Werte
- */
 public class UIModifyProduktDatumEvent extends UIModifyEvent {
 
 	private IIdentifiable id;
