@@ -70,7 +70,7 @@ public class UIControll extends UIPanel {
             @Override
             public void actionPerformed(ActionEvent e){
                 realerAufwand.setFocusable(false);														//entziehe den Fokus
-                getView().getObsController().observe(new UIModifyRealerAufwand(realerAufwand.getText()));	//teile das Ereignis dem Controller mit
+                getView().getObsController().observe(new UIModifyRealerAufwand(Double.parseDouble(realerAufwand.getText())));	//teile das Ereignis dem Controller mit
                 realerAufwand.setFocusable(true);														// gebe die Möglichkeit zum Fokussieren zurück.
             }});
 
@@ -91,7 +91,7 @@ public class UIControll extends UIPanel {
              * @param e
              */
             public void focusLost(FocusEvent e) {
-                getView().getObsController().observe(new UIModifyRealerAufwand(RealerAufwand.getText()));//teile das Ereignis dem Controller mit
+                getView().getObsController().observe(new UIModifyRealerAufwand(Double.parseDouble(realerAufwand.getText())));//teile das Ereignis dem Controller mit
             }
         });
 

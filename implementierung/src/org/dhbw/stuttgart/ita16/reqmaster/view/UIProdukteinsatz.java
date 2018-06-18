@@ -39,7 +39,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				text.setFocusable(false);															//entziehe den Fokus
-				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
+				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));		//teile das Ereignis dem Controller mit
 				text.setFocusable(true);															// gebe die Möglichkeit zum Fokussieren zurück.
 			}
 		});
