@@ -5,15 +5,15 @@ import java.util.*;
 
 public class UIModifyRealerAufwand extends UIModifyEvent {
 
-	private String proposal;
+	private double proposal;
 
 	//Konstruktor
-	public UIModifyRealerAufwand(String proposal) {
+	public UIModifyRealerAufwand(double proposal) {
     this.proposal=proposal;
 	}
 
 	//getter
-    public String getProposal() {
+    public double getProposal() {
         return proposal;
     }
 }

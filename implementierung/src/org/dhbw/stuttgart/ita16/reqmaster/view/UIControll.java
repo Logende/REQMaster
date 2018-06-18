@@ -43,7 +43,7 @@ public class UIControll extends UIPanel {
         Aufwandanzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                IObserverView.observe(new UIActionFPMMAufwandFPEvent());
+                IObserverView.observe(new UIActionFPAufwandAnzeigenMannmonateEvent());
             }
         });
         GewichtsfaktorOptimieren=new UIButton();

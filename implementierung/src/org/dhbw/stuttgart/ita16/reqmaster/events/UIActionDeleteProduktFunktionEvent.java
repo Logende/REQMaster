@@ -2,11 +2,11 @@ package org.dhbw.stuttgart.ita16.reqmaster.events;
 
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 
-public class UIActionDeleteProduktDatumEvent extends UIActionDeleteEvent {
+public class UIActionDeleteProduktFunktionEvent extends UIActionDeleteEvent {
 
     private final DataId id;
 
-    public UIActionDeleteProduktDatumEvent(DataId id){
+    public UIActionDeleteProduktFunktionEvent(DataId id){
         this.id = id;
     }
 

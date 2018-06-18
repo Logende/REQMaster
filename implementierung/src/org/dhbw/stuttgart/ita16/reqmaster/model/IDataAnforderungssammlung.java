@@ -1,17 +1,22 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
 import java.util.*;
 
 public interface IDataAnforderungssammlung {
 
     DataProdukteinsatz getDataProdukteinsatz();
 
-    DataZielbestimmung getdataZielbestimmung();
+    DataZielbestimmung getDataZielbestimmung();
 
-    List<DataProduktFunktion> getDataProkuktFunktion();
+    Map<DataId, DataProduktFunktion> getDataProduktFunktionen();
 
-    List<DataProduktDatum> getDataProduktDatum();
+    Map<DataId, DataProduktDatum> getDataProduktDaten();
 
     IDataFunctionPointAnalyse getIDataFunctionPointAnalyse();
+
+    void deleteIDataFunctionPointAnalyse();
+    IIdentifiable getObject(DataId id);
+
+
+
 }

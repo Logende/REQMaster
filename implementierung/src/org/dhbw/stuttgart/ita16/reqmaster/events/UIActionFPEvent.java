@@ -3,6 +3,6 @@ package org.dhbw.stuttgart.ita16.reqmaster.events;
 import java.io.*;
 import java.util.*;
 
-public class UIActionFPEvent extends UIActionEvent {
+class UIActionFPEvent extends UIActionEvent {
 
 }

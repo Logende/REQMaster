@@ -1,8 +1,8 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
-/**
- * legt den typ eines Events des User Interface fest
- * und speichert dessen relavente Werte
- */
+
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
+import org.dhbw.stuttgart.ita16.reqmaster.model.IIdentifiable;
+
 public class UIModifyProduktFunktionEvent extends UIModifyEvent {
 
 	private IIdentifiable id;
@@ -13,7 +13,7 @@ public class UIModifyProduktFunktionEvent extends UIModifyEvent {
      * @param id
      * @param proposal
      */
-    public UIModifyProduktFunktionEvent(IIdentifiable id, DataProduktDatum proposal)
+    public UIModifyProduktFunktionEvent(IIdentifiable id, DataProduktFunktion proposal)
             {
             this.id=id;
             this.proposal=proposal;
@@ -31,7 +31,7 @@ public class UIModifyProduktFunktionEvent extends UIModifyEvent {
      * getter für proposal
      * @return proposal
      */
-    public DataProduktDatum getProposal() {
+    public DataProduktFunktion getProposal() {
             return proposal;
             }
 
