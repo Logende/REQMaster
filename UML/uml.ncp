@@ -116,8 +116,6 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="5" second="6">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -132,8 +130,6 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -160,8 +156,6 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="3" second="7">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -172,8 +166,6 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -188,8 +180,6 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -217,13 +207,14 @@ Wir entscheiden uns für B)</Text>
         <Name>Model</Name>
         <Access>Public</Access>
         <Location left="297" top="332" />
-        <Size width="321" height="230" />
+        <Size width="321" height="247" />
         <Collapsed>False</Collapsed>
         <Member type="Field">IObserverView obsView</Member>
         <Member type="Field">private IExporter exporter</Member>
         <Member type="Field">private IDataSchaetzKonfiguration schaetzKonfiguration</Member>
         <Member type="Field">private IDataAnforderungssammlung anforderungssammlung</Member>
         <Member type="Field">private File anforderungsSammlungFile</Member>
+        <Member type="Field">IDataFunctionPointAnalyse FPAnalyse</Member>
         <Member type="Method">public void loadAnforderungssammlung(File f)</Member>
         <Member type="Method">public void saveAnforderungssammlung()</Member>
         <Member type="Method">public void saveKonfiguration()</Member>
@@ -247,7 +238,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Interface">
         <Name>IExporter</Name>
         <Access>Public</Access>
-        <Location left="991" top="310" />
+        <Location left="1056" top="241" />
         <Size width="536" height="145" />
         <Collapsed>False</Collapsed>
         <Member type="Method">IDataAnforderungssammlung loadAnforderungssammlung(File f)</Member>
@@ -259,7 +250,7 @@ Wir entscheiden uns für B)</Text>
         <Name>IDataAnforderungssammlung</Name>
         <Access>Public</Access>
         <Location left="681" top="206" />
-        <Size width="217" height="179" />
+        <Size width="293" height="203" />
         <Collapsed>False</Collapsed>
         <Member type="Method">DataProdukteinsatz getDataProdukteinsatz()</Member>
         <Member type="Method">DataZielbestimmung getdataZielbestimmung()</Member>
@@ -336,7 +327,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataProduktDatum</Name>
         <Access>Public</Access>
-        <Location left="892" top="1005" />
+        <Location left="825" top="1004" />
         <Size width="374" height="162" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String name</Member>
@@ -397,7 +388,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataUmgebung</Name>
         <Access>Public</Access>
-        <Location left="383" top="1038" />
+        <Location left="423" top="1037" />
         <Size width="218" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public boolean writeText(String neuerText)</Member>
@@ -413,10 +404,12 @@ Wir entscheiden uns für B)</Text>
         <Name>DataFunctionPointAnalyse</Name>
         <Access>Public</Access>
         <Location left="1842" top="565" />
-        <Size width="587" height="162" />
+        <Size width="587" height="196" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private Map&lt;IIdentifiable, IDataFunctionPointClassification&gt; map</Member>
+        <Member type="Field">private double fpAufwand</Member>
         <Member type="Field">private double realerAufwand</Member>
+        <Member type="Field">private double mmAufwand</Member>
         <Member type="Constructor">public DataFunctionPointAnalyse(Map&lt;IIdentifiable, IDataFunctionPointClassification&gt; map, double realerAufwand)</Member>
         <Member type="Method">void init(List&lt;IIdentifiable&gt; list, IDataSchaetzKonfiguration gewichtsfaktoren)</Member>
         <Member type="Method">double getRealerAufwand()</Member>
@@ -426,7 +419,7 @@ Wir entscheiden uns für B)</Text>
         <Name>IDataFunctionPointAnalyse</Name>
         <Access>Public</Access>
         <Location left="1546" top="423" />
-        <Size width="399" height="118" />
+        <Size width="453" height="120" />
         <Collapsed>False</Collapsed>
         <Member type="Method">void init(List&lt;IIdentifiable&gt; list, IDataSchaetzKonfiguration gewichtsfaktoren)</Member>
         <Member type="Method">double getRealerAufwand()</Member>
@@ -434,7 +427,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Interface">
         <Name>IDataFunctionPointClassification</Name>
         <Access>Public</Access>
-        <Location left="1870" top="754" />
+        <Location left="1758" top="773" />
         <Size width="344" height="179" />
         <Collapsed>False</Collapsed>
         <Member type="Method">FPFunktionsTyp getFunktionsTyp()</Member>
@@ -447,8 +440,8 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Class">
         <Name>DataFunctionPointClassification</Name>
         <Access>Public</Access>
-        <Location left="1842" top="984" />
-        <Size width="279" height="230" />
+        <Location left="1692" top="1004" />
+        <Size width="279" height="247" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private FunktionsTyp funktionstyp</Member>
         <Member type="Field">private FPKlassifizierung klassifizierung</Member>
@@ -459,12 +452,13 @@ Wir entscheiden uns für B)</Text>
         <Member type="Method">void setFunktionsTyp(FPFunktionstyp typ)</Member>
         <Member type="Method">boolean setKlassifizierung(FPKlassifizierung klassifizierung)</Member>
         <Member type="Method">void setKomplexitaet(FPKomplexitaet komplexitaet)</Member>
+        <Member type="Constructor">public DataFunctionPointClassification()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Enum">
         <Name>FPFunktionsTyp</Name>
         <Access>Public</Access>
-        <Location left="2373" top="754" />
+        <Location left="2451" top="754" />
         <Size width="162" height="95" />
         <Collapsed>False</Collapsed>
         <Value>DATEN</Value>
@@ -473,7 +467,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Enum">
         <Name>FPKlassifzierung</Name>
         <Access>Public</Access>
-        <Location left="2373" top="866" />
+        <Location left="2451" top="865" />
         <Size width="162" height="146" />
         <Collapsed>False</Collapsed>
         <Value>TRANSAKTION_EI</Value>
@@ -485,7 +479,7 @@ Wir entscheiden uns für B)</Text>
       <Entity type="Enum">
         <Name>FPKomplexitaet</Name>
         <Access>Public</Access>
-        <Location left="2378" top="1033" />
+        <Location left="2451" top="1038" />
         <Size width="162" height="112" />
         <Collapsed>False</Collapsed>
         <Value>MITTEL</Value>
@@ -496,6 +490,32 @@ Wir entscheiden uns für B)</Text>
         <Text>Die Klasse DataAnforderungssammlung und deren Subklassen verfügen über getter und setter Funktionen, um die gespeicherten Daten weitergeben zu können. Diese Funktionen wurden aus platzgründen in der Datrstellung weg gelassem.</Text>
         <Location left="1310" top="677" />
         <Size width="217" height="117" />
+      </Entity>
+      <Entity type="Interface">
+        <Name>IDataGewichtsfaktoren</Name>
+        <Access>Public</Access>
+        <Location left="2179" top="773" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">int[] getGewichtsfaktoren()</Member>
+        <Member type="Method">void setGewichtsfaktoren(int[] gewichtsfaktoren)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>DataGewichtsfaktoren</Name>
+        <Access>Public</Access>
+        <Location left="2191" top="1020" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int[] gewichtsfaktoren</Member>
+        <Member type="Constructor">public DataGewichtsfaktoren()</Member>
+        <Member type="Method">void getGewichtsfaktoren(int[] gewichtsfaktoren)</Member>
+        <Member type="Method">int[] setGewichtsfaktor()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>beides muss default wert beim konstruktor rein bringen</Text>
+        <Location left="2052" top="1295" />
+        <Size width="160" height="75" />
       </Entity>
     </Entities>
     <Relationships>
@@ -516,11 +536,11 @@ Wir entscheiden uns für B)</Text>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>948</X>
-          <Y>395</Y>
+          <X>1013</X>
+          <Y>326</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>938</X>
+          <X>1014</X>
           <Y>247</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
@@ -535,8 +555,6 @@ Wir entscheiden uns für B)</Text>
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="2" second="6">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -547,8 +565,6 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="5">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -563,16 +579,12 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="8" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="8">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -587,12 +599,16 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="11" second="12">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="11">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -600,8 +616,8 @@ Wir entscheiden uns für B)</Text>
           <Y>729</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>768</X>
-          <Y>1024</Y>
+          <X>701</X>
+          <Y>1023</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -618,16 +634,18 @@ Wir entscheiden uns für B)</Text>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1291</X>
-          <Y>1032</Y>
+          <X>1224</X>
+          <Y>1031</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="11" second="10">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1310</X>
-          <Y>1011</Y>
+          <X>1243</X>
+          <Y>1010</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
           <X>1332</X>
@@ -645,12 +663,16 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="14">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="15">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -661,6 +683,8 @@ Wir entscheiden uns für B)</Text>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="4">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
@@ -687,6 +711,8 @@ Wir entscheiden uns für B)</Text>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="2" second="17">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -694,8 +720,8 @@ Wir entscheiden uns für B)</Text>
           <Y>729</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>582</X>
-          <Y>1013</Y>
+          <X>622</X>
+          <Y>1012</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -706,7 +732,51 @@ Wir entscheiden uns für B)</Text>
       </Relationship>
       <Relationship type="Realization" first="22" second="21">
         <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1831</X>
+          <Y>978</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="1" second="20">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="19" second="21">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>2127</X>
+          <Y>863</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Comment" first="29" second="22">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Comment" first="29" second="28">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="28" second="27">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="19" second="27">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
       </Relationship>
     </Relationships>
   </ProjectItem>
@@ -902,8 +972,44 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
       <Entity type="Class">
         <Name>UIFunctionPointPanel</Name>
         <Access>Public</Access>
-        <Location left="1603" top="310" />
+        <Location left="1698" top="285" />
         <Size width="181" height="150" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIFunktionenDaten</Name>
+        <Access>Public</Access>
+        <Location left="1444" top="494" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Object[] data</Member>
+        <Member type="Constructor">public UIFunktionenDaten()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIGewichtsfaktoren</Name>
+        <Access>Public</Access>
+        <Location left="1715" top="494" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIGewichtsfaktoren()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIControll</Name>
+        <Access>Public</Access>
+        <Location left="2005" top="494" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIControll()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UITable</Name>
+        <Access>Public</Access>
+        <Location left="1477" top="879" />
+        <Size width="162" height="77" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
       </Entity>
@@ -942,12 +1048,16 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="7">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1014,18 +1124,24 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="10" second="11">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="6" second="8">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="10">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1040,24 +1156,32 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="12" second="6">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="4">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="5">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="9">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1068,12 +1192,16 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="13" second="12">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="13">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1159,6 +1287,42 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
           <Y>595</Y>
         </BendPoint>
       </Relationship>
+      <Relationship type="Association" first="18" second="19">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="18" second="20">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="18" second="21">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="18" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="19" second="22">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="20" second="22">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
     </Relationships>
   </ProjectItem>
   <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
@@ -1168,11 +1332,12 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
       <Entity type="Class">
         <Name>UIModifyProduktDatumEvent</Name>
         <Access>Public</Access>
-        <Location left="282" top="397" />
-        <Size width="214" height="112" />
+        <Location left="294" top="397" />
+        <Size width="214" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private IIdentifiable id</Member>
         <Member type="Field">private DataProduktDatum proposal</Member>
+        <Member type="Constructor">public UIModifyProduktDatumEvent(IIdentifiable id, DataProduktFunktion proposal)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -1187,10 +1352,11 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         <Name>UIModifyProduktFunktionEvent</Name>
         <Access>Public</Access>
         <Location left="10" top="397" />
-        <Size width="218" height="112" />
+        <Size width="218" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private IIdentifiable id</Member>
         <Member type="Field">private DataProduktFunktion proposal</Member>
+        <Member type="Constructor">public UIModifyProduktFunktionEvent(IIdentifiable id, DataProduktFunktion proposal)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -1221,7 +1387,7 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
       <Entity type="Class">
         <Name>UIActionDeleteEvent</Name>
         <Access>Public</Access>
-        <Location left="1083" top="361" />
+        <Location left="1131" top="361" />
         <Size width="162" height="97" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
@@ -1238,16 +1404,18 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         <Name>UIActionMenuSaveEvent</Name>
         <Access>Public</Access>
         <Location left="1372" top="529" />
-        <Size width="186" height="77" />
+        <Size width="186" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionMenuSaveEvent()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIActionMenuLoadEvent</Name>
         <Access>Public</Access>
         <Location left="1594" top="529" />
-        <Size width="209" height="77" />
+        <Size width="209" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionMenuLoadEvent()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -1257,47 +1425,53 @@ z.B. der Produkteinsatz liest den neuen Produkteinsatz-Text und übernimmt diese
         <Size width="211" height="113" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String proposal</Member>
+        <Member type="Constructor">public UIModifyProdukteinsatzEvent(DataProduktFunktion proposal)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIModifyZielbestimmungEvent</Name>
         <Access>Public</Access>
         <Location left="10" top="542" />
-        <Size width="219" height="100" />
+        <Size width="219" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String proposal</Member>
+        <Member type="Constructor">public UIModifyZielbestimmungEvent(DataProduktFunktion proposal)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIActionAddProduktfunktionEvent</Name>
         <Access>Public</Access>
         <Location left="559" top="507" />
-        <Size width="234" height="77" />
+        <Size width="234" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionAddProduktfunktionEvent()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIActionAddProduktDatumEvent</Name>
         <Access>Public</Access>
         <Location left="559" top="615" />
-        <Size width="227" height="77" />
+        <Size width="227" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionAddProduktDatumEvent()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIActionDeleteProduktfunktionEvent</Name>
         <Access>Public</Access>
-        <Location left="913" top="507" />
-        <Size width="259" height="77" />
+        <Location left="963" top="507" />
+        <Size width="259" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionDeleteProduktfunktionEvent()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIActionDeleteProduktDatumEvent</Name>
         <Access>Public</Access>
-        <Location left="934" top="615" />
-        <Size width="244" height="77" />
+        <Location left="963" top="615" />
+        <Size width="244" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionDeleteProduktDatumEvent()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Comment">
@@ -1316,8 +1490,110 @@ Da die View Events instanziiert und nicht die Reaktionen auf die verschiedenen E
         <Text>Falls ein ProduktDatum oder eine ProduktFunktion bearbeitet wird, wird sobald der Nutzer die Bearbeitung bestätigt ein UIModify[...]Event ausgeführt.
 Dieses enthält die ID des bestehenden Datums/der bestehenden Funktion, sowie eine komplett neue Instanz der Klasse, welche alle neu eingetragenen Werte beinhaltet (proposal).
 Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw.) und im Erfolgsfall die neuen Werte auf das bestehende Objekt übertragen.</Text>
-        <Location left="105" top="732" />
+        <Location left="10" top="10" />
         <Size width="303" height="155" />
+      </Entity>
+      <Entity type="Class">
+        <Name>UIActionDeleteFPAnalyseEvent</Name>
+        <Access>Public</Access>
+        <Location left="963" top="729" />
+        <Size width="244" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionDeleteFPAnalyseEvent()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIActionFPEvent</Name>
+        <Access>Public</Access>
+        <Location left="1867" top="361" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIActionFPAufwandAnzeigenEvent</Name>
+        <Access>Public</Access>
+        <Location left="1820" top="512" />
+        <Size width="237" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionFPAufwandAnzeigenEvent()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIActionFPMMAufwandFPEvent</Name>
+        <Access>Public</Access>
+        <Location left="2237" top="529" />
+        <Size width="254" height="102" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionFPMMAufwandFPEvent()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIActionFPGewichtsfaktorenOptimierenEvent</Name>
+        <Access>Public</Access>
+        <Location left="1853" top="652" />
+        <Size width="283" height="95" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIActionFPGewichtsfaktorenOptimierenEvent()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIModifyGewichtsfaktorenEvent</Name>
+        <Access>Public</Access>
+        <Location left="10" top="693" />
+        <Size width="219" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int[] proposal</Member>
+        <Member type="Method">public int[] getproposal()</Member>
+        <Member type="Constructor">public UIModifyGewichtsfaktorenEvent(int[] proposal)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIModifyFunktionstypEvent</Name>
+        <Access>Public</Access>
+        <Location left="10" top="908" />
+        <Size width="219" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private int id</Member>
+        <Member type="Field">private FPFunktionsTyp proposal</Member>
+        <Member type="Constructor">public UIModifyFunktionstypEvent(int id, FPFunktionsTyp proposal)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UImodyfiKlassifizierungEvent</Name>
+        <Access>Public</Access>
+        <Location left="282" top="713" />
+        <Size width="347" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private int id</Member>
+        <Member type="Field">private FPKlassiefizierung proposal</Member>
+        <Member type="Constructor">public UImodyfiKlassifizierungEvent(int id, FPKlassifizierung proposal)</Member>
+        <Member type="Method">public int getID()</Member>
+        <Member type="Method">public FPKlassifizierung getproposal()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIModifyKomplexitaetEvent</Name>
+        <Access>Public</Access>
+        <Location left="282" top="926" />
+        <Size width="334" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private int id</Member>
+        <Member type="Field">private FPKomplexitaet proposal</Member>
+        <Member type="Method">public int getID()</Member>
+        <Member type="Constructor">public UIModifyKomplexitaetEvent(int id, FPKomplexitaet proposal)</Member>
+        <Member type="Method">public FPKomplexitaet getproposal()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIModifyRealerAufwand</Name>
+        <Access>Public</Access>
+        <Location left="45" top="1111" />
+        <Size width="211" height="113" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private String proposal</Member>
+        <Member type="Constructor">public UIModifyRealerAufwand(String proposal)</Member>
+        <Modifier>None</Modifier>
       </Entity>
     </Entities>
     <Relationships>
@@ -1345,7 +1621,7 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>256</X>
+          <X>268</X>
           <Y>419</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
@@ -1429,11 +1705,11 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1222</X>
-          <Y>553</Y>
+          <X>1247</X>
+          <Y>555</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1222</X>
+          <X>1282</X>
           <Y>483</Y>
         </BendPoint>
       </Relationship>
@@ -1441,8 +1717,12 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1222</X>
-          <Y>646</Y>
+          <X>1239</X>
+          <Y>640</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1286</X>
+          <Y>486</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Comment" first="16" second="3">
@@ -1454,6 +1734,58 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
       <Relationship type="Comment" first="18" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="19" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1290</X>
+          <Y>498</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="20" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="21" second="20">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="22" second="20">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1998</X>
+          <Y>468</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="23" second="20">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>2026</X>
+          <Y>468</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="27" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="26" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="24" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="25" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="28" second="3">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
@@ -1539,6 +1871,8 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="5" second="4">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -1549,12 +1883,16 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="0">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -1582,8 +1920,9 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <Name>UIButton</Name>
         <Access>Public</Access>
         <Location left="501" top="167" />
-        <Size width="162" height="77" />
+        <Size width="162" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIButton()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -1598,16 +1937,18 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <Name>UIFrame</Name>
         <Access>Public</Access>
         <Location left="508" top="67" />
-        <Size width="162" height="77" />
+        <Size width="162" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIFrame()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UILabel</Name>
         <Access>Public</Access>
-        <Location left="513" top="512" />
-        <Size width="162" height="77" />
+        <Location left="508" top="512" />
+        <Size width="162" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UILabel()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -1629,23 +1970,93 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
       <Entity type="Class">
         <Name>UITextfield</Name>
         <Access>Public</Access>
-        <Location left="501" top="388" />
+        <Location left="513" top="388" />
         <Size width="162" height="99" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UITextfield()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>UIPanel</Name>
         <Access>Public</Access>
         <Location left="501" top="273" />
-        <Size width="162" height="92" />
+        <Size width="162" height="94" />
         <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIPanel()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>JLabel</Name>
         <Access>Public</Access>
         <Location left="772" top="512" />
+        <Size width="162" height="77" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JComboBox</Name>
+        <Access>Public</Access>
+        <Location left="755" top="630" />
+        <Size width="162" height="84" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIComboBox</Name>
+        <Access>Public</Access>
+        <Location left="513" top="630" />
+        <Size width="162" height="96" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIComboBox()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JToolBar</Name>
+        <Access>Public</Access>
+        <Location left="755" top="767" />
+        <Size width="162" height="84" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIToolBar</Name>
+        <Access>Public</Access>
+        <Location left="513" top="767" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIToolBar()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UIWindow</Name>
+        <Access>Public</Access>
+        <Location left="513" top="905" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UIWindow()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JWindowr</Name>
+        <Access>Public</Access>
+        <Location left="755" top="905" />
+        <Size width="162" height="84" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UITable</Name>
+        <Access>Public</Access>
+        <Location left="508" top="1021" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UITable()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>JTable</Name>
+        <Access>Public</Access>
+        <Location left="755" top="1021" />
         <Size width="162" height="77" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
@@ -1664,7 +2075,7 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>696</X>
+          <X>708</X>
           <Y>442</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
@@ -1685,6 +2096,22 @@ Der Controller wird validieren, ob das Proposal valide ist (einzigartige ID, usw
         </BendPoint>
       </Relationship>
       <Relationship type="Generalization" first="4" second="9">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="11" second="10">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="13" second="12">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="14" second="15">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="16" second="17">
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
       </Relationship>
