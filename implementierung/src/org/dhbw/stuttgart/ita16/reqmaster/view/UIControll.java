@@ -14,55 +14,54 @@ import java.awt.event.FocusListener;
  */
 public class UIControll extends UIPanel {
 
-    private UIButton Aufwandanzeigen;
-    private UIButton AufwandMManzeigen;
-    private UIButton GewichtsfaktorOptimieren;
-    private UITextField AufwandMM;
-    private UITextField AufwandFP;
-    private UITextField RealerAufwand;
-
-	public UIControll() {
+    private UIButton aufwandAnzeigen;
+    private UIButton aufwandMMAnzeigen;
+    private UIButton gewichtsfaktorOptimieren;
+    private UITextField aufwandMM;
+    private UITextField realerAufwand;
+    private UITextField aufwandFP;
+	public UIControll(View view) {
 
 	    //Superklasse Konstruktor aufrufen
-		super();
+		super(view);
 
 		//Die Klassenvariablen Instanziieren
 
-        Aufwandanzeigen=new UIButton();
-        Aufwandanzeigen.setText("Aufwand in FP anzeigen");
-        this.add(Aufwandanzeigen);
-        Aufwandanzeigen.addActionListener(new ActionListener() {
+        aufwandAnzeigen=new UIButton();
+        aufwandAnzeigen.setText("Aufwand in FP anzeigen");
+        this.add(aufwandAnzeigen);
+        aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                IObserverView.observe(new UIActionFPAufwandAnzeigenEvent());
+                getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent());
             }
         });
-        AufwandMManzeigen=new UIButton();
-        AufwandMManzeigen.setText("Aufwand in MM Anzeigen");
-        this.add(AufwandMManzeigen);
-        Aufwandanzeigen.addActionListener(new ActionListener() {
+        aufwandMMAnzeigen=new UIButton();
+        aufwandMMAnzeigen.setText("Aufwand in MM Anzeigen");
+        this.add(aufwandMMAnzeigen);
+        aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                IObserverView.observe(new UIActionFPAufwandAnzeigenMannmonateEvent());
+                getView().getObsController().observe(new UIActionFPAufwandAnzeigenMannmonateEvent());
             }
         });
-        GewichtsfaktorOptimieren=new UIButton();
-        AufwandMM=new UITextField();
-        AufwandMM.setEnabled(false);
-        this.add(GewichtsfaktorOptimieren);
-        GewichtsfaktorOptimieren.addActionListener(new ActionListener() {
+        gewichtsfaktorOptimieren=new UIButton();
+        aufwandMM=new UITextField();
+        aufwandMM.setEnabled(false);
+        this.add(gewichtsfaktorOptimieren);
+        gewichtsfaktorOptimieren.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                IObserverView.observe(new UIActionFPGewichtsfaktorenOptimierenEvent());
+                getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent());
             }
         });
-        AufwandFP= new UITextField();
+        aufwandFP= new UITextField();
 
-        AufwandFP.setEnabled(false);
-        this.add(AufwandFP);
-        RealerAufwand=new UITextField();
-        this.add(RealerAufwand);
-        RealerAufwand.addActionListener(new ActionListener() {
+        aufwandFP.setEnabled(false);
+        this.add(aufwandFP);
+        realerAufwand=new UITextField();
+        this.add(realerAufwand);
+        realerAufwand.addActionListener(new ActionListener() {
             /**
              * legt fest, dass wenn ein Action Event (Enter drücken) ausgelöst wird während der Fokus auf dem textfeld liegt,
              * dies an den Controller weitergegeben wird und der fokus auf des Textfeld verschwindet
@@ -70,12 +69,12 @@ public class UIControll extends UIPanel {
              */
             @Override
             public void actionPerformed(ActionEvent e){
-                RealerAufwand.setFocusable(false);														//entziehe den Fokus
-                IObserverController.observe(new UIModifyRealerAufwand(RealerAufwand.getText()));	//teile das Ereignis dem Controller mit
-                RealerAufwand.setFocusable(true);														// gebe die Möglichkeit zum Fokussieren zurück.
+                realerAufwand.setFocusable(false);														//entziehe den Fokus
+                getView().getObsController().observe(new UIModifyRealerAufwand(realerAufwand.getText()));	//teile das Ereignis dem Controller mit
+                realerAufwand.setFocusable(true);														// gebe die Möglichkeit zum Fokussieren zurück.
             }});
 
-        RealerAufwand.addFocusListener(new FocusListener() {
+        realerAufwand.addFocusListener(new FocusListener() {
             /**
              * legt fest, dass wenn ein der Focus auf das Textfeld gelegt wird (Mousklick), nichts passieren soll
              *
@@ -92,7 +91,7 @@ public class UIControll extends UIPanel {
              * @param e
              */
             public void focusLost(FocusEvent e) {
-                IObserverController.observe(new UIModifyRealerAufwand(RealerAufwand.getText()));//teile das Ereignis dem Controller mit
+                getView().getObsController().observe(new UIModifyRealerAufwand(RealerAufwand.getText()));//teile das Ereignis dem Controller mit
             }
         });
 

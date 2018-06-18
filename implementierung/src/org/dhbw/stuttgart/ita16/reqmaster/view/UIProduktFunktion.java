@@ -10,8 +10,8 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
  */
 public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
-    UITextField id;
     UIButton delete;
+    UITextField id;
     UITextField name;
     UITextField quelle;
     UITextField akteur;
@@ -25,6 +25,14 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     public UIProduktFunktion(View view) {
 
         super(view);
+
+        delete = new UIButton();
+        id = new UITextField();
+        name = new UITextField();
+        quelle = new UITextField();
+        akteur = new UITextField();
+        beschreibung = new UITextField();
+        verweise = new UITextField();
     }
 
 
@@ -34,6 +42,7 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      */
     @Override
     public void update(IModel model){
+
 
     }
 }

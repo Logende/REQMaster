@@ -2,6 +2,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProdukteinsatzEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
@@ -38,7 +39,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				text.setFocusable(false);															//entziehe den Fokus
-				getObsControllerFromPanel().observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
+				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
 				text.setFocusable(true);															// gebe die Möglichkeit zum Fokussieren zurück.
 			}
 		});
@@ -58,7 +59,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
-				getObsControllerFromPanel().observe(new UIModifyProdukteinsatzEvent(text.getText()));
+				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));
 				//teile das Ereignis dem Controller mit
 			}
 		});

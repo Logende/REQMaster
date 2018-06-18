@@ -4,6 +4,8 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProdukteinsatzEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyZielbestimmungEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataZielbestimmung;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 
@@ -41,7 +43,7 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				text.setFocusable(false);														//entziehe den Fokus
-				getObsControllerFromPanel().observe(new UIModifyZielbestimmungEvent(text.getText()));	//teile das Ereignis dem Controller mit
+				getView().getObsController().observe(new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));	//teile das Ereignis dem Controller mit
 				text.setFocusable(true);														// gebe die Möglichkeit zum Fokussieren zurück.
 			}});
 
@@ -59,7 +61,7 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
-				getObsControllerFromPanel().observe(new UIModifyProdukteinsatzEvent(text.getText()));//teile das Ereignis dem Controller mit
+				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));//teile das Ereignis dem Controller mit
 			}
 		});
 	}
@@ -69,7 +71,7 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 	 */
 	public void update(IModel model) {
 
-		text.setText(model.getIDataAnforderungssammlung().getdataZielbestimmung().getText());
+		text.setText(model.getIDataAnforderungssammlung().getDataZielbestimmung().getText());
 
 	}
 
