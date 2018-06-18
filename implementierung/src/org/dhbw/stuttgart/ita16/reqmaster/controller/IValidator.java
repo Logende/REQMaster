@@ -14,4 +14,10 @@ public interface IValidator {
 
 	boolean isValid(IModel model, DataProduktFunktion current, DataProduktFunktion proposal);
 
+	boolean isValid(IModel model, IDataFunctionPointEinstufung current, IDataFunctionPointEinstufung proposal, IIdentifiable iIdentifiable);
+
+	boolean isValid(IModel model, double realerAufwand);
+
+	boolean isValid(IModel model, IDataSchaetzKonfiguration schaetzKonfiguration);
+
 }
