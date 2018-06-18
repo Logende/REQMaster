@@ -1,12 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
-
 public class DataFunctionPointClassification implements IDataFunctionPointClassification {
 
 	private FPFunktionsTyp funktionstyp;
-	private FPKlassifzierung klassifizierung;
+	private FPKlassifizierung klassifizierung;
 	private FPKomplexitaet komplexitaet;
 
 	public FPFunktionsTyp getFunktionsTyp() {
@@ -14,7 +11,7 @@ public class DataFunctionPointClassification implements IDataFunctionPointClassi
 
 	}
 
-	public FPKlassifzierung getKlassifizierung() {
+	public FPKlassifizierung getKlassifizierung() {
 		return klassifizierung;
 
 	}
@@ -28,7 +25,7 @@ public class DataFunctionPointClassification implements IDataFunctionPointClassi
 
 	}
 
-	public boolean setKlassifizierung(FPKlassifzierung klassifizierung) {
+	public boolean setKlassifizierung(FPKlassifizierung klassifizierung) {
 		return true;
 	}
 

@@ -1,19 +1,16 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
-
 public interface IDataFunctionPointClassification {
 
 	FPFunktionsTyp getFunktionsTyp();
 
-	FPKlassifzierung getKlassifizierung();
+	FPKlassifizierung getKlassifizierung();
 
 	FPKomplexitaet getKomplexitaet();
 
 	void setFunktionsTyp(FPFunktionsTyp typ);
 
-	boolean setKlassifizierung(FPKlassifzierung klassifizierung);
+	boolean setKlassifizierung(FPKlassifizierung klassifizierung);
 
 	void setKomplexitaet(FPKomplexitaet komplexitaet);
 

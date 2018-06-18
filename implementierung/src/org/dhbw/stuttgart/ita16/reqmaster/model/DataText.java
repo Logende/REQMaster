@@ -20,4 +20,8 @@ public abstract class DataText {
 		return text;
 	}
 
+	public void modify(DataText goal){
+		this.text = text;
+	}
+
 }

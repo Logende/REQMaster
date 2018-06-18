@@ -1,17 +1,20 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
+
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
+
 /**
  * legt den typ eines Events des User Interface fest
  * und speichert dessen relavente Werte
  */
 public class UIModifyProdukteinsatzEvent extends UIModifyEvent {
 
-	private String proposal;
+	private DataProdukteinsatz proposal;
 
 	/**
 	 * Konstruktor für die Klasse schreibt Eingansvariablen auf Klassenvariablen um
 	 * @param proposal
 	 */
-	public UIModifyProdukteinsatzEvent(String proposal) {
+	public UIModifyProdukteinsatzEvent(DataProdukteinsatz proposal) {
 		this.proposal = proposal;
 
 	}
@@ -20,7 +23,7 @@ public class UIModifyProdukteinsatzEvent extends UIModifyEvent {
 	 * setter für proposal
 	 * @return proposal
 	 */
-	public String getProposal() {
+	public DataProdukteinsatz getProposal() {
 		return proposal;
 	}
 }

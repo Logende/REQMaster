@@ -21,4 +21,11 @@ public class DataProduktDatum implements IIdentifiable {
 	public DataId getId() {
 		return id;
 	}
+
+	public void modify(DataProduktDatum goal){
+		this.name = goal.name;
+		this.id = goal.id;
+		this.attribute = goal.attribute;
+		this.verweise = goal.verweise;
+	}
 }

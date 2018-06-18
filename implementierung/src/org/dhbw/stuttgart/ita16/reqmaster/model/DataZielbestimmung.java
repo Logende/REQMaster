@@ -9,4 +9,6 @@ public class DataZielbestimmung extends DataText {
 		super(text);
 	}
 
+
+
 }

@@ -8,13 +8,15 @@ public interface IDataAnforderungssammlung {
 
     DataZielbestimmung getDataZielbestimmung();
 
-    List<DataProduktFunktion> getDataProduktFunktionen();
+    Map<DataId, DataProduktFunktion> getDataProduktFunktionen();
 
-    List<DataProduktDatum> getDataProduktDaten();
+    Map<DataId, DataProduktDatum> getDataProduktDaten();
 
     IDataFunctionPointAnalyse getIDataFunctionPointAnalyse();
 
-
-
     void deleteIDataFunctionPointAnalyse();
+    IIdentifiable getObject(DataId id);
+
+
+
 }
