@@ -24,8 +24,8 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 	 * Initialisierd text als eie Instanz der Klasse UITextField
 	 * Definiert die Eigenschaften des Textfeldes Text
 	 */
-    public UIProdukteinsatz() {
-		super();
+    public UIProdukteinsatz(View view) {
+		super(view);
 		this.add(text = new UITextField());									//füge Text zum Panel hinzu
 		this.setBorder(BorderFactory.createTitledBorder("Produkteinsatz"));	//setzte den Titel des Panels
 		this.setVisible(true);													//mache das Panel sichtbar
@@ -38,7 +38,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				text.setFocusable(false);															//entziehe den Fokus
-				IObserverController.observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
+				getObsControllerFromPanel().observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
 				text.setFocusable(true);															// gebe die Möglichkeit zum Fokussieren zurück.
 			}
 		});
@@ -58,7 +58,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
-				IObserverController.observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
+				getObsControllerFromPanel().observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
 			}
 		});
 	}

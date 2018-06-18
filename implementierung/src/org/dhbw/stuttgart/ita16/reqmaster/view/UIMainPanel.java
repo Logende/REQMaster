@@ -24,15 +24,15 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 	 * erstellt Instanzen der Klassen UIProduktFunktionen, UIProduktDaten, UIProdukteinsatz, UIZielbestimmung und UIUmgebung
 	 * und erscheint auf der Bildfläche
 	 */
-	public UIMainPanel()
+	public UIMainPanel(View view)
 	{
 		super();
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.add(panelFunktionen=new UIProduktFunktionen());
-		this.add(panelDaten=new UIProduktDaten());
-		this.add(panelProdukteinsatz=new UIProdukteinsatz());
-		this.add(panelZielbestimmung=new UIZielbestimmung());
-		this.add(panelUmgebung=new UIUmgebung());
+		this.add(panelFunktionen=new UIProduktFunktionen(view));
+		this.add(panelDaten=new UIProduktDaten(view));
+		this.add(panelProdukteinsatz=new UIProdukteinsatz(view));
+		this.add(panelZielbestimmung=new UIZielbestimmung(view));
+		this.add(panelUmgebung=new UIUmgebung(view));
 		this.setVisible(true);
 	}
 

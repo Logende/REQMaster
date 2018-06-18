@@ -21,9 +21,9 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
     /**
      * Konstruktor der Klasse
      */
-    public UIProduktDatum () {
+    public UIProduktDatum (View view) {
 
-
+        super(view);
     }
 
 

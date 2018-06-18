@@ -5,8 +5,8 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 public class UIUmgebung extends UIPanel implements UIUpdateable{
 
-    public UIUmgebung(){
-
+    public UIUmgebung(View view){
+        super(view);
     }
 
     /**

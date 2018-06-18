@@ -20,7 +20,8 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
     /**
      * Konstruktor der Klasse
      */
-    public UIProduktDaten(){
+    public UIProduktDaten(View view){
+        super(view);
         title = new UILabel();
         produktDaten = new ArrayList<>();
         add = new UIButton();

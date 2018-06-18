@@ -22,8 +22,8 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
      * Konstruktor der Klasse
      */
 
-    public UIProduktFunktionen(){
-        super();
+    public UIProduktFunktionen(View view){
+        super(view);
         title = new UILabel();
         produktFunktionen = new ArrayList<>();
         add = new UIButton();

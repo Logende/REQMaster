@@ -22,9 +22,9 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     /**
      * Konstruktor der Klasse
      */
-    public UIProduktFunktion() {
+    public UIProduktFunktion(View view) {
 
-
+        super(view);
     }
 
 
