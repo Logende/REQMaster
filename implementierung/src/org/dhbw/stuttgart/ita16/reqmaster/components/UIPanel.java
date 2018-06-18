@@ -12,7 +12,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.view.*;
 
 public class UIPanel extends JPanel {
 
-    View view;
+    private View view;
 
     /**
      * Konstruktor der Klasse UIPanel
@@ -25,7 +25,7 @@ public class UIPanel extends JPanel {
 
     }
 
-    public IObserverController getObsControllerFromPanel() {
-        return view.getObsControllerFromView();
+    public View getView() {
+        return view;
     }
 }

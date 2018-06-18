@@ -58,7 +58,8 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
-				getObsControllerFromPanel().observe(new UIModifyProdukteinsatzEvent(text.getText()));		//teile das Ereignis dem Controller mit
+				getObsControllerFromPanel().observe(new UIModifyProdukteinsatzEvent(text.getText()));
+				//teile das Ereignis dem Controller mit
 			}
 		});
 	}

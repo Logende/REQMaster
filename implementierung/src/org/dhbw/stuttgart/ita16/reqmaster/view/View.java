@@ -44,7 +44,7 @@ public class View implements IView, IObserverView {
      * getter-Methode für IObserverController
      * @return
      */
-    public IObserverController getObsControllerFromView(){
+    public IObserverController getObsController(){
         return obsController;
     }
 }
