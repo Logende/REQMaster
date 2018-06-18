@@ -39,8 +39,22 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         this.add(beschreibung = new UITextField());
         this.add(verweise = new UITextField());
 
-        delete.setPreferredSize(new Dimension(5,20));
-        id.setPreferredSize(new Dimension(20,50));
+        delete.setBounds(10,10,90,20);
+        delete.setText("Löschen");
+        id.setText("ID");
+        id.setBounds(10,35,150,20);
+        name.setBounds(10,60, 150,20);
+        name.setText("Name");
+        quelle.setBounds(10,85,150,20);
+        quelle.setText("Quelle");
+        akteur.setBounds(10,110, 150,20);
+        akteur.setText("Akteur");
+        beschreibung.setBounds(10,135,150,50);
+        beschreibung.setText("Beschreibung");
+        verweise.setBounds(10,190, 150, 20);
+        verweise.setText("Verweise");
+
+        this.setVisible(true);
 
         delete.addActionListener(new ActionListener() {
             @Override
