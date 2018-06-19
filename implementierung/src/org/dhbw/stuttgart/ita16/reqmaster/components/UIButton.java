@@ -9,25 +9,14 @@ import java.awt.event.ActionListener;
 
 public class UIButton extends JButton {
 
-    JButton uiButton;
 
     /**
-     *
+     * Konstruktor der Klasse
      *
      */
     public UIButton() {
 
-        uiButton = new JButton();
-
         // Settings fuer spezifische Anpassungen hier
-
-        uiButton.setBounds(20,20,30,30);
-
-        uiButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }});
     }
 }
 

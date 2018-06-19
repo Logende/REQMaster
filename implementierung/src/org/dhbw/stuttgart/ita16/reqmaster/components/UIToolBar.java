@@ -4,11 +4,17 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
+/**
+ *
+ */
 public class UIToolBar extends JToolBar {
 
-
+	/**
+	 * Standardkonstruktor der Klasse
+	 */
 	public UIToolBar() {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+
+
 	}
 
 }

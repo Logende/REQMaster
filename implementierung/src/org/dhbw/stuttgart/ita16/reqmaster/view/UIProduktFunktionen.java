@@ -5,6 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         add = new UIButton();
 
         this.setBounds(10,60,80,200);
+        this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
         // weitere Einstellungen
     }
 

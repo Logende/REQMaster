@@ -1,29 +1,74 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktDatumEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
- *
+ * Grafikkomponente: legt Aufbau eines Produktdatums fest
  */
 public class UIProduktDatum extends UIPanel implements UIUpdateable {
 
+    // Variablen der Klasse
 
-    UIButton delete;
-    UITextField name;
-    UITextField id;
-    UITextField attribute;
-    UITextField verweise;
+    // Button
+    private UIButton delete;
+
+    //Textfelder
+    private UITextField name;
+    private UITextField id;
+    private UITextField attribute;
+    private UITextField verweise;
+
+    //Labels
+    private UILabel nameText;
+    private UILabel idText;
+    private UILabel attributeText;
+    private UILabel verweiseText;
 
 
     /**
      * Konstruktor der Klasse
+     * @param view Instanz der View des MVC-Patterns
      */
     public UIProduktDatum (View view) {
 
         super(view);
+
+        //keinen Layoutmanager verwenden und Größe setzen
+        this.setLayout(null);
+        this.setBounds(310,10,300,500);
+        //Hinzufügen und verwalten der Komponenten
+        addComponents();
+        setComponents();
+        //sichtbar
+        this.setVisible(true);
+
+
+        delete.addActionListener(new ActionListener() {
+            /**
+             * wenn der Löschen-Button geklickt wird, wird ein UIActionDeleteProduktDatumEvent
+             * an den Controller weitergeleitet mit der ID des Produktdatums
+             * @param e
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getView().getObsController().observe(new UIActionDeleteProduktDatumEvent(new DataId(id.getText())));
+            }
+        });
+    }
+
+    /**
+     * Hinzufügen der Grafikkomponenten
+     */
+    private void addComponents() {
 
         this.add(delete = new UIButton());
         this.add(id = new UITextField());
@@ -31,20 +76,35 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
         this.add(attribute = new UITextField());
         this.add(verweise = new UITextField());
 
-        delete.setText("Löschen");
-        delete.setBounds(10,10,90,20);
-        name.setText("Name");
-        name.setBounds(10,35,150,20);
-        id.setText("ID");
-        id.setBounds(10,60,150,20);
-        attribute.setText("Attribute");
-        attribute.setBounds(10,85,150,20);
-        verweise.setText("Verweise");
-        verweise.setBounds(10,110,150,20);
-
-        this.setVisible(true);
+        this.add(nameText = new UILabel());
+        this.add(idText = new UILabel());
+        this.add(attributeText = new UILabel());
+        this.add(verweiseText = new UILabel());
     }
 
+
+    /**
+     *  Methode zum Setzen der Position, Größe und des Inhalts der Komponenten
+     */
+    private void setComponents() {
+
+        delete.setText("Löschen");
+        delete.setBounds(150,10,90,20);
+        name.setBounds(90,35,150,20);
+        id.setBounds(90,60,150,20);
+        attribute.setBounds(90,85,150,20);
+        verweise.setBounds(90,110,150,20);
+
+        nameText.setText("Name");
+        nameText.setBounds(10,35,90,20);
+        idText.setText("ID");
+        idText.setBounds(10,60,90,20);
+        attributeText.setText("Attribute");
+        attributeText.setBounds(10,85,90,20);
+        verweiseText.setText("Verweise");
+        verweiseText.setBounds(10,110,90,20);
+
+    }
 
     /**
      *

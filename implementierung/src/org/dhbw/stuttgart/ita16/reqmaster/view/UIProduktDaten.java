@@ -5,6 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
         produktDaten = new ArrayList<>();
         add = new UIButton();
         this.setBounds(130,60, 80, 200);
+        this.setBorder(BorderFactory.createTitledBorder("Produktdaten"));
         // weitere Einstellungen
     }
 

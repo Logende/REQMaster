@@ -20,32 +20,23 @@ import java.awt.event.FocusListener;
  */
 public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 
+	//Variablen der Klasse
 	private UITextField text;
+	private UIModifyZielbestimmungEvent modifyEvent;
 
 	/**
 	 * Konstruktor der Klasse
-	 * Initialisierd text als eie Instanz der Klasse UITextField
+	 * Initialisiert text als eie Instanz der Klasse UITextField
 	 * Definiert die Eigenschaften des Textfeldes Text
 	 */
 	public UIZielbestimmung(View view) {
 
 
 		super(view);
+
 		this.add(text=new UITextField());										//füge Text zum Panel hinzu
-		this.setBorder(BorderFactory.createTitledBorder("Zielbestimmung"));	//setzte den Titel des Panels
+		this.setBorder(BorderFactory.createTitledBorder("Zielbestimmung"));		//setze den Titel des Panels
 		this.setVisible(true);													//mache das Panel sichtbar
-		text.addActionListener(new ActionListener() {
-			/**
-			 * legt fest, dass wenn ein Action Event (Enter drücken) ausgelöst wird während der Fokus auf dem textfeld liegt,
-			 * dies an den Controller weitergegeben wird und der fokus auf des Textfeld verschwindet
-			 * @param e
-			 */
-			@Override
-			public void actionPerformed(ActionEvent e){
-				text.setFocusable(false);														//entziehe den Fokus
-				getView().getObsController().observe(new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));	//teile das Ereignis dem Controller mit
-				text.setFocusable(true);														// gebe die Möglichkeit zum Fokussieren zurück.
-			}});
 
 		text.addFocusListener(new FocusListener() {
 			/**
@@ -61,7 +52,9 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
-				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));//teile das Ereignis dem Controller mit
+				getView().getObsController().observe(new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));//teile das Ereignis dem Controller mit
+
+				text.requestFocus(); // Abfrage, ob successfull
 			}
 		});
 	}
