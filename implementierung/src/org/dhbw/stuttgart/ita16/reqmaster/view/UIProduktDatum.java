@@ -5,11 +5,13 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktDatumEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+
 
 /**
  * Grafikkomponente: legt Aufbau eines Produktdatums fest
@@ -33,6 +35,11 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
     private UILabel attributeText;
     private UILabel verweiseText;
 
+    //FokusListener
+    private FocusListener focusListener;
+
+    //Events
+    private UIModifyProduktDatumEvent modifyEvent;
 
     /**
      * Konstruktor der Klasse
@@ -45,6 +52,18 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
         //keinen Layoutmanager verwenden und Größe setzen
         this.setLayout(null);
         this.setBounds(310,10,300,500);
+
+        // FokusListener definieren
+        focusListener = new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                getView().getObsController().observe(modifyEvent = new UIModifyProduktDatumEvent());
+            }
+        }
+
         //Hinzufügen und verwalten der Komponenten
         addComponents();
         setComponents();
@@ -110,8 +129,10 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
      *
      * @param model
      */
-    @Override
+  /*  @Override
     public void update(IModel model){
-
+        name.setText(model.getIDataAnforderungssammlung().getDataProduktDaten().get());
     }
+    TODO: wie kommt man an die Daten des jeweiligen Produktdatums
+    */
 }

@@ -38,22 +38,24 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 		this.setBorder(BorderFactory.createTitledBorder("Zielbestimmung"));		//setze den Titel des Panels
 		this.setVisible(true);													//mache das Panel sichtbar
 
+
 		text.addFocusListener(new FocusListener() {
+
 			/**
-			 * legt fest, dass wenn ein der Focus auf das Textfeld gelegt wird (Mousklick), nichts passieren soll
+			 * legt fest, dass wenn der Fokus auf das Textfeld gelegt wird (Mausklick), nichts passieren soll
 			 * @param e
 			 */
 			@Override
-			public void focusGained(FocusEvent e) {
-			}
+			public void focusGained(FocusEvent e) { }
+
 			/**
-			 * legt fest, dass wenn ein der Focus auf das Textfeld gelegt wird (Mousklick in ein anderes Feld),
-			 * dies an den Controller weitergegeben wird und der fokus auf des Textfeld verschwindet
+			 * legt fest, dass wenn das Textfeld den Fokus verliert, ein ModifyEvent an den Controller
+			 * weitergereicht wird, der über das Behalten oder die Freigabe des Fokus entscheidet (validieren des Textfeldinhalts)
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
-				getView().getObsController().observe(new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));//teile das Ereignis dem Controller mit
-
+				getView().getObsController().observe(modifyEvent = new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));//teile das Ereignis dem Controller mit
+				if(!(modifyEvent.isSuccess()))
 				text.requestFocus(); // Abfrage, ob successfull
 			}
 		});

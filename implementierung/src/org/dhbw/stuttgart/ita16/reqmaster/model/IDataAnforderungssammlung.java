@@ -6,6 +6,8 @@ public interface IDataAnforderungssammlung {
 
     DataProdukteinsatz getDataProdukteinsatz();
 
+    DataUmgebung getDataUmgebung();
+
     DataZielbestimmung getDataZielbestimmung();
 
     Map<DataId, DataProduktFunktion> getDataProduktFunktionen();

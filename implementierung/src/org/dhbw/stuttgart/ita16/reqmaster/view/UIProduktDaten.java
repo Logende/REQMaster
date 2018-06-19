@@ -32,8 +32,11 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
     }
 
     /**
-     *
-     * @param model
+     *Updaten der Produktfunktionen
+     * 1. schauen ob eine bestehende Produktfunktion im Model gelöscht wurde, wenn ja auch in der GUI löschen
+     * 2. alle bestehenden Produktfunktionen in der GUI aktualisieren
+     * 3. alle neuen Produktfunktionen im Model, die nicht in der GUI sind, hinzufügen
+     * @param model Instanz des Model des MVC-Patterns, das die Daten enthält
      */
     @Override
     public void update(IModel model){

@@ -18,7 +18,9 @@ import java.awt.event.FocusListener;
  */
 public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 
+	// Variablen der Klasse
 	private UITextField text;
+	private UIModifyProdukteinsatzEvent modifyEvent;
 
 	/**
 	 * Konstruktor der Klasse
@@ -30,37 +32,26 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 		this.add(text = new UITextField());									//füge Text zum Panel hinzu
 		this.setBorder(BorderFactory.createTitledBorder("Produkteinsatz"));	//setzte den Titel des Panels
 		this.setVisible(true);													//mache das Panel sichtbar
-		text.addActionListener(new ActionListener() {
-			/**
-			 * legt fest, dass wenn ein Action Event (Enter drücken) ausgelöst wird während der Fokus auf dem textfeld liegt,
-			 * dies an den Controller weitergegeben wird und der fokus auf des Textfeld verschwindet
-			 * @param e
-			 */
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				text.setFocusable(false);															//entziehe den Fokus
-				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));		//teile das Ereignis dem Controller mit
-				text.setFocusable(true);															// gebe die Möglichkeit zum Fokussieren zurück.
-			}
-		});
+
 
 		text.addFocusListener(new FocusListener() {
 			/**
-			 * legt fest, dass wenn ein der Focus auf das Textfeld gelegt wird (Mousklick), nichts passieren soll
+			 * legt fest, dass wenn das Textfeld den Fokus erhält, nichts passiert
 			 * @param e
 			 */
 			@Override
-			public void focusGained(FocusEvent e) {
-			}
+			public void focusGained(FocusEvent e) { }
 
 			/**
-			 * legt fest, dass wenn ein der Focus auf das Textfeld gelegt wird (Mousklick in ein anderes Feld),
-			 * dies an den Controller weitergegeben wird und der fokus auf des Textfeld verschwindet
+			 * legt fest, dass wenn das Textfeld den Fokus verliert, ein ModifyEvent an den Controller weitergereicht wird,
+			 * der darüber entscheidet, ob der Inhalt valide ist, und somit der Fokus behalten oder freigegeben wird
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
-				getView().getObsController().observe(new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));
-				//teile das Ereignis dem Controller mit
+				getView().getObsController().observe(modifyEvent = new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));//teile das Ereignis dem Controller mit
+				if(!(modifyEvent.isSuccess())){
+					text.requestFocus();
+				}
 			}
 		});
 	}
