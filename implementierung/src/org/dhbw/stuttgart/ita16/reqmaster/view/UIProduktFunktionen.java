@@ -8,6 +8,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,13 +31,21 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
      * @param view Instanz der View des MVC-Patterns
      */
     public UIProduktFunktionen(View view){
-        super(view);
-        this.setBounds(10,60,80,200);
-        this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
 
+        //Instanziierung
+        super(view);
         title = new UILabel();
         produktFunktionen = new ArrayList<>();
         add = new UIButton();
+
+        //Panel Settings
+        this.setBounds(10,60,80,200);
+        this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
+        this.setLayout(new GridLayout());
+        this.add(title);
+        this.add(this.add);
+
+        this.setVisible(true);
 
         add.addActionListener(new ActionListener() {
             @Override

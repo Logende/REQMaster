@@ -5,12 +5,16 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktFunktionEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 /**
  * Grafikkomponente: legt Aufbau einer Produktfunktion fest
@@ -39,6 +43,11 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     private UILabel beschreibungText;
     private UILabel verweiseText;
 
+    //FocusListener
+    private FocusListener focusListener;
+
+    //Events
+    private UIModifyProduktFunktionEvent modifyEvent;
 
     /**
      * Konstruktor der Klasse
@@ -51,6 +60,18 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         // keinen Layoutmanager verwenden und Größe setzen
         this.setLayout(null);
         this.setBounds(10,10,300,500);
+
+        // FokusListener definieren
+        focusListener = new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                getView().getObsController().observe(modifyEvent = new UIModifyProduktFunktionEvent());
+            }
+        }
+
         // Komponenten verwalten
         addComponents();
         setComponents();

@@ -129,10 +129,10 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
      *
      * @param model
      */
-  /*  @Override
+    @Override
     public void update(IModel model){
-        name.setText(model.getIDataAnforderungssammlung().getDataProduktDaten().get());
+   //     name.setText(model.getIDataAnforderungssammlung().getDataProduktDaten().get());
     }
-    TODO: wie kommt man an die Daten des jeweiligen Produktdatums
-    */
+    //TODO: wie kommt man an die Daten des jeweiligen Produktdatums
+
 }
