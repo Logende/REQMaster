@@ -5,9 +5,9 @@ import java.util.*;
 
 public interface IDataFunctionPointAnalyse {
 
-	void init(List<IIdentifiable> list, IDataSchaetzKonfiguration gewichtsfaktoren);
+	void init(List<IIdentifiable> list);
 
-	void setSchaetzKonfiguration(IDataSchaetzKonfiguration gewichtsfaktoren);
+	//void setSchaetzKonfiguration(IDataSchaetzKonfiguration gewichtsfaktoren);
 
 	double getRealerAufwand();
 
