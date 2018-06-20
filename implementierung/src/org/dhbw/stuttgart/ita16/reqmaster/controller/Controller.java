@@ -16,8 +16,11 @@ public class Controller implements IObserverController, IController{
 
     private Map<Class<? extends UIEvent>, EventReaction> reactions;
 
-    public Controller() {
+    public Controller(IModel iModel, IView iView, IValidator validator) {
         reactions = new HashMap<>();
+        this.validator = validator;
+        this.view = iView;
+        this.model = iModel;
 
         //ADD
         reactions.put(UIActionAddProduktDatumEvent.class, (model, view, event)->{
@@ -201,7 +204,7 @@ public class Controller implements IObserverController, IController{
 
         //ACTION
         reactions.put(UIActionFPAufwandAnzeigenEvent.class, (model, view, event)->{
-            //TODO
+            //TODO calculate aufwand & send "show aufwand" signal to view
             return false;
         });
 

@@ -1,10 +1,8 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import jdk.jshell.spi.ExecutionControl;
 import org.dhbw.stuttgart.ita16.reqmaster.view.IObserverView;
 
 import java.io.*;
-import java.util.*;
 
 public class Model implements IModel {
 
