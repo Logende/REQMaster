@@ -11,12 +11,11 @@ public class UILabel extends JLabel{
     JLabel uiLabel;
 
     /**
-     *
+     * Konstruktor der Klasse
      *
      */
     public UILabel() {
 
-        uiLabel = new JLabel();
         // hier Settings fuer spezifische Anpassungen
     }
 }

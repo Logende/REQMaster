@@ -1,5 +1,6 @@
-/*package org.dhbw.stuttgart.ita16.reqmaster.model;
+package org.dhbw.stuttgart.ita16.reqmaster.model;
 
+import jdk.jshell.spi.ExecutionControl;
 import org.dhbw.stuttgart.ita16.reqmaster.view.IObserverView;
 
 import java.io.*;
@@ -13,6 +14,11 @@ public class Model implements IModel {
 	private IDataAnforderungssammlung anforderungssammlung;
 	private File anforderungsSammlungFile;
 
+    public Model(IExporter exporter, File schaetzKonfigurationsFile) {
+        throw new UnsupportedOperationException("The method is not implemented yet.");
+    }
+
+
 	public void loadAnforderungssammlung(File f) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
@@ -25,9 +31,14 @@ public class Model implements IModel {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 
-	public Model(IExporter exporter, File schaetzKonfigurationsFile) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
-	}
 
+	@Override
+    public void wasModified() {
+
+    }
+
+    @Override
+    public IDataAnforderungssammlung getIDataAnforderungssammlung(){
+	    throw new UnsupportedOperationException("Not implemented yet");
+    }
 }
-*/

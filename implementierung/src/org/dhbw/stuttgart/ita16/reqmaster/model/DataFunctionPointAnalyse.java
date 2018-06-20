@@ -1,4 +1,4 @@
-package org.dhbw.stuttgart.ita16.reqmaster.model;
+/*package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import java.util.*;
 
@@ -25,3 +25,4 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 	}
 
 }
+*/

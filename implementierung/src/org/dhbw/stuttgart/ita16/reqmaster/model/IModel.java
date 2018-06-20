@@ -8,6 +8,6 @@ public interface IModel
     /**
      * Is executed by the controller after it modified model data.
      */
-    void wasModified();
+   public void wasModified();
 
 }

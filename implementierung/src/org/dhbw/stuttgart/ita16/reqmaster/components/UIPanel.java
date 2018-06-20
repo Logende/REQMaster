@@ -25,6 +25,10 @@ public class UIPanel extends JPanel {
 
     }
 
+    public UIPanel() {
+
+    }
+
     public View getView() {
         return view;
     }
