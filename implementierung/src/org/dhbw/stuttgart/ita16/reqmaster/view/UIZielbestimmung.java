@@ -10,6 +10,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -35,7 +36,8 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 		super(view);
 
 		this.add(text=new UITextField());										//füge Text zum Panel hinzu
-		this.setBorder(BorderFactory.createTitledBorder("Zielbestimmung"));		//setze den Titel des Panels
+		this.setBorder(BorderFactory.createTitledBorder("Zielbestimmung"));
+		this.setLayout(new BorderLayout());//setze den Titel des Panels
 		this.setVisible(true);													//mache das Panel sichtbar
 
 

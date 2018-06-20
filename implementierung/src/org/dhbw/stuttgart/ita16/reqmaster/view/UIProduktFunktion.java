@@ -78,7 +78,8 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     }
 
     /**
-     *  Hinzufügen der Grafikkomponenten zum Panel
+     *  Hinzufügen der Grafikkomponenten zum Panel sowie
+     *  Definition des Fokuslistener
      */
     private void addComponents() {
         // FokusListener definieren

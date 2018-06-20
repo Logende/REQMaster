@@ -7,6 +7,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.DataZielbestimmung;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -29,7 +30,8 @@ public class UIUmgebung extends UIPanel implements UIUpdateable {
         super(view);
 
         this.add(text=new UITextField());										//füge Text zum Panel hinzu
-        this.setBorder(BorderFactory.createTitledBorder("Umgebung"));		//setze den Titel des Panels
+        this.setBorder(BorderFactory.createTitledBorder("Umgebung"));
+        this.setLayout(new BorderLayout());//setze den Titel des Panels
         this.setVisible(true);													//mache das Panel sichtbar
 
 /*
