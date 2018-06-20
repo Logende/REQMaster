@@ -8,6 +8,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktFunktionEv
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import java.awt.*;
@@ -68,7 +69,7 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
             @Override
             public void focusLost(FocusEvent e) {
-                getView().getObsController().observe(modifyEvent = new UIModifyProduktFunktionEvent());
+                getView().getObsController().observe(modifyEvent = new UIModifyProduktFunktionEvent(new DataId("12"), new DataProduktFunktion()));
             }
         }
 

@@ -6,7 +6,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 
 public class UIGewichtsfaktoren extends UITable {
 
-	public UIGewichtsfaktoren() {
+	public UIGewichtsfaktoren(View view) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 

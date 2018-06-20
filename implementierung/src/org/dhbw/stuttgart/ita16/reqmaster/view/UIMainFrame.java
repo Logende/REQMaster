@@ -12,16 +12,22 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIFrame;
 public class UIMainFrame extends UIFrame implements UIUpdateable {
 
 	private UIMainPanel mainPanel;
+	private UIFunctionPointPanel functionPointPanel;
 
 	/**
 	 * Konstruktor der Klasse
 	 * erstellt UIMainPanel und erscheint auf der Bildfläche
 	 */
 	public UIMainFrame(View view) {
-		super();                        //rufe Superklasse auf
-		mainPanel = new UIMainPanel(view);    //erstelle Instanz von UIMainPanel()
-		this.add(mainPanel);            //füge mainPanel zu Frame hinzu
-		this.setVisible(true);          //mache Frame sichtbar
+		super("REQ-Master");                        		//rufe Superklasse auf
+		mainPanel = new UIMainPanel(view);    					//erstelle Instanz von UIMainPanel
+		functionPointPanel = new UIFunctionPointPanel(view); 	// erstelle Instanz von UIFunctionPointPanel
+		this.setSize(800,800);						//Grösse festlegen
+		this.setResizable(false);								//Grösse des Frames nicht veränderbar
+		this.add(mainPanel);           							//füge mainPanel zu Frame hinzu
+		this.add(functionPointPanel);							//füge functionPointPanel zu Frame hinzu
+		this.setDefaultCloseOperation(UIFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);          						//mache Frame sichtbar
 	}
 
 	/**
