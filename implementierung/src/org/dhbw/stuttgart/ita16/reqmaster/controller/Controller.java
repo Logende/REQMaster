@@ -194,7 +194,7 @@ public class Controller implements IObserverController, IController{
             UIModifyGewichtsfaktorenEvent e = (UIModifyGewichtsfaktorenEvent) event;
             IDataSchaetzKonfiguration proposal = e.getProposal();
             if(validator.isValid(model, proposal)){
-                model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setSchaetzKonfiguration(proposal);
+                model.setSchaetzKonfiguration(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
