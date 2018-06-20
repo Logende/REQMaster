@@ -8,7 +8,8 @@ public class UIFunktionenDaten extends UITable {
 
 	public Object[] data;
 
-	public UIFunktionenDaten() {
+	public UIFunktionenDaten(View view)
+	{
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 

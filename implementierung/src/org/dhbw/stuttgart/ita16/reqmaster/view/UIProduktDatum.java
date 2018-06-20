@@ -35,11 +35,8 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
     private UILabel attributeText;
     private UILabel verweiseText;
 
-    //FokusListener
-    private FocusListener focusListener;
 
-    //Events
-    private UIModifyProduktDatumEvent modifyEvent;
+
 
     /**
      * Konstruktor der Klasse
@@ -60,7 +57,9 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
 
             @Override
             public void focusLost(FocusEvent e) {
+               //TODO  UIModifyProduktDatumEvent modifyEvent = new
                 getView().getObsController().observe(modifyEvent = new UIModifyProduktDatumEvent());
+                // TODO abfrage success und neue ID setzen
             }
         }
 
@@ -131,7 +130,7 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
      */
     @Override
     public void update(IModel model){
-   //     name.setText(model.getIDataAnforderungssammlung().getDataProduktDaten().get());
+   // Key: ID    name.setText(model.getIDataAnforderungssammlung().getDataProduktDaten().get());
     }
     //TODO: wie kommt man an die Daten des jeweiligen Produktdatums
 

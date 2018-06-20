@@ -25,10 +25,17 @@ public class UIPanel extends JPanel {
 
     }
 
+    /**
+     * Standardkonstruktor der Klasse
+     */
     public UIPanel() {
 
     }
 
+    /**
+     * getter-Methode für die View
+     * @return liefert die Instanz der View des MVC-Patterns zurück
+     */
     public View getView() {
         return view;
     }

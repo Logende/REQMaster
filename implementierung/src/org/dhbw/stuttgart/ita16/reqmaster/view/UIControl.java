@@ -12,7 +12,7 @@ import java.awt.event.FocusListener;
 /**
  * Die Klasse enthält alle Eingabefelder der Function-Ponit analyse, welche nicht zur Klasse UIFunktionenDaten oder UIGewichtsfaktoren gehören.
  */
-public class UIControll extends UIPanel {
+public class UIControl extends UIPanel {
 
     private UIButton aufwandAnzeigen;
     private UIButton aufwandMMAnzeigen;
@@ -20,7 +20,8 @@ public class UIControll extends UIPanel {
     private UITextField aufwandMM;
     private UITextField realerAufwand;
     private UITextField aufwandFP;
-	public UIControll(View view) {
+
+    public UIControl(View view) {
 
 	    //Superklasse Konstruktor aufrufen
 		super(view);
@@ -94,8 +95,6 @@ public class UIControll extends UIPanel {
                 getView().getObsController().observe(new UIModifyRealerAufwand(Double.parseDouble(realerAufwand.getText())));//teile das Ereignis dem Controller mit
             }
         });
-
-
 
     }
     }

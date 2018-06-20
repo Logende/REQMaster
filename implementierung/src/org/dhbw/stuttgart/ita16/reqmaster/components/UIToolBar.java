@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- *
+ * Adaption der Swing-JToolBar für Projektzwecke
  */
 public class UIToolBar extends JToolBar {
 
@@ -13,8 +13,7 @@ public class UIToolBar extends JToolBar {
 	 * Standardkonstruktor der Klasse
 	 */
 	public UIToolBar() {
-
-
+		super();
 	}
 
 }
