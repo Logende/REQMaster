@@ -13,7 +13,8 @@ public class Model implements IModel {
 	private File anforderungsSammlungFile;
 
     public Model(IExporter exporter, File schaetzKonfigurationsFile) {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+    	this.exporter = exporter;
+    	//TODO
     }
 
 
@@ -39,4 +40,12 @@ public class Model implements IModel {
     public IDataAnforderungssammlung getIDataAnforderungssammlung(){
 	    throw new UnsupportedOperationException("Not implemented yet");
     }
+
+	public IDataSchaetzKonfiguration getSchaetzKonfiguration() {
+		return schaetzKonfiguration;
+	}
+
+	public void setSchaetzKonfiguration(IDataSchaetzKonfiguration schaetzKonfiguration) {
+		this.schaetzKonfiguration = schaetzKonfiguration;
+	}
 }

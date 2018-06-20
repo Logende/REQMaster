@@ -5,6 +5,10 @@ public interface IModel
 {
     IDataAnforderungssammlung getIDataAnforderungssammlung();
 
+
+    IDataSchaetzKonfiguration getSchaetzKonfiguration();
+    void setSchaetzKonfiguration(IDataSchaetzKonfiguration schaetzKonfiguration);
+
     /**
      * Is executed by the controller after it modified model data.
      */

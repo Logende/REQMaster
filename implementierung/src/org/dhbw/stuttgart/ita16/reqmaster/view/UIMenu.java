@@ -7,7 +7,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIToolBar;
 /**
  * Grafikkomponente: enthält die Menüeinträge der GUI
  */
-public class UIMenu extends UIToolbar {
+public class UIMenu extends UIToolBar {
 
     //Variablen der Klasse
     private UIToolBar toolBar;          //Toolbar
@@ -34,7 +34,7 @@ public class UIMenu extends UIToolbar {
 
         // Hinzufügen der Menübuttons
         toolBar.add(neuesDoc);
-        neuesDoc = new
+        //neuesDoc = new
 
     }
 }

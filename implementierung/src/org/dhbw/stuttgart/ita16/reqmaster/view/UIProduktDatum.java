@@ -8,6 +8,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktDatumEvent
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
+import org.dhbw.stuttgart.ita16.reqmaster.model.IIdentifiable;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import java.awt.event.*;
@@ -19,6 +20,7 @@ import java.awt.event.*;
 public class UIProduktDatum extends UIPanel implements UIUpdateable {
 
     // Variablen der Klasse
+    private IIdentifiable datum; //TODO
 
     // Button
     private UIButton delete;
@@ -50,19 +52,6 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
         this.setLayout(null);
         this.setBounds(310,10,300,500);
 
-        // FokusListener definieren
-        focusListener = new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) { }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-               //TODO  UIModifyProduktDatumEvent modifyEvent = new
-                getView().getObsController().observe(modifyEvent = new UIModifyProduktDatumEvent());
-                // TODO abfrage success und neue ID setzen
-            }
-        }
-
         //Hinzufügen und verwalten der Komponenten
         addComponents();
         setComponents();
@@ -87,9 +76,24 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
      * Hinzufügen der Grafikkomponenten
      */
     private void addComponents() {
+        // FokusListener definieren
+        FocusListener focusListener = new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                DataProduktDatum proposal = new DataProduktDatum(null, null, null, null);
+                UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(datum, proposal);
+                getView().getObsController().observe(modifyEvent);
+                if(!modifyEvent.isSuccess()){
+                    //TODO focus request (vtl. in Runnable damit nicht direkt danach)
+                }
+            }
+        };
 
         this.add(delete = new UIButton());
-        this.add(id = new UITextField());
+        this.add(id = new UITextField(focusListener));
         this.add(name = new UITextField());
         this.add(attribute = new UITextField());
         this.add(verweise = new UITextField());
@@ -130,7 +134,7 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
      */
     @Override
     public void update(IModel model){
-   // Key: ID    name.setText(model.getIDataAnforderungssammlung().getDataProduktDaten().get());
+        // Key: ID    name.setText(model.getIDataAnforderungssammlung().getDataProduktDaten().get());
     }
     //TODO: wie kommt man an die Daten des jeweiligen Produktdatums
 

@@ -24,6 +24,7 @@ import java.awt.event.FocusListener;
 public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
     /*Variablen der Klasse*/
+    private DataProduktFunktion funktion; //TODO
 
     // Button
     private UIButton delete;
@@ -44,12 +45,6 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     private UILabel beschreibungText;
     private UILabel verweiseText;
 
-    //FocusListener
-    private FocusListener focusListener;
-
-    //Events
-    private UIModifyProduktFunktionEvent modifyEvent;
-
     /**
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
@@ -62,16 +57,6 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         this.setLayout(null);
         this.setBounds(10,10,300,500);
 
-        // FokusListener definieren
-        focusListener = new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) { }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                getView().getObsController().observe(modifyEvent = new UIModifyProduktFunktionEvent(new DataId("12"), new DataProduktFunktion()));
-            }
-        }
 
         // Komponenten verwalten
         addComponents();
@@ -96,6 +81,21 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      *  Hinzufügen der Grafikkomponenten zum Panel
      */
     private void addComponents() {
+        // FokusListener definieren
+        FocusListener focusListener = new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                DataProduktFunktion proposal = new DataProduktFunktion(null, null, null, null, null, null);
+                UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(funktion, proposal);
+                getView().getObsController().observe(modifyEvent);
+                if(!modifyEvent.isSuccess()){
+                    //TODO
+                }
+            }
+        };
 
         this.add(delete = new UIButton());
         this.add(id = new UITextField());

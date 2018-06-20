@@ -19,13 +19,14 @@ public class View implements IView, IObserverView {
     /**
      * Konstruktor der Klasse
      * @param model Instanz der Klasse IModel des VMC-Patterns
-     * @param obsController Observer des Controllers
      */
-    public View(IModel model, IObserverController obsController) {
-
+    public View(IModel model) {
         this.model = model;
-        this.obsController = obsController;
         mainFrame = new UIMainFrame(this);
+    }
+
+    public void setObsController(IObserverController obsController){
+        this.obsController = obsController;
     }
 
     /**
