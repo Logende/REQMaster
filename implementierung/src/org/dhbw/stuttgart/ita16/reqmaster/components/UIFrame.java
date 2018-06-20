@@ -5,6 +5,7 @@ import javax.swing.*;
 public class UIFrame extends JFrame {
 
     public UIFrame() {
+
         super();
     }
 }

@@ -2,6 +2,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import java.io.*;
 import java.util.*;
+import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 
 public class UIGewichtsfaktoren extends UITable {
 

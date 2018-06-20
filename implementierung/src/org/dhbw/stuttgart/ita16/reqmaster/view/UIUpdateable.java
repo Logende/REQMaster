@@ -5,7 +5,8 @@ import java.util.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 /**
- * interface legt die Fähigkeit der View sich auf Grundlage eines Model neu aufzubauen
+ * Interface legt die Fähigkeit der View und aller Komponenten darunter fest,
+ * sich auf Grundlage eines Model neu aufzubauen
  *
  */
 public interface UIUpdateable {
