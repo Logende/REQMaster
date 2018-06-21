@@ -24,7 +24,7 @@ import java.awt.event.FocusListener;
 public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
     /*Variablen der Klasse*/
-    private DataProduktFunktion funktion; //TODO
+    private DataId dataId;
 
     // Button
     private UIButton delete;
@@ -49,7 +49,7 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
-    public UIProduktFunktion(View view) {
+    public UIProduktFunktion(View view, DataId dataId) {
 
         //UIPanel mit Übergabeparamter View
         super(view);
@@ -82,13 +82,29 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      *  Definition des Fokuslistener
      */
     private void addComponents() {
-        // FokusListener definieren
+
+        /*
+        **  Für jedes UITextField in ProduktFunktion wird einmalig ein
+        *   FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+        */
+
         FocusListener focusListener = new FocusListener() {
+
+            /**
+             * Wenn das Textfeld den Fokus verliert, soll nichts passieren
+             * @param e
+             */
             @Override
             public void focusGained(FocusEvent e) { }
 
+            /**
+             * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
+             * um den Inhalt des Textfeldes zu validieren
+             * @param e
+             */
             @Override
             public void focusLost(FocusEvent e) {
+                //TODO DataProduktFunktion definieren (extra Methode)
                 DataProduktFunktion proposal = new DataProduktFunktion(null, null, null, null, null, null);
                 UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(funktion, proposal);
                 getView().getObsController().observe(modifyEvent);
@@ -99,12 +115,12 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         };
 
         this.add(delete = new UIButton());
-        this.add(id = new UITextField());
-        this.add(name = new UITextField());
-        this.add(quelle = new UITextField());
-        this.add( akteur = new UITextField());
-        this.add(beschreibung = new UITextField());
-        this.add(verweise = new UITextField());
+        this.add(id = new UITextField(focusListener));
+        this.add(name = new UITextField(focusListener));
+        this.add(quelle = new UITextField(focusListener));
+        this.add( akteur = new UITextField(focusListener));
+        this.add(beschreibung = new UITextField(focusListener));
+        this.add(verweise = new UITextField(focusListener));
 
         this.add(idText = new UILabel());
         this.add(nameText = new UILabel());
@@ -148,7 +164,8 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      */
     @Override
     public void update(IModel model){
-
+        DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
+        //TODO auslesen und setzen der Werte in der GUI
 
     }
 }
