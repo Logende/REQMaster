@@ -21,4 +21,8 @@ public class DataId {
 		return false;
 	}
 
+	protected void modify(DataId id){
+		this.id = id.id;
+	}
+
 }

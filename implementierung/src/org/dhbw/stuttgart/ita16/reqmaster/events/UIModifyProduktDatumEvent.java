@@ -1,11 +1,12 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IIdentifiable;
 
 public class UIModifyProduktDatumEvent extends UIModifyEvent {
 
-	private IIdentifiable id;
+	private DataId id;
 	private DataProduktDatum proposal;
 
     /**
@@ -13,7 +14,7 @@ public class UIModifyProduktDatumEvent extends UIModifyEvent {
      * @param id
      * @param proposal
      */
-    public UIModifyProduktDatumEvent(IIdentifiable id, DataProduktDatum proposal)
+    public UIModifyProduktDatumEvent(DataId id, DataProduktDatum proposal)
     {
         this.id=id;
         this.proposal=proposal;
@@ -23,7 +24,7 @@ public class UIModifyProduktDatumEvent extends UIModifyEvent {
      * getter für id
      * @return id
      */
-    public IIdentifiable getId() {
+    public DataId getId() {
         return id;
     }
 
