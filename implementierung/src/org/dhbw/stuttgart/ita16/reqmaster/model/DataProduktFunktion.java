@@ -29,12 +29,12 @@ public class DataProduktFunktion implements IIdentifiable {
 
 
 	public void modify(DataProduktFunktion goal){
-		this.name = name;
-		this.beschreibung = beschreibung;
-		this.akteur = akteur;
-		this.quelle = quelle;
-		this.verweise = verweise;
-		this.id = id;
+		this.name = goal.name;
+		this.beschreibung = goal.beschreibung;
+		this.akteur = goal.akteur;
+		this.quelle = goal.quelle;
+		this.verweise = goal.verweise;
+		this.id.modify(goal.id);
 	}
 
 }
