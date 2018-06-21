@@ -1,5 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProdukteinsatzEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
@@ -20,8 +21,7 @@ import java.awt.event.FocusListener;
 public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 
 	// Variablen der Klasse
-	private UITextField text;
-	private UIModifyProdukteinsatzEvent modifyEvent;
+	private UITextArea text;
 
 	/**
 	 * Konstruktor der Klasse
@@ -29,11 +29,15 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 	 * Definiert die Eigenschaften des Textfeldes Text
 	 */
     public UIProdukteinsatz(View view) {
-		super(view);
-		this.add(text = new UITextField());									//füge Text zum Panel hinzu
-		this.setBorder(BorderFactory.createTitledBorder("Produkteinsatz"));
-		this.setLayout(new BorderLayout());//setzte den Titel des Panels
-		this.setVisible(true);													//mache das Panel sichtbar
+
+    	super(view);
+
+		text = new UITextArea();
+		text.setPreferredSize(new Dimension(350,200));
+		text.setLineWrap(true);
+		this.add(text, BorderLayout.CENTER);							//füge Text zum Panel hinzu
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"), BorderFactory.createEmptyBorder(30,0,0,0)));
+		this.setVisible(true);												//mache das Panel sichtbar
 
 
 		text.addFocusListener(new FocusListener() {
@@ -50,6 +54,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			 * @param e
 			 */
 			public void focusLost(FocusEvent e) {
+				UIModifyProdukteinsatzEvent modifyEvent;
 				getView().getObsController().observe(modifyEvent = new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));//teile das Ereignis dem Controller mit
 				if(!(modifyEvent.isSuccess())){
 					text.requestFocus();

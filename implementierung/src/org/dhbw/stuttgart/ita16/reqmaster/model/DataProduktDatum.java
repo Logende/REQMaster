@@ -28,4 +28,16 @@ public class DataProduktDatum implements IIdentifiable {
 		this.attribute = goal.attribute;
 		this.verweise = goal.verweise;
 	}
+
+	public String getName(){
+		return name;
+	}
+
+	public List<DataAttribut> getAttribute() {
+		return attribute;
+	}
+
+	public List<DataId> getVerweise() {
+		return verweise;
+	}
 }

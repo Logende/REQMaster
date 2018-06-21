@@ -41,7 +41,7 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
-    public UIProduktDatum (View view, IIdentifiable dataId) {
+    public UIProduktDatum (View view, DataId dataId) {
 
         super(view);
         this.dataId = dataId;
@@ -150,7 +150,13 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
     @Override
     public void update(IModel model){
         DataProduktDatum newDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(dataId);
-        //TODO auslesen der Daten und Setzen in der GUI
+        this.dataId = newDatum.getId();
+        this.id.setText(dataId.getId());
+        name.setText(newDatum.getName());
+
+        //TODO auslesen attribute und verweise und setzen in der GUI
+        //TODO Wie werden Attribute und Verweise angezeigt? in Textfeld oder in mehreren Textfeldern da im Model eine Liste?
+        //Ggf. scrollbar mit mehreren Textfeldern für verschiedene Verweise und Attribute
     }
 
 

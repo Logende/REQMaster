@@ -17,8 +17,6 @@ import java.awt.event.ActionListener;
 public class UIMenu extends UIMenuBar {
 
     //Menü-Einträge
-    private UIMenuItem docNeu;
-    private UIMenuItem docImport;
     private UIMenuItem docExportXml;
     private UIMenuItem fpNeu;
 
@@ -29,14 +27,10 @@ public class UIMenu extends UIMenuBar {
         super();
 
         // Instantiierung der Objekte
-        docNeu = new UIMenuItem("Neues Dokument anlegen");
-        docImport = new UIMenuItem("Dokument importieren");
         docExportXml = new UIMenuItem("Dokument in XML exportieren");
-        fpNeu = new UIMenuItem("Neue Aufwandsabschätzung");
+        fpNeu = new UIMenuItem("Aufwandsabschätzung");
 
         // Hinzufügen der Menüeinträge
-        this.add(docNeu);
-        this.add(docImport);
         this.add(docExportXml);
         this.add(fpNeu);
         this.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));

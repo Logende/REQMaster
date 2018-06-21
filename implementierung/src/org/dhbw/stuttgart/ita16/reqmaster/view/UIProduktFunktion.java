@@ -106,7 +106,7 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
             public void focusLost(FocusEvent e) {
                 //TODO DataProduktFunktion definieren (extra Methode)
                 DataProduktFunktion proposal = new DataProduktFunktion(null, null, null, null, null, null);
-                UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(funktion, proposal);
+                UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
                     //TODO
@@ -165,7 +165,13 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     @Override
     public void update(IModel model){
         DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
-        //TODO auslesen und setzen der Werte in der GUI
+        this.dataId = newFunktion.getId();
+        id.setText(dataId.getId());
+        name.setText(newFunktion.getName());
+        quelle.setText(newFunktion.getQuelle());
+        akteur.setText(newFunktion.getAkteur());
+        beschreibung.setText(newFunktion.getBeschreibung());
+        // TODO wie geht das mit den Verweisen, siehe UIProduktdatum
 
     }
 }

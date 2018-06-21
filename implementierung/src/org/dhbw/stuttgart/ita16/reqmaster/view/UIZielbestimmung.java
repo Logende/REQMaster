@@ -1,6 +1,7 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProdukteinsatzEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyZielbestimmungEvent;
@@ -22,7 +23,7 @@ import java.awt.event.FocusListener;
 public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 
 	//Variablen der Klasse
-	private UITextField text;
+	private UITextArea text;
 	private UIModifyZielbestimmungEvent modifyEvent;
 
 	/**
@@ -35,10 +36,14 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 
 		super(view);
 
-		this.add(text=new UITextField());										//füge Text zum Panel hinzu
-		this.setBorder(BorderFactory.createTitledBorder("Zielbestimmung"));
-		this.setLayout(new BorderLayout());//setze den Titel des Panels
-		this.setVisible(true);													//mache das Panel sichtbar
+		text = new UITextArea();
+		text.setPreferredSize(new Dimension(350,200));
+		text.setLineWrap(true);
+		this.add(text, BorderLayout.CENTER);							//füge Text zum Panel hinzu
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Zielbestimmung"), BorderFactory.createEmptyBorder(30,0,0,0)));
+		this.setVisible(true);
+
+
 
 
 		text.addFocusListener(new FocusListener() {

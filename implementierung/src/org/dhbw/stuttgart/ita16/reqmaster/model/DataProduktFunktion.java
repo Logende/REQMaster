@@ -27,6 +27,25 @@ public class DataProduktFunktion implements IIdentifiable {
 		return id;
 	}
 
+	public String getName(){
+		return name;
+	}
+
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+
+	public String getAkteur(){
+		return akteur;
+	}
+
+	public String getQuelle(){
+		return quelle;
+	}
+
+	public List<DataId> getVerweise() {
+		return verweise;
+	}
 
 	public void modify(DataProduktFunktion goal){
 		this.name = goal.name;
