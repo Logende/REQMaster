@@ -18,12 +18,10 @@ public class UITextField extends JTextField {
     public UITextField(FocusListener focusListener)
     {
         super();
+        this.addFocusListener(focusListener);
     }
 
-    @Override
-    public synchronized void addFocusListener(FocusListener focusListener) {
-        super.addFocusListener(focusListener);
-    }
+
 
     //Platz für Programmspezifische anpassungen
 

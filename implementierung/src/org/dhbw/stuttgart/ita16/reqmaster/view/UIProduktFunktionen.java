@@ -21,10 +21,10 @@ import java.util.List;
 public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
 
     //Variablen der Klasse
-    private UILabel title;
     private List<UIProduktFunktion> produktFunktionen;
     private UIButton add;
-
+    private UIPanel buttonPanel;
+    private UIPanel funktionsPanel;
 
     /**
      * Konstruktor der Klasse
@@ -34,17 +34,29 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
 
         //Instanziierung
         super(view);
-        title = new UILabel();
         produktFunktionen = new ArrayList<>();
         add = new UIButton();
+        funktionsPanel = new UIPanel();
+        buttonPanel = new UIPanel();
 
+       //TODO UIProduktFunktion test = new UIProduktFunktion(view);
+        //TODO UIProduktFunktion test1 = new UIProduktFunktion(view);
         //Panel Settings
+        funktionsPanel.setLayout(new GridLayout(2,1));
+       //TODO funktionsPanel.add(test);
+        //TODO funktionsPanel.add(test1);
+        add.setText("Hinzufügen");
+
+        buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.add(add, FlowLayout.LEFT);
+
+        add.setSize(20,20);
+
         this.setBounds(10,60,80,200);
         this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
-        this.setLayout(new GridLayout());
-        this.add(title);
-        this.add(this.add);
-
+        this.setLayout(new BorderLayout());
+        this.add(buttonPanel, BorderLayout.PAGE_START);
+        this.add(funktionsPanel, BorderLayout.CENTER);
         this.setVisible(true);
 
         add.addActionListener(new ActionListener() {

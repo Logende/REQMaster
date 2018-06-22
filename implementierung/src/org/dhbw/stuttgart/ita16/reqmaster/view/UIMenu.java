@@ -1,40 +1,41 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIToolBar;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuBar;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuItem;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuLoadEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Grafikkomponente: enthält die Menüeinträge der GUI
  */
-public class UIMenu extends UIToolBar {
+public class UIMenu extends UIMenuBar {
 
-    //Variablen der Klasse
-    private UIToolBar toolBar;          //Toolbar
-
-    private UIButton neuesDoc;          // Buttons für Menüeinträge
-    private UIButton docImport;
-    private UIButton docExportXml;
-    private UIButton docExportPdf;
-    private UIButton neueFp;
+    //Menü-Einträge
+    private UIMenuItem docExportXml;
+    private UIMenuItem fpNeu;
 
     /**
      * Konstruktor der Klasse
      */
-    public UIMenu() {
+    public UIMenu(View view) {
         super();
 
         // Instantiierung der Objekte
-        toolBar = new UIToolBar();
-        neuesDoc = new UIButton();
-        docImport = new UIButton();
-        docExportXml = new UIButton();
-        docExportPdf = new UIButton();
-        neueFp = new UIButton();
+        docExportXml = new UIMenuItem("Dokument in XML exportieren");
+        fpNeu = new UIMenuItem("Aufwandsabschätzung");
 
-        // Hinzufügen der Menübuttons
-        toolBar.add(neuesDoc);
-        //neuesDoc = new
+        // Hinzufügen der Menüeinträge
+        this.add(docExportXml);
+        this.add(fpNeu);
+        this.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
+
+
 
     }
 }

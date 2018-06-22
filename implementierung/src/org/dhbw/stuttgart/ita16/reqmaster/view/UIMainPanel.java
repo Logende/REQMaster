@@ -1,5 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
@@ -27,7 +28,7 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 	public UIMainPanel(View view)
 	{
 		super(view);
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new GridLayout(2,2));
 		this.add(panelFunktionen=new UIProduktFunktionen(view));
 		this.add(panelDaten=new UIProduktDaten(view));
 		this.add(panelProdukteinsatz=new UIProdukteinsatz(view));
