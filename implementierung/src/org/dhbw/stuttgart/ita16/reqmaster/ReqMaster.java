@@ -26,7 +26,7 @@ public class ReqMaster {
     public static void main(String[] args){
         IExporter exporter = new XMLExporter();
         IValidator validator = new Validator();
-        File schaetzKonfigurationsFile = new File("reqmaster/schaetzkonfiguration.xml");
+        File schaetzKonfigurationsFile = new File(System.getProperty("user.home") + "/reqmaster/schaetzkonfiguration.xml");
         Model model = new Model(exporter, schaetzKonfigurationsFile);
         View view = new View(model);
         Controller controller = new Controller(model, view, validator);
@@ -35,7 +35,7 @@ public class ReqMaster {
 
 
         //just for testing purposes
-        model.createAnforderungssammlung(new File("reqmaster/anforderungssammlung.xml"));
+        model.createAnforderungssammlung(new File(System.getProperty("user.home") + "/reqmaster/anforderungssammlung.xml"));
         model.wasModified();
     }
 }
