@@ -1,11 +1,15 @@
 package org.dhbw.stuttgart.ita16.reqmaster.components;
 
+import org.dhbw.stuttgart.ita16.reqmaster.view.View;
+
 import javax.swing.*;
 
 /**
  * Adaption der Swing-JFrame Komponente für Projektzwecke
  */
 public class UIFrame extends JFrame {
+
+    View view;
 
     /**
      * Konstruktor der Klasse
@@ -21,5 +25,14 @@ public class UIFrame extends JFrame {
      */
     public UIFrame(){
 
+    }
+
+    public UIFrame(View view){
+        this.view = view;
+    }
+
+
+    public View getView() {
+        return view;
     }
 }
