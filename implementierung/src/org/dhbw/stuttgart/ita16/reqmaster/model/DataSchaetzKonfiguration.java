@@ -1,16 +1,19 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
-
 public class DataSchaetzKonfiguration implements IDataSchaetzKonfiguration {
 
-	public void load(File f) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+
+	private  double[] gewichte;
+
+	public DataSchaetzKonfiguration(double[] gewichte){
+		this.gewichte = gewichte;
 	}
 
-	public void save(File f) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	@Override
+	public double getGewicht(int index) {
+		if(index>= gewichte.length || index<0){
+			throw new ArrayIndexOutOfBoundsException("Out of bounds: Gewicht requested was " + index + " but needs to be between 0 and " + (gewichte.length-1) + ".");
+		}
+		return gewichte[index];
 	}
-
 }

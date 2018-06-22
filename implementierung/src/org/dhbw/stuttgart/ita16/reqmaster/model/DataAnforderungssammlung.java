@@ -9,17 +9,20 @@ public class DataAnforderungssammlung implements IDataAnforderungssammlung {
 	private DataUmgebung umgebung;
 	private Map<DataId, DataProduktFunktion> produktFunktionen;
 	private Map<DataId, DataProduktDatum> produktDaten;
+
 	private IDataFunctionPointAnalyse functionPointAnalyse;
 
-	public DataAnforderungssammlung(DataZielbestimmung zielbestimmung, DataProdukteinsatz produkteinsatz,
+	public DataAnforderungssammlung(DataZielbestimmung zielbestimmung, DataProdukteinsatz produkteinsatz, DataUmgebung umgebung,
 									Map<DataId, DataProduktFunktion> produktFunktionen, Map<DataId, DataProduktDatum> produktDaten,
 									IDataFunctionPointAnalyse functionPointAnalyse) {
 		this.zielbestimmung = zielbestimmung;
 		this.produkteinsatz = produkteinsatz;
+		this.umgebung = umgebung;
 		this.produktFunktionen = produktFunktionen;
 		this.produktDaten = produktDaten;
 		this.functionPointAnalyse = functionPointAnalyse;
 	}
+
 
 
 	@Override

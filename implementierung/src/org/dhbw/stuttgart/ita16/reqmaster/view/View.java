@@ -25,7 +25,7 @@ public class View implements IView, IObserverView {
         mainFrame = new UIMainFrame(this);
     }
 
-    public void setObsController(IObserverController obsController){
+    public void setObserverController(IObserverController obsController){
         this.obsController = obsController;
     }
 

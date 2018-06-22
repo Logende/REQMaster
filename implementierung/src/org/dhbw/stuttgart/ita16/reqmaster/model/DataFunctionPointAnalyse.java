@@ -1,5 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
+import java.io.File;
 import java.util.*;
 
 public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
@@ -17,6 +18,10 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 	public void init(List<IIdentifiable> list) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
+
+
+
+
 
 	public double getRealerAufwand() {
 		return this.realerAufwand;
