@@ -7,9 +7,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.Controller;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IValidator;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.Validator;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IExporter;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
-import org.dhbw.stuttgart.ita16.reqmaster.model.Model;
+import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import org.dhbw.stuttgart.ita16.reqmaster.view.UIProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.view.View;
 import org.dhbw.stuttgart.ita16.reqmaster.view.View.*;
@@ -26,12 +24,18 @@ import java.io.File;
 public class ReqMaster {
 
     public static void main(String[] args){
-        IExporter exporter = null;
+        IExporter exporter = new XMLExporter();
         IValidator validator = new Validator();
-        File schaetzKonfigurationsFile = null;
+        File schaetzKonfigurationsFile = new File("reqmaster/schaetzkonfiguration.xml");
         Model model = new Model(exporter, schaetzKonfigurationsFile);
         View view = new View(model);
         Controller controller = new Controller(model, view, validator);
-        view.setObsController(controller);
+        view.setObserverController(controller);
+        model.setObserverView(view);
+
+
+        //just for testing purposes
+        model.createAnforderungssammlung(new File("reqmaster/anforderungssammlung.xml"));
+        model.wasModified();
     }
 }

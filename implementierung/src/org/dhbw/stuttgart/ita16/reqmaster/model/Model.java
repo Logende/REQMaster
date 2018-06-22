@@ -9,36 +9,52 @@ public class Model implements IModel {
 	IObserverView obsView;
 	private IExporter exporter;
 	private IDataSchaetzKonfiguration schaetzKonfiguration;
-	private IDataAnforderungssammlung anforderungssammlung;
-	private File anforderungsSammlungFile;
+	private IDataAnforderungssammlung anforderungsSammlung;
+	private File schaetzKonfigurationFile;
 
+	private File anforderungsSammlungFile;
     public Model(IExporter exporter, File schaetzKonfigurationsFile) {
     	this.exporter = exporter;
-    	//TODO
+    	this.schaetzKonfigurationFile = schaetzKonfigurationsFile;
+    	if(!schaetzKonfigurationsFile.exists()){
+    		this.schaetzKonfiguration = DefaultValues.createSchaetzKonfiguration();
+		}else {
+			this.schaetzKonfiguration = exporter.loadSchaetzkonfiguration(schaetzKonfigurationsFile);
+		}
     }
 
+    public void setObserverView(IObserverView obsView){
+    	this.obsView = obsView;
+	}
+
+    public void createAnforderungssammlung(File f){
+    	this.anforderungsSammlungFile = f;
+    	this.anforderungsSammlung = DefaultValues.createAnforderungsSammlung();
+	}
 
 	public void loadAnforderungssammlung(File f) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+    	this.anforderungsSammlungFile = f;
+		this.anforderungsSammlung = this.exporter.loadAnforderungssammlung(f);
 	}
 
 	public void saveAnforderungssammlung() {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+		this.exporter.saveAnforderungssammlung(anforderungsSammlung, anforderungsSammlungFile);
 	}
 
-	public void saveKonfiguration() {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	public void saveSchaetzkonfiguration(){
+    	this.exporter.saveSchaetzKonfiguration(schaetzKonfiguration, schaetzKonfigurationFile);
 	}
+
 
 
 	@Override
     public void wasModified() {
-
+    	this.obsView.update();
     }
 
     @Override
     public IDataAnforderungssammlung getIDataAnforderungssammlung(){
-	    throw new UnsupportedOperationException("Not implemented yet");
+    	return anforderungsSammlung;
     }
 
 	public IDataSchaetzKonfiguration getSchaetzKonfiguration() {

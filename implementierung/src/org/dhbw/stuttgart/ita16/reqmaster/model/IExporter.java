@@ -13,4 +13,8 @@ public interface IExporter {
 
 	void saveFunctionPointAnalyse(IDataFunctionPointAnalyse analyse, File f);
 
+	IDataSchaetzKonfiguration loadSchaetzkonfiguration(File f);
+
+	void saveSchaetzKonfiguration(IDataSchaetzKonfiguration schaetzKonfiguration, File f);
+
 }

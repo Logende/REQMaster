@@ -1,6 +1,8 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 
+import java.io.File;
+
 public interface IModel
 {
     IDataAnforderungssammlung getIDataAnforderungssammlung();
@@ -9,9 +11,17 @@ public interface IModel
     IDataSchaetzKonfiguration getSchaetzKonfiguration();
     void setSchaetzKonfiguration(IDataSchaetzKonfiguration schaetzKonfiguration);
 
-    /**
-     * Is executed by the controller after it modified model data.
-     */
+
+
+    public void createAnforderungssammlung(File f);
+
+    public void loadAnforderungssammlung(File f);
+
+    public void saveAnforderungssammlung() ;
+
+    public void saveSchaetzkonfiguration();
+
+
    public void wasModified();
 
 }
