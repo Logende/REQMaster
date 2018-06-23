@@ -1,6 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.components;
 
-import org.dhbw.stuttgart.ita16.reqmaster.view.View;
+import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 import javax.swing.*;
 
 /**
@@ -8,20 +8,21 @@ import javax.swing.*;
  */
 public class UIMenuBar extends JMenuBar {
 
-	private View view;
+	private IView view;
 
 	/**
 	 * Standardkonstruktor der Klasse
 	 */
-	public UIMenuBar() {
+	public UIMenuBar(IView view) {
 		super();
+		this.view = view;
 	}
 
 	/**
 	 * getter Methode: liefert Instanz der View des MVC-Patterns zurück
 	 * @return View des MVC-Pattern
 	 */
-	public View getView() {
+	public IView getView() {
 		return this.view;
 	}
 }

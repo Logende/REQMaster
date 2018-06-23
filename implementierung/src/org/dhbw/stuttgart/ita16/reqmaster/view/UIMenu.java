@@ -28,7 +28,7 @@ public class UIMenu extends UIMenuBar {
      * Konstruktor der Klasse
      */
     public UIMenu(IView view) {
-        super();
+        super(view);
         this.view = view;
 
         // Instantiierung der Objekte

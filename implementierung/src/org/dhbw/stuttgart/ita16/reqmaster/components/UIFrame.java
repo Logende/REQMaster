@@ -1,5 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.components;
 
+import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 import org.dhbw.stuttgart.ita16.reqmaster.view.View;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import javax.swing.*;
  */
 public class UIFrame extends JFrame {
 
-    View view;
+    IView view;
 
     /**
      * Konstruktor der Klasse
@@ -27,12 +28,12 @@ public class UIFrame extends JFrame {
 
     }
 
-    public UIFrame(View view){
+    public UIFrame(IView view){
         this.view = view;
     }
 
 
-    public View getView() {
+    public IView getView() {
         return view;
     }
 }

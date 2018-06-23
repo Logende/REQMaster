@@ -19,7 +19,7 @@ public class UIAnfangsDialog extends UIFrame {
     private UIButton docImport;
     private UIPanel buttonPanel;
 
-    public UIAnfangsDialog(View view){
+    public UIAnfangsDialog(IView view){
         super(view);
 
         docNeu = new UIButton();
