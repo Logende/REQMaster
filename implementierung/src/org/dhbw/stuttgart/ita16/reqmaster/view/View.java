@@ -15,6 +15,7 @@ public class View implements IView, IObserverView {
     private IModel model;
     private IObserverController obsController;
     private UIMainFrame mainFrame;
+    private UIAnfangsDialog anfangsDialog;
 
     /**
      * Konstruktor der Klasse
@@ -23,6 +24,7 @@ public class View implements IView, IObserverView {
     public View(IModel model) {
         this.model = model;
         mainFrame = new UIMainFrame(this);
+        anfangsDialog = new UIAnfangsDialog(this);
     }
 
     public void setObserverController(IObserverController obsController){
@@ -44,6 +46,7 @@ public class View implements IView, IObserverView {
      * getter-Methode für IObserverController
      * @return
      */
+    @Override
     public IObserverController getObsController(){
         return obsController;
     }

@@ -171,8 +171,11 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         quelle.setText(newFunktion.getQuelle());
         akteur.setText(newFunktion.getAkteur());
         beschreibung.setText(newFunktion.getBeschreibung());
-        // TODO wie geht das mit den Verweisen, siehe UIProduktdatum
+        // TODO wie geht das mit den Verweisen, siehe Produktdatum
+    }
 
+    public DataId getId(){
+        return this.dataId;
     }
 }
 

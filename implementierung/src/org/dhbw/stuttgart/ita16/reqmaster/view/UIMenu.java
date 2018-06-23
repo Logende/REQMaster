@@ -4,6 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuBar;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuItem;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuLoadEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuSaveEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
@@ -27,7 +28,7 @@ public class UIMenu extends UIMenuBar {
      * Konstruktor der Klasse
      */
     public UIMenu(IView view) {
-        super();
+        super(view);
         this.view = view;
 
         // Instantiierung der Objekte
@@ -45,7 +46,23 @@ public class UIMenu extends UIMenuBar {
         this.add(fpNeu);
         this.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
 
+        docExportXml.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UIActionMenuSaveEvent safeEvent = new UIActionMenuSaveEvent();
+                getView().getObsController().observe(safeEvent);
+              //TODO success fehlt  if(safeEvent.isSuccess){
+                    // TODO Fenster mit Speicherortauswahl
+                }
+            //}
+        });
 
+        fpNeu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             //TODO welches Event   getView().getObsController().observe(new UI);
+            }
+        });
 
     }
 }
