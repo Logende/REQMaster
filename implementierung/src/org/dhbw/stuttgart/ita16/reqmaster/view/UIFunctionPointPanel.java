@@ -3,6 +3,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import java.io.*;
 import java.util.*;
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
+import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 /**
  * Grafikkomponenten: ein Panel, das wiederum alle Grafikkomponenten fuer
@@ -22,5 +23,9 @@ public class UIFunctionPointPanel extends UIPanel {
         gewichtsfaktoren = new UIGewichtsfaktoren(view);
         control = new UIControl(view);
 
+    }
+
+    public void update(IModel model){
+        //TODO: Update values
     }
 }
