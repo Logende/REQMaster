@@ -31,7 +31,7 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 	 * Initialisiert text als eie Instanz der Klasse UITextField
 	 * Definiert die Eigenschaften des Textfeldes Text
 	 */
-	public UIZielbestimmung(View view) {
+	public UIZielbestimmung(IView view) {
 
 
 		super(view);

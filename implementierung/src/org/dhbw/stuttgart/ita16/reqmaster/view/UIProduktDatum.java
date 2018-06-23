@@ -156,7 +156,7 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
 
         //TODO auslesen attribute und verweise und setzen in der GUI
         //TODO Wie werden Attribute und Verweise angezeigt? in Textfeld oder in mehreren Textfeldern da im Model eine Liste?
-        //Ggf. scrollbar mit mehreren Textfeldern für verschiedene Verweise und Attribute
+
     }
 
 

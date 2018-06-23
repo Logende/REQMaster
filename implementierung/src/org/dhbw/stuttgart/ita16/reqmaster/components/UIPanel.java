@@ -12,17 +12,16 @@ import org.dhbw.stuttgart.ita16.reqmaster.view.*;
 
 public class UIPanel extends JPanel {
 
-    private View view;
+    private IView view;
 
     /**
      * Konstruktor der Klasse UIPanel
      * @param view Instanz der View, um auf IOberverController Instanz zuzugreifen
      */
-    public UIPanel(View view) {
+    public UIPanel(IView view) {
 
         super();
         this.view = view;
-
     }
 
     /**
@@ -36,7 +35,7 @@ public class UIPanel extends JPanel {
      * getter-Methode für die View
      * @return liefert die Instanz der View des MVC-Patterns zurück
      */
-    public View getView() {
+    public IView getView() {
         return view;
     }
 }
