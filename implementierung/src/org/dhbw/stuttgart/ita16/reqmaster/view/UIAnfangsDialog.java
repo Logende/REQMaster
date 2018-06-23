@@ -51,7 +51,7 @@ public class UIAnfangsDialog extends UIFrame {
         docImport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getView().getObsController().observe(new UIActionMenuLoadEvent());
+             //TODO File übergeben   getView().getObsController().observe(new UIActionMenuLoadEvent());
                 //TODO successfull auslesen falls vorhanden
             }
         });
