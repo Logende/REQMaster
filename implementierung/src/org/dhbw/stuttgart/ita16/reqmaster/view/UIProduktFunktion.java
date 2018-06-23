@@ -24,7 +24,7 @@ import java.awt.event.FocusListener;
 public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
     /*Variablen der Klasse*/
-    private DataId dataId;
+    private final DataId dataId; //always the real DataId instance, as being used within the model
 
     // Button
     private UIButton delete;
@@ -49,14 +49,14 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
-    public UIProduktFunktion(View view, DataId dataId) {
-
-        //UIPanel mit Übergabeparamter View
+    public UIProduktFunktion(IView view, DataId dataId) {
         super(view);
+        this.dataId = dataId;
+        this.update(view.getModel());
+
         // keinen Layoutmanager verwenden und Größe setzen
         this.setLayout(null);
         this.setBounds(10,10,300,500);
-
 
         // Komponenten verwalten
         addComponents();
@@ -64,17 +64,7 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         // sichtbar
         this.setVisible(true);
 
-        delete.addActionListener(new ActionListener() {
-            /**
-             * wenn der Löschen-Button geklickt wird, wird ein UIActionDeleteProduktFunktionEvent an den
-             * Controller weitergereicht mit der ID der Produktfunktion
-             * @param e
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(new DataId(id.getText())));
-            }
-        });
+        delete.addActionListener((actionListener -> getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(new DataId(id.getText())))));
     }
 
     /**
@@ -82,26 +72,16 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      *  Definition des Fokuslistener
      */
     private void addComponents() {
-
-        /*
-        **  Für jedes UITextField in ProduktFunktion wird einmalig ein
-        *   FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
-        */
-
+        //Für jedes UITextField in ProduktFunktion wird einmalig ein
+        //FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
         FocusListener focusListener = new FocusListener() {
 
-            /**
-             * Wenn das Textfeld den Fokus verliert, soll nichts passieren
-             * @param e
-             */
+             //Wenn das Textfeld den Fokus verliert, soll nichts passieren
             @Override
             public void focusGained(FocusEvent e) { }
 
-            /**
-             * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
-             * um den Inhalt des Textfeldes zu validieren
-             * @param e
-             */
+             //Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
+             //um den Inhalt des Textfeldes zu validieren
             @Override
             public void focusLost(FocusEvent e) {
                 //TODO DataProduktFunktion definieren (extra Methode)
@@ -158,14 +138,9 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         verweiseText.setBounds(10,190,90,20);
     }
 
-    /**
-     *
-     * @param model
-     */
     @Override
     public void update(IModel model){
         DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
-        this.dataId = newFunktion.getId();
         id.setText(dataId.getId());
         name.setText(newFunktion.getName());
         quelle.setText(newFunktion.getQuelle());

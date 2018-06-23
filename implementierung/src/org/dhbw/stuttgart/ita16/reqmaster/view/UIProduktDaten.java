@@ -4,6 +4,8 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -59,6 +61,33 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
      */
     @Override
     public void update(IModel model){
-
+        //Update bestehende Daten und loesche mittlerweile aus dem Model entfernte Daten
+        List<UIProduktDatum> toDelete = new ArrayList<>();
+        for(UIProduktDatum uiProduktDatum : produktDaten){
+            DataProduktDatum dataProduktDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(uiProduktDatum.getId());
+            if(dataProduktDatum == null){
+                toDelete.add(uiProduktDatum);
+            }else{
+                uiProduktDatum.update(model);
+            }
+        }
+        for(UIProduktDatum uiProduktDatum : toDelete){
+            produktDaten.remove(uiProduktDatum);
+            //TODO: remove data from actual GUI panel, not just from list in memory
+        }
+        //Fuege neue zum Model hinzugefuegte Funktionen dazu
+        for(DataProduktDatum dataProduktDatum : model.getIDataAnforderungssammlung().getDataProduktDaten().values()){
+            boolean isNew = true;
+            for(UIProduktDatum uiProduktDatum : produktDaten){
+                if(uiProduktDatum.getId() == dataProduktDatum.getId()){
+                    isNew = false;
+                    break;
+                }
+            }
+            if(isNew){
+                produktDaten.add(new UIProduktDatum(getView(), dataProduktDatum.getId()));
+                //TODO: add function to actual GUI panel, not just from list in memory
+            }
+        }
     }
 }

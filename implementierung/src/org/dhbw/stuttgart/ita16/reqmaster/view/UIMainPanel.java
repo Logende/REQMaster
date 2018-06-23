@@ -25,8 +25,7 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 	 * erstellt Instanzen der Klassen UIProduktFunktionen, UIProduktDaten, UIProdukteinsatz, UIZielbestimmung und UIUmgebung
 	 * und erscheint auf der Bildfläche
 	 */
-	public UIMainPanel(View view)
-	{
+	public UIMainPanel(View view){
 		super(view);
 		setLayout(new GridLayout(2,2));
 		this.add(panelFunktionen=new UIProduktFunktionen(view));
@@ -42,9 +41,7 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 	 * und validiert die eigeneKlasse
 	 * @param model
 	 */
-	public void update(IModel model)
-	{
-		//update Klassenvariablen
+	public void update(IModel model){
 		panelFunktionen.update(model);
 		panelDaten.update(model);
 		panelProdukteinsatz.update(model);

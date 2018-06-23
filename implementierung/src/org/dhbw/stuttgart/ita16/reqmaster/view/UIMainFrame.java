@@ -42,8 +42,8 @@ public class UIMainFrame extends UIFrame implements UIUpdateable {
 	 */
 	@Override
 	public void update(IModel model) {
-
 		mainPanel.update(model);        //update mainPanel
+		functionPointPanel.update(model);
 		this.validate();                //update Layout
 	}
 

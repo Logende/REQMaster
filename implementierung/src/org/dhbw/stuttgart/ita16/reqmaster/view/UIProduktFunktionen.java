@@ -32,7 +32,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
-    public UIProduktFunktionen(View view){
+    public UIProduktFunktionen(IView view){
 
         //Instanziierung
         super(view);
@@ -77,12 +77,32 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
      */
     @Override
     public void update(IModel model){
-        for(UIProduktFunktion o : produktFunktionen){
-            for(Map.Entry<DataId, DataProduktFunktion> entry : model.getIDataAnforderungssammlung().getDataProduktFunktionen().entrySet()){
-                if(o.getId() == entry.getKey()){
-                    o.update(model);
+        //Update bestehende Funktionen und loesche mittlerweile aus dem Model entfernte Funktionen
+        List<UIProduktFunktion> toDelete = new ArrayList<>();
+        for(UIProduktFunktion uiProduktFunktion : produktFunktionen){
+            DataProduktFunktion dataProduktFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(uiProduktFunktion.getId());
+            if(dataProduktFunktion == null){
+                toDelete.add(uiProduktFunktion);
+            }else{
+                uiProduktFunktion.update(model);
+            }
+        }
+        for(UIProduktFunktion uiProduktFunktion : toDelete){
+            produktFunktionen.remove(uiProduktFunktion);
+            //TODO: remove function from actual GUI panel, not just from list in memory
+        }
+        //Fuege neue zum Model hinzugefuegte Funktionen dazu
+        for(DataProduktFunktion dataProduktFunktion : model.getIDataAnforderungssammlung().getDataProduktFunktionen().values()){
+            boolean isNew = true;
+            for(UIProduktFunktion uiProduktFunktion : produktFunktionen){
+                if(uiProduktFunktion.getId() == dataProduktFunktion.getId()){
+                    isNew = false;
+                    break;
                 }
-                //TODO auf gelöschte oder neu hinzukommende prüfen
+            }
+            if(isNew){
+                produktFunktionen.add(new UIProduktFunktion(getView(), dataProduktFunktion.getId()));
+                //TODO: add function to actual GUI panel, not just from list in memory
             }
         }
     }
