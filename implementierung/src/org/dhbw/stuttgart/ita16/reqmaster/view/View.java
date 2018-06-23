@@ -49,4 +49,9 @@ public class View implements IView, IObserverView {
     public IObserverController getObsController(){
         return obsController;
     }
+
+    @Override
+    public IModel getModel() {
+        return model;
+    }
 }

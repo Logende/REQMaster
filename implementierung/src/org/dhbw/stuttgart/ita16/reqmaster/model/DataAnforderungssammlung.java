@@ -12,6 +12,7 @@ public class DataAnforderungssammlung implements IDataAnforderungssammlung {
 
 	private IDataFunctionPointAnalyse functionPointAnalyse;
 
+
 	public DataAnforderungssammlung(DataZielbestimmung zielbestimmung, DataProdukteinsatz produkteinsatz, DataUmgebung umgebung,
 									Map<DataId, DataProduktFunktion> produktFunktionen, Map<DataId, DataProduktDatum> produktDaten,
 									IDataFunctionPointAnalyse functionPointAnalyse) {

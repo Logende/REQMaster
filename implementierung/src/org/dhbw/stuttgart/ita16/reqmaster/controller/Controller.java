@@ -4,6 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.events.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 
+import java.io.File;
 import java.util.*;
 
 public class Controller implements IObserverController, IController{
@@ -220,12 +221,14 @@ public class Controller implements IObserverController, IController{
 
         //MENU
         reactions.put(UIActionMenuLoadEvent.class, (model, view, event)->{
-            //TODO
+            File f = ((UIActionMenuLoadEvent)event).getFileAnforderungssammlung();
+            model.loadAnforderungssammlung(f);
             return false;
         });
 
         reactions.put(UIActionMenuSaveEvent.class, (model, view, event)->{
-            //TODO
+            model.saveAnforderungssammlung();
+            model.saveSchaetzkonfiguration();
             return false;
         });
     }
