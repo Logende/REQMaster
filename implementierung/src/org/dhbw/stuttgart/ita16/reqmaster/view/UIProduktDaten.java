@@ -4,6 +4,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollBar;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
@@ -22,6 +23,7 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
     private UIButton add;
     private UIPanel buttonPanel;
     private UIPanel datenPanel;
+    private UIScrollBar vertikalBar;
 
 
     /**
@@ -33,6 +35,7 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
         add = new UIButton();
         buttonPanel = new UIPanel();
         datenPanel = new UIPanel();
+        vertikalBar = new UIScrollBar();
 
 //TODO        UIProduktDatum test = new UIProduktDatum(view);
 //TODO        UIProduktDatum test1 = new UIProduktDatum(view);
@@ -48,6 +51,7 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
         this.setLayout(new BorderLayout());
         this.add(datenPanel, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.PAGE_START);
+        this.add(vertikalBar, BorderLayout.EAST);
         this.setVisible(true);
         // weitere Einstellungen
     }

@@ -21,7 +21,7 @@ public class UIControl extends UIPanel {
     private UITextField realerAufwand;
     private UITextField aufwandFP;
 
-    public UIControl(View view) {
+    public UIControl(IView view) {
 
 	    //Superklasse Konstruktor aufrufen
 		super(view);

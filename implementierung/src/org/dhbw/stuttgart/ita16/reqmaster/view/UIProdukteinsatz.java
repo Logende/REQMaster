@@ -24,22 +24,22 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 	 * Initialisierd text als eie Instanz der Klasse UITextField
 	 * Definiert die Eigenschaften des Textfeldes Text
 	 */
-    public UIProdukteinsatz(View view) {
+	public UIProdukteinsatz(View view) {
 
     	super(view);
 
 		text = new UITextArea();
 		text.setPreferredSize(new Dimension(350,200));
 		text.setLineWrap(true);
-		this.add(text, BorderLayout.CENTER);							//füge Text zum Panel hinzu
+		this.add(text, BorderLayout.CENTER);
 		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"), BorderFactory.createEmptyBorder(30,0,0,0)));
-		this.setVisible(true);												//mache das Panel sichtbar
+		this.setVisible(true);
 
 
 		text.addFocusListener(new FocusListener() {
 			/**
 			 * legt fest, dass wenn das Textfeld den Fokus erhält, nichts passiert
-			 * @param e
+			 * @param e FocusEvent
 			 */
 			@Override
 			public void focusGained(FocusEvent e) { }
@@ -47,7 +47,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			/**
 			 * legt fest, dass wenn das Textfeld den Fokus verliert, ein ModifyEvent an den Controller weitergereicht wird,
 			 * der darüber entscheidet, ob der Inhalt valide ist, und somit der Fokus behalten oder freigegeben wird
-			 * @param e
+			 * @param e FocusEvent
 			 */
 			public void focusLost(FocusEvent e) {
 				UIModifyProdukteinsatzEvent modifyEvent;
@@ -61,7 +61,7 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 
 	/**
 	 * updatet den Inhalt des Textfeldes
-	 * @param model
+	 * @param model Istanz des Model des MVC-Patterns
 	 */
 	public void update(IModel model) {
 

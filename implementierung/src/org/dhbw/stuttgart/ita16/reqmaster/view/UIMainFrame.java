@@ -1,5 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
@@ -27,12 +28,13 @@ public class UIMainFrame extends UIFrame implements UIUpdateable {
 		menu = new UIMenu(view);
 		//functionPointPanel = new UIFunctionPointPanel(view); 	// erstelle Instanz von UIFunctionPointPanel
 		this.setSize(1200,680);						//Grösse festlegen
-		this.setResizable(false);								//Grösse des Frames nicht veränderbar
+		this.setResizable(true);								//Grösse des Frames nicht veränderbar
 		this.add(mainPanel);									//füge mainPanel zu Frame hinzu
 		this.setJMenuBar(menu);
 		//this.add(functionPointPanel);							//füge functionPointPanel zu Frame hinzu
 		this.setDefaultCloseOperation(UIFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);          						//mache Frame sichtbar
+		this.setMinimumSize(new Dimension(100,100));
+		this.pack();
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class UIMainFrame extends UIFrame implements UIUpdateable {
 	@Override
 	public void update(IModel model) {
 		mainPanel.update(model);        //update mainPanel
-		functionPointPanel.update(model);
+//		functionPointPanel.update(model);
 		this.validate();                //update Layout
 	}
 

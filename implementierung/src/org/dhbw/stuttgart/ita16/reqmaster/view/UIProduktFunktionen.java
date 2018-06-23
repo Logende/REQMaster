@@ -3,6 +3,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollBar;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
@@ -27,6 +28,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
     private UIButton add;
     private UIPanel buttonPanel;
     private UIPanel funktionsPanel;
+    private UIScrollBar vertikalBar;
 
     /**
      * Konstruktor der Klasse
@@ -40,6 +42,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         add = new UIButton();
         funktionsPanel = new UIPanel();
         buttonPanel = new UIPanel();
+        vertikalBar = new UIScrollBar();
 
         //Panel Settings
         funktionsPanel.setLayout(new GridLayout(2,1));
@@ -54,6 +57,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         this.setLayout(new BorderLayout());
         this.add(buttonPanel, BorderLayout.PAGE_START);
         this.add(funktionsPanel, BorderLayout.CENTER);
+        this.add(vertikalBar, BorderLayout.EAST);
         this.setVisible(true);
 
         add.addActionListener(new ActionListener() {
@@ -61,9 +65,6 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
             public void actionPerformed(ActionEvent e) {
                 UIActionAddProduktFunktionEvent addEvent;
                 getView().getObsController().observe(addEvent = new UIActionAddProduktFunktionEvent());
-             /*   if(addEvent.isSuccess) {
-                    //TODO Hinzufügen im Controller oder in der View?
-                }*/
             }
         });
     }
@@ -89,6 +90,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         }
         for(UIProduktFunktion uiProduktFunktion : toDelete){
             produktFunktionen.remove(uiProduktFunktion);
+            this.repaint();
             //TODO: remove function from actual GUI panel, not just from list in memory
         }
         //Fuege neue zum Model hinzugefuegte Funktionen dazu

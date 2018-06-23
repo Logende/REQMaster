@@ -24,7 +24,7 @@ public class View implements IView, IObserverView {
     public View(IModel model) {
         this.model = model;
         mainFrame = new UIMainFrame(this);
-        anfangsDialog = new UIAnfangsDialog(this);
+        anfangsDialog = new UIAnfangsDialog(this, mainFrame);
     }
 
     public void setObserverController(IObserverController obsController){

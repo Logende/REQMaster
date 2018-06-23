@@ -16,7 +16,7 @@ public class UIFunctionPointPanel extends UIPanel {
     private UIControl control;
 
 
-    public UIFunctionPointPanel(View view) {
+    public UIFunctionPointPanel(IView view) {
 
         super(view);
         funktionenDaten = new UIFunktionenDaten(view);
