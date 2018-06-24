@@ -21,11 +21,10 @@ public class UITextField extends JTextField {
         this.addFocusListener(focusListener);
     }
 
+    /**
+     * Standardkonstruktor der Klasse
+     */
+    public UITextField() {
 
-
-    //Platz für Programmspezifische anpassungen
-
-    public UITextField(){
-        //TODO: löschen wenn nicht gebraucht
     }
 }

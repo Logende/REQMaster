@@ -1,5 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProdukteinsatzEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
@@ -16,26 +17,33 @@ import java.awt.event.FocusListener;
  */
 public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 
-	// Variablen der Klasse
+	/**Variablen der Klasse**/
 	private UITextArea text;
+	private UIScrollPane scrollPane;
+	/************************/
 
 	/**
 	 * Konstruktor der Klasse
-	 * Initialisierd text als eie Instanz der Klasse UITextField
-	 * Definiert die Eigenschaften des Textfeldes Text
+	 * @param view Instanz der View des MVC-Patterns
 	 */
 	public UIProdukteinsatz(View view) {
 
     	super(view);
-
+    	/***Initialisierung****************/
 		text = new UITextArea();
-		text.setPreferredSize(new Dimension(350,200));
+		scrollPane = new UIScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		/**********************************/
+
+		/*********Settings*****************/
 		text.setLineWrap(true);
-		this.add(text, BorderLayout.CENTER);
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"), BorderFactory.createEmptyBorder(30,0,0,0)));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(scrollPane);
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"), BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
+		/**********************************/
 
-
+		/****Fokuslistener für TextArea****/
 		text.addFocusListener(new FocusListener() {
 			/**
 			 * legt fest, dass wenn das Textfeld den Fokus erhält, nichts passiert
@@ -51,9 +59,10 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 			 */
 			public void focusLost(FocusEvent e) {
 				UIModifyProdukteinsatzEvent modifyEvent;
-				getView().getObsController().observe(modifyEvent = new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));//teile das Ereignis dem Controller mit
+				getView().getObsController().observe(modifyEvent =
+						new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));
 				if(!(modifyEvent.isSuccess())){
-					text.requestFocus();
+					text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
 				}
 			}
 		});

@@ -12,7 +12,10 @@ import java.awt.event.ActionListener;
  */
 public class UIMenuItem extends JMenuItem {
 
-
+    /**
+     * Konstruktor der Klasse
+     * @param text String, nachdem das Item benannt werden soll
+     */
     public UIMenuItem(String text) {
         super(text);
 

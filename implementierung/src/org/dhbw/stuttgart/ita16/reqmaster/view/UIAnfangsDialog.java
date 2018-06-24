@@ -3,10 +3,9 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuLoadEvent;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Grafikkomponente: Anfangsdialog,
@@ -15,10 +14,12 @@ import java.awt.event.ActionListener;
  */
 public class UIAnfangsDialog extends UIFrame {
 
+    /******Variablen der Klasse****/
     private UIButton docNeu;
     private UIButton docImport;
     private UIPanel buttonPanel;
     private UIMainFrame mainFrame;
+    /******************************/
 
     /**
      * Konstruktor der Klasse
@@ -28,39 +29,81 @@ public class UIAnfangsDialog extends UIFrame {
     public UIAnfangsDialog(IView view, UIMainFrame mainFrame){
         super(view);
         this.mainFrame = mainFrame;
+
+        /**********Instanzierung******************/
         docNeu = new UIButton();
         docImport = new UIButton();
         buttonPanel = new UIPanel();
-        docNeu.setText("Neues Dokument anlegen");
-        docImport.setText("Dokument importieren");
+        /*****************************************/
 
-        buttonPanel.setSize(80,80);
+        /*************Settings*********************/
+        docNeu.setText("Neues Dokument");
+        docNeu.setBounds(45,20,180,30);
+        docImport.setText("Dokument importieren");
+        docImport.setBounds(45,60, 180,30);
+
+        buttonPanel.setBounds(10,10,250,160);
+        buttonPanel.setLayout(null);
         buttonPanel.add(docNeu);
         buttonPanel.add(docImport);
+
         this.setTitle("Anfangsdialog");
-        this.setBounds(550,250,300,200);
+        this.setLocationRelativeTo(null);
+        this.setSize(300,160);
+        this.setLayout(null);
+        this.setResizable(false);
         this.requestFocus();
         this.setDefaultCloseOperation(UIFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.add(buttonPanel, BorderLayout.CENTER);
+        this.add(buttonPanel);
         this.setVisible(true);
+        /******************************************/
 
+
+        /********ActionListener definieren für Buttons**********/
         docNeu.addActionListener(new ActionListener() {
+            /**
+             * wenn auf den Button geklickt wird, wird ein Speicherort und ein Name ausgewählt und
+             * ein Event an den Controller geschickt,
+             * um ein neues Dokument zu erstellen
+             * @param e auf zu reagierendes Event
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
-             //   getView().getObsController().observe(new);
-                mainFrame.setVisible(true);
-                dispose();
+
+                File file;
+                file = UIPathSelector.forcePathSelection("Neues Dokument anlegen", ".xml",true,
+                        "C:\\Users\\%name%\\Documents", true);
+                if(file != null){
+                 //TODO an Controller das File weiterleiten aber Event noch nicht definiert
+                }
+           //     mainFrame.setVisible(true);
+           //     dispose();
             }
         });
 
         docImport.addActionListener(new ActionListener() {
+            /**
+             * wenn auf den Button geklickt wird, wird eine Datei ausgewählt,
+             * die geöffnet werden soll und ein Event an den Controller geschickt
+             * @param e auf zu reagierendes Event
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
-             //TODO File übergeben   getView().getObsController().observe(new UIActionMenuLoadEvent());
-                //TODO successfull auslesen falls vorhanden
-                mainFrame.setVisible(true);
-                dispose();
+
+                UIActionMenuLoadEvent loadEvent;
+                File file;
+                file = UIPathSelector.forcePathSelection("Dokument importieren", ".xml",true,
+                        "C:\\Users\\%name%\\Documents", false);
+                if(file !=null) {
+                    getView().getObsController().observe(loadEvent = new UIActionMenuLoadEvent(file));
+                }
+                /*
+                TODO isSuccess noch nicht definiert
+                if(loadEvent.isSuccess){
+                    mainFrame.setVisible(true);
+                    dispose();
+                }
+                */
             }
         });
     }

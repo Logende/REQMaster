@@ -14,38 +14,41 @@ import javax.swing.*;
  */
 public class UIMainFrame extends UIFrame implements UIUpdateable {
 
+	/******Variablen der Klasse******************/
 	private UIMainPanel mainPanel;
 	private UIFunctionPointPanel functionPointPanel;
 	private UIMenu menu;
+	/*******************************************/
 
 	/**
 	 * Konstruktor der Klasse
 	 * erstellt UIMainPanel und erscheint auf der Bildfläche
 	 */
 	public UIMainFrame(View view) {
-		super("REQ-Master");                        		//rufe Superklasse auf
-		mainPanel = new UIMainPanel(view);						//erstelle Instanz von UIMainPanel
-		menu = new UIMenu(view);
-		//functionPointPanel = new UIFunctionPointPanel(view); 	// erstelle Instanz von UIFunctionPointPanel
-		this.setSize(1200,680);						//Grösse festlegen
-		this.setResizable(true);								//Grösse des Frames nicht veränderbar
-		this.add(mainPanel);									//füge mainPanel zu Frame hinzu
+		super("REQ-Master");
+
+		/****Instanzierung****************/
+		mainPanel = new UIMainPanel(view);
+		//functionPointPanel = new UIFunctionPointPanel(view);
+		menu = new UIMenu(view, functionPointPanel);
+		/*********************************/
+
+		/*********Settings****************/
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.add(mainPanel);
 		this.setJMenuBar(menu);
-		//this.add(functionPointPanel);							//füge functionPointPanel zu Frame hinzu
+		//this.add(functionPointPanel);
 		this.setDefaultCloseOperation(UIFrame.EXIT_ON_CLOSE);
-		this.setMinimumSize(new Dimension(100,100));
-		this.pack();
 	}
 
 	/**
-	 * updatet panel und validiert die Klasse
-	 *
-	 * @param model
+	 * updatet das mainPanel und updatet das Layout
+	 * @param model Instanz des Model des MVC-Pattern
 	 */
 	@Override
 	public void update(IModel model) {
 		mainPanel.update(model);        //update mainPanel
-//		functionPointPanel.update(model);
+		//functionPointPanel.update(model);
 		this.validate();                //update Layout
 	}
 

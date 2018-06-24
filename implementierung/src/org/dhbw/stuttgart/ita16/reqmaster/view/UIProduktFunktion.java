@@ -53,17 +53,13 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         super(view);
         this.dataId = dataId;
         this.update(view.getModel());
-
-        // keinen Layoutmanager verwenden und Größe setzen
-        this.setLayout(null);
-        this.setBounds(10,10,300,500);
-
-        // Komponenten verwalten
+        this.setLayout(new GridLayout(9,2));
         addComponents();
         setComponents();
-        // sichtbar
         this.setVisible(true);
 
+        // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
+        // um eine Produktfunktion zu löschen
         delete.addActionListener((actionListener -> getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(new DataId(id.getText())))));
     }
 
@@ -72,16 +68,25 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
      *  Definition des Fokuslistener
      */
     private void addComponents() {
-        //Für jedes UITextField in ProduktFunktion wird einmalig ein
-        //FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+
+        /*Für jedes UITextField in ProduktFunktion wird einmalig ein
+        *FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+        */
         FocusListener focusListener = new FocusListener() {
 
-             //Wenn das Textfeld den Fokus verliert, soll nichts passieren
+            /**
+             * Methode, die implementiert werden muss, aber nichts tun soll,
+             * wenn eine Komponente den Fokus verliert
+             * @param e auf das zu reagierende Event
+             */
             @Override
             public void focusGained(FocusEvent e) { }
 
-             //Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
-             //um den Inhalt des Textfeldes zu validieren
+            /**
+             * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
+             * um den Inhalt des Textfeldes zu validieren
+             * @param e
+             */
             @Override
             public void focusLost(FocusEvent e) {
                 //TODO DataProduktFunktion definieren (extra Methode)
@@ -95,19 +100,21 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         };
 
         this.add(delete = new UIButton());
-        this.add(id = new UITextField(focusListener));
-        this.add(name = new UITextField(focusListener));
-        this.add(quelle = new UITextField(focusListener));
-        this.add( akteur = new UITextField(focusListener));
-        this.add(beschreibung = new UITextField(focusListener));
-        this.add(verweise = new UITextField(focusListener));
-
+        this.add(new Label());
+        this.add(new Label());
+        this.add(new Label());
         this.add(idText = new UILabel());
+        this.add(id = new UITextField(focusListener));
         this.add(nameText = new UILabel());
+        this.add(name = new UITextField(focusListener));
         this.add(quelleText = new UILabel());
+        this.add(quelle = new UITextField(focusListener));
         this.add(akteurText = new UILabel());
+        this.add( akteur = new UITextField(focusListener));
         this.add(beschreibungText = new UILabel());
+        this.add(beschreibung = new UITextField(focusListener));
         this.add(verweiseText = new UILabel());
+        this.add(verweise = new UITextField(focusListener));
     }
 
     /**
@@ -116,41 +123,32 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     private void setComponents(){
 
         delete.setText("Löschen");
-        delete.setBounds(190,10,90,20);
-        id.setBounds(130,35,150,20);
-        name.setBounds(130,60, 150,20);
-        quelle.setBounds(130,85,150,20);
-        akteur.setBounds(130,110, 150,20);
-        beschreibung.setBounds(130,135,150,50);
-        verweise.setBounds(130,190, 150, 20);
-
         idText.setText("ID");
-        idText.setBounds(10,35,90,20);
         nameText.setText("Name");
-        nameText.setBounds(10,60, 90,20);
         quelleText.setText("Quelle");
-        quelleText.setBounds(10,85,90,20);
         akteurText.setText("Akteur");
-        akteurText.setBounds(10,110,90,20);
         beschreibungText.setText("Beschreibung");
-        beschreibungText.setBounds(10,135,90,20);
         verweiseText.setText("Verweise");
-        verweiseText.setBounds(10,190,90,20);
     }
 
     @Override
     public void update(IModel model){
-        DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
+/*        DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
         id.setText(dataId.getId());
         name.setText(newFunktion.getName());
         quelle.setText(newFunktion.getQuelle());
         akteur.setText(newFunktion.getAkteur());
         beschreibung.setText(newFunktion.getBeschreibung());
         // TODO wie geht das mit den Verweisen, siehe Produktdatum
+        */
     }
 
+    /**
+     * getter Methode für ID der Produktfunktion
+     * @return DataId der Produktfunktion
+     */
     public DataId getId(){
         return this.dataId;
-    }
+   }
 }
 

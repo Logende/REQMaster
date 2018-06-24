@@ -1,6 +1,7 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProdukteinsatzEvent;
@@ -22,35 +23,38 @@ import java.awt.event.FocusListener;
  */
 public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 
-	//Variablen der Klasse
+	/*****Variablen der Klasse*********/
 	private UITextArea text;
-	private UIModifyZielbestimmungEvent modifyEvent;
+	private UIScrollPane scrollPane;
+	/**********************************/
 
 	/**
 	 * Konstruktor der Klasse
-	 * Initialisiert text als eie Instanz der Klasse UITextField
-	 * Definiert die Eigenschaften des Textfeldes Text
+	 * @param view Instanz der View des MVC-Patterns
 	 */
 	public UIZielbestimmung(IView view) {
-
-
 		super(view);
 
+		/*****Instanzierung***********/
 		text = new UITextArea();
-		text.setPreferredSize(new Dimension(350,200));
+		scrollPane = new UIScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		/*****************************/
+
+		/*****Settings****************/
 		text.setLineWrap(true);
-		this.add(text, BorderLayout.CENTER);							//füge Text zum Panel hinzu
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Zielbestimmung"), BorderFactory.createEmptyBorder(30,0,0,0)));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(scrollPane);
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Zielbestimmung"), BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
+		/*****************************/
 
-
-
-
+		/********Definition eines FocusListener für TextArea********/
 		text.addFocusListener(new FocusListener() {
 
 			/**
 			 * legt fest, dass wenn der Fokus auf das Textfeld gelegt wird (Mausklick), nichts passieren soll
-			 * @param e
+			 * @param e auf zu reagierendes Event
 			 */
 			@Override
 			public void focusGained(FocusEvent e) { }
@@ -58,12 +62,14 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 			/**
 			 * legt fest, dass wenn das Textfeld den Fokus verliert, ein ModifyEvent an den Controller
 			 * weitergereicht wird, der über das Behalten oder die Freigabe des Fokus entscheidet (validieren des Textfeldinhalts)
-			 * @param e
+			 * @param e auf zu reagierendes Event
 			 */
 			public void focusLost(FocusEvent e) {
-				getView().getObsController().observe(modifyEvent = new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));//teile das Ereignis dem Controller mit
+				UIModifyZielbestimmungEvent modifyEvent;
+				getView().getObsController().observe(modifyEvent =
+						new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));
 				if(!(modifyEvent.isSuccess()))
-				text.requestFocus(); // Abfrage, ob successfull
+				text.requestFocus(); // Abfrage, ob Änderung valide, ansonsten Fokus beibehalten
 			}
 		});
 	}

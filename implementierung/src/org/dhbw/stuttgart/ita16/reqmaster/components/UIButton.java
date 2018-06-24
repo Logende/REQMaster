@@ -15,8 +15,6 @@ public class UIButton extends JButton {
      *
      */
     public UIButton() {
-
-        // Settings fuer spezifische Anpassungen hier
     }
 }
 

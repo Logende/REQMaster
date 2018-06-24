@@ -2,15 +2,17 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollBar;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktDatumEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,41 +21,57 @@ import java.util.List;
  */
 public class UIProduktDaten extends UIPanel implements UIUpdateable {
 
+    /**********Variablen der Klasse*************/
     private List<UIProduktDatum> produktDaten;
     private UIButton add;
-    private UIPanel buttonPanel;
     private UIPanel datenPanel;
-    private UIScrollBar vertikalBar;
-
+    private UIScrollPane scrollPane;
+    /*******************************************/
 
     /**
      * Konstruktor der Klasse
+     * @param view Instanz der View des MVC-Patterns
      */
-    public UIProduktDaten(View view){
+    public UIProduktDaten(IView view){
         super(view);
+
+        /**Instanzierung***************/
         produktDaten = new ArrayList<>();
         add = new UIButton();
-        buttonPanel = new UIPanel();
         datenPanel = new UIPanel();
-        vertikalBar = new UIScrollBar();
+        scrollPane = new UIScrollPane(datenPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        /********************************/
 
-//TODO        UIProduktDatum test = new UIProduktDatum(view);
-//TODO        UIProduktDatum test1 = new UIProduktDatum(view);
+        /*******************TEST***************************************/
+        UIProduktDatum test = new UIProduktDatum(view, new DataId("2"));
+        UIProduktDatum test1 = new UIProduktDatum(view, new DataId("1"));
+        /***************************************************************/
 
-        buttonPanel.add(add, FlowLayout.LEFT);
-        add.setSize(30,20);
+        /**** Hinzufügen der Komponenten sowie Settings******************/
         add.setText("Hinzufügen");
-        datenPanel.setLayout(new GridLayout(2,1));
-        //TODO       datenPanel.add(test);
-        //TODO datenPanel.add(test1);
-        this.setBounds(130,60, 80, 200);
+        datenPanel.setLayout(new BoxLayout(datenPanel, BoxLayout.Y_AXIS));
+        datenPanel.add(test);
+        datenPanel.add(test1);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         this.setBorder(BorderFactory.createTitledBorder("Produktdaten"));
-        this.setLayout(new BorderLayout());
-        this.add(datenPanel, BorderLayout.CENTER);
-        this.add(buttonPanel, BorderLayout.PAGE_START);
-        this.add(vertikalBar, BorderLayout.EAST);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(add);
+        this.add(scrollPane, BorderLayout.PAGE_START);
         this.setVisible(true);
-        // weitere Einstellungen
+        /*****************************************************************/
+
+        add.addActionListener(new ActionListener() {
+            /**
+             * Wenn Button gedrückt wird, wird ein UIActionAddProduktDatumEvent
+             * an den Controller geschickt
+             * @param e auf zu reagierendes Event
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UIActionAddProduktDatumEvent addEvent;
+                getView().getObsController().observe(addEvent = new UIActionAddProduktDatumEvent());
+            }
+        });
     }
 
     /**

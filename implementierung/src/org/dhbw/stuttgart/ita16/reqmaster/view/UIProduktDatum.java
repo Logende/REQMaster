@@ -8,9 +8,9 @@ import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktDatumEvent
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IIdentifiable;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
+import java.awt.*;
 import java.awt.event.*;
 
 
@@ -35,38 +35,45 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
     /**
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
+     * @param dataId ID des Produktdatums
      */
+
     public UIProduktDatum (IView view, DataId dataId) {
         super(view);
         this.dataId = dataId;
         this.update(view.getModel());
 
-        //keinen Layoutmanager verwenden und Größe setzen
-        this.setLayout(null);
-        this.setBounds(310,10,300,500);
-
-        //Hinzufügen und verwalten der Komponenten
+        this.setLayout(new GridLayout(6,2));
         addComponents();
         setComponents();
-        //sichtbar
         this.setVisible(true);
 
+        // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
+        // um ein Produktdatum zu löschen
         delete.addActionListener(actionListener -> getView().getObsController().observe(new UIActionDeleteProduktDatumEvent(dataId)));
     }
 
     /**
-     * Hinzufügen der Grafikkomponenten
+     * Hinzufügen der Grafikkomponenten sowie Definition eines FokusListener
      */
     private void addComponents() {
+
         // Für jedes UITextField in ProduktDatum wird einmalig ein
         // FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
         FocusListener focusListener = new FocusListener() {
-             //Wenn das Textfeld den Fokus verliert, soll nichts passieren
+
+            /**
+             * Wenn das Textfeld den Fokus verliert, soll nichts passieren
+             * @param e auf zu reagierendes Event
+             */
             @Override
             public void focusGained(FocusEvent e) { }
 
-             //Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
-             //um den Inhalt des Textfeldes zu validieren
+            /**
+             * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
+             * um den Inhalt des Textfeldes zu validieren
+             * @param e auf zu reagierendes Event
+             */
             @Override
             public void focusLost(FocusEvent e) {
                 //TODO DataProduktDatum definieren (extra Methode)
@@ -81,52 +88,45 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
         };
 
         this.add(delete = new UIButton());
-        this.add(id = new UITextField(focusListener));
-        this.add(name = new UITextField(focusListener));
-        this.add(attribute = new UITextField(focusListener));
-        this.add(verweise = new UITextField(focusListener));
-
-        this.add(nameText = new UILabel());
+        this.add(new UILabel());
         this.add(idText = new UILabel());
+        this.add(id = new UITextField(focusListener));
+        this.add(nameText = new UILabel());
+        this.add(name = new UITextField(focusListener));
         this.add(attributeText = new UILabel());
+        this.add(attribute = new UITextField(focusListener));
         this.add(verweiseText = new UILabel());
+        this.add(verweise = new UITextField(focusListener));
     }
 
 
     /**
-     *  Methode zum Setzen der Position, Größe und des Inhalts der Komponenten
+     *  Methode zum Setzen des Inhalts der Komponenten
      */
     private void setComponents() {
         delete.setText("Löschen");
-        delete.setBounds(150,10,90,20);
-        name.setBounds(90,35,150,20);
-        id.setBounds(90,60,150,20);
-        attribute.setBounds(90,85,150,20);
-        verweise.setBounds(90,110,150,20);
-
         nameText.setText("Name");
-        nameText.setBounds(10,35,90,20);
         idText.setText("ID");
-        idText.setBounds(10,60,90,20);
         attributeText.setText("Attribute");
-        attributeText.setBounds(10,85,90,20);
         verweiseText.setText("Verweise");
-        verweiseText.setBounds(10,110,90,20);
     }
 
 
     @Override
     public void update(IModel model){
-        DataProduktDatum newDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(dataId);
-        this.id.setText(dataId.getId());
-        name.setText(newDatum.getName());
+//        DataProduktDatum newDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(dataId);
+  //      this.id.setText(dataId.getId());
+    //    name.setText(newDatum.getName());
 
         //TODO auslesen attribute und verweise und setzen in der GUI
         //TODO Wie werden Attribute und Verweise angezeigt? in Textfeld oder in mehreren Textfeldern da im Model eine Liste?
 
     }
 
-
+    /**
+     * getter-Methode für die ID des Produktdatums
+     * @return DataId des Produktdatum
+     */
     public DataId getId() {
         return dataId;
     }

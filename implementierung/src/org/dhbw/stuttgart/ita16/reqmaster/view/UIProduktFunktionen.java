@@ -1,12 +1,10 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollBar;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -15,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Grafikkomponente: Panel, das die Produktfunktionen beinhaltet
@@ -23,44 +20,53 @@ import java.util.Map;
 
 public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
 
-    //Variablen der Klasse
+    /********Variablen der Klasse*********************/
     private List<UIProduktFunktion> produktFunktionen;
     private UIButton add;
-    private UIPanel buttonPanel;
     private UIPanel funktionsPanel;
-    private UIScrollBar vertikalBar;
+    private UIScrollPane scrollPane;
+    private UIProduktFunktion test;
+    private UIProduktFunktion test1;
+    /*************************************************/
 
-    /**
-     * Konstruktor der Klasse
+    /* Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
     public UIProduktFunktionen(IView view){
 
-        //Instanziierung
+        /*******Instanzierung******************/
         super(view);
         produktFunktionen = new ArrayList<>();
         add = new UIButton();
         funktionsPanel = new UIPanel();
-        buttonPanel = new UIPanel();
-        vertikalBar = new UIScrollBar();
+        scrollPane = new UIScrollPane( funktionsPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        /***************************************/
 
-        //Panel Settings
-        funktionsPanel.setLayout(new GridLayout(2,1));
+        /************TEST***********************************/
+        test = new UIProduktFunktion(view, new DataId("5"));
+        test1 = new UIProduktFunktion(view, new DataId("2"));
+        /**************************************************/
+
+        /******HInzufügen der Komponenten sowie Settings***************************/
+        funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
+        funktionsPanel.add(test);
+        funktionsPanel.add(test1);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         add.setText("Hinzufügen");
-        buttonPanel.setLayout(new FlowLayout());
-        buttonPanel.add(add, FlowLayout.LEFT);
-
-        add.setSize(20,20);
-
-        this.setBounds(10,60,80,200);
         this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
-        this.setLayout(new BorderLayout());
-        this.add(buttonPanel, BorderLayout.PAGE_START);
-        this.add(funktionsPanel, BorderLayout.CENTER);
-        this.add(vertikalBar, BorderLayout.EAST);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(add);
+        this.add(scrollPane);
         this.setVisible(true);
+        /***************************************************************************/
 
         add.addActionListener(new ActionListener() {
+            /**
+             * Wenn der Button gedrückt wird,
+             * wird ein UIActionAddProduktFunktionEvent an den Controller gesendet
+             * @param e auf zu reagierendes Event
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 UIActionAddProduktFunktionEvent addEvent;
@@ -78,7 +84,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
      */
     @Override
     public void update(IModel model){
-        //Update bestehende Funktionen und loesche mittlerweile aus dem Model entfernte Funktionen
+    /*    //Update bestehende Funktionen und loesche mittlerweile aus dem Model entfernte Funktionen
         List<UIProduktFunktion> toDelete = new ArrayList<>();
         for(UIProduktFunktion uiProduktFunktion : produktFunktionen){
             DataProduktFunktion dataProduktFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(uiProduktFunktion.getId());
@@ -106,7 +112,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
                 produktFunktionen.add(new UIProduktFunktion(getView(), dataProduktFunktion.getId()));
                 //TODO: add function to actual GUI panel, not just from list in memory
             }
-        }
+        }*/
     }
 
 

@@ -12,11 +12,8 @@ public class UILabel extends JLabel{
 
     /**
      * Konstruktor der Klasse
-     *
      */
     public UILabel() {
-
-        // hier Settings fuer spezifische Anpassungen
     }
 }
 

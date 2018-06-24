@@ -14,11 +14,13 @@ import javax.swing.*;
 
 public class UIMainPanel extends UIPanel implements UIUpdateable {
 
+	/***********Variablen der Klasse**************/
 	private UIProduktFunktionen panelFunktionen;
 	private UIProduktDaten panelDaten;
 	private UIProdukteinsatz panelProdukteinsatz;
 	private UIZielbestimmung panelZielbestimmung;
 	private UIUmgebung panelUmgebung;
+	/********************************************/
 
 	/**
 	 * Konstruktor der Klasse
@@ -27,13 +29,15 @@ public class UIMainPanel extends UIPanel implements UIUpdateable {
 	 */
 	public UIMainPanel(View view){
 		super(view);
+		/*****Instanzierung und Hinzufügen der Komponenten******/
 		setLayout(new GridLayout(2,2));
+		this.add(panelZielbestimmung=new UIZielbestimmung(view));
+		this.add(panelProdukteinsatz=new UIProdukteinsatz(view));
+		this.add(panelUmgebung=new UIUmgebung(view));
 		this.add(panelFunktionen=new UIProduktFunktionen(view));
 		this.add(panelDaten=new UIProduktDaten(view));
-		this.add(panelProdukteinsatz=new UIProdukteinsatz(view));
-		this.add(panelZielbestimmung=new UIZielbestimmung(view));
-		this.add(panelUmgebung=new UIUmgebung(view));
 		this.setVisible(true);
+		/*******************************************************/
 	}
 
 	/**

@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public class UIFrame extends JFrame {
 
-    IView view;
+    private IView view;
 
     /**
      * Konstruktor der Klasse
@@ -28,11 +28,18 @@ public class UIFrame extends JFrame {
 
     }
 
+    /**
+     * KOnstruktor der Klasse
+     * @param view Instanz der View des MVC-Patterns
+     */
     public UIFrame(IView view){
         this.view = view;
     }
 
-
+    /**
+     * getter Methode, um die Instanz der View des MVC-Patterns zu bekommen
+     * @return Instanz der View
+     */
     public IView getView() {
         return view;
     }

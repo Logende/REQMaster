@@ -12,6 +12,7 @@ public class UIMenuBar extends JMenuBar {
 
 	/**
 	 * Standardkonstruktor der Klasse
+	 * @param view Instanz der View des MVC-Patterns
 	 */
 	public UIMenuBar(IView view) {
 		super();
