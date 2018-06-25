@@ -39,6 +39,7 @@ public class UIMainFrame extends UIFrame implements UIUpdateable {
 		this.setJMenuBar(menu);
 		//this.add(functionPointPanel);
 		this.setDefaultCloseOperation(UIFrame.EXIT_ON_CLOSE);
+		/**********************************/
 	}
 
 	/**

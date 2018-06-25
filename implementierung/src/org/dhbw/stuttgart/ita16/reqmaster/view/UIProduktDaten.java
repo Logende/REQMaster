@@ -42,16 +42,9 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
         scrollPane = new UIScrollPane(datenPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         /********************************/
 
-        /*******************TEST***************************************/
-        UIProduktDatum test = new UIProduktDatum(view, new DataId("2"));
-        UIProduktDatum test1 = new UIProduktDatum(view, new DataId("1"));
-        /***************************************************************/
-
         /**** Hinzufügen der Komponenten sowie Settings******************/
         add.setText("Hinzufügen");
         datenPanel.setLayout(new BoxLayout(datenPanel, BoxLayout.Y_AXIS));
-        datenPanel.add(test);
-        datenPanel.add(test1);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         this.setBorder(BorderFactory.createTitledBorder("Produktdaten"));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -110,6 +103,11 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
                 produktDaten.add(new UIProduktDatum(getView(), dataProduktDatum.getId()));
                 //TODO: add function to actual GUI panel, not just from list in memory
             }
+        }
+
+        datenPanel.removeAll();
+        for (UIProduktDatum i : produktDaten) {
+            datenPanel.add(i);
         }
     }
 }

@@ -5,6 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -43,15 +44,8 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         /***************************************/
 
-        /************TEST***********************************/
-        test = new UIProduktFunktion(view, new DataId("5"));
-        test1 = new UIProduktFunktion(view, new DataId("2"));
-        /**************************************************/
-
         /******HInzufügen der Komponenten sowie Settings***************************/
         funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
-        funktionsPanel.add(test);
-        funktionsPanel.add(test1);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         add.setText("Hinzufügen");
         this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
@@ -84,7 +78,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
      */
     @Override
     public void update(IModel model){
-    /*    //Update bestehende Funktionen und loesche mittlerweile aus dem Model entfernte Funktionen
+        //Update bestehende Funktionen und loesche mittlerweile aus dem Model entfernte Funktionen
         List<UIProduktFunktion> toDelete = new ArrayList<>();
         for(UIProduktFunktion uiProduktFunktion : produktFunktionen){
             DataProduktFunktion dataProduktFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(uiProduktFunktion.getId());
@@ -112,8 +106,11 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
                 produktFunktionen.add(new UIProduktFunktion(getView(), dataProduktFunktion.getId()));
                 //TODO: add function to actual GUI panel, not just from list in memory
             }
-        }*/
+        }
+
+        funktionsPanel.removeAll();
+        for (UIProduktFunktion i : produktFunktionen){
+            funktionsPanel.add(i);
+        }
     }
-
-
 }

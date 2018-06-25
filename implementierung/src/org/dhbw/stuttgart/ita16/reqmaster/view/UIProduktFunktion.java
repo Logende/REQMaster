@@ -60,7 +60,13 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
         // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
         // um eine Produktfunktion zu löschen
-        delete.addActionListener((actionListener -> getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(new DataId(id.getText())))));
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(new DataId(id.getText())));
+                validate();
+            }
+        });
     }
 
     /**
@@ -133,14 +139,15 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
     @Override
     public void update(IModel model){
-/*        DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
-        id.setText(dataId.getId());
-        name.setText(newFunktion.getName());
-        quelle.setText(newFunktion.getQuelle());
-        akteur.setText(newFunktion.getAkteur());
-        beschreibung.setText(newFunktion.getBeschreibung());
+
+            DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
+            id.setText(dataId.getId());
+            name.setText(newFunktion.getName());
+            quelle.setText(newFunktion.getQuelle());
+            akteur.setText(newFunktion.getAkteur());
+            beschreibung.setText(newFunktion.getBeschreibung());
+
         // TODO wie geht das mit den Verweisen, siehe Produktdatum
-        */
     }
 
     /**

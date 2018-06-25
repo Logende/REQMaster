@@ -76,7 +76,7 @@ public class UIAnfangsDialog extends UIFrame {
                 if(file != null){
                  //TODO an Controller das File weiterleiten aber Event noch nicht definiert
                 }
-           //     mainFrame.setVisible(true);
+                mainFrame.setVisible(true);
            //     dispose();
             }
         });
