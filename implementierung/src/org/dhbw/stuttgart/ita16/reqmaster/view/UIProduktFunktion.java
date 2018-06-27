@@ -96,7 +96,8 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
             @Override
             public void focusLost(FocusEvent e) {
                 //TODO DataProduktFunktion definieren (extra Methode)
-                DataProduktFunktion proposal = new DataProduktFunktion(null, null, null, null, null, null);
+                DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
+                        quelle.getText(), verweise.getText(), new DataId(id.getText()));
                 UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){

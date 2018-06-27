@@ -26,8 +26,6 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
     private UIButton add;
     private UIPanel funktionsPanel;
     private UIScrollPane scrollPane;
-    private UIProduktFunktion test;
-    private UIProduktFunktion test1;
     /*************************************************/
 
     /* Konstruktor der Klasse

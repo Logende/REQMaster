@@ -77,7 +77,7 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
             @Override
             public void focusLost(FocusEvent e) {
                 //TODO DataProduktDatum definieren (extra Methode)
-                DataProduktDatum proposal = new DataProduktDatum(null, null, null, null);
+                DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), attribute.getText(), verweise.getText());
                 UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
