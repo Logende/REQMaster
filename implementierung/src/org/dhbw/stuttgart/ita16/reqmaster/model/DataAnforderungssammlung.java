@@ -69,6 +69,16 @@ public class DataAnforderungssammlung implements IDataAnforderungssammlung {
 		if(produktDaten.containsKey(id)){
 			return produktDaten.get(id);
 		}
+		for(IIdentifiable iIdentifiable : produktDaten.values()){
+			if(iIdentifiable.getId().equals(id)){
+				return iIdentifiable;
+			}
+		}
+		for(IIdentifiable iIdentifiable : produktFunktionen.values()){
+			if(iIdentifiable.getId().equals(id)){
+				return iIdentifiable;
+			}
+		}
 		return null;
 	}
 }
