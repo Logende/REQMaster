@@ -12,6 +12,8 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 
 /**
@@ -20,6 +22,7 @@ import java.awt.event.*;
 public class UIProduktDatum extends UIPanel implements UIUpdateable {
 
     private final DataId dataId;
+    private final UUID uuid = new UUID(20, 20);
 
     private UIButton delete;
     private UITextField name;
@@ -41,16 +44,21 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
     public UIProduktDatum (IView view, DataId dataId) {
         super(view);
         this.dataId = dataId;
-        this.update(view.getModel());
 
         this.setLayout(new GridLayout(6,2));
         addComponents();
         setComponents();
+        this.update(view.getModel());
         this.setVisible(true);
 
         // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
         // um ein Produktdatum zu löschen
-        delete.addActionListener(actionListener -> getView().getObsController().observe(new UIActionDeleteProduktDatumEvent(dataId)));
+        delete.addActionListener(actionEvent -> {
+            if(View.forcesFocus == null || UIProduktDatum.this == View.forcesFocus) {
+                getView().getObsController().observe(new UIActionDeleteProduktDatumEvent(dataId));
+                View.forcesFocus = null;
+            }
+        });
     }
 
     /**
@@ -67,7 +75,9 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
              * @param e auf zu reagierendes Event
              */
             @Override
-            public void focusGained(FocusEvent e) { }
+            public void focusGained(FocusEvent e) {
+                System.out.println("focus gained with produktdatum component " + e.getComponent().getClass().getName());
+            }
 
             /**
              * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
@@ -76,13 +86,19 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
              */
             @Override
             public void focusLost(FocusEvent e) {
-                //TODO DataProduktDatum definieren (extra Methode)
-                DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), attribute.getText(), verweise.getText());
+                if(e.getOppositeComponent() != null) {
+                    if (e.getComponent().getParent() == e.getOppositeComponent().getParent()) {
+                        return; //do nothing if new component has same parent
+                    }
+                }
+                DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), new ArrayList<>(), verweise.getText());
                 UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
-                    //TODO focus request (vtl. in Runnable damit nicht direkt danach)
-                    //
+                    View.forcesFocus = UIProduktDatum.this;
+                    e.getComponent().requestFocus();
+                }else{
+                    View.forcesFocus = null;
                 }
             }
         };
@@ -114,12 +130,11 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
 
     @Override
     public void update(IModel model){
-//        DataProduktDatum newDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(dataId);
-  //      this.id.setText(dataId.getId());
-    //    name.setText(newDatum.getName());
-
-        //TODO auslesen attribute und verweise und setzen in der GUI
-        //TODO Wie werden Attribute und Verweise angezeigt? in Textfeld oder in mehreren Textfeldern da im Model eine Liste?
+        DataProduktDatum newDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(dataId);
+        this.id.setText(dataId.getId());
+        this.name.setText(newDatum.getName());
+        this.verweise.setText(newDatum.getVerweise());
+        //TODO: attribute
 
     }
 

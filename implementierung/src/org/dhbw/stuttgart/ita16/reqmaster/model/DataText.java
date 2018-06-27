@@ -21,7 +21,7 @@ public abstract class DataText {
 	}
 
 	public void modify(DataText goal){
-		this.text = text;
+		this.text = goal.text;
 	}
 
 }

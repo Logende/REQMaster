@@ -61,8 +61,10 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                UIActionAddProduktDatumEvent addEvent;
-                getView().getObsController().observe(addEvent = new UIActionAddProduktDatumEvent());
+                if (View.forcesFocus == null) {
+                    UIActionAddProduktDatumEvent addEvent;
+                    getView().getObsController().observe(addEvent = new UIActionAddProduktDatumEvent());
+                }
             }
         });
     }

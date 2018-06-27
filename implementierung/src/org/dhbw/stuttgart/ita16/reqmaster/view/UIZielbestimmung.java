@@ -68,8 +68,12 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 				UIModifyZielbestimmungEvent modifyEvent;
 				getView().getObsController().observe(modifyEvent =
 						new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));
-				if(!(modifyEvent.isSuccess()))
-				text.requestFocus(); // Abfrage, ob Änderung valide, ansonsten Fokus beibehalten
+				if(!(modifyEvent.isSuccess())){
+					View.forcesFocus = UIZielbestimmung.this;
+					text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
+				}else{
+					View.forcesFocus = null;
+				}
 			}
 		});
 	}

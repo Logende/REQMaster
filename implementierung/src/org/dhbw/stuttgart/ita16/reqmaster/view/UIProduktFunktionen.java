@@ -42,7 +42,7 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         /***************************************/
 
-        /******HInzufügen der Komponenten sowie Settings***************************/
+        /******Hinzufügen der Komponenten sowie Settings***************************/
         funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         add.setText("Hinzufügen");
@@ -61,8 +61,10 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                UIActionAddProduktFunktionEvent addEvent;
-                getView().getObsController().observe(addEvent = new UIActionAddProduktFunktionEvent());
+                if (View.forcesFocus == null) {
+                    UIActionAddProduktFunktionEvent addEvent;
+                    getView().getObsController().observe(addEvent = new UIActionAddProduktFunktionEvent());
+                }
             }
         });
     }

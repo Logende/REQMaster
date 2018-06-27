@@ -8,9 +8,9 @@ public class DataProduktDatum implements IIdentifiable {
 	private String name;
 	private DataId id;
 	private List<DataAttribut> attribute;
-	private List<DataId> verweise;
+	private String verweise;
 
-	public DataProduktDatum(String name, DataId id, List<DataAttribut> attribute, List<DataId> verweise) {
+	public DataProduktDatum(String name, DataId id, List<DataAttribut> attribute, String verweise) {
 		this.name = name;
 		this.id = id;
 		this.attribute = attribute;
@@ -22,11 +22,15 @@ public class DataProduktDatum implements IIdentifiable {
 		return id;
 	}
 
-	public void modify(DataProduktDatum goal){
+	public boolean modify(DataProduktDatum goal){
+		boolean wasModified = !this.name.equals(goal.name) |! this.id.equals(goal.id) |! this.verweise.equals(goal.verweise)
+				|! this.attribute.equals(goal.attribute);
+
 		this.name = goal.name;
 		this.id.modify(goal.id);
 		this.attribute = goal.attribute;
 		this.verweise = goal.verweise;
+		return wasModified;
 	}
 
 	public String getName(){
@@ -37,7 +41,7 @@ public class DataProduktDatum implements IIdentifiable {
 		return attribute;
 	}
 
-	public List<DataId> getVerweise() {
+	public String getVerweise() {
 		return verweise;
 	}
 }

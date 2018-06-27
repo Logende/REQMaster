@@ -9,11 +9,11 @@ public class DataProduktFunktion implements IIdentifiable {
 	private String beschreibung;
 	private String akteur;
 	private String quelle;
-	private List<DataId> verweise;
+	private String verweise;
 	private DataId id;
 
 	public DataProduktFunktion(String name, String beschreibung,
-							   String akteur, String quelle, List<DataId> verweise, DataId id) {
+							   String akteur, String quelle, String verweise, DataId id) {
 		this.name = name;
 		this.beschreibung = beschreibung;
 		this.akteur = akteur;
@@ -43,17 +43,22 @@ public class DataProduktFunktion implements IIdentifiable {
 		return quelle;
 	}
 
-	public List<DataId> getVerweise() {
+	public String getVerweise() {
 		return verweise;
 	}
 
-	public void modify(DataProduktFunktion goal){
+	public boolean modify(DataProduktFunktion goal){
+		boolean wasModified = !this.name.equals(goal.name) |! this.id.equals(goal.id) |! this.verweise.equals(goal.verweise)
+				|! this.beschreibung.equals(goal.beschreibung) |! this.quelle.equals(goal.quelle) |! this.akteur.equals(goal.akteur);
+
 		this.name = goal.name;
 		this.beschreibung = goal.beschreibung;
 		this.akteur = goal.akteur;
 		this.quelle = goal.quelle;
 		this.verweise = goal.verweise;
 		this.id.modify(goal.id);
+
+		return wasModified;
 	}
 
 }
