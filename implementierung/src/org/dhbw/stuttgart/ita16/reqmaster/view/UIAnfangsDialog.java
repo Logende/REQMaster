@@ -1,6 +1,7 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuCreateEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuLoadEvent;
 
 import java.awt.event.ActionEvent;
@@ -74,10 +75,10 @@ public class UIAnfangsDialog extends UIFrame {
                 file = UIPathSelector.forcePathSelection("Neues Dokument anlegen", ".xml",true,
                         "C:\\Users\\%name%\\Documents", true);
                 if(file != null){
-                 //TODO an Controller das File weiterleiten aber Event noch nicht definiert
+                    view.getObsController().observe(new UIActionMenuCreateEvent(file));
+                    mainFrame.setVisible(true);
+                    dispose();
                 }
-                mainFrame.setVisible(true);
-           //     dispose();
             }
         });
 
@@ -89,21 +90,14 @@ public class UIAnfangsDialog extends UIFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                UIActionMenuLoadEvent loadEvent;
                 File file;
                 file = UIPathSelector.forcePathSelection("Dokument importieren", ".xml",true,
                         "C:\\Users\\%name%\\Documents", false);
                 if(file !=null) {
-                    getView().getObsController().observe(loadEvent = new UIActionMenuLoadEvent(file));
-                }
-                /*
-                TODO isSuccess noch nicht definiert
-                if(loadEvent.isSuccess){
+                    getView().getObsController().observe(new UIActionMenuLoadEvent(file));
                     mainFrame.setVisible(true);
                     dispose();
                 }
-                */
             }
         });
     }

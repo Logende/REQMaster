@@ -3,13 +3,20 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 public class DataAttribut {
 
-	private Class type;
-	private int limit;
+	private String anzahl;
 	private String name;
 
-	public DataAttribut(String name, Class type, int limit) {
-		this.type = type;
+	public DataAttribut(String name, String anzahl) {
+		this.anzahl = anzahl;
 		this.name = name;
-		this.limit = limit;
+	}
+
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof  DataAttribut){
+			DataAttribut a = (DataAttribut) o;
+			return anzahl.equals(a.anzahl) && name.equals(a.name);
+		}
+		return false;
 	}
 }

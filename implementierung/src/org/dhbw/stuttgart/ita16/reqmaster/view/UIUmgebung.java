@@ -4,7 +4,9 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyUmgebungEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyZielbestimmungEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DataUmgebung;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataZielbestimmung;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
@@ -57,11 +59,15 @@ public class UIUmgebung extends UIPanel implements UIUpdateable {
              * @param e auf zu reagierendes Event
              */
            public void focusLost(FocusEvent e) {
-               UIModifyZielbestimmungEvent modifyEvent;
+               UIModifyUmgebungEvent modifyEvent;
                 getView().getObsController().observe(modifyEvent =
-                        new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));
-                if(!(modifyEvent.isSuccess()))
-                    text.requestFocus(); // Abfrage, ob Änderung valide ist, wenn nein, dann Fokus auf TextArea behalten
+                        new UIModifyUmgebungEvent(new DataUmgebung(text.getText())));
+               if(!(modifyEvent.isSuccess())){
+                   View.forcesFocus = UIUmgebung.this;
+                   text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
+               }else{
+                   View.forcesFocus = null;
+               }
             }
         });
 

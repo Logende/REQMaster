@@ -30,11 +30,13 @@ public class Model implements IModel {
     public void createAnforderungssammlung(File f){
     	this.anforderungsSammlungFile = f;
     	this.anforderungsSammlung = DefaultValues.createAnforderungsSammlung();
+    	this.wasModified();
 	}
 
 	public void loadAnforderungssammlung(File f) {
     	this.anforderungsSammlungFile = f;
 		this.anforderungsSammlung = this.exporter.loadAnforderungssammlung(f);
+		this.wasModified();
 	}
 
 	public void saveAnforderungssammlung() {

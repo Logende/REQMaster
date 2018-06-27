@@ -52,20 +52,19 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
     public UIProduktFunktion(IView view, DataId dataId) {
         super(view);
         this.dataId = dataId;
-        this.update(view.getModel());
         this.setLayout(new GridLayout(9,2));
         addComponents();
         setComponents();
+        this.update(view.getModel());
         this.setVisible(true);
 
         // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
         // um eine Produktfunktion zu löschen
-        delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(new DataId(id.getText())));
-                validate();
-            }
+        delete.addActionListener(actionEvent -> {
+        if(View.forcesFocus == null || UIProduktFunktion.this == View.forcesFocus) {
+            getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(this.dataId));
+            View.forcesFocus = null;
+        }
         });
     }
 
@@ -86,7 +85,8 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
              * @param e auf das zu reagierende Event
              */
             @Override
-            public void focusGained(FocusEvent e) { }
+            public void focusGained(FocusEvent e) {
+            }
 
             /**
              * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
@@ -95,13 +95,20 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
              */
             @Override
             public void focusLost(FocusEvent e) {
-                //TODO DataProduktFunktion definieren (extra Methode)
+                if(e.getOppositeComponent() != null) {
+                    if (e.getComponent().getParent() == e.getOppositeComponent().getParent()) {
+                        return; //do nothing if new component has same parent
+                    }
+                }
                 DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
                         quelle.getText(), verweise.getText(), new DataId(id.getText()));
                 UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
-                    //TODO
+                    View.forcesFocus = UIProduktFunktion.this;
+                    e.getComponent().requestFocus();
+                }else{
+                    View.forcesFocus = null;
                 }
             }
         };
@@ -147,6 +154,7 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
             quelle.setText(newFunktion.getQuelle());
             akteur.setText(newFunktion.getAkteur());
             beschreibung.setText(newFunktion.getBeschreibung());
+            verweise.setText(newFunktion.getVerweise());
 
         // TODO wie geht das mit den Verweisen, siehe Produktdatum
     }

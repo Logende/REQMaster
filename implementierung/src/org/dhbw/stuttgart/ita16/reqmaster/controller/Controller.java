@@ -3,6 +3,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.controller;
 import org.dhbw.stuttgart.ita16.reqmaster.events.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
+import org.dhbw.stuttgart.ita16.reqmaster.view.UIUmgebung;
 
 import java.io.File;
 import java.util.*;
@@ -25,8 +26,8 @@ public class Controller implements IObserverController, IController{
 
         //ADD
         reactions.put(UIActionAddProduktDatumEvent.class, (model, view, event)->{
-            DataProduktDatum dataProduktDatum = new DataProduktDatum(DefaultValues.PRODUKTDATUM_NAME, generateUniqueID("/LF", "/"),
-                    new ArrayList<>(), new ArrayList<>());
+            DataProduktDatum dataProduktDatum = new DataProduktDatum(DefaultValues.PRODUKTDATUM_NAME, generateUniqueID("/LD", "/"),
+                    new ArrayList<>(), DefaultValues.PRODUKTDATUM_VERWEISE);
             model.getIDataAnforderungssammlung().getDataProduktDaten().put(dataProduktDatum.getId(), dataProduktDatum);
             return true;
         });
@@ -34,7 +35,7 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIActionAddProduktFunktionEvent.class, (model, view, event)->{
             DataProduktFunktion dataProduktFunktion = new DataProduktFunktion(DefaultValues.PRODUKTFUNKTION_NAME,
                     DefaultValues.PRODUKTFUNKTION_BESCHREIBUNG, DefaultValues.PRODUKTFUNKTION_AKTEUR, DefaultValues.PRODUKTFUNKTION_QUELLE,
-                    new ArrayList<>(), generateUniqueID("/LD", "/"));
+                   DefaultValues.PRODUKTFUNKTION_VERWEISE, generateUniqueID("/LF", "/"));
             model.getIDataAnforderungssammlung().getDataProduktFunktionen().put(dataProduktFunktion.getId(), dataProduktFunktion);
             return true;
         });
@@ -89,10 +90,10 @@ public class Controller implements IObserverController, IController{
             DataProduktDatum proposal = e.getProposal();
             DataProduktDatum current = model.getIDataAnforderungssammlung().getDataProduktDaten().get(e.getId());
             if(validator.isValid(model, current, proposal)){
-                current.modify(proposal);
+                boolean containsChange = current.modify(proposal);
                 e.setSuccess(true);
-                return true;
-            }else{
+                return containsChange;
+            }else {
                 return false;
             }
         });
@@ -102,9 +103,9 @@ public class Controller implements IObserverController, IController{
             DataProduktFunktion proposal = e.getProposal();
             DataProduktFunktion current = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(e.getId());
             if(validator.isValid(model, current, proposal)){
-                current.modify(proposal);
+                boolean containsChange = current.modify(proposal);
                 e.setSuccess(true);
-                return true;
+                return containsChange;
             }else{
                 return false;
             }
@@ -115,6 +116,18 @@ public class Controller implements IObserverController, IController{
             DataZielbestimmung proposal = e.getProposal();
             if(validator.isValid(model, proposal)){
                 model.getIDataAnforderungssammlung().getDataZielbestimmung().modify(proposal);
+                e.setSuccess(true);
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        reactions.put(UIModifyUmgebungEvent.class, (model, view, event)->{
+            UIModifyUmgebungEvent e = (UIModifyUmgebungEvent) event;
+            DataUmgebung proposal = e.getProposal();
+            if(validator.isValid(model, proposal)){
+                model.getIDataAnforderungssammlung().getDataUmgebung().modify(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
@@ -220,6 +233,12 @@ public class Controller implements IObserverController, IController{
         });
 
         //MENU
+        reactions.put(UIActionMenuCreateEvent.class, (model, view, event)->{
+            File f = ((UIActionMenuCreateEvent)event).getFileAnforderungssammlung();
+            model.createAnforderungssammlung(f);
+            return false;
+        });
+
         reactions.put(UIActionMenuLoadEvent.class, (model, view, event)->{
             File f = ((UIActionMenuLoadEvent)event).getFileAnforderungssammlung();
             model.loadAnforderungssammlung(f);
@@ -247,7 +266,7 @@ public class Controller implements IObserverController, IController{
     private DataId generateUniqueID(String prefix, String suffix){
         int i = 0;
         DataId id ;
-        while(model.getIDataAnforderungssammlung().getObject(id = new DataId(prefix + String.valueOf(i) + suffix))!= null){
+        while(model.getIDataAnforderungssammlung().getObject(id = new DataId(prefix + String.valueOf(i) + suffix)) != null){
             i+=5;
         }
         return id;

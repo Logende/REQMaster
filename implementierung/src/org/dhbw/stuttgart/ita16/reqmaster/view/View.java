@@ -3,6 +3,8 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
+import java.awt.*;
+
 /**
  *  Klasse View des VMC-Patterns
  *  legt das mainFrame an und implementiert das Obeserver-Interface, um die UI-Komponenten
@@ -12,6 +14,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 public class View implements IView, IObserverView {
 
+    public static Component forcesFocus;
     private IModel model;
     private IObserverController obsController;
     private UIMainFrame mainFrame;
@@ -38,7 +41,6 @@ public class View implements IView, IObserverView {
     @Override
 
     public void update(){
-
         mainFrame.update(model);
     }
 

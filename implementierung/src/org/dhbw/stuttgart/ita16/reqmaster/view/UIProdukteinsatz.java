@@ -62,7 +62,10 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 				getView().getObsController().observe(modifyEvent =
 						new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));
 				if(!(modifyEvent.isSuccess())){
+					View.forcesFocus = UIProdukteinsatz.this;
 					text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
+				}else{
+					View.forcesFocus = null;
 				}
 			}
 		});

@@ -22,6 +22,10 @@ public class Validator implements  IValidator{
     public boolean isValid(IModel model, DataProdukteinsatz proposal) {
         return true;
     }
+    @Override
+    public boolean isValid(IModel model, DataUmgebung proposal) {
+        return true;
+    }
 
     @Override
     public boolean isValid(IModel model, DataProduktFunktion current, DataProduktFunktion proposal) {
