@@ -17,10 +17,9 @@ import java.awt.event.FocusListener;
  */
 public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 
-	/**Variablen der Klasse**/
+	//Variablen der Klasse
 	private UITextArea text;
 	private UIScrollPane scrollPane;
-	/************************/
 
 	/**
 	 * Konstruktor der Klasse
@@ -29,21 +28,19 @@ public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
 	public UIProdukteinsatz(View view) {
 
     	super(view);
-    	/***Initialisierung****************/
+    	//Initialisierung
 		text = new UITextArea();
 		scrollPane = new UIScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		/**********************************/
 
-		/*********Settings*****************/
+		//Settings
 		text.setLineWrap(true);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(scrollPane);
 		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"), BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
-		/**********************************/
 
-		/****Fokuslistener für TextArea****/
+		//Fokuslistener für TextArea
 		text.addFocusListener(new FocusListener() {
 			/**
 			 * legt fest, dass wenn das Textfeld den Fokus erhält, nichts passiert

@@ -21,10 +21,10 @@ import java.util.UUID;
  */
 public class UIProduktDatum extends UIPanel implements UIUpdateable {
 
-    private final DataId dataId;
-    private final UUID uuid = new UUID(20, 20);
-
+    //Variablen der Klasse
+    private final DataId dataId; //always the real DataId instance, as being used within the model
     private UIButton delete;
+    private UIButton addAttr;
     private UITextField name;
     private UITextField id;
     private UITextField attribute;
@@ -33,6 +33,8 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
     private UILabel idText;
     private UILabel attributeText;
     private UILabel verweiseText;
+    private UIPanel attributPanel;
+    private UIPanel datumPanel;
 
 
     /**
@@ -45,7 +47,8 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
         super(view);
         this.dataId = dataId;
 
-        this.setLayout(new GridLayout(6,2));
+        //Settings
+        this.setLayout(new GridLayout(8,2));
         addComponents();
         setComponents();
         this.update(view.getModel());
@@ -76,7 +79,7 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
              */
             @Override
             public void focusGained(FocusEvent e) {
-                System.out.println("focus gained with produktdatum component " + e.getComponent().getClass().getName());
+
             }
 
             /**
@@ -109,10 +112,11 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
         this.add(id = new UITextField(focusListener));
         this.add(nameText = new UILabel());
         this.add(name = new UITextField(focusListener));
-        this.add(attributeText = new UILabel());
-        this.add(attribute = new UITextField(focusListener));
         this.add(verweiseText = new UILabel());
         this.add(verweise = new UITextField(focusListener));
+        this.add(attributeText = new UILabel());
+        this.add(addAttr = new UIButton());
+        this.add(attribute = new UITextField(focusListener));
     }
 
 
@@ -121,13 +125,19 @@ public class UIProduktDatum extends UIPanel implements UIUpdateable {
      */
     private void setComponents() {
         delete.setText("Löschen");
+        addAttr.setText("Attribut hinzufügen");
         nameText.setText("Name");
         idText.setText("ID");
         attributeText.setText("Attribute");
         verweiseText.setText("Verweise");
     }
 
-
+    /**
+     * Implementierung der Update-Methode
+     * wenn sich ein Produktdatum geändert hat, wird diese Methode aufgerufen,
+     * um die GUI zu aktualisieren
+     * @param model Instanz des Models des MVC-Patterns
+     */
     @Override
     public void update(IModel model){
         DataProduktDatum newDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(dataId);

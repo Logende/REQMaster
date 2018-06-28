@@ -15,12 +15,11 @@ import java.io.File;
  */
 public class UIAnfangsDialog extends UIFrame {
 
-    /******Variablen der Klasse****/
+    //Variablen der Klasse
     private UIButton docNeu;
     private UIButton docImport;
     private UIPanel buttonPanel;
     private UIMainFrame mainFrame;
-    /******************************/
 
     /**
      * Konstruktor der Klasse
@@ -31,13 +30,12 @@ public class UIAnfangsDialog extends UIFrame {
         super(view);
         this.mainFrame = mainFrame;
 
-        /**********Instanzierung******************/
+        //Instanzierung
         docNeu = new UIButton();
         docImport = new UIButton();
         buttonPanel = new UIPanel();
-        /*****************************************/
 
-        /*************Settings*********************/
+        //Settings
         docNeu.setText("Neues Dokument");
         docNeu.setBounds(45,20,180,30);
         docImport.setText("Dokument importieren");
@@ -48,7 +46,7 @@ public class UIAnfangsDialog extends UIFrame {
         buttonPanel.add(docNeu);
         buttonPanel.add(docImport);
 
-        this.setTitle("Anfangsdialog");
+        this.setTitle("Willkommen");
         this.setLocationRelativeTo(null);
         this.setSize(300,160);
         this.setLayout(null);
@@ -57,10 +55,8 @@ public class UIAnfangsDialog extends UIFrame {
         this.setDefaultCloseOperation(UIFrame.EXIT_ON_CLOSE);
         this.add(buttonPanel);
         this.setVisible(true);
-        /******************************************/
 
-
-        /********ActionListener definieren für Buttons**********/
+        //ActionListener definieren für Buttons
         docNeu.addActionListener(new ActionListener() {
             /**
              * wenn auf den Button geklickt wird, wird ein Speicherort und ein Name ausgewählt und
@@ -73,7 +69,7 @@ public class UIAnfangsDialog extends UIFrame {
 
                 File file;
                 file = UIPathSelector.forcePathSelection("Neues Dokument anlegen", ".xml",true,
-                        "C:\\Users\\%name%\\Documents", true);
+                        ".xml","C:\\Users\\%name%\\Documents", true);
                 if(file != null){
                     view.getObsController().observe(new UIActionMenuCreateEvent(file));
                     mainFrame.setVisible(true);
@@ -92,7 +88,7 @@ public class UIAnfangsDialog extends UIFrame {
             public void actionPerformed(ActionEvent e) {
                 File file;
                 file = UIPathSelector.forcePathSelection("Dokument importieren", ".xml",true,
-                        "C:\\Users\\%name%\\Documents", false);
+                        ".xml","C:\\Users\\%name%\\Documents", false);
                 if(file !=null) {
                     getView().getObsController().observe(new UIActionMenuLoadEvent(file));
                     mainFrame.setVisible(true);

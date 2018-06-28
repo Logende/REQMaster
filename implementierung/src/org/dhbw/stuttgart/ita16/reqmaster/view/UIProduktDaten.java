@@ -21,12 +21,11 @@ import java.util.List;
  */
 public class UIProduktDaten extends UIPanel implements UIUpdateable {
 
-    /**********Variablen der Klasse*************/
+    //Variablen der Klasse
     private List<UIProduktDatum> produktDaten;
     private UIButton add;
     private UIPanel datenPanel;
     private UIScrollPane scrollPane;
-    /*******************************************/
 
     /**
      * Konstruktor der Klasse
@@ -35,14 +34,13 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
     public UIProduktDaten(IView view){
         super(view);
 
-        /**Instanzierung***************/
+        //Instanzierung
         produktDaten = new ArrayList<>();
         add = new UIButton();
         datenPanel = new UIPanel();
         scrollPane = new UIScrollPane(datenPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        /********************************/
 
-        /**** Hinzufügen der Komponenten sowie Settings******************/
+        // Hinzufügen der Komponenten sowie Settings
         add.setText("Hinzufügen");
         datenPanel.setLayout(new BoxLayout(datenPanel, BoxLayout.Y_AXIS));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
@@ -51,7 +49,6 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
         this.add(add);
         this.add(scrollPane, BorderLayout.PAGE_START);
         this.setVisible(true);
-        /*****************************************************************/
 
         add.addActionListener(new ActionListener() {
             /**
@@ -90,7 +87,6 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
         }
         for(UIProduktDatum uiProduktDatum : toDelete){
             produktDaten.remove(uiProduktDatum);
-            //TODO: remove data from actual GUI panel, not just from list in memory
         }
         //Fuege neue zum Model hinzugefuegte Funktionen dazu
         for(DataProduktDatum dataProduktDatum : model.getIDataAnforderungssammlung().getDataProduktDaten().values()){
@@ -103,10 +99,10 @@ public class UIProduktDaten extends UIPanel implements UIUpdateable {
             }
             if(isNew){
                 produktDaten.add(new UIProduktDatum(getView(), dataProduktDatum.getId()));
-                //TODO: add function to actual GUI panel, not just from list in memory
             }
         }
 
+        //datenPanel aktualisieren
         datenPanel.removeAll();
         for (UIProduktDatum i : produktDaten) {
             datenPanel.add(i);

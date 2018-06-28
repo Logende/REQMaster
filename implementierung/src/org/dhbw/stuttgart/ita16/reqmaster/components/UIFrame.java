@@ -4,11 +4,13 @@ import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 import org.dhbw.stuttgart.ita16.reqmaster.view.View;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 /**
  * Adaption der Swing-JFrame Komponente für Projektzwecke
  */
-public class UIFrame extends JFrame {
+public class UIFrame extends JFrame{
 
     private IView view;
 
@@ -25,7 +27,6 @@ public class UIFrame extends JFrame {
      * Standardkonstruktor der Klasse
      */
     public UIFrame(){
-
     }
 
     /**
@@ -43,4 +44,5 @@ public class UIFrame extends JFrame {
     public IView getView() {
         return view;
     }
+
 }

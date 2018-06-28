@@ -21,28 +21,26 @@ import java.util.List;
 
 public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
 
-    /********Variablen der Klasse*********************/
+    //Variablen der Klasse
     private List<UIProduktFunktion> produktFunktionen;
     private UIButton add;
     private UIPanel funktionsPanel;
     private UIScrollPane scrollPane;
-    /*************************************************/
 
-    /* Konstruktor der Klasse
+    /** Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
     public UIProduktFunktionen(IView view){
 
-        /*******Instanzierung******************/
+        //Instanzierung
         super(view);
         produktFunktionen = new ArrayList<>();
         add = new UIButton();
         funktionsPanel = new UIPanel();
         scrollPane = new UIScrollPane( funktionsPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        /***************************************/
 
-        /******Hinzufügen der Komponenten sowie Settings***************************/
+        //Hinzufügen der Komponenten sowie Settings
         funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         add.setText("Hinzufügen");
@@ -51,8 +49,8 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         this.add(add);
         this.add(scrollPane);
         this.setVisible(true);
-        /***************************************************************************/
 
+        //ActionListener fuer Hinzufügen-Button
         add.addActionListener(new ActionListener() {
             /**
              * Wenn der Button gedrückt wird,
@@ -91,7 +89,6 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         for(UIProduktFunktion uiProduktFunktion : toDelete){
             produktFunktionen.remove(uiProduktFunktion);
             this.repaint();
-            //TODO: remove function from actual GUI panel, not just from list in memory
         }
         //Fuege neue zum Model hinzugefuegte Funktionen dazu
         for(DataProduktFunktion dataProduktFunktion : model.getIDataAnforderungssammlung().getDataProduktFunktionen().values()){
@@ -104,10 +101,10 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
             }
             if(isNew){
                 produktFunktionen.add(new UIProduktFunktion(getView(), dataProduktFunktion.getId()));
-                //TODO: add function to actual GUI panel, not just from list in memory
             }
         }
 
+        //funktionsPanel aktualisieren
         funktionsPanel.removeAll();
         for (UIProduktFunktion i : produktFunktionen){
             funktionsPanel.add(i);

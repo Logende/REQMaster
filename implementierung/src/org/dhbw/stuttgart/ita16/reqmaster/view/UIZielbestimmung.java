@@ -23,10 +23,9 @@ import java.awt.event.FocusListener;
  */
 public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 
-	/*****Variablen der Klasse*********/
+	//Variablen der Klasse
 	private UITextArea text;
 	private UIScrollPane scrollPane;
-	/**********************************/
 
 	/**
 	 * Konstruktor der Klasse
@@ -35,21 +34,19 @@ public class UIZielbestimmung extends UIPanel implements UIUpdateable {
 	public UIZielbestimmung(IView view) {
 		super(view);
 
-		/*****Instanzierung***********/
+		//Instanzierung
 		text = new UITextArea();
 		scrollPane = new UIScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		/*****************************/
 
-		/*****Settings****************/
+		//Settings
 		text.setLineWrap(true);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(scrollPane);
 		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Zielbestimmung"), BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
-		/*****************************/
 
-		/********Definition eines FocusListener für TextArea********/
+		//Definition eines FocusListener für TextArea
 		text.addFocusListener(new FocusListener() {
 
 			/**

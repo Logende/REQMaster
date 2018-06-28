@@ -30,6 +30,10 @@ public class View implements IView, IObserverView {
         anfangsDialog = new UIAnfangsDialog(this, mainFrame);
     }
 
+    /**
+     * Setter Methode für den Observer des Controllers
+     * @param obsController Instanz des Observers
+     */
     public void setObserverController(IObserverController obsController){
         this.obsController = obsController;
     }
@@ -39,20 +43,23 @@ public class View implements IView, IObserverView {
      * Aufruf der update-Methode des mainFrames
      */
     @Override
-
     public void update(){
         mainFrame.update(model);
     }
 
     /**
      * getter-Methode für IObserverController
-     * @return
+     * @return Instanz es Observers
      */
     @Override
     public IObserverController getObsController(){
         return obsController;
     }
 
+    /**
+     * Getter für das Model
+     * @return Instanz des Model des MVC-Patterns
+     */
     @Override
     public IModel getModel() {
         return model;

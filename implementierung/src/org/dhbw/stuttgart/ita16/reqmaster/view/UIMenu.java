@@ -18,12 +18,11 @@ import java.awt.event.ActionListener;
  */
 public class UIMenu extends UIMenuBar {
 
-    /***Variablen der Klasse*******/
+    //Variablen der Klasse
     private IView view;
     private UIMenuItem docExportXml;
     private UIMenuItem fpNeu;
     private UIFunctionPointPanel functionPointPanel;
-    /******************************/
 
     /**
      * Konstruktor der Klasse
@@ -35,19 +34,17 @@ public class UIMenu extends UIMenuBar {
         this.view = view;
         this.functionPointPanel = functionPointPanel;
 
-        /********************Instanzierung***************/
+        //Instanzierung
         docExportXml = new UIMenuItem("Dokument in XML exportieren");
         fpNeu = new UIMenuItem("Aufwandsabschätzung");
-        /************************************************/
 
-        /******************Settings*********************/
+        //Settings
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         this.setLayout(new FlowLayout());
         this.add(docExportXml, FlowLayout.LEFT);
         this.add(fpNeu, FlowLayout.LEFT);
-        /***********************************************/
 
-        /******Actionlistener definieren****************/
+        //ActionListener definieren
         docExportXml.addActionListener(new ActionListener() {
             /**
              * definiert, dass ein UIActionSaveEvent an den Controller gesendet wird,
@@ -58,8 +55,8 @@ public class UIMenu extends UIMenuBar {
             public void actionPerformed(ActionEvent e) {
                 UIActionMenuSaveEvent safeEvent = new UIActionMenuSaveEvent();
                 getView().getObsController().observe(safeEvent);
-                //TODO success fehlt  if(safeEvent.isSuccess){
-                //}
+                JOptionPane.showMessageDialog(UIMenu.this, "Ihr Dokument wurde gespeichert",
+                        "Speichern", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 

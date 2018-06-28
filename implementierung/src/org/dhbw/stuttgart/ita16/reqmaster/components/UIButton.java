@@ -12,7 +12,6 @@ public class UIButton extends JButton {
 
     /**
      * Konstruktor der Klasse
-     *
      */
     public UIButton() {
     }

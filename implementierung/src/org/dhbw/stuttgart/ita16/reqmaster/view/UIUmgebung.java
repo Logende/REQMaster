@@ -32,18 +32,18 @@ public class UIUmgebung extends UIPanel implements UIUpdateable {
     public UIUmgebung(IView view) {
 
         super(view);
-        /****Initialisierung********/
+        //Initialisierung
         text = new UITextArea();
         scrollPane = new UIScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        /********Settings***********/
+        //Settings
         text.setLineWrap(true);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(scrollPane);
         this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Umgebung"), BorderFactory.createEmptyBorder(30,10,20,10)));
         this.setVisible(true);
 
-        /********Definition eines FocusListeners für TextArea*****/
+        //Definition eines FocusListeners für TextArea
         text.addFocusListener(new FocusListener() {
 
             /**

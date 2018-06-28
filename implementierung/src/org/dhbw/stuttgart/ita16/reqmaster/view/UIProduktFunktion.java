@@ -23,21 +23,15 @@ import java.awt.event.FocusListener;
 
 public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
-    /*Variablen der Klasse*/
+    //Variablen der Klasse
     private final DataId dataId; //always the real DataId instance, as being used within the model
-
-    // Button
     private UIButton delete;
-
-    //Textfelder
     private UITextField id;
     private UITextField name;
     private UITextField quelle;
     private UITextField akteur;
     private UITextField beschreibung;
     private UITextField verweise;
-
-    //Labels
     private UILabel idText;
     private UILabel nameText;
     private UILabel quelleText;
@@ -115,8 +109,6 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
 
         this.add(delete = new UIButton());
         this.add(new Label());
-        this.add(new Label());
-        this.add(new Label());
         this.add(idText = new UILabel());
         this.add(id = new UITextField(focusListener));
         this.add(nameText = new UILabel());
@@ -145,6 +137,12 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
         verweiseText.setText("Verweise");
     }
 
+    /**
+     * Implementierung der Update-Methode
+     * wenn sich eine Produktfunktion geändert hat, wird diese Methode aufgerufen,
+     * um die GUI zu aktualisieren
+     * @param model Instanz des Models des MVC-Patterns
+     */
     @Override
     public void update(IModel model){
 
@@ -155,8 +153,6 @@ public class UIProduktFunktion extends UIPanel implements UIUpdateable{
             akteur.setText(newFunktion.getAkteur());
             beschreibung.setText(newFunktion.getBeschreibung());
             verweise.setText(newFunktion.getVerweise());
-
-        // TODO wie geht das mit den Verweisen, siehe Produktdatum
     }
 
     /**
