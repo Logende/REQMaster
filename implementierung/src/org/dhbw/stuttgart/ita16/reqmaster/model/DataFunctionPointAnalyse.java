@@ -7,12 +7,10 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 
 	private Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen;
 	private double realerAufwand;
-	private IModel model;
 
-	public DataFunctionPointAnalyse(IModel model, Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen, double realerAufwand) {
+	public DataFunctionPointAnalyse(Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen, double realerAufwand) {
 		this.einstufungen = einstufungen;
 		this.realerAufwand = realerAufwand;
-		this.model = model;
 	}
 
 
@@ -31,7 +29,9 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
         if(einstufungen.containsKey(iIdentifiable)) {
 			return einstufungen.get(iIdentifiable);
 		}else{
-        	return DefaultValues.getDefaultEinstufung(iIdentifiable);
+        	IDataFunctionPointEinstufung einstufung = DefaultValues.getDefaultEinstufung(iIdentifiable);
+        	einstufungen.put(iIdentifiable, einstufung);
+        	return einstufung;
 		}
     }
 }

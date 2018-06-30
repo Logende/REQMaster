@@ -6,5 +6,6 @@ import java.util.*;
 public interface IIdentifiable {
 
 	public DataId getId();
+	public String getName();
 
 }

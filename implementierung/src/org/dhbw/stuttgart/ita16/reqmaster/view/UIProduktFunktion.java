@@ -1,9 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
+import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
@@ -68,26 +65,9 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
         /*Für jedes UITextField in ProduktFunktion wird einmalig ein
         *FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
         */
-        FocusListener focusListener = new FocusListener() {
-
-            /**
-             * Methode, die implementiert werden muss, aber nichts tun soll,
-             * wenn eine Komponente den Fokus verliert
-             * @param e auf das zu reagierende Event
-             */
-            @Override
-            public void focusGained(FocusEvent e) {
-            }
-
-            /**
-             * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
-             * um den Inhalt des Textfeldes zu validieren
-             * @param e
-             */
-            @Override
-            public void focusLost(FocusEvent e) {
-                if(e.getOppositeComponent() != null) {
-                    if (e.getComponent().getParent() == e.getOppositeComponent().getParent()) {
+        UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
+                if(focusGained != null) {
+                    if (focusLost.getParent() == focusGained.getParent()) {
                         return; //do nothing if new component has same parent
                     }
                 }
@@ -97,27 +77,26 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
                     View.forcesFocus = UIProduktFunktion.this;
-                    e.getComponent().requestFocus();
+                    focusLost.requestFocus();
                 }else{
                     View.forcesFocus = null;
                 }
-            }
-        };
+            };
 
         this.add(delete = new UIButton());
         this.add(new Label());
         this.add(idText = new UILabel());
-        this.add(id = new UITextField(focusListener));
+        this.add(id = new UITextField(listener));
         this.add(nameText = new UILabel());
-        this.add(name = new UITextField(focusListener));
+        this.add(name = new UITextField(listener));
         this.add(quelleText = new UILabel());
-        this.add(quelle = new UITextField(focusListener));
+        this.add(quelle = new UITextField(listener));
         this.add(akteurText = new UILabel());
-        this.add( akteur = new UITextField(focusListener));
+        this.add( akteur = new UITextField(listener));
         this.add(beschreibungText = new UILabel());
-        this.add(beschreibung = new UITextField(focusListener));
+        this.add(beschreibung = new UITextField(listener));
         this.add(verweiseText = new UILabel());
-        this.add(verweise = new UITextField(focusListener));
+        this.add(verweise = new UITextField(listener));
     }
 
     /**

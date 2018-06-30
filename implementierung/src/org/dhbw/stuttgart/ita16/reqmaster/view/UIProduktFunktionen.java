@@ -4,12 +4,10 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktFunktionEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
  * Grafikkomponente: Panel, das die Produktfunktionen beinhaltet
  */
 
-public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
+public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private List<UIProduktFunktion> produktFunktionen;
@@ -88,7 +86,6 @@ public class UIProduktFunktionen extends UIPanel implements UIUpdateable{
         }
         for(UIProduktFunktion uiProduktFunktion : toDelete){
             produktFunktionen.remove(uiProduktFunktion);
-            this.repaint();
         }
         //Fuege neue zum Model hinzugefuegte Funktionen dazu
         for(DataProduktFunktion dataProduktFunktion : model.getIDataAnforderungssammlung().getDataProduktFunktionen().values()){
