@@ -1,5 +1,7 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +27,24 @@ public class DefaultValues {
     }
 
     public static IDataSchaetzKonfiguration createSchaetzKonfiguration(){
-        double defaultGewichte[] = null;
+        Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> defaultGewichte = new HashMap<>();
+        for(FPKlassifizierung klassifizierung : FPKlassifizierung.values()){
+            Map<FPKomplexitaet, Double> submap = new HashMap<>();
+            for(FPKomplexitaet komplexitaet : FPKomplexitaet.values()){
+                submap.put(komplexitaet, 1.0);
+            }
+            defaultGewichte.put(klassifizierung, submap);
+        }
         return new DataSchaetzKonfiguration(defaultGewichte);
+    }
+
+    public static IDataFunctionPointEinstufung getDefaultEinstufung(IIdentifiable i){
+        if(i instanceof DataProduktFunktion){
+            return new DataFunctionPointEinstufung(FPFunktionsTyp.TRANSAKTION, FPKlassifizierung.TRANSAKTION_EI, FPKomplexitaet.MITTEL);
+        }else if(i instanceof DataProduktDatum){
+            return new DataFunctionPointEinstufung(FPFunktionsTyp.DATEN, FPKlassifizierung.DATEN_ELF, FPKomplexitaet.MITTEL);
+        }else{
+            throw new IllegalArgumentException("No default IDataFunctionPointEinstufung defined for iidentifiable of type " + i.getClass().getName());
+        }
     }
 }

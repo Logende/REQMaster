@@ -15,12 +15,6 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 		this.model = model;
 	}
 
-	public void init(List<IIdentifiable> list) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
-	}
-
-
-
 
 
 	public double getRealerAufwand() {
@@ -33,7 +27,11 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
     }
 
     @Override
-    public IDataFunctionPointEinstufung getEinstufung(IIdentifiable id) {
-        return einstufungen.get(id);
+    public IDataFunctionPointEinstufung getEinstufung(IIdentifiable iIdentifiable) {
+        if(einstufungen.containsKey(iIdentifiable)) {
+			return einstufungen.get(iIdentifiable);
+		}else{
+        	return DefaultValues.getDefaultEinstufung(iIdentifiable);
+		}
     }
 }

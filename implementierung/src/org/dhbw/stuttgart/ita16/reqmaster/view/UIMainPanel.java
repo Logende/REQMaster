@@ -1,18 +1,15 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import java.awt.*;
-import java.io.*;
-import java.util.*;
+
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-
-import javax.swing.*;
 
 /**
  * Grafikkomponente: legt Aufbau einer Anforderungssammlung TODO ist das richtig ?
  */
 
-public class UIMainPanel extends UIPanel implements UIUpdateable {
+public class UIMainPanel extends UIPanel implements IUIUpdateable {
 
 	// Variablen der Klasse
 	private UIProduktFunktionen panelFunktionen;

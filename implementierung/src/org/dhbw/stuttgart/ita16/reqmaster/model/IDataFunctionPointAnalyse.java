@@ -5,14 +5,11 @@ import java.util.*;
 
 public interface IDataFunctionPointAnalyse {
 
-	void init(List<IIdentifiable> list);
-
-	//void setSchaetzKonfiguration(IDataSchaetzKonfiguration gewichtsfaktoren);
 
 	double getRealerAufwand();
 
 	void setRealerAufwand(double d);
 
-	IDataFunctionPointEinstufung getEinstufung(IIdentifiable id);
+	IDataFunctionPointEinstufung getEinstufung(IIdentifiable iIdentifiable);
 
 }

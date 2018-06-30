@@ -1,19 +1,23 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
+import java.util.Map;
+
 public class DataSchaetzKonfiguration implements IDataSchaetzKonfiguration {
 
 
-	private  double[] gewichte;
+	private Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> gewichte;
 
-	public DataSchaetzKonfiguration(double[] gewichte){
+	public DataSchaetzKonfiguration(Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> gewichte){
 		this.gewichte = gewichte;
 	}
 
 	@Override
-	public double getGewicht(int index) {
-		if(index>= gewichte.length || index<0){
-			throw new ArrayIndexOutOfBoundsException("Out of bounds: Gewicht requested was " + index + " but needs to be between 0 and " + (gewichte.length-1) + ".");
-		}
-		return gewichte[index];
+	public double getGewicht(FPKlassifizierung klassifizierung, FPKomplexitaet komplexitaet) {
+		return gewichte.get(klassifizierung).get(komplexitaet);
+	}
+
+	@Override
+	public void setGewicht(FPKlassifizierung klassifizierung, FPKomplexitaet komplexitaet, double d){
+		gewichte.get(klassifizierung).put(komplexitaet, d);
 	}
 }

@@ -3,22 +3,18 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyUmgebungEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyZielbestimmungEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataUmgebung;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataZielbestimmung;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
  * Grafikkomponente: legt Aufbau einer Zielbestimmung fest
  */
-public class UIUmgebung extends UIPanel implements UIUpdateable {
+public class UIUmgebung extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private UITextArea text;

@@ -13,13 +13,12 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.UUID;
 
 
 /**
  * Grafikkomponente: legt Aufbau eines Produktdatums fest
  */
-public class UIProduktDatum extends UIPanel implements UIUpdateable {
+public class UIProduktDatum extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private final DataId dataId; //always the real DataId instance, as being used within the model

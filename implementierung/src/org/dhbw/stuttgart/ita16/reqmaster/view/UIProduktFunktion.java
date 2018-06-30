@@ -5,15 +5,12 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktFunktionEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -21,7 +18,7 @@ import java.awt.event.FocusListener;
  * Grafikkomponente: legt Aufbau einer Produktfunktion fest
  */
 
-public class UIProduktFunktion extends UIPanel implements UIUpdateable{
+public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private final DataId dataId; //always the real DataId instance, as being used within the model
