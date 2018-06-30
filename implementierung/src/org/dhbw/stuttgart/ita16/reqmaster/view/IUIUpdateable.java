@@ -9,7 +9,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
  * sich auf Grundlage eines Model neu aufzubauen
  *
  */
-public interface UIUpdateable {
+public interface IUIUpdateable {
 
 	void update(IModel model);
 

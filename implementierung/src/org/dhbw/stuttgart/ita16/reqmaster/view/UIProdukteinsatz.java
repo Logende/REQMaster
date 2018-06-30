@@ -8,14 +8,13 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
  * Grafikkomponente: legt Aufbau des Produkteinsatzes fest
  */
-public class UIProdukteinsatz extends UIPanel implements UIUpdateable {
+public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 
 	//Variablen der Klasse
 	private UITextArea text;

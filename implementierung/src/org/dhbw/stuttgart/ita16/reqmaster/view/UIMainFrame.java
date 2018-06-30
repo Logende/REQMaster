@@ -1,11 +1,8 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.*;
-import java.util.*;
+
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIFrame;
 
@@ -15,7 +12,7 @@ import javax.swing.*;
  * Grafikkomponente: UIMainFrame ist das Standardfenster
  * für die Grafikkomponenten
  */
-public class UIMainFrame extends UIFrame implements UIUpdateable {
+public class UIMainFrame extends UIFrame implements IUIUpdateable {
 
 	//Variablen der Klasse
 	private UIMainPanel mainPanel;
