@@ -1,10 +1,18 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
 
 public enum FPFunktionsTyp {
 
-	DATEN,
-	TRANSAKTION
+	DATEN{
+		public FPKlassifizierung getDefaultKlassifizierung(){
+			return FPKlassifizierung.DATEN_ELF;
+		}
+	},
+	TRANSAKTION{
+		public FPKlassifizierung getDefaultKlassifizierung(){
+			return FPKlassifizierung.TRANSAKTION_EO;
+		}
+	};
+
+	public abstract FPKlassifizierung getDefaultKlassifizierung();
 }

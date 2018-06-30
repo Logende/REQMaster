@@ -147,12 +147,11 @@ public class Controller implements IObserverController, IController{
             }
         });
 
-        reactions.put(UIModifyFunktionstypEvent.class, (model, view, event)->{
-            UIModifyFunktionstypEvent e = (UIModifyFunktionstypEvent) event;
-            FPFunktionsTyp proposalPart = e.getProposal();
+        reactions.put(UIModifyFunctionPointEinstufungEvent.class, (model, view, event)->{
+            UIModifyFunctionPointEinstufungEvent e = (UIModifyFunctionPointEinstufungEvent) event;
             IIdentifiable iIdentifiable = model.getIDataAnforderungssammlung().getObject(e.getID());
             IDataFunctionPointEinstufung current = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
-            IDataFunctionPointEinstufung proposal = new DataFunctionPointEinstufung(proposalPart, current.getKlassifizierung(), current.getKomplexitaet());
+            IDataFunctionPointEinstufung proposal = e.getProposal();
             if(validator.isValid(model, current, proposal, iIdentifiable)){
                 current.modify(proposal);
                 e.setSuccess(true);
@@ -162,35 +161,6 @@ public class Controller implements IObserverController, IController{
             }
         });
 
-        reactions.put(UIModifyKlassifizierungEvent.class, (model, view, event)->{
-            UIModifyKlassifizierungEvent e = (UIModifyKlassifizierungEvent) event;
-            FPKlassifizierung proposalPart = e.getProposal();
-            IIdentifiable iIdentifiable = model.getIDataAnforderungssammlung().getObject(e.getID());
-            IDataFunctionPointEinstufung current = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
-            IDataFunctionPointEinstufung proposal = new DataFunctionPointEinstufung(current.getFunktionstyp(), proposalPart, current.getKomplexitaet());
-            if(validator.isValid(model, current, proposal, iIdentifiable)){
-                current.modify(proposal);
-                e.setSuccess(true);
-                return true;
-            }else{
-                return false;
-            }
-        });
-
-        reactions.put(UIModifyKomplexitaetEvent.class, (model, view, event)->{
-            UIModifyKomplexitaetEvent e = (UIModifyKomplexitaetEvent) event;
-            FPKomplexitaet proposalPart = e.getProposal();
-            IIdentifiable iIdentifiable = model.getIDataAnforderungssammlung().getObject(e.getID());
-            IDataFunctionPointEinstufung current = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
-            IDataFunctionPointEinstufung proposal = new DataFunctionPointEinstufung(current.getFunktionstyp(), current.getKlassifizierung(), proposalPart);
-            if(validator.isValid(model, current, proposal, iIdentifiable)){
-                current.modify(proposal);
-                e.setSuccess(true);
-                return true;
-            }else{
-                return false;
-            }
-        });
 
         reactions.put(UIModifyRealerAufwand.class, (model, view, event)->{
             UIModifyRealerAufwand e = (UIModifyRealerAufwand) event;

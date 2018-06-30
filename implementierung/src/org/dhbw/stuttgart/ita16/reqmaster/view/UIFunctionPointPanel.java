@@ -11,7 +11,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
  */
 public class UIFunctionPointPanel extends UIPanel {
 
-    private UIFunktionenDaten funktionenDaten;
+    private UIFunctionPointEinstufungen funktionenDaten;
     private UIGewichtsfaktoren gewichtsfaktoren;
     private UIControl control;
 
@@ -19,7 +19,7 @@ public class UIFunctionPointPanel extends UIPanel {
     public UIFunctionPointPanel(IView view) {
 
         super(view);
-        funktionenDaten = new UIFunktionenDaten(view);
+        funktionenDaten = new UIFunctionPointEinstufungen(view);
         gewichtsfaktoren = new UIGewichtsfaktoren(view);
         control = new UIControl(view);
 

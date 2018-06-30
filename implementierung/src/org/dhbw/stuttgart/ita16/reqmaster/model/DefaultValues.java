@@ -23,7 +23,7 @@ public class DefaultValues {
         DataUmgebung umgebung = new DataUmgebung("Umgebung");
         Map<DataId, DataProduktFunktion> produktFunktionen = new HashMap<>();
         Map<DataId, DataProduktDatum> produktDaten = new HashMap<>();
-        return new DataAnforderungssammlung(zielbestimmung, produkteinsatz, umgebung, produktFunktionen, produktDaten, null);
+        return new DataAnforderungssammlung(zielbestimmung, produkteinsatz, umgebung, produktFunktionen, produktDaten, DefaultValues.createFunctionPointAnalyse());
     }
 
     public static IDataSchaetzKonfiguration createSchaetzKonfiguration(){
@@ -36,6 +36,10 @@ public class DefaultValues {
             defaultGewichte.put(klassifizierung, submap);
         }
         return new DataSchaetzKonfiguration(defaultGewichte);
+    }
+
+    public static IDataFunctionPointAnalyse createFunctionPointAnalyse(){
+        return new DataFunctionPointAnalyse(new HashMap<>(), 0);
     }
 
     public static IDataFunctionPointEinstufung getDefaultEinstufung(IIdentifiable i){

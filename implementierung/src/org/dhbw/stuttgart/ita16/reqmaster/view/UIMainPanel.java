@@ -18,6 +18,8 @@ public class UIMainPanel extends UIPanel implements IUIUpdateable {
 	private UIZielbestimmung panelZielbestimmung;
 	private UIUmgebung panelUmgebung;
 
+	private UIFunctionPointEinstufungen einstufungen; //just here for testing purposes
+
 	/**
 	 * Konstruktor der Klasse
 	 * erstellt Instanzen der Klassen UIProduktFunktionen, UIProduktDaten, UIProdukteinsatz, UIZielbestimmung und UIUmgebung
@@ -32,6 +34,7 @@ public class UIMainPanel extends UIPanel implements IUIUpdateable {
 		this.add(panelUmgebung=new UIUmgebung(view));
 		this.add(panelFunktionen=new UIProduktFunktionen(view));
 		this.add(panelDaten=new UIProduktDaten(view));
+		this.add(einstufungen = new UIFunctionPointEinstufungen(view)); //just here for testing purposes
 		this.setVisible(true);
 	}
 
@@ -46,6 +49,7 @@ public class UIMainPanel extends UIPanel implements IUIUpdateable {
 		panelProdukteinsatz.update(model);
 		panelZielbestimmung.update(model);
 		panelUmgebung.update(model);
+		einstufungen.update(model); //just here for testing purposes
 		this.validate();
 	}
 

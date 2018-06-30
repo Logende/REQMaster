@@ -1,9 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
+import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
@@ -70,26 +67,9 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
 
         // Für jedes UITextField in ProduktDatum wird einmalig ein
         // FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
-        FocusListener focusListener = new FocusListener() {
-
-            /**
-             * Wenn das Textfeld den Fokus verliert, soll nichts passieren
-             * @param e auf zu reagierendes Event
-             */
-            @Override
-            public void focusGained(FocusEvent e) {
-
-            }
-
-            /**
-             * Wenn das Textfeld den Fokus verliert, wird ein Event an den Controller geschickt,
-             * um den Inhalt des Textfeldes zu validieren
-             * @param e auf zu reagierendes Event
-             */
-            @Override
-            public void focusLost(FocusEvent e) {
-                if(e.getOppositeComponent() != null) {
-                    if (e.getComponent().getParent() == e.getOppositeComponent().getParent()) {
+        UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
+                if(focusGained != null) {
+                    if (focusLost.getParent() == focusGained.getParent()) {
                         return; //do nothing if new component has same parent
                     }
                 }
@@ -98,24 +78,23 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
                     View.forcesFocus = UIProduktDatum.this;
-                    e.getComponent().requestFocus();
+                   focusLost.requestFocus();
                 }else{
                     View.forcesFocus = null;
                 }
-            }
-        };
+            };
 
         this.add(delete = new UIButton());
         this.add(new UILabel());
         this.add(idText = new UILabel());
-        this.add(id = new UITextField(focusListener));
+        this.add(id = new UITextField(listener));
         this.add(nameText = new UILabel());
-        this.add(name = new UITextField(focusListener));
+        this.add(name = new UITextField(listener));
         this.add(verweiseText = new UILabel());
-        this.add(verweise = new UITextField(focusListener));
+        this.add(verweise = new UITextField(listener));
         this.add(attributeText = new UILabel());
         this.add(addAttr = new UIButton());
-        this.add(attribute = new UITextField(focusListener));
+        this.add(attribute = new UITextField(listener));
     }
 
 

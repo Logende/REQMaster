@@ -13,12 +13,21 @@ public class UITextField extends JTextField {
 
     /**
      * Konstruktor der Klasse
-     * @param focusListener definierter FokusListener in den UIKomponenten der View
+     * @param listener definierter listener in den UIKomponenten der View
      */
-    public UITextField(FocusListener focusListener)
+    public UITextField(final UIListenerComponentLostFocus listener)
     {
         super();
-        this.addFocusListener(focusListener);
+        this.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                listener.lostFocus(e.getComponent(), e.getOppositeComponent());
+            }
+        });
     }
 
     /**

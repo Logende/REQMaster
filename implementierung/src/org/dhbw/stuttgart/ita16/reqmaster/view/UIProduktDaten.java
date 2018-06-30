@@ -5,7 +5,6 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktDatumEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * Grafikkomponente: Panel, das die Produktdaten enthaelt
  */
-public class UIProduktDaten extends UIPanel implements UIUpdateable {
+public class UIProduktDaten extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private List<UIProduktDatum> produktDaten;

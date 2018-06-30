@@ -37,7 +37,7 @@ public class Validator implements  IValidator{
 
     @Override
     public boolean isValid(IModel model, IDataFunctionPointEinstufung current, IDataFunctionPointEinstufung proposal, IIdentifiable iIdentifiable) {
-        switch (proposal.getFunktionstyp()) {
+         switch (proposal.getFunktionstyp()) {
             case DATEN:
                 switch (proposal.getKlassifizierung()) {
                     case DATEN_ELF:
@@ -48,6 +48,7 @@ public class Validator implements  IValidator{
                     case TRANSAKTION_EQ:
                         return false;
                 }
+                break;
 
             case TRANSAKTION:
                 switch (proposal.getKlassifizierung()) {
@@ -59,8 +60,8 @@ public class Validator implements  IValidator{
                     case TRANSAKTION_EQ:
                         break;
                 }
+                break;
         }
-
         return true;
     }
 
