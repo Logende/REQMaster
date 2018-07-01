@@ -5,7 +5,7 @@ import java.io.File;
 public class UIActionMenuLoadEvent extends UIActionMenuEvent {
 
 
-    private File fileAnforderungssammlung;
+    private final File fileAnforderungssammlung;
 
     public UIActionMenuLoadEvent(File fileAnforderungssammlung){
         this.fileAnforderungssammlung = fileAnforderungssammlung;

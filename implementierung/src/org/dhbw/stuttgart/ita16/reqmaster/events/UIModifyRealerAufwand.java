@@ -1,11 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
-import java.io.*;
-import java.util.*;
 
 public class UIModifyRealerAufwand extends UIModifyEvent {
 
-	private double proposal;
+	private final double proposal;
 
 	//Konstruktor
 	public UIModifyRealerAufwand(double proposal) {

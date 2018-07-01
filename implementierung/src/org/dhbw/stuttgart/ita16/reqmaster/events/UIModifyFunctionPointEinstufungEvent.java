@@ -5,8 +5,8 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IDataFunctionPointEinstufung;
 
 public class UIModifyFunctionPointEinstufungEvent extends UIModifyEvent {
 
-	IDataFunctionPointEinstufung proposal;
-	private DataId id;
+	private final IDataFunctionPointEinstufung proposal;
+	private final DataId id;
 
 
 	//Konstruktor

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class UIModifyGewichtsfaktorenEvent extends UIModifyEvent {
 
-	IDataSchaetzKonfiguration proposal;
+	private final IDataSchaetzKonfiguration proposal;
 
 
 	//Konstruktor

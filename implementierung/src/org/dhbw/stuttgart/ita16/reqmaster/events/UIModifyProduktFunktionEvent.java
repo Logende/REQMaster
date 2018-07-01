@@ -6,8 +6,8 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IIdentifiable;
 
 public class UIModifyProduktFunktionEvent extends UIModifyEvent {
 
-	private DataId id;
-	private DataProduktFunktion proposal;
+	private final DataId id;
+	private final DataProduktFunktion proposal;
 
    /**
      * Konstruktor für die Klasse schreibt Eingansvariablen auf Klassenvariablen um
