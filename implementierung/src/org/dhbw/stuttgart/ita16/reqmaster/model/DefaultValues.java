@@ -27,15 +27,16 @@ public class DefaultValues {
     }
 
     public static IDataSchaetzKonfiguration createSchaetzKonfiguration(){
-        Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> defaultGewichte = new LinkedHashMap<>();
+        Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> defaultGewichte1 = new LinkedHashMap<>();
         for(FPKlassifizierung klassifizierung : FPKlassifizierung.values()){
             Map<FPKomplexitaet, Double> submap = new LinkedHashMap<>();
             for(FPKomplexitaet komplexitaet : FPKomplexitaet.values()){
                 submap.put(komplexitaet, 1.0);
             }
-            defaultGewichte.put(klassifizierung, submap);
+            defaultGewichte1.put(klassifizierung, submap);
         }
-        return new DataSchaetzKonfiguration(defaultGewichte);
+        double[] defaultGewichte2 = {1,1,1,1,1,1,1};
+        return new DataSchaetzKonfiguration(defaultGewichte1, defaultGewichte2);
     }
 
     public static IDataFunctionPointAnalyse createFunctionPointAnalyse(){
