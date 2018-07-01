@@ -2,8 +2,6 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuItem;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIFrame;
@@ -11,21 +9,21 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIFrame;
 import javax.swing.*;
 
 /**
- * Grafikkomponente: UIMainFrame ist das Standardfenster
- * für die Grafikkomponenten
+ * Grafikkomponente: UIMainFrame ist das Hauptfenster
+ * Es ermöglicht, das Hauptfenster zu gestalten
  */
 public class UIMainFrame extends UIFrame implements IUIUpdateable {
 
 	//Variablen der Klasse
-	private boolean modeMainPanel;
+	private boolean modeMainPanel;	//legt fest, ob mainPanel angezeigt wird
 	private UIMainPanel mainPanel;
 	private UIFunctionPointPanel functionPointPanel;
 	private UIMenu menu;
 
-
 	/**
 	 * Konstruktor der Klasse
-	 * erstellt UIMainPanel und erscheint auf der Bildfläche
+	 * Die Klasse erstellt die Panels für die Anforderungssammlung und die Aufwandsabschätzung
+	 * und zeigt diese an
 	 */
 	public UIMainFrame(View view) {
 		super("REQ-Master");
@@ -35,7 +33,6 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 		functionPointPanel = new UIFunctionPointPanel(view);
 		menu = new UIMenu(view, this);
 
-
 		//Settings
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.add(mainPanel);
@@ -43,6 +40,8 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 		this.setJMenuBar(menu);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
+		//Falls das Mainframe geschlossen werden soll, wird nachgefragt,
+		//ob der Anwender das wirklich will
 		addWindowListener(new WindowAdapter()
 		{
 			/**
@@ -63,17 +62,22 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 	}
 
 	/**
-	 * updatet das mainPanel und updatet das Layout
-	 * @param model Instanz des Model des MVC-Pattern
+	 * Die Methode updatet die Anforderungssammlung(mainPanel) und die Aufwandsabschätzung (functionPointPanel)
+	 * und updatet das Layout
+	 * @param model Instanz des Model des MVC-Pattern, mit dem die GUI aktualisiert werden soll
 	 */
 	@Override
 	public void update(IModel model) {
-		mainPanel.update(model);        //update mainPanel
+		mainPanel.update(model);
 		functionPointPanel.update(model);
-		this.validate();
-		this.repaint();	//update Layout
+		this.validate(); // aktualisiere Layout
+		this.repaint();	// aktualisiere Layout
 	}
 
+	/**
+	 * Methode, um zwischen Anforderungssammlung und Aufwandsabschätzung umzuschalten im Mainframe
+	 * @param button der Button, der zwischen beiden umschalten soll, wenn gedrückt
+	 */
 	public synchronized void toggleMode(UIMenuItem button){
 		modeMainPanel = !modeMainPanel;
 		if(modeMainPanel){
@@ -85,7 +89,7 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 			this.add(functionPointPanel);
 			button.setText("Zu Anforderungssammlung");
 		}
-		this.validate();
-		this.repaint();	//update Layout
+		this.validate(); // aktualisiere Layout
+		this.repaint();	// aktualisiere Layout
 	}
 }

@@ -15,24 +15,24 @@ import javax.swing.filechooser.FileFilter;
  */
 public class UIPathSelector {
 
-    public static File selected;
+    public static File selected; // Datei, die gespeichert oder geöffnet werden soll
 
     /**
      * statische Methode des FileChooser zur Auswahl einer Datei
      * @param title Titel des Fensters
      * @param description Filterung der Dateien nach diesem String
      * @param ending Dateiendung
-     * @param default_directory Verzeichnis, in dem standardmäßig gespeichert wird
+     * @param default_directory Verzeichnis, in dem man sich aktuell befindet bei Fensteröffnung
      * @param type_save boolean: true: Speicherdialog, false: Öffnendialog
-     * @return File das geöffnet oder gespeichert werden soll
+     * @return File, das geöffnet oder gespeichert werden soll
      */
     public static File forcePathSelection(final String title, final String description, final String ending, String default_directory, boolean type_save){
+        //Instanzierung
         UIFrame frame = new UIFrame(title);
-
         UIFileChooser filechooser = new UIFileChooser();
-        String username = System.getProperty("user.name");
-        filechooser.setCurrentDirectory(new File(default_directory.replace("%name%", username)));
 
+        String username = System.getProperty("user.name"); // Hostname, der gerade eingeloggt ist
+        filechooser.setCurrentDirectory(new File(default_directory.replace("%name%", username)));
         filechooser.setFileFilter(new FileFilter() {
 
             /**
@@ -46,8 +46,8 @@ public class UIPathSelector {
 
             /**
              * Überschreiben der Methode des FileFilters
-             * entscheidet, ob das File von diesem Filter akzeptiert wird
-             * @param f
+             * Die Implementierung der Methode entscheidet, ob ein File von diesem Filter akzeptiert wird
+             * @param f das zu prüfende File
              * @return true: wenn akzeptiert, false sonst
              */
             @Override
@@ -70,18 +70,16 @@ public class UIPathSelector {
         }
         if (goal  == 0) {
             frame.dispose();
-
-                // falls Datei vom Benutzer ohne xml Endung eingegeben wurde
-                selected = filechooser.getSelectedFile();
-                if(selected.getName().toLowerCase().endsWith(".xml")) {
-                    return selected;
-                }
-                else {
-                    return new File(selected.getAbsolutePath() + ".xml");
-                }
+            // falls Datei vom Benutzer ohne xml Endung eingegeben wurde, Endung hinzufügen
+            selected = filechooser.getSelectedFile();
+            if(selected.getName().toLowerCase().endsWith(".xml")) {
+                return selected;
+            }
+            else{
+                return new File(selected.getAbsolutePath() + ".xml");
+            }
         }
         return null;
     }
-
 }
 

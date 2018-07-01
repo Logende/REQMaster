@@ -4,14 +4,13 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuCreateEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuLoadEvent;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
- * Grafikkomponente: Anfangsdialog,
- * der den Benutzer auffordert,
- * ein Dokument zu importieren oder ein neues anzulegen
+ * Grafikkomponente: Ermöglicht es, den Anfangsdialog zu definieren
  */
 public class UIAnfangsDialog extends UIFrame {
 
@@ -24,7 +23,7 @@ public class UIAnfangsDialog extends UIFrame {
     /**
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
-     * @param mainFrame das Hauptfenster, das angezeigt wird, wenn einer der Buttons geklickt wird
+     * @param mainFrame das Hauptfenster, das angezeigt wird, wenn ein Dokument angelegt/importiert wurde
      */
     public UIAnfangsDialog(IView view, UIMainFrame mainFrame){
         super(view);
@@ -36,16 +35,6 @@ public class UIAnfangsDialog extends UIFrame {
         buttonPanel = new UIPanel();
 
         //Settings
-        docNeu.setText("Neues Dokument");
-        docNeu.setBounds(45,20,180,30);
-        docImport.setText("Dokument importieren");
-        docImport.setBounds(45,60, 180,30);
-
-        buttonPanel.setBounds(10,10,250,160);
-        buttonPanel.setLayout(null);
-        buttonPanel.add(docNeu);
-        buttonPanel.add(docImport);
-
         this.setTitle("Willkommen");
         this.setLocationRelativeTo(null);
         this.setSize(300,160);
@@ -56,17 +45,25 @@ public class UIAnfangsDialog extends UIFrame {
         this.add(buttonPanel);
         this.setVisible(true);
 
+        buttonPanel.setBounds(10,10,250,160);
+        buttonPanel.setLayout(null);
+        buttonPanel.add(docNeu);
+        buttonPanel.add(docImport);
+
+        docNeu.setText("Neues Dokument");
+        docNeu.setBounds(45,20,180,30);
+        docImport.setText("Dokument importieren");
+        docImport.setBounds(45,60, 180,30);
+
         //ActionListener definieren für Buttons
         docNeu.addActionListener(new ActionListener() {
             /**
              * wenn auf den Button geklickt wird, wird ein Speicherort und ein Name ausgewählt und
-             * ein Event an den Controller geschickt,
-             * um ein neues Dokument zu erstellen
+             * ein Event an den Controller geschickt, um ein neues Dokument zu erstellen
              * @param e auf zu reagierendes Event
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 File file;
                 file = UIPathSelector.forcePathSelection("Neues Dokument anlegen", ".xml",
                         ".xml","C:\\Users\\%name%\\Documents", true);

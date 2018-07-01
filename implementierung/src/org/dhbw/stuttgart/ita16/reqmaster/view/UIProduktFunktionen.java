@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Grafikkomponente: Panel, das die Produktfunktionen beinhaltet
+ * Grafikkomponente: Diese Klasse legt fest, wie die Instanzen der UIProduktfunktion in der GUI
+ * angezeigt werden
  */
 
 public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
@@ -39,22 +40,22 @@ public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         //Hinzufügen der Komponenten sowie Settings
-        funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
-        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
-        add.setText("Hinzufügen");
         this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(add);
         this.add(scrollPane);
         this.setVisible(true);
+        funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
+        add.setText("Hinzufügen");
 
         //ActionListener fuer Hinzufügen-Button
         add.addActionListener(new ActionListener() {
             /**
              * Wenn der Button gedrückt wird,
-             * wird ein UIActionAddProduktFunktionEvent an den Controller gesendet
-             * @param e auf zu reagierendes Event
+             * wird ein Event an den Controller gesendet, um eine neue Produktfunktion hinzuzufügen
+             * @param e Event, auf das reagiert werden soll
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,7 +103,7 @@ public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
             }
         }
 
-        //funktionsPanel aktualisieren
+        //Entfernen aller Produktfunktionen vom Panel und danach neu hinzufügen
         funktionsPanel.removeAll();
         for (UIProduktFunktion i : produktFunktionen){
             funktionsPanel.add(i);

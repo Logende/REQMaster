@@ -12,7 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: legt Aufbau einer Zielbestimmung fest
+ * Grafikkomponente: Ermöglicht es, den Aufbau der Zielbestimmung festzulegen
  */
 public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 
@@ -33,26 +33,25 @@ public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		//Settings
-		text.setLineWrap(true);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(scrollPane);
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Zielbestimmung"), BorderFactory.createEmptyBorder(30,10,20,10)));
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Zielbestimmung"),
+				BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
+		text.setLineWrap(true);
 
 		//Definition eines FocusListener für TextArea
 		text.addFocusListener(new FocusListener() {
-			/**
-			 * legt fest, dass wenn der Fokus auf das Textfeld gelegt wird (Mausklick), nichts passieren soll
-			 * @param e auf zu reagierendes Event
-			 */
 			@Override
 			public void focusGained(FocusEvent e) { }
 
 			/**
-			 * legt fest, dass wenn das Textfeld den Fokus verliert, ein ModifyEvent an den Controller
-			 * weitergereicht wird, der über das Behalten oder die Freigabe des Fokus entscheidet (validieren des Textfeldinhalts)
+			 * Wenn der Fokus verloren wird, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
+			 * Der Controller kann bei invaliden Daten das Event ablehnen, woraufhin die Komponente den Fokus erneut anfordert,
+			 * damit der Anwender valide Daten eingibt.
 			 * @param e auf zu reagierendes Event
 			 */
+			@Override
 			public void focusLost(FocusEvent e) {
 				UIModifyZielbestimmungEvent modifyEvent;
 				getView().getObsController().observe(modifyEvent =
@@ -73,5 +72,4 @@ public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 	public void update(IModel model) {
 		text.setText(model.getIDataAnforderungssammlung().getDataZielbestimmung().getText());
 	}
-
 }

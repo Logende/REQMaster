@@ -4,7 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 import javax.swing.*;
 
 /**
- * Adaption der Swing-JToolBar für Projektzwecke
+ * Adaption der Swing-JToolBar fuer individuelle Anpassungen an das Projekt
  */
 public class UIMenuBar extends JMenuBar {
 
@@ -20,7 +20,7 @@ public class UIMenuBar extends JMenuBar {
 	}
 
 	/**
-	 * getter Methode: liefert Instanz der View des MVC-Patterns zurück
+	 * Getter Methode: liefert Instanz der View des MVC-Patterns zurück
 	 * @return View des MVC-Pattern
 	 */
 	public IView getView() {

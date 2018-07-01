@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * Adaption der Swing JButton-Klasse fuer Projektzwecke
+ * Adaption der Swing JButton-Klasse fuer individuelle Anpassungen an das Projekt
  */
 public class UITextField extends JTextField {
 
@@ -23,6 +23,11 @@ public class UITextField extends JTextField {
             public void focusGained(FocusEvent e) {
             }
 
+            /**
+             * Wenn eine Grafikkomponente den Fokus verliert, wird die für diesen Fall
+             * implementierte Methode aufgerufen
+             * @param e das FocusEvent, auf das reagiert werden soll
+             */
             @Override
             public void focusLost(FocusEvent e) {
                 listener.lostFocus(e.getComponent(), e.getOppositeComponent());
@@ -34,6 +39,5 @@ public class UITextField extends JTextField {
      * Standardkonstruktor der Klasse
      */
     public UITextField() {
-
     }
 }

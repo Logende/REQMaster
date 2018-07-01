@@ -13,9 +13,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: legt Aufbau einer Produktfunktion fest
+ * Grafikkomponente: Ermöglicht es, den Aufbau einer Produktfunktion festzulegen
  */
-
 public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
@@ -63,8 +62,8 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
      *  Definition des Fokuslistener
      */
     private void addComponents() {
-        /*Für jedes UITextField in ProduktFunktion wird einmalig ein
-        *FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+        /** Für jedes UITextField in ProduktFunktion wird einmalig ein
+        *   FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
         */
         UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
                 if(focusGained != null) {
@@ -72,12 +71,14 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
                         return; //do nothing if new component has same parent
                     }
                 }
+                // Wenn der Fokus von einer Komponente der Produktfunktion auf irgendeine andere Komponente der GUI gelegt wird,
+                // wird zur Validierung der Produktfunktion, ein Event an den Controller gesendet
                 DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
                         quelle.getText(), verweise.getText(), new DataId(id.getText()));
                 UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
-                    View.forcesFocus = UIProduktFunktion.this;
+                    View.forcesFocus = UIProduktFunktion.this; // falls Validierung der Produktfunktion negativ, Fokus zurück auf Komponente
                     focusLost.requestFocus();
                 }else{
                     View.forcesFocus = null;

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *  Adaption der Swing JScrollPane Klasse für Projektzwecke
+ *  Adaption der Swing JScrollPane Klasse fuer individuelle Anpassungen an das Projekt
  */
 public class UIScrollPane extends JScrollPane {
 

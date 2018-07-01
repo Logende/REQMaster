@@ -19,10 +19,15 @@ import java.awt.*;
 import java.io.File;
 
 /**
- * Hier erst einmal ein Testframe und Testpanel zum Testen
+ * Diese Klasse ist die Hauptklasse des Programmes
+ * Sie initialisiert die Bestandteile des MVC-Patterns
  */
 public class ReqMaster {
 
+    /**
+     * Definition der main-Methode
+     * @param args Standard-Übergabeparameter der main-Methode
+     */
     public static void main(String[] args){
         IExporter exporter = new XMLExporter();
         IValidator validator = new Validator();
@@ -32,10 +37,5 @@ public class ReqMaster {
         Controller controller = new Controller(model, view, validator);
         view.setObserverController(controller);
         model.setObserverView(view);
-
-
-        //just for testing purposes
-        model.createAnforderungssammlung(new File(System.getProperty("user.home") + "/reqmaster/anforderungssammlung.xml"));
-        model.wasModified();
     }
 }

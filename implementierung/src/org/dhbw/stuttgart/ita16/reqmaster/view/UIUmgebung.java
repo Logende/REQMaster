@@ -12,37 +12,37 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: Ermöglicht dem Anwender, die Umgebung zu definieren.
+ * Grafikkomponente: Ermöglicht es, die Umgebung der Anforderungssammlung zu definieren.
  */
 public class UIUmgebung extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private UITextArea text;
     private UIScrollPane scrollPane;
-   // private UIModify modifyEvent;
 
     /**
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
     public UIUmgebung(IView view) {
-
         super(view);
         //Initialisierung
         text = new UITextArea();
-        scrollPane = new UIScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane = new UIScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         //Settings
-        text.setLineWrap(true);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(scrollPane);
-        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Umgebung"), BorderFactory.createEmptyBorder(30,10,20,10)));
+        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Umgebung"),
+                BorderFactory.createEmptyBorder(30,10,20,10)));
         this.setVisible(true);
+        text.setLineWrap(true);
 
         //Definition eines FocusListeners für TextArea
         text.addFocusListener(new FocusListener() {
 
-         @Override
+            @Override
             public void focusGained(FocusEvent e) { }
             /**
              * Wenn der Fokus verloren wird, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
@@ -50,7 +50,8 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
              * damit der Anwender valide Daten eingibt.
              * @param e auf zu reagierendes Event
              */
-           public void focusLost(FocusEvent e) {
+            @Override
+            public void focusLost(FocusEvent e) {
                UIModifyUmgebungEvent modifyEvent;
                 getView().getObsController().observe(modifyEvent =
                         new UIModifyUmgebungEvent(new DataUmgebung(text.getText())));

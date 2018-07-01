@@ -7,7 +7,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.view.*;
 
 /**
- * Adaption der Swing JPanel-Klasse fuer Projektzwecke
+ * Adaption der Swing JPanel-Klasse fuer individuelle Anpassungen an das Projekt
  */
 
 public class UIPanel extends JPanel {
@@ -19,7 +19,6 @@ public class UIPanel extends JPanel {
      * @param view Instanz der View, um auf IOberverController Instanz zuzugreifen
      */
     public UIPanel(IView view) {
-
         super();
         this.view = view;
     }
@@ -28,11 +27,10 @@ public class UIPanel extends JPanel {
      * Standardkonstruktor der Klasse
      */
     public UIPanel() {
-
     }
 
     /**
-     * getter-Methode für die View
+     * Getter Methode für die View
      * @return liefert die Instanz der View des MVC-Patterns zurück
      */
     public IView getView() {

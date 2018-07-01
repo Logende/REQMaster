@@ -4,11 +4,12 @@ import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 import org.dhbw.stuttgart.ita16.reqmaster.view.View;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /**
- * Adaption der Swing-JFrame Komponente für Projektzwecke
+ * Adaption der Swing JFrame-Klasse fuer individuelle Anpassungen an das Projekt
  */
 public class UIFrame extends JFrame{
 
@@ -19,7 +20,6 @@ public class UIFrame extends JFrame{
      * @param text Name, den das Frame haben soll
      */
     public UIFrame(String text) {
-
         super(text);
     }
 
@@ -30,7 +30,7 @@ public class UIFrame extends JFrame{
     }
 
     /**
-     * KOnstruktor der Klasse
+     * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
     public UIFrame(IView view){
@@ -38,7 +38,7 @@ public class UIFrame extends JFrame{
     }
 
     /**
-     * getter Methode, um die Instanz der View des MVC-Patterns zu bekommen
+     * Getter Methode, um die Instanz der View des MVC-Patterns zu bekommen
      * @return Instanz der View
      */
     public IView getView() {

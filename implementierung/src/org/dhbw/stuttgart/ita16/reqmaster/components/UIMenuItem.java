@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Adaption der Swing JMenuItem-Klasse fuer Projektzwecke
+ * Adaption der Swing JMenuItem-Klasse fuer individuelle Anpassungen an das Projekt
  */
 public class UIMenuItem extends JMenuItem {
 
@@ -18,6 +18,5 @@ public class UIMenuItem extends JMenuItem {
      */
     public UIMenuItem(String text) {
         super(text);
-
     }
 }

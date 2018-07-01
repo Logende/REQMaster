@@ -12,7 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: legt Aufbau des Produkteinsatzes fest
+ * Grafikkomponente: Ermöglicht es, den Aufbau des Produkteinsatzes festzulegen
  */
 public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 
@@ -32,26 +32,25 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		//Settings
-		text.setLineWrap(true);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(scrollPane);
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"), BorderFactory.createEmptyBorder(30,10,20,10)));
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"),
+				BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
+		text.setLineWrap(true);
 
 		//Fokuslistener für TextArea
 		text.addFocusListener(new FocusListener() {
-			/**
-			 * legt fest, dass wenn das Textfeld den Fokus erhält, nichts passiert
-			 * @param e FocusEvent
-			 */
 			@Override
 			public void focusGained(FocusEvent e) { }
 
 			/**
-			 * legt fest, dass wenn das Textfeld den Fokus verliert, ein ModifyEvent an den Controller weitergereicht wird,
-			 * der darüber entscheidet, ob der Inhalt valide ist, und somit der Fokus behalten oder freigegeben wird
-			 * @param e FocusEvent
+			 * Wenn der Fokus verloren wird, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
+			 * Der Controller kann bei invaliden Daten das Event ablehnen, woraufhin die Komponente den Fokus erneut anfordert,
+			 * damit der Anwender valide Daten eingibt.
+			 * @param e auf zu reagierendes Event
 			 */
+			@Override
 			public void focusLost(FocusEvent e) {
 				UIModifyProdukteinsatzEvent modifyEvent;
 				getView().getObsController().observe(modifyEvent =
@@ -67,11 +66,12 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 	}
 
 	/**
-	 * updatet den Inhalt des Textfeldes
+	 * aktualisiert den Inhalt des Textfeldes
 	 * @param model Istanz des Model des MVC-Patterns
 	 */
+	@Override
 	public void update(IModel model) {
-		text.setText(model.getIDataAnforderungssammlung().getDataProdukteinsatz().getText());		//hole Daten aus dem Model und schreibe sie in das Textfeld
+		text.setText(model.getIDataAnforderungssammlung().getDataProdukteinsatz().getText());
 	}
 
 

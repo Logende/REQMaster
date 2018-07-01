@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Grafikkomponente: Panel, das die Produktdaten enthaelt
+ * Grafikkomponente: Diese Klasse legt fest, wie die verschiedenen Instanzen von UIProduktdatum in
+ * der GUI angeordnet werden
  */
 public class UIProduktDaten extends UIPanel implements IUIUpdateable {
 
@@ -37,23 +38,25 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
         produktDaten = new ArrayList<>();
         add = new UIButton();
         datenPanel = new UIPanel();
-        scrollPane = new UIScrollPane(datenPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane = new UIScrollPane(datenPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        // Hinzufügen der Komponenten sowie Settings
-        add.setText("Hinzufügen");
-        datenPanel.setLayout(new BoxLayout(datenPanel, BoxLayout.Y_AXIS));
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
-        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
+        // Hinzufügen der Komponenten zum Panel sowie Settings
         this.setBorder(BorderFactory.createTitledBorder("Produktdaten"));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(add);
         this.add(scrollPane, BorderLayout.PAGE_START);
         this.setVisible(true);
+        add.setText("Hinzufügen");
+        datenPanel.setLayout(new BoxLayout(datenPanel, BoxLayout.Y_AXIS));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
 
+        //Definition eines ActionListener
         add.addActionListener(new ActionListener() {
             /**
-             * Wenn Button gedrückt wird, wird ein UIActionAddProduktDatumEvent
-             * an den Controller geschickt
+             * Wenn Button gedrückt wird, wird ein Event an den Controller geschickt, um ein neues
+             * Produktdatum hinzuzufügen
              * @param e auf zu reagierendes Event
              */
             @Override
@@ -101,8 +104,8 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
                 produktDaten.add(new UIProduktDatum(getView(), dataProduktDatum.getId()));
             }
         }
-
-        //datenPanel aktualisieren
+        //datenPanel aktualisieren, indem alle Produktdatum des Panel entfernt werden und dann
+        //wieder hinzugefügt werden
         datenPanel.removeAll();
         for (UIProduktDatum i : produktDaten) {
             datenPanel.add(i);

@@ -3,17 +3,16 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
  *  Klasse View des VMC-Patterns
- *  legt das mainFrame an und implementiert das Obeserver-Interface, um die UI-Komponenten
- *  updaten zu können
- *  beinhaltet eine Instanz von IModel
+ *  legt die Hauptbestandteile der grafischen Oberfläche an
  */
-
 public class View implements IView, IObserverView {
 
+    //Variablen der Klasse
     public static Component forcesFocus;
     private IModel model;
     private IObserverController obsController;
@@ -39,7 +38,7 @@ public class View implements IView, IObserverView {
     }
 
     /**
-     * Implementierung der update-Methode
+     * Implementierung der update-Methode des IObserverView-Interface
      * Aufruf der update-Methode des mainFrames
      */
     @Override
@@ -48,8 +47,9 @@ public class View implements IView, IObserverView {
     }
 
     /**
-     * getter-Methode für IObserverController
-     * @return Instanz es Observers
+     * Implementierung des IView-Interface
+     * Getter-Methode für den IObserverController
+     * @return Instanz des Observers des Controllers des MVC-Patterns
      */
     @Override
     public IObserverController getObsController(){
@@ -57,7 +57,8 @@ public class View implements IView, IObserverView {
     }
 
     /**
-     * Getter für das Model
+     * Implementierung des IView Interface
+     * Getter Methode für das Model
      * @return Instanz des Model des MVC-Patterns
      */
     @Override
