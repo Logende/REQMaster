@@ -3,6 +3,8 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
+import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuItem;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIFrame;
 
@@ -15,6 +17,7 @@ import javax.swing.*;
 public class UIMainFrame extends UIFrame implements IUIUpdateable {
 
 	//Variablen der Klasse
+	private boolean modeMainPanel;
 	private UIMainPanel mainPanel;
 	private UIFunctionPointPanel functionPointPanel;
 	private UIMenu menu;
@@ -29,16 +32,16 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 
 		//Instanzierung
 		mainPanel = new UIMainPanel(view);
-		//functionPointPanel = new UIFunctionPointPanel(view);
-		menu = new UIMenu(view, functionPointPanel);
+		functionPointPanel = new UIFunctionPointPanel(view);
+		menu = new UIMenu(view, this);
 
 
 		//Settings
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.add(mainPanel);
+		modeMainPanel = true;
 		this.setJMenuBar(menu);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		//this.add(functionPointPanel);
 
 		addWindowListener(new WindowAdapter()
 		{
@@ -66,7 +69,22 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 	@Override
 	public void update(IModel model) {
 		mainPanel.update(model);        //update mainPanel
-		//functionPointPanel.update(model);
+		functionPointPanel.update(model);
+		this.validate();
+		this.repaint();	//update Layout
+	}
+
+	public synchronized void toggleMode(UIMenuItem button){
+		modeMainPanel = !modeMainPanel;
+		if(modeMainPanel){
+			this.add(mainPanel);
+			this.remove(functionPointPanel);
+			button.setText("Zu Aufwandsabschätzung");
+		}else{
+			this.remove(mainPanel);
+			this.add(functionPointPanel);
+			button.setText("Zu Anforderungssammlung");
+		}
 		this.validate();
 		this.repaint();	//update Layout
 	}
