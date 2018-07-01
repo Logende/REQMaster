@@ -21,18 +21,18 @@ public class UIPathSelector {
      * statische Methode des FileChooser zur Auswahl einer Datei
      * @param title Titel des Fensters
      * @param description Filterung der Dateien nach diesem String
-     * @param select boolean true/false
      * @param ending Dateiendung
      * @param default_directory Verzeichnis, in dem standardmäßig gespeichert wird
      * @param type_save boolean: true: Speicherdialog, false: Öffnendialog
      * @return File das geöffnet oder gespeichert werden soll
      */
-    public static File forcePathSelection(final String title, final String description, boolean select, final String ending, String default_directory, boolean type_save){
+    public static File forcePathSelection(final String title, final String description, final String ending, String default_directory, boolean type_save){
         UIFrame frame = new UIFrame(title);
 
         UIFileChooser filechooser = new UIFileChooser();
         String username = System.getProperty("user.name");
         filechooser.setCurrentDirectory(new File(default_directory.replace("%name%", username)));
+
         filechooser.setFileFilter(new FileFilter() {
 
             /**
@@ -52,15 +52,16 @@ public class UIPathSelector {
              */
             @Override
             public boolean accept(File f) {
-                if(f.getName().toLowerCase().endsWith(ending)){
-                    System.out.println(f.getName());
+                if(f.getName().toLowerCase().endsWith(ending) || f.isDirectory()){
                     return true;
                 }
                 return false;
             }
         });
+
         filechooser.setFileHidingEnabled(true);
         filechooser.setDialogTitle(title);
+
         int goal = -1;
         if(type_save){
             goal = filechooser.showSaveDialog(frame);
@@ -69,14 +70,18 @@ public class UIPathSelector {
         }
         if (goal  == 0) {
             frame.dispose();
-            if(select){
+
+                // falls Datei vom Benutzer ohne xml Endung eingegeben wurde
                 selected = filechooser.getSelectedFile();
-                return selected;
-            }else{
-                return filechooser.getSelectedFile();
-            }
+                if(selected.getName().toLowerCase().endsWith(".xml")) {
+                    return selected;
+                }
+                else {
+                    return new File(selected.getAbsolutePath() + ".xml");
+                }
         }
         return null;
     }
 
 }
+

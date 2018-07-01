@@ -7,6 +7,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -41,6 +42,7 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
         super(view);
         this.dataId = dataId;
         this.setLayout(new GridLayout(9,2));
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         addComponents();
         setComponents();
         this.update(view.getModel());

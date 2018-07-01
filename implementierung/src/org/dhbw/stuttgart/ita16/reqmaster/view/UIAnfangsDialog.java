@@ -68,7 +68,7 @@ public class UIAnfangsDialog extends UIFrame {
             public void actionPerformed(ActionEvent e) {
 
                 File file;
-                file = UIPathSelector.forcePathSelection("Neues Dokument anlegen", ".xml",true,
+                file = UIPathSelector.forcePathSelection("Neues Dokument anlegen", ".xml",
                         ".xml","C:\\Users\\%name%\\Documents", true);
                 if(file != null){
                     view.getObsController().observe(new UIActionMenuCreateEvent(file));
@@ -87,7 +87,7 @@ public class UIAnfangsDialog extends UIFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 File file;
-                file = UIPathSelector.forcePathSelection("Dokument importieren", ".xml",true,
+                file = UIPathSelector.forcePathSelection("Dokument importieren", ".xml",
                         ".xml","C:\\Users\\%name%\\Documents", false);
                 if(file !=null) {
                     getView().getObsController().observe(new UIActionMenuLoadEvent(file));

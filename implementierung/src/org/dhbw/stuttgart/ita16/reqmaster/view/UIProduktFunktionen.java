@@ -41,6 +41,7 @@ public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
         //Hinzufügen der Komponenten sowie Settings
         funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         add.setText("Hinzufügen");
         this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

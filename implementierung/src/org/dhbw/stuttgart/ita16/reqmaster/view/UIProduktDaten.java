@@ -43,6 +43,7 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
         add.setText("Hinzufügen");
         datenPanel.setLayout(new BoxLayout(datenPanel, BoxLayout.Y_AXIS));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         this.setBorder(BorderFactory.createTitledBorder("Produktdaten"));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(add);
