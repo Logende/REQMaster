@@ -12,7 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: Ermöglicht es, den Aufbau des Produkteinsatzes festzulegen
+ * Grafikkomponente: Ermöglicht es dem Anwender, den Produkteinsatz seiner Anforderungssammlung zu definieren.
  */
 public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 
@@ -66,7 +66,7 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 	}
 
 	/**
-	 * aktualisiert den Inhalt des Textfeldes
+	 * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
 	 * @param model Istanz des Model des MVC-Patterns
 	 */
 	@Override

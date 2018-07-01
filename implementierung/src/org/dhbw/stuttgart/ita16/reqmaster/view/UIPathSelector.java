@@ -62,7 +62,7 @@ public class UIPathSelector {
         filechooser.setFileHidingEnabled(true);
         filechooser.setDialogTitle(title);
 
-        int goal = -1;
+        int goal;
         if(type_save){
             goal = filechooser.showSaveDialog(frame);
         }else{

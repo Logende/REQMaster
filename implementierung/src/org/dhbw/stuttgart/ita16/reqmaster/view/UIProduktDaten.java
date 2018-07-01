@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Grafikkomponente: Diese Klasse legt fest, wie die verschiedenen Instanzen von UIProduktdatum in
- * der GUI angeordnet werden
+ * Grafikkomponente: Beinhaltet alle durch den Anwender hinzufgefügten Produktdaten (durch UIProduktDatum dargestellt)
+ * und ermöglicht Löschen/Hinzufügen/Bearbeiten von ProduktDaten.
  */
 public class UIProduktDaten extends UIPanel implements IUIUpdateable {
 
@@ -70,7 +70,7 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     *Updaten der Produktfunktionen
+     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
      * 1. schauen ob eine bestehende Produktfunktion im Model gelöscht wurde, wenn ja auch in der GUI löschen
      * 2. alle bestehenden Produktfunktionen in der GUI aktualisieren
      * 3. alle neuen Produktfunktionen im Model, die nicht in der GUI sind, hinzufügen

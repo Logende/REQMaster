@@ -1,12 +1,8 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuBar;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuItem;
-import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuLoadEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuSaveEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
 import java.awt.*;

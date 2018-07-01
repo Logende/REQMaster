@@ -35,10 +35,7 @@ public class UIFunctionPointEinstufungen extends UIPanel implements IUIUpdateabl
     }
 
     /**
-     *Updaten der Produktfunktionen
-     * 1. schauen ob eine bestehende Produktfunktion im Model gelöscht wurde, wenn ja auch in der GUI löschen
-     * 2. alle bestehenden Produktfunktionen in der GUI aktualisieren
-     * 3. alle neuen Produktfunktionen im Model, die nicht in der GUI sind, hinzufügen
+     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
      * @param model Instanz des IModel des MVC-Patterns, das die Daten enthält
      */
     @Override

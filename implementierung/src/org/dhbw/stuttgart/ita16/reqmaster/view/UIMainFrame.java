@@ -62,8 +62,7 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 	}
 
 	/**
-	 * Die Methode updatet die Anforderungssammlung(mainPanel) und die Aufwandsabschätzung (functionPointPanel)
-	 * und updatet das Layout
+	 * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
 	 * @param model Instanz des Model des MVC-Pattern, mit dem die GUI aktualisiert werden soll
 	 */
 	@Override

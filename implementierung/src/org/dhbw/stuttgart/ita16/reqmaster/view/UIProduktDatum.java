@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Grafikkomponente: Ermöglicht es, den Aufbau eines Produktdatum festzulegen
+ * Grafikkomponente: Ermöglicht es dem Anwender, ein Produktdatum seiner Anforderungssammlung zu definieren.
  */
 public class UIProduktDatum extends UIPanel implements IUIUpdateable {
 
@@ -91,7 +91,9 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
                 if(focusGained != null) {
                     if (focusLost.getParent() == focusGained.getParent()) {
-                        return; //do nothing if new component has same parent
+                        if(focusGained instanceof  UITextField) {
+                            return; //do nothing if new component has same parent
+                        }
                     }
                 }
                 wasModified(focusLost);
@@ -171,9 +173,7 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     * Implementierung der Update-Methode
-     * wenn sich ein Produktdatum geändert hat, wird diese Methode aufgerufen,
-     * um die GUI zu aktualisieren
+     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
      * @param model Instanz des Models des MVC-Patterns
      */
     @Override

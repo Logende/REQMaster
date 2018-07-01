@@ -36,8 +36,7 @@ public class UIMainPanel extends UIPanel implements IUIUpdateable {
 	}
 
 	/**
-	 * Diese Methode aktualisiert die Komponenten der Anforderungssammlung
-	 * und validiert die eigeneKlasse
+	 * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
 	 * @param model Model des MVC-Patterns, mit dem die View aktualisiert werden soll
 	 */
 	public void update(IModel model){

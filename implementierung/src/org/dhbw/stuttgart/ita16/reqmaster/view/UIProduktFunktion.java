@@ -13,11 +13,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: Ermöglicht es, den Aufbau einer Produktfunktion festzulegen
+ * Grafikkomponente: Ermöglicht es dem Anwender, eine Produktfunktion seiner Anforderungssammlung zu definieren.
  */
 public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
 
-    //Variablen der Klasse
     private final DataId dataId; //always the real DataId instance, as being used within the model
     private UILabel title;
     private UIButton delete;

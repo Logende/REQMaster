@@ -30,6 +30,10 @@ public class UIFunctionPointPanel extends UIPanel {
 
     }
 
+    /**
+     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
+     * @param model
+     */
     public void update(IModel model){
         einstufungen.update(model);
         //TODO: Update values
