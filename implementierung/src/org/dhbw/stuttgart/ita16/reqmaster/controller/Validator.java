@@ -75,11 +75,15 @@ public class Validator implements  IValidator{
         return true;
     }
 
+    
     public boolean isValidId(IModel model, IIdentifiable current, DataId idProposal){
-        IIdentifiable existingWithSameId = model.getIDataAnforderungssammlung().getObject(idProposal);
-        if(existingWithSameId == null || existingWithSameId == current){
-            return true;
+        if(idProposal.getId().length() == 0){
+            return false;
         }
-        return false;
+        IIdentifiable existingWithSameId = model.getIDataAnforderungssammlung().getObject(idProposal);
+        if(existingWithSameId != null && existingWithSameId != current){
+            return false;
+        }
+        return true;
     }
 }
