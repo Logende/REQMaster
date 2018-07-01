@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Grafikkomponente: Diese Klasse legt fest, wie die Instanzen der UIProduktfunktion in der GUI
- * angezeigt werden
+ * Grafikkomponente: Beinhaltet alle durch den Anwender hinzufgefügten Produktfunktionen (durch UIProduktFunktion dargestellt)
+ * und ermöglicht Löschen/Hinzufügen/Bearbeiten von Produktfunktionen.
  */
 
 public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
@@ -60,18 +60,17 @@ public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (View.forcesFocus == null) {
-                    UIActionAddProduktFunktionEvent addEvent;
-                    getView().getObsController().observe(addEvent = new UIActionAddProduktFunktionEvent());
+                    getView().getObsController().observe(new UIActionAddProduktFunktionEvent());
                 }
             }
         });
     }
 
     /**
-     *Updaten der Produktfunktionen
+     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
      * 1. schauen ob eine bestehende Produktfunktion im Model gelöscht wurde, wenn ja auch in der GUI löschen
      * 2. alle bestehenden Produktfunktionen in der GUI aktualisieren
-     * 3. alle neuen Produktfunktionen im Model, die nicht in der GUI sind, hinzufügen
+     * 3. alle neuen Produktfunktionen im Model, die noch nicht in der GUI sind, hinzufügen
      * @param model Instanz des IModel des MVC-Patterns, das die Daten enthält
      */
     @Override

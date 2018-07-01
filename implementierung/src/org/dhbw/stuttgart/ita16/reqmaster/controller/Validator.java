@@ -75,7 +75,7 @@ public class Validator implements  IValidator{
         return true;
     }
 
-    
+
     public boolean isValidId(IModel model, IIdentifiable current, DataId idProposal){
         if(idProposal.getId().length() == 0){
             return false;

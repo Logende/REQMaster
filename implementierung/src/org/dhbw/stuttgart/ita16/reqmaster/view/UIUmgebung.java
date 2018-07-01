@@ -12,7 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: Ermöglicht es, die Umgebung der Anforderungssammlung zu definieren.
+ * Grafikkomponente: Ermöglicht es dem Anwender, die Umgebung seiner Anforderungssammlung zu definieren.
  */
 public class UIUmgebung extends UIPanel implements IUIUpdateable {
 
@@ -67,7 +67,7 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     * updatet den Inhalt des Textfeldes
+     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
      * @param model Model des MVC-Patterns
      */
     public void update(IModel model) {

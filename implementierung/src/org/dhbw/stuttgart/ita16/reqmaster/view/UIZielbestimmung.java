@@ -12,7 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: Ermöglicht es, den Aufbau der Zielbestimmung festzulegen
+ * Grafikkomponente: Ermöglicht es dem Anwender, die Zielbestimmung seiner Anforderungssammlung zu definieren.
  */
 public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 
@@ -66,7 +66,7 @@ public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 		});
 	}
 	/**
-	 * updatet den Inhalt des Textfeldes
+	 * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
 	 * @param model
 	 */
 	public void update(IModel model) {
