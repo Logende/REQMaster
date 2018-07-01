@@ -4,7 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
 
 public class UIModifyProdukteinsatzEvent extends UIModifyEvent {
 
-	private DataProdukteinsatz proposal;
+	private final DataProdukteinsatz proposal;
 
 	/**
 	 * Konstruktor für die Klasse schreibt Eingansvariablen auf Klassenvariablen um

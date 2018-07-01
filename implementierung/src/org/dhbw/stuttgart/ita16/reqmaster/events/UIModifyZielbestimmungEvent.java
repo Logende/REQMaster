@@ -5,7 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.DataZielbestimmung;
 
 public class UIModifyZielbestimmungEvent extends UIModifyEvent {
 
-	private DataZielbestimmung proposal;
+	private final DataZielbestimmung proposal;
 	/**
 	 * Konstruktor für die Klasse schreibt Eingansvariablen auf Klassenvariablen um
 	 * @param proposal

@@ -4,7 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.DataUmgebung;
 
 public class UIModifyUmgebungEvent extends UIModifyEvent {
 
-	private DataUmgebung proposal;
+	private final DataUmgebung proposal;
 
 	/**
 	 * Konstruktor für die Klasse schreibt Eingansvariablen auf Klassenvariablen um
