@@ -13,10 +13,10 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
     private final DataId dataId; //always the real DataId instance, as being used within the model
     private UILabel idText;
     private UILabel nameText;
-    private UILabel funktionsTypText;
+    //private UILabel funktionsTypText;
     private UILabel klassifizierungText;
     private UILabel komplexitaetText;
-    private UIChoice<FPFunktionsTyp> funktionsTypUIChoice;
+    //private UIChoice<FPFunktionsTyp> funktionsTypUIChoice;
     private UIChoice<FPKlassifizierung> klassifizierungUIChoice;
     private UIChoice<FPKomplexitaet> komplexitaetUIChoice;
 
@@ -31,7 +31,7 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
         this.dataId = dataId;
 
         //Settings
-        this.setLayout(new GridLayout(5,2));
+        this.setLayout(new GridLayout(4,2));
         addComponents();
         setComponents();
         this.update(view.getModel());
@@ -44,8 +44,8 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
     private void addComponents() {
         this.add(idText = new UILabel());
         this.add(nameText = new UILabel());
-        this.add(funktionsTypText = new UILabel());
-        this.add(funktionsTypUIChoice = new UIChoice<>(FPFunktionsTyp.values(), (component, selected) -> this.changedValue(true)));
+        //this.add(funktionsTypText = new UILabel());
+        //this.add(funktionsTypUIChoice = new UIChoice<>(FPFunktionsTyp.values(), (component, selected) -> this.changedValue(true)));
         this.add(klassifizierungText = new UILabel());
         this.add(klassifizierungUIChoice = new UIChoice<>(FPKlassifizierung.values(), (component, selected) -> this.changedValue(false)));
         this.add(komplexitaetText = new UILabel());
@@ -56,14 +56,15 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
     private void setComponents() {
         this.idText.setForeground(Color.BLUE);
         this.nameText.setForeground(Color.BLUE);
-        funktionsTypText.setText("Funktionstyp");
+        //funktionsTypText.setText("Funktionstyp");
         klassifizierungText.setText("Klassifizierung");
         komplexitaetText.setText("Komplexitaet");
     }
 
     public void changedValue(boolean changedFunktionstyp){
-        FPFunktionsTyp funktionsTyp = (FPFunktionsTyp) funktionsTypUIChoice.getSelectedItem();
         FPKlassifizierung klassifizierung = (FPKlassifizierung) klassifizierungUIChoice.getSelectedItem();
+        String klassifizierungName = klassifizierung.name();
+        FPFunktionsTyp funktionsTyp = FPFunktionsTyp.valueOf(klassifizierungName.substring(0, klassifizierungName.indexOf("_")));
         FPKomplexitaet komplexitaet = (FPKomplexitaet) komplexitaetUIChoice.getSelectedItem();
 
         IIdentifiable iIdentifiable = getView().getModel().getIDataAnforderungssammlung().getObject(this.dataId);
@@ -96,7 +97,7 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
         IDataFunctionPointEinstufung einstufung = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
         this.idText.setText("Id: " + dataId.getId());
         this.nameText.setText("Name: " + iIdentifiable.getName());
-        this.funktionsTypUIChoice.setChoice(einstufung.getFunktionstyp());
+        //this.funktionsTypUIChoice.setChoice(einstufung.getFunktionstyp());
         this.klassifizierungUIChoice.setChoice(einstufung.getKlassifizierung());
         this.komplexitaetUIChoice.setChoice(einstufung.getKomplexitaet());
 

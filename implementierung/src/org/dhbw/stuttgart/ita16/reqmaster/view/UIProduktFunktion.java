@@ -20,6 +20,7 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private final DataId dataId; //always the real DataId instance, as being used within the model
+    private UILabel title;
     private UIButton delete;
     private UITextField id;
     private UITextField name;
@@ -42,7 +43,6 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
         super(view);
         this.dataId = dataId;
         this.setLayout(new GridLayout(9,2));
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         addComponents();
         setComponents();
         this.update(view.getModel());
@@ -85,8 +85,10 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
                 }
             };
 
+        this.add(new UILabel());
+        this.add(new UILabel());
+        this.add(title = new UILabel());
         this.add(delete = new UIButton());
-        this.add(new Label());
         this.add(idText = new UILabel());
         this.add(id = new UITextField(listener));
         this.add(nameText = new UILabel());
@@ -105,7 +107,7 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
      * Größe der Komponenten und Inhalt setzen
      */
     private void setComponents(){
-
+        title.setForeground(Color.BLUE);
         delete.setText("Löschen");
         idText.setText("ID");
         nameText.setText("Name");
@@ -123,7 +125,6 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
      */
     @Override
     public void update(IModel model){
-
             DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
             id.setText(dataId.getId());
             name.setText(newFunktion.getName());
@@ -131,6 +132,7 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
             akteur.setText(newFunktion.getAkteur());
             beschreibung.setText(newFunktion.getBeschreibung());
             verweise.setText(newFunktion.getVerweise());
+            title.setText(newFunktion.getId().getId());
     }
 
     /**

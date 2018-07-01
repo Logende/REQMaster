@@ -21,6 +21,7 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
     private final DataId dataId; //always the real DataId instance, as being used within the model
+    private UILabel title;
     private UIButton delete;
     private UIButton addAttr;
     private UIButton deleteAttr;
@@ -34,10 +35,9 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
     private UILabel verweiseText;
     private UIList attributList;
     private DefaultListModel<String> attributModel;
-    private UIPanel datumPanel;
     private UIPanel attributPanel;
+    private UIPanel datumPanel;
     private UIScrollPane scrollPaneAttr;
-    private List<DataAttribut> dataAttributeList;
 
 
     /**
@@ -56,7 +56,6 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         setComponents();
         this.update(view.getModel());
         this.setVisible(true);
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
         // um ein Produktdatum zu löschen
@@ -68,27 +67,13 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         });
 
         addAttr.addActionListener(actionEvent -> {
-            DataAttribut dataAttribut;
-            dataAttributeList.add(dataAttribut = new DataAttribut(attribute.getText()));
-            DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
-            UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
-            getView().getObsController().observe(modifyEvent);
-
-            if(!modifyEvent.isSuccess()){
-                dataAttributeList.remove(dataAttribut);
-            }
+            attributModel.addElement(attribute.getText());
+            wasModified(null);
         });
 
         deleteAttr.addActionListener(actionEvent -> {
-            DataAttribut dataAttribut = (DataAttribut) attributList.getSelectedValue();
-            dataAttributeList.remove(dataAttribut);
-            DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
-            UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
-            getView().getObsController().observe(modifyEvent);
-
-            if(!modifyEvent.isSuccess()){
-                dataAttributeList.add(dataAttribut);
-            }
+            attributModel.remove(attributList.getSelectedIndex());
+            wasModified(null);
         });
     }
 
@@ -96,7 +81,6 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
      * Hinzufügen der Grafikkomponenten sowie Definition eines FokusListener
      */
     private void addComponents() {
-
         // Für jedes UITextField in ProduktDatum wird einmalig ein
         // FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
         UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
@@ -105,27 +89,16 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
                         return; //do nothing if new component has same parent
                     }
                 }
-                DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
-                UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
-                getView().getObsController().observe(modifyEvent);
-                if(!modifyEvent.isSuccess()){
-                    View.forcesFocus = UIProduktDatum.this;
-                   focusLost.requestFocus();
-                }else{
-                    View.forcesFocus = null;
-                }
+                wasModified(focusLost);
             };
-
-        this.add(datumPanel = new UIPanel());
-        attributPanel = new UIPanel();
-        attributModel = new DefaultListModel<String>();
-        attributPanel.add(attributList = new UIList(attributModel = new DefaultListModel<String>()), BorderLayout.WEST);
-        this.add(scrollPaneAttr = new UIScrollPane(attributList,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
-        scrollPaneAttr.add(attributPanel);
+        //Panel mit Gridlayout fuer alles ausser Attribute
+        datumPanel = new UIPanel();
+        datumPanel.setLayout(new GridLayout(9,2));
         datumPanel.add(new UILabel());
         datumPanel.add(new UILabel());
         datumPanel.add(new UILabel());
+        datumPanel.add(new UILabel());
+        datumPanel.add(title = new UILabel());
         datumPanel.add(delete = new UIButton());
         datumPanel.add(idText = new UILabel());
         datumPanel.add(id = new UITextField(listener));
@@ -135,10 +108,20 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         datumPanel.add(verweise = new UITextField(listener));
         datumPanel.add(new UILabel());
         datumPanel.add(new UILabel());
-        datumPanel.add(addAttr = new UIButton());
-        datumPanel.add(deleteAttr = new UIButton());
         datumPanel.add(attributeText = new UILabel());
         datumPanel.add(attribute = new UITextField(listener));
+        datumPanel.add(addAttr = new UIButton());
+        datumPanel.add(deleteAttr = new UIButton());
+        this.add(datumPanel);
+
+
+        attributModel = new DefaultListModel<>();
+        attributList = new UIList(attributModel);
+        attributList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        attributList.setSelectedIndex(0);
+        scrollPaneAttr = new UIScrollPane(attributList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        this.add(scrollPaneAttr);
 
     }
 
@@ -153,21 +136,28 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         idText.setText("ID");
         attributeText.setText("Attribut");
         verweiseText.setText("Verweise");
-
-        datumPanel.setLayout(new GridLayout(8,2));
-        attributPanel.setLayout(new BorderLayout());
-        attributList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        attributList.setSelectedIndex(0);
-        attributList.setPreferredSize(new Dimension(20,50));
+        title.setForeground(Color.BLUE);
+    }
 
 
-        attributModel.addElement("bla");
-        attributModel.addElement("asdf");
-        attributModel.addElement("asdf");
-        attributModel.addElement("bla");
-        attributModel.addElement("asdf");
-        attributModel.addElement("asdf");
+    private void wasModified(Component focusLost){
+        List<DataAttribut> dataAttributeList = new ArrayList<>();
+        for(int i = 0; i< attributModel.size(); i++){
+            String attribut = attributModel.elementAt(i);
+            dataAttributeList.add(new DataAttribut(attribut));
+        }
 
+        DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
+        UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
+        getView().getObsController().observe(modifyEvent);
+        if(focusLost != null) {
+            if (!modifyEvent.isSuccess()) {
+                View.forcesFocus = UIProduktDatum.this;
+                focusLost.requestFocus();
+            } else {
+                View.forcesFocus = null;
+            }
+        }
     }
 
     /**
@@ -179,16 +169,13 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
     @Override
     public void update(IModel model){
         DataProduktDatum newDatum = model.getIDataAnforderungssammlung().getDataProduktDaten().get(dataId);
+        this.title.setText(dataId.getId());
         this.id.setText(dataId.getId());
         this.name.setText(newDatum.getName());
         this.verweise.setText(newDatum.getVerweise());
         this.attributModel.removeAllElements();
-        this.dataAttributeList.clear();
-        List<DataAttribut> newAttribute = newDatum.getAttribute();
-
-        for(DataAttribut i: newAttribute){
-            attributModel.addElement(i.getName());
-            dataAttributeList.add(i);
+        for(DataAttribut dataAttribut: newDatum.getAttribute()){
+            attributModel.addElement(dataAttribut.getName());
         }
     }
 

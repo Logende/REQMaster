@@ -22,17 +22,17 @@ public class UIMenu extends UIMenuBar {
     private IView view;
     private UIMenuItem docExportXml;
     private UIMenuItem fpNeu;
-    private UIFunctionPointPanel functionPointPanel;
+    private UIMainFrame mainFrame;
 
     /**
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
-    public UIMenu(IView view, UIFunctionPointPanel functionPointPanel) {
+    public UIMenu(IView view, UIMainFrame mainFrame) {
 
         super(view);
         this.view = view;
-        this.functionPointPanel = functionPointPanel;
+        this.mainFrame = mainFrame;
 
         //Instanzierung
         docExportXml = new UIMenuItem("Dokument in XML exportieren");
@@ -68,8 +68,7 @@ public class UIMenu extends UIMenuBar {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-             //TODO welches Event   getView().getObsController().observe(new UI);
-                functionPointPanel.setVisible(true);
+                mainFrame.toggleMode(fpNeu);
             }
         });
 

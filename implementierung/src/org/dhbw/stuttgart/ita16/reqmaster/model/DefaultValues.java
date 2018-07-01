@@ -2,6 +2,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class DefaultValues {
@@ -20,15 +21,15 @@ public class DefaultValues {
         DataZielbestimmung zielbestimmung = new DataZielbestimmung("Zielbestimmung");
         DataProdukteinsatz produkteinsatz = new DataProdukteinsatz("Produkteinsatz");
         DataUmgebung umgebung = new DataUmgebung("Umgebung");
-        Map<DataId, DataProduktFunktion> produktFunktionen = new HashMap<>();
-        Map<DataId, DataProduktDatum> produktDaten = new HashMap<>();
+        Map<DataId, DataProduktFunktion> produktFunktionen = new LinkedHashMap<>();
+        Map<DataId, DataProduktDatum> produktDaten = new LinkedHashMap<>();
         return new DataAnforderungssammlung(zielbestimmung, produkteinsatz, umgebung, produktFunktionen, produktDaten, DefaultValues.createFunctionPointAnalyse());
     }
 
     public static IDataSchaetzKonfiguration createSchaetzKonfiguration(){
-        Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> defaultGewichte = new HashMap<>();
+        Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> defaultGewichte = new LinkedHashMap<>();
         for(FPKlassifizierung klassifizierung : FPKlassifizierung.values()){
-            Map<FPKomplexitaet, Double> submap = new HashMap<>();
+            Map<FPKomplexitaet, Double> submap = new LinkedHashMap<>();
             for(FPKomplexitaet komplexitaet : FPKomplexitaet.values()){
                 submap.put(komplexitaet, 1.0);
             }
@@ -38,7 +39,7 @@ public class DefaultValues {
     }
 
     public static IDataFunctionPointAnalyse createFunctionPointAnalyse(){
-        return new DataFunctionPointAnalyse(new HashMap<>(), 0);
+        return new DataFunctionPointAnalyse(new LinkedHashMap<>(), 0);
     }
 
     public static IDataFunctionPointEinstufung getDefaultEinstufung(IIdentifiable i){
