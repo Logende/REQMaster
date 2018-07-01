@@ -162,8 +162,10 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
             if (!modifyEvent.isSuccess()) {
                 View.forcesFocus = UIProduktDatum.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
                 focusLost.requestFocus();
+                focusLost.setForeground(Color.red);
             } else {
                 View.forcesFocus = null;
+                focusLost.setForeground(Color.black);
             }
         }
     }

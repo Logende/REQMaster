@@ -80,8 +80,10 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
                 if(!modifyEvent.isSuccess()){
                     View.forcesFocus = UIProduktFunktion.this; // falls Validierung der Produktfunktion negativ, Fokus zurück auf Komponente
                     focusLost.requestFocus();
+                    focusLost.setForeground(Color.red);
                 }else{
                     View.forcesFocus = null;
+                    focusLost.setForeground(Color.black);
                 }
             };
 

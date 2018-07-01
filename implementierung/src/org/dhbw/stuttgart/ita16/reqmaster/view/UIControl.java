@@ -4,6 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.*;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -14,54 +15,58 @@ import java.awt.event.FocusListener;
  */
 public class UIControl extends UIPanel {
 
+    //Variablen der Klasse
     private UIButton aufwandAnzeigen;
     private UIButton aufwandMMAnzeigen;
-    private UIButton gewichtsfaktorOptimieren;
-    private UITextField aufwandMM;
+    private UIButton gewichtsfaktorOpt;
+    private UILabel aufwandFP;
+    private UILabel aufwandMM;
     private UITextField realerAufwand;
-    private UITextField aufwandFP;
 
     public UIControl(IView view) {
 
-	    //Superklasse Konstruktor aufrufen
 		super(view);
 
-		//Die Klassenvariablen Instanziieren
-
+		//Die Klassenvariablen Instanzieren
         aufwandAnzeigen=new UIButton();
-        aufwandAnzeigen.setText("Aufwand in FP anzeigen");
+        aufwandMMAnzeigen=new UIButton();
+        gewichtsfaktorOpt=new UIButton();
+        aufwandMM=new UILabel();
+        aufwandFP= new UILabel();
+        realerAufwand=new UITextField();
+
         this.add(aufwandAnzeigen);
+        this.add(aufwandFP);
+        this.add(aufwandMMAnzeigen);
+        this.add(aufwandMM);
+        this.add(gewichtsfaktorOpt);
+        this.add(realerAufwand);
+
+        aufwandAnzeigen.setText("Aufwand in FP anzeigen");
+        aufwandMMAnzeigen.setText("Aufwand in MM Anzeigen");
+        gewichtsfaktorOpt.setText("Optimieren");
+
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent());
             }
         });
-        aufwandMMAnzeigen=new UIButton();
-        aufwandMMAnzeigen.setText("Aufwand in MM Anzeigen");
-        this.add(aufwandMMAnzeigen);
+
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getView().getObsController().observe(new UIActionFPAufwandAnzeigenMannmonateEvent());
             }
         });
-        gewichtsfaktorOptimieren=new UIButton();
-        aufwandMM=new UITextField();
-        aufwandMM.setEnabled(false);
-        this.add(gewichtsfaktorOptimieren);
-        gewichtsfaktorOptimieren.addActionListener(new ActionListener() {
+
+        gewichtsfaktorOpt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent());
             }
         });
-        aufwandFP= new UITextField();
 
-        aufwandFP.setEnabled(false);
-        this.add(aufwandFP);
-        realerAufwand=new UITextField();
-        this.add(realerAufwand);
         realerAufwand.addActionListener(new ActionListener() {
             /**
              * legt fest, dass wenn ein Action Event (Enter drücken) ausgelöst wird während der Fokus auf dem textfeld liegt,
