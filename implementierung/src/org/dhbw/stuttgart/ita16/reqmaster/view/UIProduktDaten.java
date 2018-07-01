@@ -6,6 +6,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -42,7 +43,7 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         // Hinzufügen der Komponenten zum Panel sowie Settings
-        this.setBorder(BorderFactory.createTitledBorder("Produktdaten"));
+        this.setBorder(BorderFactory.createTitledBorder(DefaultValues.PRODUKTDATEN));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(add);
         this.add(scrollPane, BorderLayout.PAGE_START);

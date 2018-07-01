@@ -5,6 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         //Hinzufügen der Komponenten sowie Settings
-        this.setBorder(BorderFactory.createTitledBorder("Produktfunktionen"));
+        this.setBorder(BorderFactory.createTitledBorder(DefaultValues.PRODUKTFUNKTIONEN));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(add);
         this.add(scrollPane);

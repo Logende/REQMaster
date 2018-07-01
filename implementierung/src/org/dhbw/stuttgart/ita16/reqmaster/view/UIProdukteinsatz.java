@@ -4,6 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProdukteinsatzEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 
@@ -34,7 +35,7 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 		//Settings
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(scrollPane);
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Produkteinsatz"),
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(DefaultValues.PRODUKTEINSATZ),
 				BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
 		text.setLineWrap(true);
@@ -56,6 +57,8 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 				getView().getObsController().observe(modifyEvent =
 						new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));
 				if(!(modifyEvent.isSuccess())){
+					JOptionPane.showMessageDialog(scrollPane, "Falsche Eingabe",
+							"Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
 					View.forcesFocus = UIProdukteinsatz.this;
 					text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
 				}else{

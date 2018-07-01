@@ -5,6 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktFunktionEv
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -61,30 +62,32 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
      *  Definition des Fokuslistener
      */
     private void addComponents() {
-        /** Für jedes UITextField in ProduktFunktion wird einmalig ein
-        *   FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
-        */
+        /**
+         * Für jedes UITextField der ProduktFunktion wird einmalig ein
+         * FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+         * focusLost und focusGained sind Komponenten der GUI die den Fokus bekommen oder verlieren
+         */
         UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
-                if(focusGained != null) {
+            if(focusGained != null) {
                     if (focusLost.getParent() == focusGained.getParent()) {
                         return; //do nothing if new component has same parent
                     }
-                }
-                // Wenn der Fokus von einer Komponente der Produktfunktion auf irgendeine andere Komponente der GUI gelegt wird,
-                // wird zur Validierung der Produktfunktion, ein Event an den Controller gesendet
-                DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
-                        quelle.getText(), verweise.getText(), new DataId(id.getText()));
-                UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
-                getView().getObsController().observe(modifyEvent);
-                if(!modifyEvent.isSuccess()){
-                    View.forcesFocus = UIProduktFunktion.this; // falls Validierung der Produktfunktion negativ, Fokus zurück auf Komponente
-                    focusLost.requestFocus();
-                    focusLost.setForeground(Color.red);
-                }else{
-                    View.forcesFocus = null;
-                    focusLost.setForeground(Color.black);
-                }
-            };
+            }
+            // Wenn der Fokus von einer Komponente der Produktfunktion auf irgendeine andere Komponente der GUI gelegt wird,
+            // wird zur Validierung der Produktfunktion, ein Event an den Controller gesendet
+            DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
+                    quelle.getText(), verweise.getText(), new DataId(id.getText()));
+            UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
+            getView().getObsController().observe(modifyEvent);
+            if(!modifyEvent.isSuccess()){
+                JOptionPane.showMessageDialog(focusLost.getParent(), modifyEvent.getErrorMessage(),
+                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
+                View.forcesFocus = UIProduktFunktion.this; // falls Validierung der Produktfunktion negativ, Fokus zurück auf Komponente
+                focusLost.requestFocus();
+            }else{
+                View.forcesFocus = null;
+            }
+        };
 
         this.add(new UILabel());
         this.add(new UILabel());
@@ -110,12 +113,12 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
     private void setComponents(){
         title.setForeground(Color.BLUE);
         delete.setText("Löschen");
-        idText.setText("ID");
-        nameText.setText("Name");
-        quelleText.setText("Quelle");
-        akteurText.setText("Akteur");
-        beschreibungText.setText("Beschreibung");
-        verweiseText.setText("Verweise");
+        idText.setText(DefaultValues.ID);
+        nameText.setText(DefaultValues.PRODUKTFUNKTION_NAME);
+        quelleText.setText(DefaultValues.PRODUKTFUNKTION_QUELLE);
+        akteurText.setText(DefaultValues.PRODUKTFUNKTION_AKTEUR);
+        beschreibungText.setText(DefaultValues.PRODUKTFUNKTION_BESCHREIBUNG);
+        verweiseText.setText(DefaultValues.VERWEISE);
     }
 
     /**

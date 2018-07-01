@@ -28,6 +28,7 @@ public class UIFunctionPointEinstufungen extends UIPanel implements IUIUpdateabl
         //Hinzufügen der Komponenten sowie Settings
         funktionsPanel.setLayout(new BoxLayout(funktionsPanel, BoxLayout.Y_AXIS));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         this.setBorder(BorderFactory.createTitledBorder("FunctionPoint Einstufungen"));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(scrollPane);

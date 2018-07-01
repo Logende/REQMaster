@@ -1,8 +1,7 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import java.awt.*;
-import java.io.*;
-import java.util.*;
+
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
@@ -13,18 +12,16 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 public class UIFunctionPointPanel extends UIPanel {
 
     private UIFunctionPointEinstufungen einstufungen;
+    private UIFunctionPointErgebnis fpErgebnis;
     private UIGewichtsfaktoren gewichtsfaktoren;
-    private UIControl control;
-    private UIEinflussfaktoren einflussfaktoren;
 
     public UIFunctionPointPanel(IView view) {
         super(view);
         setLayout(new GridLayout(2,2));
         this.add(einstufungen = new UIFunctionPointEinstufungen(view));
-        this.add(einflussfaktoren = new UIEinflussfaktoren());
-        //gewichtsfaktoren = new UIGewichtsfaktoren(view);
-        control = new UIControl(view);
-        this.add(control);
+        this.add(gewichtsfaktoren = new UIGewichtsfaktoren(view));
+        fpErgebnis = new UIFunctionPointErgebnis(view);
+        this.add(fpErgebnis);
 
         this.setVisible(true);
 

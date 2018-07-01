@@ -3,10 +3,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataAttribut;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
+import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -138,10 +135,10 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         delete.setText("Löschen");
         addAttr.setText("Attribut hinzufügen");
         deleteAttr.setText("Attribut löschen");
-        nameText.setText("Name");
-        idText.setText("ID");
-        attributeText.setText("Attribut");
-        verweiseText.setText("Verweise");
+        nameText.setText(DefaultValues.PRODUKTDATUM_NAME);
+        idText.setText(DefaultValues.ID);
+        attributeText.setText(DefaultValues.PRODUKTDATUM_ATTRIBUTE);
+        verweiseText.setText(DefaultValues.VERWEISE);
         title.setForeground(Color.BLUE);
     }
 
@@ -162,12 +159,12 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         getView().getObsController().observe(modifyEvent);
         if(focusLost != null) {
             if (!modifyEvent.isSuccess()) {
+                JOptionPane.showMessageDialog(focusLost.getParent(), modifyEvent.getErrorMessage(),
+                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
                 View.forcesFocus = UIProduktDatum.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
                 focusLost.requestFocus();
-                focusLost.setForeground(Color.red);
             } else {
                 View.forcesFocus = null;
-                focusLost.setForeground(Color.black);
             }
         }
     }

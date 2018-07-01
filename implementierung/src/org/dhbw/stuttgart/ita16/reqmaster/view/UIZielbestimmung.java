@@ -5,6 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyZielbestimmungEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataZielbestimmung;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -35,7 +36,7 @@ public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 		//Settings
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(scrollPane);
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Zielbestimmung"),
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(DefaultValues.ZIELBESTIMMUNG),
 				BorderFactory.createEmptyBorder(30,10,20,10)));
 		this.setVisible(true);
 		text.setLineWrap(true);
@@ -57,6 +58,8 @@ public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 				getView().getObsController().observe(modifyEvent =
 						new UIModifyZielbestimmungEvent(new DataZielbestimmung(text.getText())));
 				if(!(modifyEvent.isSuccess())){
+					JOptionPane.showMessageDialog(scrollPane, modifyEvent.getErrorMessage(),
+							"Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
 					View.forcesFocus = UIZielbestimmung.this;
 					text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
 				}else{

@@ -27,7 +27,7 @@ public class Controller implements IObserverController, IController{
         //ADD
         reactions.put(UIActionAddProduktDatumEvent.class, (model, view, event)->{
             DataProduktDatum dataProduktDatum = new DataProduktDatum(DefaultValues.PRODUKTDATUM_NAME, generateUniqueID("/LD", "/"),
-                    new ArrayList<>(), DefaultValues.PRODUKTDATUM_VERWEISE);
+                    new ArrayList<>(), DefaultValues.VERWEISE);
             model.getIDataAnforderungssammlung().getDataProduktDaten().put(dataProduktDatum.getId(), dataProduktDatum);
             return true;
         });
@@ -35,7 +35,7 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIActionAddProduktFunktionEvent.class, (model, view, event)->{
             DataProduktFunktion dataProduktFunktion = new DataProduktFunktion(DefaultValues.PRODUKTFUNKTION_NAME,
                     DefaultValues.PRODUKTFUNKTION_BESCHREIBUNG, DefaultValues.PRODUKTFUNKTION_AKTEUR, DefaultValues.PRODUKTFUNKTION_QUELLE,
-                   DefaultValues.PRODUKTFUNKTION_VERWEISE, generateUniqueID("/LF", "/"));
+                   DefaultValues.VERWEISE, generateUniqueID("/LF", "/"));
             model.getIDataAnforderungssammlung().getDataProduktFunktionen().put(dataProduktFunktion.getId(), dataProduktFunktion);
             return true;
         });

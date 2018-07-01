@@ -5,6 +5,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyUmgebungEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataUmgebung;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
@@ -34,7 +35,7 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
         //Settings
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(scrollPane);
-        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Umgebung"),
+        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(DefaultValues.UMGEBUNG),
                 BorderFactory.createEmptyBorder(30,10,20,10)));
         this.setVisible(true);
         text.setLineWrap(true);
@@ -56,6 +57,8 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
                 getView().getObsController().observe(modifyEvent =
                         new UIModifyUmgebungEvent(new DataUmgebung(text.getText())));
                if(!(modifyEvent.isSuccess())){
+                   JOptionPane.showMessageDialog(scrollPane, modifyEvent.getErrorMessage(),
+                           "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
                    View.forcesFocus = UIUmgebung.this;
                    text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
                }else{

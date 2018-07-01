@@ -3,6 +3,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuCreateEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuLoadEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -66,7 +67,7 @@ public class UIAnfangsDialog extends UIFrame {
             public void actionPerformed(ActionEvent e) {
                 File file;
                 file = UIPathSelector.forcePathSelection("Neues Dokument anlegen", ".xml",
-                        ".xml","C:\\Users\\%name%\\Documents", true);
+                        ".xml",DefaultValues.DEFAULT_PATH, true);
                 if(file != null){
                     view.getObsController().observe(new UIActionMenuCreateEvent(file));
                     mainFrame.setVisible(true);
@@ -85,7 +86,7 @@ public class UIAnfangsDialog extends UIFrame {
             public void actionPerformed(ActionEvent e) {
                 File file;
                 file = UIPathSelector.forcePathSelection("Dokument importieren", ".xml",
-                        ".xml","C:\\Users\\%name%\\Documents", false);
+                        ".xml", DefaultValues.DEFAULT_PATH, false);
                 if(file !=null) {
                     getView().getObsController().observe(new UIActionMenuLoadEvent(file));
                     mainFrame.setVisible(true);
