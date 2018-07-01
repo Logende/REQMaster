@@ -25,7 +25,6 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 	 * @param view Instanz der View des MVC-Patterns
 	 */
 	public UIProdukteinsatz(View view) {
-
     	super(view);
     	//Initialisierung
 		text = new UITextArea();
@@ -72,7 +71,6 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 	 * @param model Istanz des Model des MVC-Patterns
 	 */
 	public void update(IModel model) {
-
 		text.setText(model.getIDataAnforderungssammlung().getDataProdukteinsatz().getText());		//hole Daten aus dem Model und schreibe sie in das Textfeld
 	}
 

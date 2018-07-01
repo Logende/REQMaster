@@ -41,7 +41,6 @@ public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 
 		//Definition eines FocusListener für TextArea
 		text.addFocusListener(new FocusListener() {
-
 			/**
 			 * legt fest, dass wenn der Fokus auf das Textfeld gelegt wird (Mausklick), nichts passieren soll
 			 * @param e auf zu reagierendes Event
@@ -72,9 +71,7 @@ public class UIZielbestimmung extends UIPanel implements IUIUpdateable {
 	 * @param model
 	 */
 	public void update(IModel model) {
-
 		text.setText(model.getIDataAnforderungssammlung().getDataZielbestimmung().getText());
-
 	}
 
 }

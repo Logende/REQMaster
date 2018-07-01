@@ -12,7 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Grafikkomponente: legt Aufbau einer Zielbestimmung fest
+ * Grafikkomponente: Ermöglicht dem Anwender, die Umgebung zu definieren.
  */
 public class UIUmgebung extends UIPanel implements IUIUpdateable {
 
@@ -42,16 +42,12 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
         //Definition eines FocusListeners für TextArea
         text.addFocusListener(new FocusListener() {
 
-            /**
-             * legt fest, dass wenn der Fokus auf das Textfeld gelegt wird (Mausklick), nichts passieren soll
-             * @param e auf zu reagierendes Event
-             */
          @Override
             public void focusGained(FocusEvent e) { }
-
             /**
-             * legt fest, dass wenn das Textfeld den Fokus verliert, ein ModifyEvent an den Controller
-             * weitergereicht wird, der über das Behalten oder die Freigabe des Fokus entscheidet (validieren des Textfeldinhalts)
+             * Wenn der Fokus verloren wird, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
+             * Der Controller kann bei invaliden Daten das Event ablehnen, woraufhin die Komponente den Fokus erneut anfordert,
+             * damit der Anwender valide Daten eingibt.
              * @param e auf zu reagierendes Event
              */
            public void focusLost(FocusEvent e) {
@@ -71,10 +67,9 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
 
     /**
      * updatet den Inhalt des Textfeldes
-     * @param model Model des MVC-Patterns, das die Daten speichert
+     * @param model Model des MVC-Patterns
      */
     public void update(IModel model) {
-
         text.setText(model.getIDataAnforderungssammlung().getDataUmgebung().getText());
     }
 

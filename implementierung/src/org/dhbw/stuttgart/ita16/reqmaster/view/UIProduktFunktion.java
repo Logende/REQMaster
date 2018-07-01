@@ -63,7 +63,6 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
      *  Definition des Fokuslistener
      */
     private void addComponents() {
-
         /*Für jedes UITextField in ProduktFunktion wird einmalig ein
         *FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
         */
@@ -118,9 +117,7 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     * Implementierung der Update-Methode
-     * wenn sich eine Produktfunktion geändert hat, wird diese Methode aufgerufen,
-     * um die GUI zu aktualisieren
+     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
      * @param model Instanz des Models des MVC-Patterns
      */
     @Override
@@ -136,7 +133,7 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     * getter Methode für ID der Produktfunktion
+     * Getter Methode für ID der Produktfunktion
      * @return DataId der Produktfunktion
      */
     public DataId getId(){
