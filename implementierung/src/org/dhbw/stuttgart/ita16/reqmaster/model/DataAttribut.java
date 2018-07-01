@@ -3,11 +3,10 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 public class DataAttribut {
 
-	private String anzahl;
+
 	private String name;
 
-	public DataAttribut(String name, String anzahl) {
-		this.anzahl = anzahl;
+	public DataAttribut(String name) {
 		this.name = name;
 	}
 
@@ -15,8 +14,16 @@ public class DataAttribut {
 	public boolean equals(Object o){
 		if(o instanceof  DataAttribut){
 			DataAttribut a = (DataAttribut) o;
-			return anzahl.equals(a.anzahl) && name.equals(a.name);
+			return name.equals(a.name);
 		}
 		return false;
+	}
+
+	/**
+	 * getter für den Name des Attributs
+	 * @return name: Inhalt des Attributs
+	 */
+	public String getName() {
+		return name;
 	}
 }

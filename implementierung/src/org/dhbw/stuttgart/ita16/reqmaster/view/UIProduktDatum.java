@@ -37,6 +37,7 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
     private UIPanel datumPanel;
     private UIPanel attributPanel;
     private UIScrollPane scrollPaneAttr;
+    private List<DataAttribut> dataAttributeList;
 
 
     /**
@@ -65,6 +66,30 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
                 View.forcesFocus = null;
             }
         });
+
+        addAttr.addActionListener(actionEvent -> {
+            DataAttribut dataAttribut;
+            dataAttributeList.add(dataAttribut = new DataAttribut(attribute.getText()));
+            DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
+            UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
+            getView().getObsController().observe(modifyEvent);
+
+            if(!modifyEvent.isSuccess()){
+                dataAttributeList.remove(dataAttribut);
+            }
+        });
+
+        deleteAttr.addActionListener(actionEvent -> {
+            DataAttribut dataAttribut = (DataAttribut) attributList.getSelectedValue();
+            dataAttributeList.remove(dataAttribut);
+            DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
+            UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
+            getView().getObsController().observe(modifyEvent);
+
+            if(!modifyEvent.isSuccess()){
+                dataAttributeList.add(dataAttribut);
+            }
+        });
     }
 
     /**
@@ -80,7 +105,7 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
                         return; //do nothing if new component has same parent
                     }
                 }
-                DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), new ArrayList<>(), verweise.getText());
+                DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
                 UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
                 getView().getObsController().observe(modifyEvent);
                 if(!modifyEvent.isSuccess()){
@@ -158,10 +183,12 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         this.name.setText(newDatum.getName());
         this.verweise.setText(newDatum.getVerweise());
         this.attributModel.removeAllElements();
+        this.dataAttributeList.clear();
         List<DataAttribut> newAttribute = newDatum.getAttribute();
 
         for(DataAttribut i: newAttribute){
-            attributModel.addElement(i.);
+            attributModel.addElement(i.getName());
+            dataAttributeList.add(i);
         }
     }
 
@@ -172,4 +199,5 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
     public DataId getId() {
         return dataId;
     }
+
 }
