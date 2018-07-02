@@ -5,7 +5,10 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 public class AufwandRechner implements IAufwandRechner {
 
     @Override
-    public void calculateAufwand(IModel model, double vaf) {
+    public String calculateAufwand(IModel model, double vaf) {
+        if(vaf < 0.65 || vaf > 1.35){
+            return "Value Adjustment Factor ist invalide. Muss zwischen 0.65 und 1.35 liegen.";
+        }
         IDataAnforderungssammlung anforderungssammlung = model.getIDataAnforderungssammlung();
         IDataFunctionPointAnalyse functionPointAnalyse = anforderungssammlung.getIDataFunctionPointAnalyse();
         double summeAufwand = this.calculateSummeAufwand(model);
@@ -22,7 +25,7 @@ public class AufwandRechner implements IAufwandRechner {
         functionPointAnalyse.setSummEinflussFaktoren(summeEinflussFaktoren);
         functionPointAnalyse.setAufwandInFP(aufwandInFp);
         functionPointAnalyse.setAufwandInMM(aufwandInMm);
-        System.out.println("fp: " + aufwandInMm);
+        return null;
     }
 
 
@@ -50,7 +53,10 @@ public class AufwandRechner implements IAufwandRechner {
     }
 
     @Override
-    public void optimiereFaktor(IModel model, double vaf, int index) {
+    public String optimiereFaktor(IModel model, double vaf, int index) {
+        if(vaf < 0.65 || vaf > 1.35){
+            return "Value Adjustment Factor ist invalide. Muss zwischen 0.65 und 1.35 liegen.";
+        }
         IDataAnforderungssammlung anforderungssammlung = model.getIDataAnforderungssammlung();
         double summeAufwand = this.calculateSummeAufwand(model);
 
@@ -67,6 +73,7 @@ public class AufwandRechner implements IAufwandRechner {
         double[] einflussFaktoren = model.getSchaetzKonfiguration().getGewichte2();
         einflussFaktoren[index] = einflussFaktor;
         model.getSchaetzKonfiguration().setGewichte2(einflussFaktoren);
+        return null;
     }
 }
 
