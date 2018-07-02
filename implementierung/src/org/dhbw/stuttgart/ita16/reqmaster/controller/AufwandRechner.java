@@ -34,6 +34,7 @@ public class AufwandRechner implements IAufwandRechner {
         functionPointAnalyse.setSummEinflussFaktoren(summeEinflussFaktoren);
         functionPointAnalyse.setAufwandInFP(aufwandInFp);
         functionPointAnalyse.setAufwandInMM(aufwandInMm);
+        System.out.println("fp: " + aufwandInMm);
     }
 
 }

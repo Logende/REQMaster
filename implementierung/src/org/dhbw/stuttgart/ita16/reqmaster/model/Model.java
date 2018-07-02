@@ -16,7 +16,8 @@ public class Model implements IModel {
     public Model(IExporter exporter, File schaetzKonfigurationsFile) {
     	this.exporter = exporter;
     	this.schaetzKonfigurationFile = schaetzKonfigurationsFile;
-    	if(!schaetzKonfigurationsFile.exists()){
+    	boolean b = true;
+    	if(!schaetzKonfigurationsFile.exists() || b){
     		this.schaetzKonfiguration = DefaultValues.createSchaetzKonfiguration();
 		}else {
 			this.schaetzKonfiguration = exporter.loadSchaetzkonfiguration(schaetzKonfigurationsFile);
