@@ -47,6 +47,7 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
         setBorder(BorderFactory.createTitledBorder("Einflussfaktoren"));
         addComponents();
         setComponents();
+        this.update(view.getModel());
     }
 
     private void addComponents(){
@@ -136,7 +137,7 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
     private void wasModified(Component focusLost){
         // Erstellen einer Liste mit den aktuellen Attributen
 
-        DataSchaetzKonfiguration proposal = new DataSchaetzKonfiguration(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
+        /*DataSchaetzKonfiguration proposal = new DataSchaetzKonfiguration(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
         UIActionFPGewichtsfaktorenOptimierenEvent optimierenEvent = new UIModifyProduktDatumEvent(dataId, proposal);
         getView().getObsController().observe(optimierenEvent);
         if(focusLost != null) {
@@ -148,6 +149,6 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
             } else {
                 View.forcesFocus = null;
             }
-        }
+        }*/
     }
 }

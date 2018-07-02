@@ -37,6 +37,6 @@ public class UIFunctionPointPanel extends UIPanel {
      */
     public void update(IModel model){
         einstufungen.update(model);
-        //TODO: Update values
+        gewichtsfaktoren.update(model);
     }
 }

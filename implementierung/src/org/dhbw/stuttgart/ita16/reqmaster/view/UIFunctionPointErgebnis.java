@@ -19,10 +19,10 @@ public class UIFunctionPointErgebnis extends UIPanel {
 
     //Variablen der Klasse
     private UIButton aufwandAnzeigen;
-    private UIButton aufwandMMAnzeigen;
     private UIButton gewichtsfaktorOpt;
     private UILabel aufwandFP;
     private UILabel aufwandMM;
+    private UILabel aufwandMMLabel;
     private UITextField realerAufwand;
     private UIChoice<FPGewichtsfaktor> choice;
 
@@ -32,27 +32,27 @@ public class UIFunctionPointErgebnis extends UIPanel {
 
 		//Die Klassenvariablen instanzieren
         aufwandAnzeigen=new UIButton();
-        aufwandMMAnzeigen=new UIButton();
         gewichtsfaktorOpt=new UIButton();
         aufwandMM=new UILabel();
         aufwandFP= new UILabel();
+        aufwandMMLabel = new UILabel();
         realerAufwand=new UITextField();
-        choice = new UIChoice<>(FPGewichtsfaktor.values(),null);
+        choice = new UIChoice<>(FPGewichtsfaktor.values());
         insets = new Insets(10,10,10,10);
 
         //Hinzufügen der Komponenten sowie Settings
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createTitledBorder("Ergebnis"));
         aufwandAnzeigen.setText("Aufwand in FP anzeigen");
-        aufwandMMAnzeigen.setText("Aufwand in MM Anzeigen");
+        aufwandMM.setText("Aufwand in MM");
         gewichtsfaktorOpt.setText("Optimieren");
         realerAufwand.setPreferredSize(new Dimension(100,20));
         realerAufwand.setMinimumSize(new Dimension(50,20));
 
         //Definieren des Layout wegen GridBagLayout
         addGB(aufwandAnzeigen,this, gridx = 1, gridy = 1, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.HORIZONTAL, insets);
+        addGB(aufwandMMLabel,this, gridx = 1, gridy = 2, gridwidth = 1, gridheight = 1, insets);
         addGB(aufwandFP,this, gridx = 2, gridy = 1, gridwidth = 1, gridheight = 1, insets);
-        addGB(aufwandMMAnzeigen,this, gridx = 1, gridy = 2, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.HORIZONTAL, insets);
         addGB(aufwandMM,this, gridx = 2, gridy = 2, gridwidth = 1, gridheight = 1, insets);
         addGB(gewichtsfaktorOpt,this,gridx = 1, gridy = 3, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.HORIZONTAL, insets);
         addGB(realerAufwand,this, gridx = 2, gridy = 3, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.BOTH, insets);
@@ -61,14 +61,12 @@ public class UIFunctionPointErgebnis extends UIPanel {
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent());
-            }
-        });
-
-        aufwandAnzeigen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getView().getObsController().observe(new UIActionFPAufwandAnzeigenMannmonateEvent());
+                try{
+                    double vaf = Double.parseDouble(realerAufwand.getText());
+                    getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent(vaf));
+                }catch(NumberFormatException exception){
+                    //TODO: show error message/dialog
+                }
             }
         });
 
