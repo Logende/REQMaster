@@ -138,7 +138,7 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         nameText.setText(DefaultValues.PRODUKTDATUM_NAME);
         idText.setText(DefaultValues.ID);
         attributeText.setText(DefaultValues.PRODUKTDATUM_ATTRIBUTE);
-        verweiseText.setText(DefaultValues.VERWEISE);
+        verweiseText.setText(DefaultValues.PRODUKTDATUM_VERWEISE);
         title.setForeground(Color.BLUE);
     }
 
