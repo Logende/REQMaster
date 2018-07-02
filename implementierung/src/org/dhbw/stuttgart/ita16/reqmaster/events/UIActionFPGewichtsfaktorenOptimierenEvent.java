@@ -1,25 +1,22 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
-import org.dhbw.stuttgart.ita16.reqmaster.model.FPGewichtsfaktor;
-
-import java.io.*;
-import java.util.*;
 
 public class UIActionFPGewichtsfaktorenOptimierenEvent extends UIActionFPEvent {
 
-	private final FPGewichtsfaktor gewichtsfaktor;
-	private final double realerAufwand;
+	private final int index;
+	private final double vaf;
 
-	public UIActionFPGewichtsfaktorenOptimierenEvent(FPGewichtsfaktor gewichtsfaktor, double realerAufwand) {
-		this.gewichtsfaktor = gewichtsfaktor;
-		this.realerAufwand = realerAufwand;
+	public UIActionFPGewichtsfaktorenOptimierenEvent(int index, double vaf) {
+		this.index = index;
+		this.vaf = vaf;
 	}
 
-	public FPGewichtsfaktor getGewichtsfaktor() {
-		return gewichtsfaktor;
+
+	public int getIndex() {
+		return index;
 	}
 
-	public double getRealerAufwand() {
-		return realerAufwand;
+	public double getVaf() {
+		return vaf;
 	}
 }

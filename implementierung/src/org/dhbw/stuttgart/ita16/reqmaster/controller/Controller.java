@@ -3,7 +3,6 @@ package org.dhbw.stuttgart.ita16.reqmaster.controller;
 import org.dhbw.stuttgart.ita16.reqmaster.events.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
-import org.dhbw.stuttgart.ita16.reqmaster.view.UIUmgebung;
 
 import java.io.File;
 import java.util.*;
@@ -212,7 +211,8 @@ public class Controller implements IObserverController, IController{
         });
 
         reactions.put(UIActionFPGewichtsfaktorenOptimierenEvent.class, (model, view, event)->{
-            //TODO
+            UIActionFPGewichtsfaktorenOptimierenEvent e = (UIActionFPGewichtsfaktorenOptimierenEvent) event;
+            aufwandRechner.optimiereFaktor(model, e.getVaf(), e.getIndex());
             return true;
         });
 
