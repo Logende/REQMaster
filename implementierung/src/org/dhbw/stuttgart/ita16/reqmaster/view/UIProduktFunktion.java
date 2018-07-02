@@ -118,7 +118,7 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
         quelleText.setText(DefaultValues.PRODUKTFUNKTION_QUELLE);
         akteurText.setText(DefaultValues.PRODUKTFUNKTION_AKTEUR);
         beschreibungText.setText(DefaultValues.PRODUKTFUNKTION_BESCHREIBUNG);
-        verweiseText.setText(DefaultValues.VERWEISE);
+        verweiseText.setText(DefaultValues.PRODUKTFUNKTION_VERWEISE);
     }
 
     /**

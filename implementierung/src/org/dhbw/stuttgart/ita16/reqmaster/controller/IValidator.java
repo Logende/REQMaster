@@ -1,25 +1,80 @@
 package org.dhbw.stuttgart.ita16.reqmaster.controller;
 
-import java.io.*;
-import java.util.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
+
+/**
+ * Interface for validators, which validate user input for the model.
+ * Used by the controller to validate user input and deny invalid input.
+ */
 public interface IValidator {
 
-	boolean isValid(IModel model, DataProduktDatum current, DataProduktDatum proposal);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param current
+	 * @param proposal
+	 * @return null if valid, error message if invalid.
+	 */
+	String isValid(IModel model, DataProduktDatum current, DataProduktDatum proposal);
 
-	boolean isValid(IModel model, DataZielbestimmung proposal);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param proposal
+	 * @return
+	 */
+	String isValid(IModel model, DataZielbestimmung proposal);
 
-	boolean isValid(IModel model, DataProdukteinsatz proposal);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param proposal
+	 * @return null if valid, error message if invalid.
+	 */
+	String isValid(IModel model, DataProdukteinsatz proposal);
 
-	boolean isValid(IModel model, DataUmgebung proposal);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param proposal
+	 * @return null if valid, error message if invalid.
+	 */
+	String isValid(IModel model, DataUmgebung proposal);
 
-	boolean isValid(IModel model, DataProduktFunktion current, DataProduktFunktion proposal);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param current
+	 * @param proposal
+	 * @return null if valid, error message if invalid.
+	 */
+	String isValid(IModel model, DataProduktFunktion current, DataProduktFunktion proposal);
 
-	boolean isValid(IModel model, IDataFunctionPointEinstufung current, IDataFunctionPointEinstufung proposal, IIdentifiable iIdentifiable);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param current
+	 * @param proposal
+	 * @param iIdentifiable
+	 * @return null if valid, error message if invalid.
+	 */
+	String isValid(IModel model, IDataFunctionPointEinstufung current, IDataFunctionPointEinstufung proposal, IIdentifiable iIdentifiable);
 
-	boolean isValid(IModel model, double realerAufwand);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param realerAufwand
+	 * @return null if valid, error message if invalid.
+	 */
+	String isValid(IModel model, double realerAufwand);
 
-	boolean isValid(IModel model, IDataSchaetzKonfiguration schaetzKonfiguration);
+	/**
+	 * Checks whether proposal is valid.
+	 * @param model
+	 * @param schaetzKonfiguration
+	 * @return null if valid, error message if invalid.
+	 */
+	String isValid(IModel model, IDataSchaetzKonfiguration schaetzKonfiguration);
 
 }

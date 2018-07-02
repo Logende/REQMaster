@@ -27,7 +27,7 @@ public class Controller implements IObserverController, IController{
         //ADD
         reactions.put(UIActionAddProduktDatumEvent.class, (model, view, event)->{
             DataProduktDatum dataProduktDatum = new DataProduktDatum(DefaultValues.PRODUKTDATUM_NAME, generateUniqueID("/LD", "/"),
-                    new ArrayList<>(), DefaultValues.VERWEISE);
+                    new ArrayList<>(), DefaultValues.PRODUKTDATUM_VERWEISE);
             model.getIDataAnforderungssammlung().getDataProduktDaten().put(dataProduktDatum.getId(), dataProduktDatum);
             return true;
         });
@@ -35,7 +35,7 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIActionAddProduktFunktionEvent.class, (model, view, event)->{
             DataProduktFunktion dataProduktFunktion = new DataProduktFunktion(DefaultValues.PRODUKTFUNKTION_NAME,
                     DefaultValues.PRODUKTFUNKTION_BESCHREIBUNG, DefaultValues.PRODUKTFUNKTION_AKTEUR, DefaultValues.PRODUKTFUNKTION_QUELLE,
-                   DefaultValues.VERWEISE, generateUniqueID("/LF", "/"));
+                    DefaultValues.PRODUKTFUNKTION_VERWEISE, generateUniqueID("/LF", "/"));
             model.getIDataAnforderungssammlung().getDataProduktFunktionen().put(dataProduktFunktion.getId(), dataProduktFunktion);
             return true;
         });
@@ -89,11 +89,13 @@ public class Controller implements IObserverController, IController{
             UIModifyProduktDatumEvent e = (UIModifyProduktDatumEvent) event;
             DataProduktDatum proposal = e.getProposal();
             DataProduktDatum current = model.getIDataAnforderungssammlung().getDataProduktDaten().get(e.getId());
-            if(validator.isValid(model, current, proposal)){
+            String errorMessage = validator.isValid(model, current, proposal);
+            if(errorMessage == null){
                 boolean containsChange = current.modify(proposal);
                 e.setSuccess(true);
                 return containsChange;
-            }else {
+            }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });
@@ -102,11 +104,13 @@ public class Controller implements IObserverController, IController{
             UIModifyProduktFunktionEvent e = (UIModifyProduktFunktionEvent) event;
             DataProduktFunktion proposal = e.getProposal();
             DataProduktFunktion current = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(e.getId());
-            if(validator.isValid(model, current, proposal)){
+            String errorMessage = validator.isValid(model, current, proposal);
+            if(errorMessage == null){
                 boolean containsChange = current.modify(proposal);
                 e.setSuccess(true);
                 return containsChange;
             }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });
@@ -114,11 +118,13 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIModifyZielbestimmungEvent.class, (model, view, event)->{
             UIModifyZielbestimmungEvent e = (UIModifyZielbestimmungEvent) event;
             DataZielbestimmung proposal = e.getProposal();
-            if(validator.isValid(model, proposal)){
+            String errorMessage = validator.isValid(model, proposal);
+            if(errorMessage == null){
                 model.getIDataAnforderungssammlung().getDataZielbestimmung().modify(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });
@@ -126,11 +132,13 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIModifyUmgebungEvent.class, (model, view, event)->{
             UIModifyUmgebungEvent e = (UIModifyUmgebungEvent) event;
             DataUmgebung proposal = e.getProposal();
-            if(validator.isValid(model, proposal)){
+            String errorMessage = validator.isValid(model, proposal);
+            if(errorMessage == null){
                 model.getIDataAnforderungssammlung().getDataUmgebung().modify(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });
@@ -138,11 +146,13 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIModifyProdukteinsatzEvent.class, (model, view, event)->{
             UIModifyProdukteinsatzEvent e = (UIModifyProdukteinsatzEvent) event;
             DataProdukteinsatz proposal = e.getProposal();
-            if(validator.isValid(model, proposal)){
+            String errorMessage = validator.isValid(model, proposal);
+            if(errorMessage == null){
                 model.getIDataAnforderungssammlung().getDataProdukteinsatz().modify(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });
@@ -152,11 +162,13 @@ public class Controller implements IObserverController, IController{
             IIdentifiable iIdentifiable = model.getIDataAnforderungssammlung().getObject(e.getID());
             IDataFunctionPointEinstufung current = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
             IDataFunctionPointEinstufung proposal = e.getProposal();
-            if(validator.isValid(model, current, proposal, iIdentifiable)){
+            String errorMessage = validator.isValid(model, current, proposal, iIdentifiable);
+            if(errorMessage == null){
                 current.modify(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });
@@ -165,11 +177,13 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIModifyRealerAufwand.class, (model, view, event)->{
             UIModifyRealerAufwand e = (UIModifyRealerAufwand) event;
             double proposal = e.getProposal();
-            if(validator.isValid(model, proposal)){
+            String errorMessage = validator.isValid(model, proposal);
+            if(errorMessage == null){
                 model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setRealerAufwand(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });
@@ -177,11 +191,13 @@ public class Controller implements IObserverController, IController{
         reactions.put(UIModifyGewichtsfaktorenEvent.class, (model, view, event)->{
             UIModifyGewichtsfaktorenEvent e = (UIModifyGewichtsfaktorenEvent) event;
             IDataSchaetzKonfiguration proposal = e.getProposal();
-            if(validator.isValid(model, proposal)){
+            String errorMessage = validator.isValid(model, proposal);
+            if(errorMessage == null){
                 model.setSchaetzKonfiguration(proposal);
                 e.setSuccess(true);
                 return true;
             }else{
+                e.setErrorMessage(errorMessage);
                 return false;
             }
         });

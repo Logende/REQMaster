@@ -6,37 +6,37 @@ public class Validator implements  IValidator{
 
 
     @Override
-    public boolean isValid(IModel model, DataProduktDatum current, DataProduktDatum proposal) {
+    public String isValid(IModel model, DataProduktDatum current, DataProduktDatum proposal) {
         if(!isValidId(model, current, proposal.getId())){
-            return false;
+            return "Invalide Id.";
         }
-        return true;
+        return null;
     }
 
     @Override
-    public boolean isValid(IModel model, DataZielbestimmung proposal) {
-        return true;
+    public String isValid(IModel model, DataZielbestimmung proposal) {
+        return null;
     }
 
     @Override
-    public boolean isValid(IModel model, DataProdukteinsatz proposal) {
-        return true;
+    public String isValid(IModel model, DataProdukteinsatz proposal) {
+        return null;
     }
     @Override
-    public boolean isValid(IModel model, DataUmgebung proposal) {
-        return true;
+    public String isValid(IModel model, DataUmgebung proposal) {
+        return null;
     }
 
     @Override
-    public boolean isValid(IModel model, DataProduktFunktion current, DataProduktFunktion proposal) {
+    public String isValid(IModel model, DataProduktFunktion current, DataProduktFunktion proposal) {
         if(!isValidId(model, current, proposal.getId())){
-            return false;
+            return "Invalide Id.";
         }
-        return true;
+        return null;
     }
 
     @Override
-    public boolean isValid(IModel model, IDataFunctionPointEinstufung current, IDataFunctionPointEinstufung proposal, IIdentifiable iIdentifiable) {
+    public String isValid(IModel model, IDataFunctionPointEinstufung current, IDataFunctionPointEinstufung proposal, IIdentifiable iIdentifiable) {
          switch (proposal.getFunktionstyp()) {
             case DATEN:
                 switch (proposal.getKlassifizierung()) {
@@ -46,7 +46,7 @@ public class Validator implements  IValidator{
                     case TRANSAKTION_EI:
                     case TRANSAKTION_EO:
                     case TRANSAKTION_EQ:
-                        return false;
+                        return "Invalide Klassifizierung für Funktionstyp DATEN.";
                 }
                 break;
 
@@ -54,7 +54,7 @@ public class Validator implements  IValidator{
                 switch (proposal.getKlassifizierung()) {
                     case DATEN_ELF:
                     case DATEN_ILF:
-                        return false;
+                        return "Invalide Klassifizierung für Funktionstyp TRANSAKTION.";
                     case TRANSAKTION_EI:
                     case TRANSAKTION_EO:
                     case TRANSAKTION_EQ:
@@ -62,17 +62,20 @@ public class Validator implements  IValidator{
                 }
                 break;
         }
-        return true;
+        return null;
     }
 
     @Override
-    public boolean isValid(IModel model, double realerAufwand) {
-        return realerAufwand > 0;
+    public String isValid(IModel model, double realerAufwand) {
+        if(realerAufwand <= 0){
+            return "Invalider realer Aufwand: Muss positiv sein.";
+        }
+        return null;
     }
 
     @Override
-    public boolean isValid(IModel model, IDataSchaetzKonfiguration schaetzKonfiguration) {
-        return true;
+    public String isValid(IModel model, IDataSchaetzKonfiguration schaetzKonfiguration) {
+        return null;
     }
 
 

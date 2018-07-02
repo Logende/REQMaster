@@ -1,7 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -9,11 +8,12 @@ public class DefaultValues {
 
     public static final String PRODUKTDATUM_NAME = "Produktdatumname";
     public static final String PRODUKTDATUM_ATTRIBUTE = "Attribute";
+    public static final String PRODUKTDATUM_VERWEISE = "Verweise";
     public static final String PRODUKTFUNKTION_NAME = "Produktfunktionname";
     public static final String PRODUKTFUNKTION_BESCHREIBUNG = "Beschreibung";
     public static final String PRODUKTFUNKTION_QUELLE = "Quelle";
     public static final String PRODUKTFUNKTION_AKTEUR = "Akteur";
-    public static final String VERWEISE = "Verweise";
+    public static final String PRODUKTFUNKTION_VERWEISE = "Verweise";
     public static final String ID = "ID";
     public static final String ZIELBESTIMMUNG = "Zielbestimmung";
     public static final String PRODUKTEINSATZ = "Produkteinsatz";
@@ -41,7 +41,7 @@ public class DefaultValues {
             }
             defaultGewichte1.put(klassifizierung, submap);
         }
-        double[] defaultGewichte2 = {1,1,1,1,1,1,1};
+        double[] defaultGewichte2 = {1,1,1,1,1,1,1,1,1,1,1};
         return new DataSchaetzKonfiguration(defaultGewichte1, defaultGewichte2);
     }
 
