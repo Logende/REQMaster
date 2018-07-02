@@ -3,6 +3,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.*;
+import org.dhbw.stuttgart.ita16.reqmaster.model.FPGewichtsfaktor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,8 +24,7 @@ public class UIFunctionPointErgebnis extends UIPanel {
     private UILabel aufwandFP;
     private UILabel aufwandMM;
     private UITextField realerAufwand;
-    private int gridx, gridy, gridwidth, gridheight, fill, anchor, ipadx, ipady;
-    private Insets insets;
+    private UIChoice<FPGewichtsfaktor> choice;
 
     public UIFunctionPointErgebnis(IView view) {
 
@@ -37,11 +37,18 @@ public class UIFunctionPointErgebnis extends UIPanel {
         aufwandMM=new UILabel();
         aufwandFP= new UILabel();
         realerAufwand=new UITextField();
+        choice = new UIChoice<>(FPGewichtsfaktor.values(),null);
         insets = new Insets(10,10,10,10);
 
         //Hinzufügen der Komponenten sowie Settings
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createTitledBorder("Ergebnis"));
+        aufwandAnzeigen.setText("Aufwand in FP anzeigen");
+        aufwandMMAnzeigen.setText("Aufwand in MM Anzeigen");
+        gewichtsfaktorOpt.setText("Optimieren");
+        realerAufwand.setPreferredSize(new Dimension(100,20));
+        realerAufwand.setMinimumSize(new Dimension(50,20));
+
         //Definieren des Layout wegen GridBagLayout
         addGB(aufwandAnzeigen,this, gridx = 1, gridy = 1, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.HORIZONTAL, insets);
         addGB(aufwandFP,this, gridx = 2, gridy = 1, gridwidth = 1, gridheight = 1, insets);
@@ -49,12 +56,7 @@ public class UIFunctionPointErgebnis extends UIPanel {
         addGB(aufwandMM,this, gridx = 2, gridy = 2, gridwidth = 1, gridheight = 1, insets);
         addGB(gewichtsfaktorOpt,this,gridx = 1, gridy = 3, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.HORIZONTAL, insets);
         addGB(realerAufwand,this, gridx = 2, gridy = 3, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.BOTH, insets);
-
-        aufwandAnzeigen.setText("Aufwand in FP anzeigen");
-        aufwandMMAnzeigen.setText("Aufwand in MM Anzeigen");
-        gewichtsfaktorOpt.setText("Optimieren");
-        realerAufwand.setPreferredSize(new Dimension(100,20));
-        realerAufwand.setMinimumSize(new Dimension(50,20));
+        addGB(choice, this, 3,3,2,1,fill = GridBagConstraints.BOTH, insets);
 
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
@@ -73,44 +75,43 @@ public class UIFunctionPointErgebnis extends UIPanel {
         gewichtsfaktorOpt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent());
+                if (realerAufwand.getText() != null) {
+                    try {
+                        double value = Double.parseDouble(realerAufwand.getText());
+                        realerAufwand.setForeground(Color.BLACK);
+                        getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent((FPGewichtsfaktor) choice.getSelectedItem(), value));
+                    } catch (Exception exception) {
+                        realerAufwand.setForeground(Color.RED);
+                    }
+                }
             }
         });
+    }
 
-        realerAufwand.addActionListener(new ActionListener() {
-            /**
-             * legt fest, dass wenn ein Action Event (Enter drücken) ausgelöst wird während der Fokus auf dem textfeld liegt,
-             * dies an den Controller weitergegeben wird und der fokus auf des Textfeld verschwindet
-             * @param e
-             */
-            @Override
-            public void actionPerformed(ActionEvent e){
-                realerAufwand.setFocusable(false);														//entziehe den Fokus
-                getView().getObsController().observe(new UIModifyRealerAufwand(Double.parseDouble(realerAufwand.getText())));	//teile das Ereignis dem Controller mit
-                realerAufwand.setFocusable(true);														// gebe die Möglichkeit zum Fokussieren zurück.
-            }});
+    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, Insets insets) {
+        addGB(component, parent, gridx, gridy, gridwidth, gridheight, GridBagConstraints.NONE, 0.0, 0.0,
+                GridBagConstraints.CENTER, insets, 0, 0);
+    }
 
-        realerAufwand.addFocusListener(new FocusListener() {
-            /**
-             * legt fest, dass wenn ein der Focus auf das Textfeld gelegt wird (Mousklick), nichts passieren soll
-             *
-             * @param e
-             */
-            @Override
-            public void focusGained(FocusEvent e) {
-            }
-
-            /**
-             * legt fest, dass wenn ein der Focus auf das Textfeld gelegt wird (Mousklick in ein anderes Feld),
-             * dies an den Controller weitergegeben wird und der fokus auf des Textfeld verschwindet
-             *
-             * @param e
-             */
-            public void focusLost(FocusEvent e) {
-                getView().getObsController().observe(new UIModifyRealerAufwand(Double.parseDouble(realerAufwand.getText())));//teile das Ereignis dem Controller mit
-            }
-        });
-
+    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, int fill, Insets insets) {
+        addGB(component, parent, gridx, gridy, gridwidth, gridheight, fill, 0.0, 0.0, GridBagConstraints.CENTER,
+                insets, 0, 0);
+    }
+    private void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight,
+                       int fill, double weightx, double weighty, int anchor, Insets insets, int ipadx, int ipady) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = gridx;
+        constraints.gridy = gridy;
+        constraints.gridwidth = gridwidth;
+        constraints.gridheight = gridheight;
+        constraints.fill = fill;
+        constraints.weightx = weightx;
+        constraints.weighty = weighty;
+        constraints.anchor = anchor;
+        constraints.insets = insets;
+        constraints.ipadx = ipadx;
+        constraints.ipady = ipady;
+        parent.add(component, constraints);
     }
 }
 

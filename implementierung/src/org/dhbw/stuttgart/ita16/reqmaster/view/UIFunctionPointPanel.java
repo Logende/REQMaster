@@ -11,20 +11,24 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
  */
 public class UIFunctionPointPanel extends UIPanel {
 
+    //Variablen der Klasse
     private UIFunctionPointEinstufungen einstufungen;
     private UIFunctionPointErgebnis fpErgebnis;
     private UIGewichtsfaktoren gewichtsfaktoren;
 
+    /**
+     * Konstruktor der Klasse
+     * @param view Instanz der View des MVC-Patterns
+     */
     public UIFunctionPointPanel(IView view) {
         super(view);
+
         setLayout(new GridLayout(2,2));
         this.add(einstufungen = new UIFunctionPointEinstufungen(view));
         this.add(gewichtsfaktoren = new UIGewichtsfaktoren(view));
         fpErgebnis = new UIFunctionPointErgebnis(view);
         this.add(fpErgebnis);
-
         this.setVisible(true);
-
     }
 
     /**
