@@ -157,17 +157,17 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
 
     private double[] createGewichte(){
         try {
-            double[] gewichte = null;
+            double[] gewichte = new double[11];
             gewichte[0] = Double.parseDouble(faktorEins.getText());
-            gewichte[0] = Double.parseDouble(faktorZwei.getText());
-            gewichte[0] = Double.parseDouble(faktorDrei.getText());
-            gewichte[0] = Double.parseDouble(faktorAVier.getText());
-            gewichte[0] = Double.parseDouble(faktorBVier.getText());
-            gewichte[0] = Double.parseDouble(faktorCVier.getText());
-            gewichte[0] = Double.parseDouble(faktorDVier.getText());
-            gewichte[0] = Double.parseDouble(faktorFuenf.getText());
-            gewichte[0] = Double.parseDouble(faktorSechs.getText());
-            gewichte[0] = Double.parseDouble(faktorSieben.getText());
+            gewichte[1] = Double.parseDouble(faktorZwei.getText());
+            gewichte[2] = Double.parseDouble(faktorDrei.getText());
+            gewichte[3] = Double.parseDouble(faktorAVier.getText());
+            gewichte[4] = Double.parseDouble(faktorBVier.getText());
+            gewichte[5] = Double.parseDouble(faktorCVier.getText());
+            gewichte[6] = Double.parseDouble(faktorDVier.getText());
+            gewichte[7] = Double.parseDouble(faktorFuenf.getText());
+            gewichte[8] = Double.parseDouble(faktorSechs.getText());
+            gewichte[9] = Double.parseDouble(faktorSieben.getText());
             return gewichte;
         } catch (NumberFormatException exception) {
             JOptionPane.showMessageDialog(this, "Einer der Gewichtsfaktoren ist keine Zahl!",
