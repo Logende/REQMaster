@@ -7,6 +7,7 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 
 	private Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen;
 	private double realerAufwand, aufwandFp, aufwandMm;
+	private double summeAufwand, summEinflussFaktoren, faktorEinflussBewertung;
 
 	public DataFunctionPointAnalyse(Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen, double realerAufwand) {
 		this.einstufungen = einstufungen;
@@ -55,4 +56,34 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 	public void setAufwandInMM(double aufwandMm) {
 		this.aufwandMm = aufwandMm;
 	}
+
+    @Override
+    public double getSummeAufwand() {
+        return summeAufwand;
+    }
+
+    @Override
+    public void setSummeAufwand(double summeAufwand) {
+        this.summeAufwand = summeAufwand;
+    }
+
+    @Override
+    public double getSummEinflussFaktoren() {
+        return summEinflussFaktoren;
+    }
+
+    @Override
+    public void setSummEinflussFaktoren(double summEinflussFaktoren) {
+        this.summEinflussFaktoren = summEinflussFaktoren;
+    }
+
+    @Override
+    public double getFaktorEinflussBewertung() {
+        return faktorEinflussBewertung;
+    }
+
+    @Override
+    public void setFaktorEinflussBewertung(double faktorEinflussBewertung) {
+        this.faktorEinflussBewertung = faktorEinflussBewertung;
+    }
 }
