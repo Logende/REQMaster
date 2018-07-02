@@ -18,6 +18,8 @@ public class DataSchaetzKonfiguration implements IDataSchaetzKonfiguration {
 		return gewichte2;
 	}
 
+
+
 	@Override
 	public double getGewicht1(FPKlassifizierung klassifizierung, FPKomplexitaet komplexitaet) {
 		return gewichte1.get(klassifizierung).get(komplexitaet);
@@ -36,5 +38,10 @@ public class DataSchaetzKonfiguration implements IDataSchaetzKonfiguration {
 	@Override
 	public void setGewichte2(double[] gewichte) {
 		this.gewichte2 = gewichte;
+	}
+
+	@Override
+	public Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> getGewichte1() {
+		return gewichte1;
 	}
 }
