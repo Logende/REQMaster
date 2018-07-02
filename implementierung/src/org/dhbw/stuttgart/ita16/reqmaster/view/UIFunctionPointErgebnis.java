@@ -30,7 +30,6 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
     public UIFunctionPointErgebnis(IView view) {
 
 		super(view);
-
 		//Die Klassenvariablen instanzieren
         aufwandAnzeigen=new UIButton();
         gewichtsfaktorOpt=new UIButton();
@@ -51,14 +50,15 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         realerAufwand.setMinimumSize(new Dimension(50,20));
 
         //Definieren des Layout wegen GridBagLayout
-        addGB(aufwandAnzeigen,this, gridx = 1, gridy = 1, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.HORIZONTAL, insets);
-        addGB(aufwandMMLabel,this, gridx = 1, gridy = 2, gridwidth = 1, gridheight = 1, insets);
-        addGB(aufwandFP,this, gridx = 2, gridy = 1, gridwidth = 1, gridheight = 1, insets);
-        addGB(aufwandMM,this, gridx = 2, gridy = 2, gridwidth = 1, gridheight = 1, insets);
-        addGB(gewichtsfaktorOpt,this,gridx = 1, gridy = 3, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.HORIZONTAL, insets);
-        addGB(realerAufwand,this, gridx = 2, gridy = 3, gridwidth = 1, gridheight = 1, fill = GridBagConstraints.BOTH, insets);
-        addGB(choice, this, 3,3,2,1,fill = GridBagConstraints.BOTH, insets);
-
+        GridBagConstraints constraints = new GridBagConstraints();
+        addGB(aufwandAnzeigen,this, 1, 1, 1,  1, GridBagConstraints.HORIZONTAL, insets, constraints);
+        addGB(aufwandFP,this,  2,  1, 1, 1, insets, constraints);
+        addGB(aufwandMMLabel,this,  1,  2,  1, 1, insets, constraints);
+        addGB(aufwandMM,this,  2,  2,  1, 1, insets, constraints);
+        addGB(gewichtsfaktorOpt,this, 1,  3,  1, 1, fill = GridBagConstraints.HORIZONTAL, insets, constraints);
+        addGB(realerAufwand,this,  2,  3,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
+        addGB(choice, this, 3,3,2,1,fill = GridBagConstraints.BOTH, insets, constraints);
+        
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,21 +92,20 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         });
     }
 
-    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, Insets insets) {
+    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, Insets insets, GridBagConstraints constraints) {
         addGB(component, parent, gridx, gridy, gridwidth, gridheight, GridBagConstraints.NONE, 0.0, 0.0,
-                GridBagConstraints.CENTER, insets, 0, 0);
+                GridBagConstraints.CENTER, insets, 0, 0, constraints);
     }
 
-    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, int fill, Insets insets) {
+    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, int fill, Insets insets, GridBagConstraints constraints) {
         addGB(component, parent, gridx, gridy, gridwidth, gridheight, fill, 0.0, 0.0, GridBagConstraints.CENTER,
-                insets, 0, 0);
+                insets, 0, 0, constraints);
     }
     private void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight,
-                       int fill, double weightx, double weighty, int anchor, Insets insets, int ipadx, int ipady) {
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = gridx;
-        constraints.gridy = gridy;
-        constraints.gridwidth = gridwidth;
+                       int fill, double weightx, double weighty, int anchor, Insets insets, int ipadx, int ipady, GridBagConstraints constraints) {
+        constraints. gridx = gridx;
+        constraints. gridy = gridy;
+        constraints. gridwidth = gridwidth;
         constraints.gridheight = gridheight;
         constraints.fill = fill;
         constraints.weightx = weightx;
@@ -120,7 +119,11 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
 
     @Override
     public void update(IModel model) {
-
+        System.out.println( model);
+        System.out.println( model.getIDataAnforderungssammlung());
+        aufwandFP.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInFP()));
+        aufwandMM.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInMM()));
+        realerAufwand.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getRealerAufwand()));
     }
 }
 
