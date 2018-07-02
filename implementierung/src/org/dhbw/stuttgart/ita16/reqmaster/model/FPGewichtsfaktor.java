@@ -22,4 +22,9 @@ public enum FPGewichtsfaktor {
     public String getDisplayname() {
         return displayname;
     }
+
+    @Override
+    public String toString(){
+        return getDisplayname();
+    }
 }
