@@ -23,32 +23,42 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
     private UILabel aufwandFP;
     private UILabel aufwandMM;
     private UILabel aufwandMMLabel;
+    private UILabel realerAufwandLabel;
     private UITextField realerAufwand;
     private UILabel vafText;
     private UITextField vaf;
     private UIChoice<FPGewichtsfaktor> choice;
+    private UIScrollPane scrollPane;
+    private UIPanel ergebnisPanel;
 
     public UIFunctionPointErgebnis(IView view) {
 
         super(view);
         //Die Klassenvariablen instanzieren
-        aufwandAnzeigen=new UIButton();
-        gewichtsfaktorOpt=new UIButton();
-        aufwandMM=new UILabel();
-        aufwandFP= new UILabel();
+        ergebnisPanel = new UIPanel();
+        scrollPane = new UIScrollPane(ergebnisPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        aufwandAnzeigen = new UIButton();
+        gewichtsfaktorOpt = new UIButton();
+        aufwandMM = new UILabel();
+        aufwandFP = new UILabel();
         aufwandMMLabel = new UILabel();
-        realerAufwand=new UITextField();
+        realerAufwand = new UITextField();
+        realerAufwandLabel = new UILabel();
         vaf = new UITextField();
         vafText = new UILabel();
         choice = new UIChoice<>(FPGewichtsfaktor.values());
         insets = new Insets(10,10,10,10);
 
         //Hinzufügen der Komponenten sowie Settings
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createTitledBorder("Ergebnis"));
+        this.add(scrollPane);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        ergebnisPanel.setLayout(new GridBagLayout());
         aufwandAnzeigen.setText("Aufwand in FP anzeigen");
         aufwandMM.setText("Aufwand in MM");
         gewichtsfaktorOpt.setText("Optimieren");
+        realerAufwandLabel.setText("Realer Aufwand");
         vafText.setText("VAF-Faktor");
         vaf.setText("1.0");
         realerAufwand.setPreferredSize(new Dimension(100,20));
@@ -58,15 +68,16 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
 
         //Definieren des Layout wegen GridBagLayout
         GridBagConstraints constraints = new GridBagConstraints();
-        addGB(aufwandAnzeigen,this, 1, 1, 1,  1, GridBagConstraints.HORIZONTAL, insets, constraints);
-        addGB(aufwandFP,this,  2,  1, 1, 1, insets, constraints);
-        addGB(aufwandMMLabel,this,  1,  2,  1, 1, insets, constraints);
-        addGB(aufwandMM,this,  2,  2,  1, 1, insets, constraints);
-        addGB(gewichtsfaktorOpt,this, 1,  3,  1, 1, fill = GridBagConstraints.HORIZONTAL, insets, constraints);
-        addGB(realerAufwand,this,  2,  3,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
-        addGB(choice, this, 3,3,2,1,fill = GridBagConstraints.BOTH, insets, constraints);
-        addGB(vafText,this,  1,  4,  1, 1, insets, constraints);
-        addGB(vaf,this,  2,  4,  1, 1, insets, constraints);
+        addGB(aufwandAnzeigen,ergebnisPanel, 1, 1, 1,  1, GridBagConstraints.HORIZONTAL, insets, constraints);
+        addGB(aufwandFP,ergebnisPanel,  2,  1, 1, 1, insets, constraints);
+        addGB(aufwandMMLabel,ergebnisPanel,  1,  2,  1, 1, insets, constraints);
+        addGB(aufwandMM,ergebnisPanel,  2,  2,  1, 1, insets, constraints);
+        addGB(gewichtsfaktorOpt,ergebnisPanel, 1,  3,  1, 1, fill = GridBagConstraints.HORIZONTAL, insets, constraints);
+        addGB(choice, ergebnisPanel, 2,3,2,1,fill = GridBagConstraints.BOTH, insets, constraints);
+        addGB(realerAufwandLabel,ergebnisPanel,  1,  4,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
+        addGB(realerAufwand,ergebnisPanel,  2,  4,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
+        addGB(vafText,ergebnisPanel,  1,  5,  1, 1, insets, constraints);
+        addGB(vaf,ergebnisPanel,  2,  5,  1, 1, insets, constraints);
 
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
@@ -149,9 +160,9 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
     }
     private void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight,
                        int fill, double weightx, double weighty, int anchor, Insets insets, int ipadx, int ipady, GridBagConstraints constraints) {
-        constraints. gridx = gridx;
-        constraints. gridy = gridy;
-        constraints. gridwidth = gridwidth;
+        constraints.gridx = gridx;
+        constraints.gridy = gridy;
+        constraints.gridwidth = gridwidth;
         constraints.gridheight = gridheight;
         constraints.fill = fill;
         constraints.weightx = weightx;
