@@ -8,20 +8,8 @@ public class AufwandRechner implements IAufwandRechner {
     public void calculateAufwand(IModel model, double vaf) {
         IDataAnforderungssammlung anforderungssammlung = model.getIDataAnforderungssammlung();
         IDataFunctionPointAnalyse functionPointAnalyse = anforderungssammlung.getIDataFunctionPointAnalyse();
-        double summeAufwand = 0;
-        for(DataProduktFunktion dataProduktFunktion : anforderungssammlung.getDataProduktFunktionen().values()){
-            IDataFunctionPointEinstufung einstufung = functionPointAnalyse.getEinstufung(dataProduktFunktion);
-            summeAufwand += model.getSchaetzKonfiguration().getGewicht1(einstufung.getKlassifizierung(), einstufung.getKomplexitaet());
-        }
-        for(DataProduktDatum dataProduktDatum : anforderungssammlung.getDataProduktDaten().values()){
-            IDataFunctionPointEinstufung einstufung = functionPointAnalyse.getEinstufung(dataProduktDatum);
-            summeAufwand += model.getSchaetzKonfiguration().getGewicht1(einstufung.getKlassifizierung(), einstufung.getKomplexitaet());
-        }
-
-        double summeEinflussFaktoren = 0;
-        for(double einflussFaktor : model.getSchaetzKonfiguration().getGewichte2()){
-            summeEinflussFaktoren += einflussFaktor;
-        }
+        double summeAufwand = this.calculateSummeAufwand(model);
+        double summeEinflussFaktoren = this.calculateSummeEinflussfaktoren(model);
 
         double faktorEinflussbewertung = summeEinflussFaktoren / 100.0 + 0.7;
         double aufwandInFp = summeAufwand * faktorEinflussbewertung;
@@ -37,5 +25,48 @@ public class AufwandRechner implements IAufwandRechner {
         System.out.println("fp: " + aufwandInMm);
     }
 
+
+    private double calculateSummeAufwand(IModel model){
+        IDataAnforderungssammlung anforderungssammlung = model.getIDataAnforderungssammlung();
+        IDataFunctionPointAnalyse functionPointAnalyse = anforderungssammlung.getIDataFunctionPointAnalyse();
+        double summeAufwand = 0;
+        for(DataProduktFunktion dataProduktFunktion : anforderungssammlung.getDataProduktFunktionen().values()){
+            IDataFunctionPointEinstufung einstufung = functionPointAnalyse.getEinstufung(dataProduktFunktion);
+            summeAufwand += model.getSchaetzKonfiguration().getGewicht1(einstufung.getKlassifizierung(), einstufung.getKomplexitaet());
+        }
+        for(DataProduktDatum dataProduktDatum : anforderungssammlung.getDataProduktDaten().values()){
+            IDataFunctionPointEinstufung einstufung = functionPointAnalyse.getEinstufung(dataProduktDatum);
+            summeAufwand += model.getSchaetzKonfiguration().getGewicht1(einstufung.getKlassifizierung(), einstufung.getKomplexitaet());
+        }
+        return summeAufwand;
+    }
+
+    private double calculateSummeEinflussfaktoren(IModel model){
+        double summeEinflussFaktoren = 0;
+        for(double einflussFaktor : model.getSchaetzKonfiguration().getGewichte2()){
+            summeEinflussFaktoren += einflussFaktor;
+        }
+        return summeEinflussFaktoren;
+    }
+
+    @Override
+    public void optimiereFaktor(IModel model, double vaf, int index) {
+        IDataAnforderungssammlung anforderungssammlung = model.getIDataAnforderungssammlung();
+        double summeAufwand = this.calculateSummeAufwand(model);
+
+        double goalAufwandInMm = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getRealerAufwand();
+        double afp = Math.pow(goalAufwandInMm, 1.0/0.4);
+        double aufwandInFp = afp / vaf;
+        double faktorEinflussbewertung = aufwandInFp / summeAufwand;
+        double summeEinflussfaktoren = (faktorEinflussbewertung - 0.7)*100;
+
+        double oldSummeEinflussfaktoren = this.calculateSummeEinflussfaktoren(model);
+        double summeEinflussfaktorenWithoutSelectedFaktor = oldSummeEinflussfaktoren - model.getSchaetzKonfiguration().getGewicht2(index);
+
+        double einflussFaktor = summeEinflussfaktoren - summeEinflussfaktorenWithoutSelectedFaktor;
+        double[] einflussFaktoren = model.getSchaetzKonfiguration().getGewichte2();
+        einflussFaktoren[index] = einflussFaktor;
+        model.getSchaetzKonfiguration().setGewichte2(einflussFaktoren);
+    }
 }
 
