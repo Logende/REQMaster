@@ -10,8 +10,8 @@ public enum FPGewichtsfaktor {
     G4c("   c Ausnahmeregelungen"),
     G4d("   d Logik"),
     G5("5. Wiederverwendbarkeit"),
-    G6("Datenbestandskonvertierung"),
-    G7("Anpassbarkeit");
+    G6("6. Datenbestandskonvertierung"),
+    G7("7. Anpassbarkeit");
 
     private String displayname;
 

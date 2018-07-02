@@ -132,6 +132,8 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
         faktorFuenf.setText(String.valueOf(gewichte[7]));
         faktorSechs.setText(String.valueOf(gewichte[8]));
         faktorSieben.setText(String.valueOf(gewichte[9]));
+    //    sumEinflussZahl.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getSummEinflussFaktoren()));
+    //    faktorEinflussZahl.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getFaktorEinflussBewertung()));
     }
 
 
