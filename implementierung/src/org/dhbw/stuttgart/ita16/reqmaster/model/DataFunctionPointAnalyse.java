@@ -1,12 +1,12 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.File;
-import java.util.*;
+
+import java.util.Map;
 
 public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 
 	private Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen;
-	private double realerAufwand;
+	private double realerAufwand, aufwandFp, aufwandMm;
 
 	public DataFunctionPointAnalyse(Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen, double realerAufwand) {
 		this.einstufungen = einstufungen;
@@ -34,4 +34,25 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
         	return einstufung;
 		}
     }
+
+
+    @Override
+	public double getAufwandInFP() {
+		return aufwandFp;
+	}
+
+	@Override
+	public void setAufwandInFP(double aufwandFp) {
+		this.aufwandFp = aufwandFp;
+	}
+
+	@Override
+	public double getAufwandInMM() {
+		return aufwandMm;
+	}
+
+	@Override
+	public void setAufwandInMM(double aufwandMm) {
+		this.aufwandMm = aufwandMm;
+	}
 }

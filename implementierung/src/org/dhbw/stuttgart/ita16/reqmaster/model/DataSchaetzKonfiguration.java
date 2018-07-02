@@ -13,6 +13,10 @@ public class DataSchaetzKonfiguration implements IDataSchaetzKonfiguration {
 		this.gewichte2 = gewichte2;
 	}
 
+	@Override
+	public double[] getGewichte2() {
+		return gewichte2;
+	}
 
 	@Override
 	public double getGewicht1(FPKlassifizierung klassifizierung, FPKomplexitaet komplexitaet) {

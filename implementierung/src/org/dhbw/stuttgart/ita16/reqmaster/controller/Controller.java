@@ -15,12 +15,14 @@ public class Controller implements IObserverController, IController{
     private IView view;
 
     private IValidator validator;
+    private IAufwandRechner aufwandRechner;
 
     private Map<Class<? extends UIEvent>, EventReaction> reactions;
 
-    public Controller(IModel iModel, IView iView, IValidator validator) {
+    public Controller(IModel iModel, IView iView, IValidator validator, IAufwandRechner aufwandRechner) {
         reactions = new HashMap<>();
         this.validator = validator;
+        this.aufwandRechner = aufwandRechner;
         this.view = iView;
         this.model = iModel;
 
@@ -204,8 +206,9 @@ public class Controller implements IObserverController, IController{
 
         //ACTION
         reactions.put(UIActionFPAufwandAnzeigenEvent.class, (model, view, event)->{
-            //TODO calculate aufwand & send "show aufwand" signal to view
-            return false;
+            double aufwandInFp = aufwandRechner.calculateAufwandInFP(model);
+            model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setAufwandInFP(aufwandInFp);
+            return true;
         });
 
         reactions.put(UIActionFPGewichtsfaktorenOptimierenEvent.class, (model, view, event)->{
@@ -214,8 +217,9 @@ public class Controller implements IObserverController, IController{
         });
 
         reactions.put(UIActionFPAufwandAnzeigenMannmonateEvent.class, (model, view, event)->{
-            //TODO
-            return false;
+            double aufwandInMm = aufwandRechner.calculateAufwandInMM(model);
+            model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setAufwandInMM(aufwandInMm);
+            return true;
         });
 
         //MENU
