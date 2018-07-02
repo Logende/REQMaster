@@ -25,6 +25,8 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
     private UILabel aufwandMM;
     private UILabel aufwandMMLabel;
     private UITextField realerAufwand;
+    private UILabel vafText;
+    private UITextField vaf;
     private UIChoice<FPGewichtsfaktor> choice;
 
     public UIFunctionPointErgebnis(IView view) {
@@ -37,6 +39,8 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         aufwandFP= new UILabel();
         aufwandMMLabel = new UILabel();
         realerAufwand=new UITextField();
+        vaf = new UITextField();
+        vafText = new UILabel();
         choice = new UIChoice<>(FPGewichtsfaktor.values());
         insets = new Insets(10,10,10,10);
 
@@ -46,8 +50,12 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         aufwandAnzeigen.setText("Aufwand in FP anzeigen");
         aufwandMM.setText("Aufwand in MM");
         gewichtsfaktorOpt.setText("Optimieren");
+        vafText.setText("VAF-Faktor");
+        vaf.setText("1.0");
         realerAufwand.setPreferredSize(new Dimension(100,20));
         realerAufwand.setMinimumSize(new Dimension(50,20));
+        vaf.setPreferredSize(new Dimension(100,20));
+        vaf.setMinimumSize(new Dimension(50,20));
 
         //Definieren des Layout wegen GridBagLayout
         GridBagConstraints constraints = new GridBagConstraints();
@@ -58,7 +66,9 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         addGB(gewichtsfaktorOpt,this, 1,  3,  1, 1, fill = GridBagConstraints.HORIZONTAL, insets, constraints);
         addGB(realerAufwand,this,  2,  3,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
         addGB(choice, this, 3,3,2,1,fill = GridBagConstraints.BOTH, insets, constraints);
-        
+        addGB(vafText,this,  1,  4,  1, 1, insets, constraints);
+        addGB(vaf,this,  2,  4,  1, 1, insets, constraints);
+
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,8 +129,6 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
 
     @Override
     public void update(IModel model) {
-        System.out.println( model);
-        System.out.println( model.getIDataAnforderungssammlung());
         aufwandFP.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInFP()));
         aufwandMM.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInMM()));
         realerAufwand.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getRealerAufwand()));
