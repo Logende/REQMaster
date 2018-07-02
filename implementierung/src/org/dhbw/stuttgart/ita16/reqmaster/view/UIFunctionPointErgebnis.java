@@ -61,11 +61,13 @@ public class UIFunctionPointErgebnis extends UIPanel {
         aufwandAnzeigen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-                    double vaf = Double.parseDouble(realerAufwand.getText());
-                    getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent(vaf));
-                }catch(NumberFormatException exception){
-                    //TODO: show error message/dialog
+                if (View.forcesFocus == null) {
+                    try {
+                        double vaf = Double.parseDouble(realerAufwand.getText());
+                        getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent(vaf));
+                    } catch (NumberFormatException exception) {
+                        //TODO: show error message/dialog
+                    }
                 }
             }
         });
@@ -73,13 +75,15 @@ public class UIFunctionPointErgebnis extends UIPanel {
         gewichtsfaktorOpt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (realerAufwand.getText() != null) {
-                    try {
-                        double value = Double.parseDouble(realerAufwand.getText());
-                        realerAufwand.setForeground(Color.BLACK);
-                        getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent((FPGewichtsfaktor) choice.getSelectedItem(), value));
-                    } catch (Exception exception) {
-                        realerAufwand.setForeground(Color.RED);
+                if (View.forcesFocus == null) {
+                    if (realerAufwand.getText() != null) {
+                        try {
+                            double value = Double.parseDouble(realerAufwand.getText());
+                            realerAufwand.setForeground(Color.BLACK);
+                            getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent((FPGewichtsfaktor) choice.getSelectedItem(), value));
+                        } catch (Exception exception) {
+                            realerAufwand.setForeground(Color.RED);
+                        }
                     }
                 }
             }
