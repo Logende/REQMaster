@@ -48,11 +48,13 @@ public class UIMenu extends UIMenuBar {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                UIActionMenuSaveEvent safeEvent = new UIActionMenuSaveEvent();
-                getView().getObsController().observe(safeEvent);
-                //Anzeige der Information, dass Dokument gespeichert wurde
-                JOptionPane.showMessageDialog(UIMenu.this, "Ihr Dokument wurde gespeichert",
-                        "Speichern", JOptionPane.INFORMATION_MESSAGE);
+                if (View.forcesFocus == null) {
+                    UIActionMenuSaveEvent safeEvent = new UIActionMenuSaveEvent();
+                    getView().getObsController().observe(safeEvent);
+                    //Anzeige der Information, dass Dokument gespeichert wurde
+                    JOptionPane.showMessageDialog(UIMenu.this, "Ihr Dokument wurde gespeichert",
+                            "Speichern", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 
@@ -64,7 +66,9 @@ public class UIMenu extends UIMenuBar {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.toggleMode(functionPointAnz);
+                if (View.forcesFocus == null) {
+                    mainFrame.toggleMode(functionPointAnz);
+                }
             }
         });
     }
