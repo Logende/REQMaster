@@ -10,5 +10,6 @@ public interface IDataSchaetzKonfiguration {
 	double getGewicht2(int i);
 	double[] getGewichte2();
 	void setGewichte2(double[] gewichte);
+	Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> getGewichte1();
 
 }

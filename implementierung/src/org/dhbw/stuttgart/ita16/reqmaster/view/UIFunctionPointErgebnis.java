@@ -4,6 +4,7 @@ import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.FPGewichtsfaktor;
+import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ import java.awt.event.FocusListener;
 /**
  * Die Klasse enthält alle Eingabefelder der Function-Ponit analyse, welche nicht zur Klasse UIFunktionenDaten oder UIGewichtsfaktoren gehören.
  */
-public class UIFunctionPointErgebnis extends UIPanel {
+public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
 
     //Variablen der Klasse
     private UIButton aufwandAnzeigen;
@@ -66,7 +67,8 @@ public class UIFunctionPointErgebnis extends UIPanel {
                         double vaf = Double.parseDouble(realerAufwand.getText());
                         getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent(vaf));
                     } catch (NumberFormatException exception) {
-                        //TODO: show error message/dialog
+                        JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, "VAF-Faktor ist kein zulässiger Wert",
+                                "Fehler", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
@@ -80,7 +82,7 @@ public class UIFunctionPointErgebnis extends UIPanel {
                         try {
                             double value = Double.parseDouble(realerAufwand.getText());
                             realerAufwand.setForeground(Color.BLACK);
-                            getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent((FPGewichtsfaktor) choice.getSelectedItem(), value));
+                            getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent(choice.getSelectedIndex(), value));
                         } catch (Exception exception) {
                             realerAufwand.setForeground(Color.RED);
                         }
@@ -114,6 +116,11 @@ public class UIFunctionPointErgebnis extends UIPanel {
         constraints.ipadx = ipadx;
         constraints.ipady = ipady;
         parent.add(component, constraints);
+    }
+
+    @Override
+    public void update(IModel model) {
+
     }
 }
 

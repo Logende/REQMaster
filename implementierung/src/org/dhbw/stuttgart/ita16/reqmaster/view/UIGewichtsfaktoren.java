@@ -2,6 +2,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionFPGewichtsfaktorenOptimierenEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyGewichtsfaktorenEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
@@ -134,21 +135,44 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
     }
 
 
-    private void wasModified(Component focusLost){
+    private void wasModified(Component focusLost) {
         // Erstellen einer Liste mit den aktuellen Attributen
-
-        /*DataSchaetzKonfiguration proposal = new DataSchaetzKonfiguration(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
-        UIActionFPGewichtsfaktorenOptimierenEvent optimierenEvent = new UIModifyProduktDatumEvent(dataId, proposal);
-        getView().getObsController().observe(optimierenEvent);
-        if(focusLost != null) {
-            if (!optimierenEvent.isSuccess()) {
-                JOptionPane.showMessageDialog(focusLost.getParent(), optimierenEvent.getErrorMessage(),
-                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                View.forcesFocus = UIGewichtsfaktoren.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
-                focusLost.requestFocus();
-            } else {
-                View.forcesFocus = null;
+        double[] gewichte = createGewichte();
+        DataSchaetzKonfiguration proposal = new DataSchaetzKonfiguration(getView().getModel().getSchaetzKonfiguration().getGewichte1(), gewichte);
+        UIModifyGewichtsfaktorenEvent optimierenEvent = new UIModifyGewichtsfaktorenEvent(proposal);
+        if (gewichte != null) {
+            getView().getObsController().observe(optimierenEvent);
+            if (focusLost != null) {
+                if (!optimierenEvent.isSuccess()) {
+                    JOptionPane.showMessageDialog(focusLost.getParent(), optimierenEvent.getErrorMessage(),
+                            "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
+                    View.forcesFocus = UIGewichtsfaktoren.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
+                    focusLost.requestFocus();
+                } else {
+                    View.forcesFocus = null;
+                }
             }
-        }*/
+        }
+    }
+
+    private double[] createGewichte(){
+        try {
+            double[] gewichte = null;
+            gewichte[0] = Double.parseDouble(faktorEins.getText());
+            gewichte[0] = Double.parseDouble(faktorZwei.getText());
+            gewichte[0] = Double.parseDouble(faktorDrei.getText());
+            gewichte[0] = Double.parseDouble(faktorAVier.getText());
+            gewichte[0] = Double.parseDouble(faktorBVier.getText());
+            gewichte[0] = Double.parseDouble(faktorCVier.getText());
+            gewichte[0] = Double.parseDouble(faktorDVier.getText());
+            gewichte[0] = Double.parseDouble(faktorFuenf.getText());
+            gewichte[0] = Double.parseDouble(faktorSechs.getText());
+            gewichte[0] = Double.parseDouble(faktorSieben.getText());
+            return gewichte;
+        } catch (NumberFormatException exception) {
+            JOptionPane.showMessageDialog(this, "Einer der Gewichtsfaktoren ist keine Zahl!",
+                    "Fehler in Gewichtsfaktoren", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
     }
 }
