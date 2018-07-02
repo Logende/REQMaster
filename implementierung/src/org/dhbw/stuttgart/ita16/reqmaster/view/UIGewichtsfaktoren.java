@@ -1,19 +1,18 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
-import org.dhbw.stuttgart.ita16.reqmaster.components.UILabel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
-import org.dhbw.stuttgart.ita16.reqmaster.components.UITextField;
-import org.dhbw.stuttgart.ita16.reqmaster.model.FPGewichtsfaktor;
+import org.dhbw.stuttgart.ita16.reqmaster.components.*;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionFPGewichtsfaktorenOptimierenEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UIGewichtsfaktoren extends UIPanel {
+public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
 
     //Variablen der Klasse
-    private UIScrollPane scrollPane;
-    private UIPanel gewichtPanel;
     private UILabel faktorEinsText;
     private UILabel faktorZweiText;
     private UILabel faktorDreiText;
@@ -39,54 +38,74 @@ public class UIGewichtsfaktoren extends UIPanel {
     private UITextField faktorFuenf;
     private UITextField faktorSechs;
     private UITextField faktorSieben;
+    private UIPanel gewichtsPanel;
+    private UIScrollPane scrollPane;
 
     public UIGewichtsfaktoren(IView view) {
         super(view);
-        this.setLayout(new BorderLayout());
-        setBorder(BorderFactory.createTitledBorder("Gewichtsfaktoren"));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(BorderFactory.createTitledBorder("Einflussfaktoren"));
         addComponents();
         setComponents();
     }
 
     private void addComponents(){
-        gewichtPanel = new UIPanel();
-        this.add(scrollPane = new UIScrollPane(gewichtPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
-        gewichtPanel.add(faktorEinsText = new UILabel());
-        gewichtPanel.add(faktorEins = new UITextField());
-        gewichtPanel.add(faktorZweiText = new UILabel());
-        gewichtPanel.add(faktorZwei = new UITextField());
-        gewichtPanel.add(faktorDreiText = new UILabel());
-        gewichtPanel.add(faktorDrei = new UITextField());
-        gewichtPanel.add(faktorVierText = new UILabel());
-        gewichtPanel.add(new UILabel());
-        gewichtPanel.add(faktorVierAText = new UILabel());
-        gewichtPanel.add(faktorAVier = new UITextField());
-        gewichtPanel.add(faktorVierBText = new UILabel());
-        gewichtPanel.add(faktorBVier = new UITextField());
-        gewichtPanel.add(faktorVierCText = new UILabel());
-        gewichtPanel.add(faktorCVier = new UITextField());
-        gewichtPanel.add(faktorVierDText = new UILabel());
-        gewichtPanel.add(faktorDVier = new UITextField());
-        gewichtPanel.add(faktorFuenfText = new UILabel());
-        gewichtPanel.add(faktorFuenf = new UITextField());
-        gewichtPanel.add(faktorSechsText = new UILabel());
-        gewichtPanel.add(faktorSechs = new UITextField());
-        gewichtPanel.add(faktorSiebenText = new UILabel());
-        gewichtPanel.add(faktorSieben = new UITextField());
-        gewichtPanel.add(sumEinflussText = new UILabel());
-        gewichtPanel.add(sumEinflussZahl = new UILabel());
-        gewichtPanel.add(faktorEinflussText = new UILabel());
-        gewichtPanel.add(faktorEinflussZahl = new UILabel());
+        // Für jedes UITextField in ProduktDatum wird einmalig ein
+        // FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+        UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
+            if(focusGained != null) {
+                if (focusLost.getParent() == focusGained.getParent()) {
+                    if(focusGained instanceof  UITextField) {
+                        return; //do nothing if new component has same parent
+                    }
+                }
+            }
+            wasModified(focusLost);
+        };
+
+
+        gewichtsPanel = new UIPanel();
+        scrollPane = new UIScrollPane(gewichtsPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        this.add(scrollPane);
+        gewichtsPanel.add(faktorEinsText = new UILabel());
+        gewichtsPanel.add(faktorEins = new UITextField());
+        gewichtsPanel.add(faktorZweiText = new UILabel());
+        gewichtsPanel.add(faktorZwei = new UITextField());
+        gewichtsPanel.add(faktorDreiText = new UILabel());
+        gewichtsPanel.add(faktorDrei = new UITextField());
+        gewichtsPanel.add(faktorVierText = new UILabel());
+        gewichtsPanel.add(new UILabel());
+        gewichtsPanel.add(faktorVierAText = new UILabel());
+        gewichtsPanel.add(faktorAVier = new UITextField());
+        gewichtsPanel.add(faktorVierBText = new UILabel());
+        gewichtsPanel.add(faktorBVier = new UITextField());
+        gewichtsPanel.add(faktorVierCText = new UILabel());
+        gewichtsPanel.add(faktorCVier = new UITextField());
+        gewichtsPanel.add(faktorVierDText = new UILabel());
+        gewichtsPanel.add(faktorDVier = new UITextField());
+        gewichtsPanel.add(faktorFuenfText = new UILabel());
+        gewichtsPanel.add(faktorFuenf = new UITextField());
+        gewichtsPanel.add(faktorSechsText = new UILabel());
+        gewichtsPanel.add(faktorSechs = new UITextField());
+        gewichtsPanel.add(faktorSiebenText = new UILabel());
+        gewichtsPanel.add(faktorSieben = new UITextField());
+        gewichtsPanel.add(new UILabel());
+        gewichtsPanel.add(new UILabel());
+        gewichtsPanel.add(sumEinflussText = new UILabel());
+        gewichtsPanel.add(sumEinflussZahl = new UILabel());
+        gewichtsPanel.add(faktorEinflussText = new UILabel());
+        gewichtsPanel.add(faktorEinflussZahl = new UILabel());
     }
 
     private void setComponents() {
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(5,0,0,0));
-        gewichtPanel.setLayout(new GridLayout(14,2));
+        gewichtsPanel.setLayout(new GridLayout(15,2));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        faktorEins.setMaximumSize(new Dimension(100,40));
         faktorEinsText.setText(FPGewichtsfaktor.G1.getDisplayname());
         faktorZweiText.setText(FPGewichtsfaktor.G2.getDisplayname());
         faktorDreiText.setText(FPGewichtsfaktor.G3.getDisplayname());
-        faktorVierText.setText(FPGewichtsfaktor.G4.getDisplayname());
+        faktorVierText.setText("4. Verarbeitungslogik");
         faktorVierAText.setText(FPGewichtsfaktor.G4a.getDisplayname());
         faktorVierBText.setText(FPGewichtsfaktor.G4b.getDisplayname());
         faktorVierCText.setText(FPGewichtsfaktor.G4c.getDisplayname());
@@ -94,7 +113,41 @@ public class UIGewichtsfaktoren extends UIPanel {
         faktorFuenfText.setText(FPGewichtsfaktor.G5.getDisplayname());
         faktorSechsText.setText(FPGewichtsfaktor.G6.getDisplayname());
         faktorSiebenText.setText(FPGewichtsfaktor.G7.getDisplayname());
-        sumEinflussText.setText(FPGewichtsfaktor.SUMME_FAKTOREN.getDisplayname());
-        faktorEinflussText.setText(FPGewichtsfaktor.FAKTOR_EINFLUSS.getDisplayname());
+        sumEinflussText.setText("Summe der 7 Einflüsse (E2)");
+        faktorEinflussText.setText("Faktor Einflussbewertung (E2/100 + 0.7)");
+    }
+
+    @Override
+    public void update(IModel model) {
+       double[] gewichte = model.getSchaetzKonfiguration().getGewichte2();
+        faktorEins.setText(String.valueOf(gewichte[0]));
+        faktorZwei.setText(String.valueOf(gewichte[1]));
+        faktorDrei.setText(String.valueOf(gewichte[2]));
+        faktorAVier.setText(String.valueOf(gewichte[3]));
+        faktorBVier.setText(String.valueOf(gewichte[4]));
+        faktorCVier.setText(String.valueOf(gewichte[5]));
+        faktorDVier.setText(String.valueOf(gewichte[6]));
+        faktorFuenf.setText(String.valueOf(gewichte[7]));
+        faktorSechs.setText(String.valueOf(gewichte[8]));
+        faktorSieben.setText(String.valueOf(gewichte[9]));
+    }
+
+
+    private void wasModified(Component focusLost){
+        // Erstellen einer Liste mit den aktuellen Attributen
+
+        DataSchaetzKonfiguration proposal = new DataSchaetzKonfiguration(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
+        UIActionFPGewichtsfaktorenOptimierenEvent optimierenEvent = new UIModifyProduktDatumEvent(dataId, proposal);
+        getView().getObsController().observe(optimierenEvent);
+        if(focusLost != null) {
+            if (!optimierenEvent.isSuccess()) {
+                JOptionPane.showMessageDialog(focusLost.getParent(), optimierenEvent.getErrorMessage(),
+                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
+                View.forcesFocus = UIGewichtsfaktoren.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
+                focusLost.requestFocus();
+            } else {
+                View.forcesFocus = null;
+            }
+        }
     }
 }
