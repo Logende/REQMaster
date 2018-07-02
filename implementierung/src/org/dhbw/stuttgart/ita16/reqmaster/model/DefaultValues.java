@@ -34,13 +34,36 @@ public class DefaultValues {
 
     public static IDataSchaetzKonfiguration createSchaetzKonfiguration(){
         Map<FPKlassifizierung, Map<FPKomplexitaet, Double>> defaultGewichte1 = new LinkedHashMap<>();
-        for(FPKlassifizierung klassifizierung : FPKlassifizierung.values()){
-            Map<FPKomplexitaet, Double> submap = new LinkedHashMap<>();
-            for(FPKomplexitaet komplexitaet : FPKomplexitaet.values()){
-                submap.put(komplexitaet, 1.0);
-            }
-            defaultGewichte1.put(klassifizierung, submap);
-        }
+        Map<FPKomplexitaet, Double> gewichteDatenILF = new LinkedHashMap<>();
+        gewichteDatenILF.put(FPKomplexitaet.EINFACH, 3.0);
+        gewichteDatenILF.put(FPKomplexitaet.MITTEL, 4.0);
+        gewichteDatenILF.put(FPKomplexitaet.KOMPLEX, 6.0);
+        defaultGewichte1.put(FPKlassifizierung.DATEN_ILF, gewichteDatenILF);
+
+        Map<FPKomplexitaet, Double> gewichteDatenELF = new LinkedHashMap<>();
+        gewichteDatenELF.put(FPKomplexitaet.EINFACH, 3.0);
+        gewichteDatenELF.put(FPKomplexitaet.MITTEL, 4.0);
+        gewichteDatenELF.put(FPKomplexitaet.KOMPLEX, 6.0);
+        defaultGewichte1.put(FPKlassifizierung.DATEN_ELF, gewichteDatenELF);
+
+        Map<FPKomplexitaet, Double> gewichteTransaktionEO = new LinkedHashMap<>();
+        gewichteTransaktionEO.put(FPKomplexitaet.EINFACH, 3.0);
+        gewichteTransaktionEO.put(FPKomplexitaet.MITTEL, 4.0);
+        gewichteTransaktionEO.put(FPKomplexitaet.KOMPLEX, 6.0);
+        defaultGewichte1.put(FPKlassifizierung.TRANSAKTION_EO, gewichteTransaktionEO);
+
+        Map<FPKomplexitaet, Double> gewichteTransaktionEI = new LinkedHashMap<>();
+        gewichteTransaktionEI.put(FPKomplexitaet.EINFACH, 3.0);
+        gewichteTransaktionEI.put(FPKomplexitaet.MITTEL, 4.0);
+        gewichteTransaktionEI.put(FPKomplexitaet.KOMPLEX, 6.0);
+        defaultGewichte1.put(FPKlassifizierung.TRANSAKTION_EI, gewichteTransaktionEI);
+
+        Map<FPKomplexitaet, Double> gewichteTransaktionEQ = new LinkedHashMap<>();
+        gewichteTransaktionEQ.put(FPKomplexitaet.EINFACH, 3.0);
+        gewichteTransaktionEQ.put(FPKomplexitaet.MITTEL, 4.0);
+        gewichteTransaktionEQ.put(FPKomplexitaet.KOMPLEX, 6.0);
+        defaultGewichte1.put(FPKlassifizierung.TRANSAKTION_EQ, gewichteTransaktionEQ);
+
         double[] defaultGewichte2 = {1,1,1,1,1,1,1,1,1,1,1};
         return new DataSchaetzKonfiguration(defaultGewichte1, defaultGewichte2);
     }
