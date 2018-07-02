@@ -1,7 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
-import org.dhbw.stuttgart.ita16.reqmaster.controller.IObserverController;
 import org.dhbw.stuttgart.ita16.reqmaster.events.*;
 import org.dhbw.stuttgart.ita16.reqmaster.model.FPGewichtsfaktor;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
@@ -31,8 +30,8 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
 
     public UIFunctionPointErgebnis(IView view) {
 
-		super(view);
-		//Die Klassenvariablen instanzieren
+        super(view);
+        //Die Klassenvariablen instanzieren
         aufwandAnzeigen=new UIButton();
         gewichtsfaktorOpt=new UIButton();
         aufwandMM=new UILabel();
@@ -74,8 +73,13 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
             public void actionPerformed(ActionEvent e) {
                 if (View.forcesFocus == null) {
                     try {
-                        double vaf = Double.parseDouble(realerAufwand.getText());
-                        getView().getObsController().observe(new UIActionFPAufwandAnzeigenEvent(vaf));
+                        double vaf = Double.parseDouble(UIFunctionPointErgebnis.this.vaf.getText());
+                        UIActionFPAufwandAnzeigenEvent event = new UIActionFPAufwandAnzeigenEvent(vaf);
+                        getView().getObsController().observe(event);
+                        if(!event.isSuccess()){
+                            JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, event.getErrorMessage(),
+                                    "Fehler", JOptionPane.WARNING_MESSAGE);
+                        }
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, "VAF-Faktor ist kein zulässiger Wert",
                                 "Fehler", JOptionPane.WARNING_MESSAGE);
@@ -84,19 +88,51 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
             }
         });
 
+        realerAufwand.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                try {
+                    double value = Double.parseDouble(realerAufwand.getText());
+                    UIModifyRealerAufwandEvent modifyEvent = new UIModifyRealerAufwandEvent(value);
+                    getView().getObsController().observe(modifyEvent);
+
+                    if (!modifyEvent.isSuccess()) {
+                        JOptionPane.showMessageDialog(e.getComponent().getParent(), modifyEvent.getErrorMessage(),
+                                "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
+                        View.forcesFocus = e.getComponent(); // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
+                        e.getComponent().requestFocus();
+                    } else {
+                        View.forcesFocus = null;
+                    }
+                } catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(e.getComponent().getParent(), "Realer Aufwand: Keine valide Zahl.",
+                            "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
+                    View.forcesFocus = e.getComponent(); // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
+                    e.getComponent().requestFocus();
+                }
+            }
+        });
+
         gewichtsfaktorOpt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (View.forcesFocus == null) {
-                    if (realerAufwand.getText() != null) {
                         try {
-                            double value = Double.parseDouble(realerAufwand.getText());
+                            double vaf = Double.parseDouble(UIFunctionPointErgebnis.this.vaf.getText());
                             realerAufwand.setForeground(Color.BLACK);
-                            getView().getObsController().observe(new UIActionFPGewichtsfaktorenOptimierenEvent(choice.getSelectedIndex(), value));
-                        } catch (Exception exception) {
+                            UIActionFPGewichtsfaktorenOptimierenEvent event = new UIActionFPGewichtsfaktorenOptimierenEvent(choice.getSelectedIndex(), vaf);
+                            getView().getObsController().observe(event);
+                            if(!event.isSuccess()){
+                                JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, event.getErrorMessage(),
+                                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
+                            }
+                        } catch (NumberFormatException exception) {
                             realerAufwand.setForeground(Color.RED);
                         }
-                    }
                 }
             }
         });
