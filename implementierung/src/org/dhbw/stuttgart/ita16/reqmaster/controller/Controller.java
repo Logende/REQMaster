@@ -206,14 +206,26 @@ public class Controller implements IObserverController, IController{
         //ACTION
         reactions.put(UIActionFPAufwandAnzeigenEvent.class, (model, view, event)->{
             UIActionFPAufwandAnzeigenEvent e = (UIActionFPAufwandAnzeigenEvent) event;
-            aufwandRechner.calculateAufwand(model, e.getVaf());
-            return true;
+            String errorMessage = aufwandRechner.calculateAufwand(model, e.getVaf());
+            if(errorMessage == null) {
+                e.setSuccess(true);
+                return true;
+            }else{
+                e.setErrorMessage(errorMessage);
+                return false;
+            }
         });
 
         reactions.put(UIActionFPGewichtsfaktorenOptimierenEvent.class, (model, view, event)->{
             UIActionFPGewichtsfaktorenOptimierenEvent e = (UIActionFPGewichtsfaktorenOptimierenEvent) event;
-            aufwandRechner.optimiereFaktor(model, e.getVaf(), e.getIndex());
-            return true;
+            String errorMessage = aufwandRechner.optimiereFaktor(model, e.getVaf(), e.getIndex());
+            if(errorMessage == null) {
+                e.setSuccess(true);
+                return true;
+            }else{
+                e.setErrorMessage(errorMessage);
+                return false;
+            }
         });
 
 

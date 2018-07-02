@@ -6,6 +6,8 @@ public class UIActionFPAufwandAnzeigenEvent extends UIActionFPEvent {
 
 	private double vaf;
 
+
+
 	public UIActionFPAufwandAnzeigenEvent(double vaf) {
 		this.vaf = vaf;
 	}
