@@ -175,8 +175,8 @@ public class Controller implements IObserverController, IController{
         });
 
 
-        reactions.put(UIModifyRealerAufwand.class, (model, view, event)->{
-            UIModifyRealerAufwand e = (UIModifyRealerAufwand) event;
+        reactions.put(UIModifyRealerAufwandEvent.class, (model, view, event)->{
+            UIModifyRealerAufwandEvent e = (UIModifyRealerAufwandEvent) event;
             double proposal = e.getProposal();
             String errorMessage = validator.isValid(model, proposal);
             if(errorMessage == null){
