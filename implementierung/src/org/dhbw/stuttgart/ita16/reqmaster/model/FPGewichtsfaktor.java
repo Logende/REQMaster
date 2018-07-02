@@ -8,7 +8,7 @@ public enum FPGewichtsfaktor {
     G4a("   a Rechenoperationen"),
     G4b("   b Kontrollverfahren"),
     G4c("   c Ausnahmeregelungen"),
-    G4d("d Logik"),
+    G4d("   d Logik"),
     G5("5. Wiederverwendbarkeit"),
     G6("Datenbestandskonvertierung"),
     G7("Anpassbarkeit");
