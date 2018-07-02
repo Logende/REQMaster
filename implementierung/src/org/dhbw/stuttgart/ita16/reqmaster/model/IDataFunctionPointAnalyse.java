@@ -12,6 +12,15 @@ public interface IDataFunctionPointAnalyse {
 	void setAufwandInFP(double d);
 	void setAufwandInMM(double d);
 
+	double getSummeAufwand();
+	void setSummeAufwand(double summeAufwand);
+
+	double getSummEinflussFaktoren();
+	void setSummEinflussFaktoren(double summEinflussFaktoren);
+
+	double getFaktorEinflussBewertung() ;
+	void setFaktorEinflussBewertung(double faktorEinflussBewertung);
+
 	IDataFunctionPointEinstufung getEinstufung(IIdentifiable iIdentifiable);
 
 }

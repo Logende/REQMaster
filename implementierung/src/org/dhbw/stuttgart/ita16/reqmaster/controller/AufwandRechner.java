@@ -1,21 +1,20 @@
 package org.dhbw.stuttgart.ita16.reqmaster.controller;
 
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IDataFunctionPointEinstufung;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
+import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
 public class AufwandRechner implements IAufwandRechner {
 
     @Override
-    public double calculateAufwandInFP(IModel model) {
+    public void calculateAufwand(IModel model, double vaf) {
+        IDataAnforderungssammlung anforderungssammlung = model.getIDataAnforderungssammlung();
+        IDataFunctionPointAnalyse functionPointAnalyse = anforderungssammlung.getIDataFunctionPointAnalyse();
         double summeAufwand = 0;
-        for(DataProduktFunktion dataProduktFunktion : model.getIDataAnforderungssammlung().getDataProduktFunktionen().values()){
-            IDataFunctionPointEinstufung einstufung = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(dataProduktFunktion);
+        for(DataProduktFunktion dataProduktFunktion : anforderungssammlung.getDataProduktFunktionen().values()){
+            IDataFunctionPointEinstufung einstufung = functionPointAnalyse.getEinstufung(dataProduktFunktion);
             summeAufwand += model.getSchaetzKonfiguration().getGewicht1(einstufung.getKlassifizierung(), einstufung.getKomplexitaet());
         }
-        for(DataProduktDatum dataProduktDatum : model.getIDataAnforderungssammlung().getDataProduktDaten().values()){
-            IDataFunctionPointEinstufung einstufung = model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(dataProduktDatum);
+        for(DataProduktDatum dataProduktDatum : anforderungssammlung.getDataProduktDaten().values()){
+            IDataFunctionPointEinstufung einstufung = functionPointAnalyse.getEinstufung(dataProduktDatum);
             summeAufwand += model.getSchaetzKonfiguration().getGewicht1(einstufung.getKlassifizierung(), einstufung.getKomplexitaet());
         }
 
@@ -26,15 +25,16 @@ public class AufwandRechner implements IAufwandRechner {
 
         double faktorEinflussbewertung = summeEinflussFaktoren / 100.0 + 0.7;
         double aufwandInFp = summeAufwand * faktorEinflussbewertung;
-        return aufwandInFp;
+
+        double afp = aufwandInFp * vaf;
+        double aufwandInMm = Math.pow(afp, 0.4f);
+
+        functionPointAnalyse.setFaktorEinflussBewertung(faktorEinflussbewertung);
+        functionPointAnalyse.setSummeAufwand(summeAufwand);
+        functionPointAnalyse.setSummEinflussFaktoren(summeEinflussFaktoren);
+        functionPointAnalyse.setAufwandInFP(aufwandInFp);
+        functionPointAnalyse.setAufwandInMM(aufwandInMm);
     }
 
-    @Override
-    public double calculateAufwandInMM(IModel model) {
-        double vaf = 1.0; //todo
-        double afp = this.calculateAufwandInFP(model) * vaf;
-        double aufwandInMm = Math.pow(afp, 0.4f);
-        return aufwandInMm;
-    }
 }
 

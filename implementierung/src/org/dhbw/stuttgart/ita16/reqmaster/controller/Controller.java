@@ -206,8 +206,8 @@ public class Controller implements IObserverController, IController{
 
         //ACTION
         reactions.put(UIActionFPAufwandAnzeigenEvent.class, (model, view, event)->{
-            double aufwandInFp = aufwandRechner.calculateAufwandInFP(model);
-            model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setAufwandInFP(aufwandInFp);
+            UIActionFPAufwandAnzeigenEvent e = (UIActionFPAufwandAnzeigenEvent) event;
+            aufwandRechner.calculateAufwand(model, e.getVaf());
             return true;
         });
 
@@ -216,11 +216,6 @@ public class Controller implements IObserverController, IController{
             return true;
         });
 
-        reactions.put(UIActionFPAufwandAnzeigenMannmonateEvent.class, (model, view, event)->{
-            double aufwandInMm = aufwandRechner.calculateAufwandInMM(model);
-            model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setAufwandInMM(aufwandInMm);
-            return true;
-        });
 
         //MENU
         reactions.put(UIActionMenuCreateEvent.class, (model, view, event)->{
