@@ -84,118 +84,73 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         addGB(vafText,ergebnisPanel,  1,  5,  1, 1, insets, constraints);
         addGB(vaf,ergebnisPanel,  2,  5,  1, 1, insets, constraints);
 
-        aufwandAnzeigen.addActionListener(new ActionListener() {
-            /**
-             * Wenn der Benutzer auf den Aufwand anzeigen Button klickt,
-             * wird ein Event an den Controller gesendet, um den Aufwand zu berechnen
-             * @param e Event, auf das reagiert werden soll
-             */
+        aufwandAnzeigen.addActionListener(new ActionListenerEventTriggering(view) {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (View.forcesFocus == null) {
-                    // falls kein double im Textfeld des VAF-Faktors steht, wird eine Exception geworfen
-                    try {
-                        double vaf = Double.parseDouble(UIFunctionPointErgebnis.this.vaf.getText());
-                        //Erstellen des Events
-                        UIActionFPAufwandAnzeigenEvent event = new UIActionFPAufwandAnzeigenEvent(vaf);
-                        getView().getObsController().observe(event);
-                        //Auswerten des Events nach Controllerbehandlung
-                        if(!event.isSuccess()){
-                            JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, event.getErrorMessage(),
-                                    "Fehler", JOptionPane.WARNING_MESSAGE);
-                        }
-                    } catch (NumberFormatException exception) {
-                        JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, "VAF-Faktor ist kein zulässiger Wert",
-                                "Fehler", JOptionPane.WARNING_MESSAGE);
-                    }
+            public UIEvent generateEvent(Object source) {
+                try {
+                    double vaf = Double.parseDouble(UIFunctionPointErgebnis.this.vaf.getText());
+                    return new UIActionFPAufwandAnzeigenEvent(vaf);
+                } catch (NumberFormatException exception) {
+                    return new UIErrorEvent("Invalider 'VAF' Wert.");
                 }
             }
         });
 
-        realerAufwand.addFocusListener(new FocusListener() {
+        realerAufwand.addFocusListener(new FocusListenerEventTriggering(view) {
             @Override
-            public void focusGained(FocusEvent e) {
-            }
-
-            /**
-             *
-             * @param e
-             */
-            @Override
-            public void focusLost(FocusEvent e) {
+            public UIEvent generateEvent(Component lostFocus, Component gotFocus) {
                 try {
                     double value = Double.parseDouble(realerAufwand.getText());
-                    UIModifyRealerAufwandEvent modifyEvent = new UIModifyRealerAufwandEvent(value);
-                    getView().getObsController().observe(modifyEvent);
-                    // Auswertung des Events nach Controllerbehandlung
-                    if (!modifyEvent.isSuccess()) {
-                        JOptionPane.showMessageDialog(e.getComponent().getParent(), modifyEvent.getErrorMessage(),
-                                "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                        View.forcesFocus = e.getComponent(); // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
-                        e.getComponent().requestFocus();
-                    } else {
-                        View.forcesFocus = null;
-                    }
+                    return new UIModifyRealerAufwandEvent(value);
                 } catch (NumberFormatException exception) {
-                    JOptionPane.showMessageDialog(e.getComponent().getParent(), "Realer Aufwand: Keine valide Zahl.",
-                            "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                    View.forcesFocus = e.getComponent(); // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
-                    e.getComponent().requestFocus();
+                    return new UIErrorEvent("Invalider 'realer Aufwand' Wert.");
                 }
             }
         });
 
-        gewichtsfaktorOpt.addActionListener(new ActionListener() {
+        gewichtsfaktorOpt.addActionListener(new ActionListenerEventTriggering(view) {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (View.forcesFocus == null) {
-                        try {
-                            double vaf = Double.parseDouble(UIFunctionPointErgebnis.this.vaf.getText());
-                            realerAufwand.setForeground(Color.BLACK);
-                            UIActionFPGewichtsfaktorenOptimierenEvent event = new UIActionFPGewichtsfaktorenOptimierenEvent(choice.getSelectedIndex(), vaf);
-                            getView().getObsController().observe(event);
-                            if(!event.isSuccess()){
-                                JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, event.getErrorMessage(),
-                                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                            }
-                        } catch (NumberFormatException exception) {
-                            realerAufwand.setForeground(Color.RED);
-                        }
+            public UIEvent generateEvent(Object source) {
+                try {
+                    double vaf = Double.parseDouble(UIFunctionPointErgebnis.this.vaf.getText());
+                    return new UIActionFPGewichtsfaktorenOptimierenEvent(choice.getSelectedIndex(), vaf);
+                } catch (NumberFormatException exception) {
+                    return new UIErrorEvent("Invalider 'VAF' Wert.");
                 }
             }
         });
-    }
+        }
 
-    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, Insets insets, GridBagConstraints constraints) {
-        addGB(component, parent, gridx, gridy, gridwidth, gridheight, GridBagConstraints.NONE, 0.0, 0.0,
-                GridBagConstraints.CENTER, insets, 0, 0, constraints);
-    }
+        public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, Insets insets, GridBagConstraints constraints) {
+            addGB(component, parent, gridx, gridy, gridwidth, gridheight, GridBagConstraints.NONE, 0.0, 0.0,
+                    GridBagConstraints.CENTER, insets, 0, 0, constraints);
+        }
 
-    public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, int fill, Insets insets, GridBagConstraints constraints) {
-        addGB(component, parent, gridx, gridy, gridwidth, gridheight, fill, 0.0, 0.0, GridBagConstraints.CENTER,
-                insets, 0, 0, constraints);
-    }
-    private void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight,
-                       int fill, double weightx, double weighty, int anchor, Insets insets, int ipadx, int ipady, GridBagConstraints constraints) {
-        constraints.gridx = gridx;
-        constraints.gridy = gridy;
-        constraints.gridwidth = gridwidth;
-        constraints.gridheight = gridheight;
-        constraints.fill = fill;
-        constraints.weightx = weightx;
-        constraints.weighty = weighty;
-        constraints.anchor = anchor;
-        constraints.insets = insets;
-        constraints.ipadx = ipadx;
-        constraints.ipady = ipady;
-        parent.add(component, constraints);
-    }
+        public void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight, int fill, Insets insets, GridBagConstraints constraints) {
+            addGB(component, parent, gridx, gridy, gridwidth, gridheight, fill, 0.0, 0.0, GridBagConstraints.CENTER,
+                    insets, 0, 0, constraints);
+        }
+        private void addGB(Component component, UIPanel parent, int gridx, int gridy, int gridwidth, int gridheight,
+        int fill, double weightx, double weighty, int anchor, Insets insets, int ipadx, int ipady, GridBagConstraints constraints) {
+            constraints.gridx = gridx;
+            constraints.gridy = gridy;
+            constraints.gridwidth = gridwidth;
+            constraints.gridheight = gridheight;
+            constraints.fill = fill;
+            constraints.weightx = weightx;
+            constraints.weighty = weighty;
+            constraints.anchor = anchor;
+            constraints.insets = insets;
+            constraints.ipadx = ipadx;
+            constraints.ipady = ipady;
+            parent.add(component, constraints);
+        }
 
-    @Override
-    public void update(IModel model) {
-        aufwandFp.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInFP()));
-        aufwandMm.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInMM()));
-        realerAufwand.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getRealerAufwand()));
+        @Override
+        public void update(IModel model) {
+            aufwandFp.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInFP()));
+            aufwandMm.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInMM()));
+            realerAufwand.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getRealerAufwand()));
+        }
     }
-}
 

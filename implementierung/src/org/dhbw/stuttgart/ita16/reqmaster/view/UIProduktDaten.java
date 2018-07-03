@@ -1,10 +1,12 @@
 
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import org.dhbw.stuttgart.ita16.reqmaster.components.ActionListenerEventTriggering;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktDatumEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktDatum;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
@@ -32,13 +34,13 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
      */
-    public UIProduktDaten(IView view){
+    public UIProduktDaten(IView view) {
         super(view);
         //Instanzierung
         produktDaten = new ArrayList<>();
         add = new UIButton();
         datenPanel = new UIPanel();
-        scrollPane = new UIScrollPane(datenPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+        scrollPane = new UIScrollPane(datenPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         // Hinzufügen der Komponenten zum Panel sowie Settings
@@ -49,22 +51,14 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
         this.setVisible(true);
         add.setText("Hinzufügen");
         datenPanel.setLayout(new BoxLayout(datenPanel, BoxLayout.Y_AXIS));
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
 
         //ActionListener fuer Hinzufügen-Button
-        add.addActionListener(new ActionListener() {
-            /**
-             * Wenn Button gedrückt wird, wird ein Event an den Controller geschickt, um ein neues
-             * Produktdatum hinzuzufügen
-             * @param e auf zu reagierendes Event
-             */
+        add.addActionListener(new ActionListenerEventTriggering(view) {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (View.forcesFocus == null) {
-                    UIActionAddProduktDatumEvent addEvent;
-                    getView().getObsController().observe(addEvent = new UIActionAddProduktDatumEvent());
-                }
+            public UIEvent generateEvent(Object source) {
+                return new UIActionAddProduktDatumEvent();
             }
         });
     }

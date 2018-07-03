@@ -16,25 +16,7 @@ public class UITextArea extends JTextArea{
         super();
     }
 
-    public UITextArea(final UIListenerComponentLostFocus listener)
-    {
-        super();
-
-        this.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-            }
-
-            /**
-             * Wenn eine Grafikkomponente den Fokus verliert, wird die für diesen Fall
-             * implementierte Methode aufgerufen
-             * @param e das FocusEvent, auf das reagiert werden soll
-             */
-            @Override
-            public void focusLost(FocusEvent e) {
-                listener.lostFocus(e.getComponent(), e.getOppositeComponent());
-            }
-
-            });
+    public UITextArea(final FocusListener listener){
+        this.addFocusListener(listener);
     }
 }

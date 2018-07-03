@@ -1,6 +1,6 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
-class UIModifyEvent extends UIEvent {
+class UIModifyEvent extends UIEvent implements IEventFailable{
 
 	private boolean success;
 	private String error;

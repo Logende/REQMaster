@@ -1,14 +1,17 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import org.dhbw.stuttgart.ita16.reqmaster.components.FocusListenerEventTriggering;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UITextArea;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyUmgebungEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataUmgebung;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -41,31 +44,10 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
         text.setLineWrap(true);
 
         //Definition eines FocusListeners für TextArea
-        text.addFocusListener(new FocusListener() {
-
+        text.addFocusListener(new FocusListenerEventTriggering(view) {
             @Override
-            public void focusGained(FocusEvent e) { }
-            /**
-             * Wenn die TextArea den Fokus verliert, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
-             * Der Controller kann bei invaliden Daten das Event ablehnen, woraufhin die Komponente den Fokus erneut anfordert,
-             * damit der Anwender valide Daten eingibt.
-             * @param e auf zu reagierendes Event
-             */
-            @Override
-            public void focusLost(FocusEvent e) {
-               UIModifyUmgebungEvent modifyEvent;
-               //Erstellen des Events
-                getView().getObsController().observe(modifyEvent =
-                        new UIModifyUmgebungEvent(new DataUmgebung(text.getText())));
-                //Auswerten des Events nach Controllerbehandlung
-               if(!(modifyEvent.isSuccess())){
-                   JOptionPane.showMessageDialog(scrollPane, modifyEvent.getErrorMessage(),
-                           "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                   View.forcesFocus = UIUmgebung.this;
-                   text.requestFocus();	//Abfrage, ob Änderung valide ist, ansonsten Fokus auf TextArea behalten
-               }else{
-                   View.forcesFocus = null;
-               }
+            public UIEvent generateEvent(Component lostFocus, Component gotFocus) {
+                return new UIModifyUmgebungEvent(new DataUmgebung(text.getText()));
             }
         });
 

@@ -2,10 +2,12 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktFunktionEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusListener;
 
 /**
  * Grafikkomponente: Ermöglicht es dem Anwender, eine Produktfunktion seiner Anforderungssammlung zu definieren.
@@ -44,9 +46,13 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
 
         // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
         // um eine Produktfunktion zu löschen
-        delete.addActionListener(actionEvent -> {
-            if(View.forcesFocus == null || UIProduktFunktion.this == View.forcesFocus) {    //falls keine andere Komponente den Fokus behalten muss, bzw. der Fokus auf der Komponente liegt
-                getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(this.dataId));
+        delete.addActionListener(new ActionListenerEventTriggering(view) {
+            @Override
+            public UIEvent generateEvent(Object source) {
+                return new UIActionDeleteProduktFunktionEvent(UIProduktFunktion.this.dataId);
+            }
+            @Override
+            public void finishedAction(){
                 View.forcesFocus = null;
             }
         });
@@ -60,15 +66,12 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
         /**
          * Für jedes UITextField der ProduktFunktion wird einmalig ein
          * FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
-         * focusLost und focusGained sind Komponenten der GUI die den Fokus bekommen oder verlieren
          */
-        UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
-            if(focusGained != null) {
-                if (focusLost.getParent() == focusGained.getParent()) {
-                    return; //do nothing if new component has same parent
-                }
+        FocusListener listener = new FocusListenerEventTriggering(getView()) {
+            @Override
+            public UIEvent generateEvent(Component lostFocus, Component gotFocus) {
+                return UIProduktFunktion.this.generateModifyEvent();
             }
-            wasModified(focusLost);
         };
 
         this.add(new UILabel());
@@ -87,6 +90,13 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
         this.add(beschreibung = new UITextField(listener));
         this.add(verweiseText = new UILabel());
         this.add(verweise = new UITextField(listener));
+    }
+
+    private UIEvent generateModifyEvent(){
+        DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
+                quelle.getText(), verweise.getText(), new DataId(id.getText()));
+        UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
+        return modifyEvent;
     }
 
     /**
@@ -120,33 +130,11 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     * Wenn diese Methode aufgerufen wird, sendet sie ein Event an den Controller,
-     * um die veränderte Produktfunktion vom Controller überprüfen zu lassen
-     * @param focusLost Komponente, die zu validieren ist, da Benutzer versucht, Fokus auf andere Komponente zu legen
-     */
-    private void wasModified(Component focusLost){
-        //Erstellen des geänderten Produktdatums und des Events
-        DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
-                quelle.getText(), verweise.getText(), new DataId(id.getText()));
-        UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
-        getView().getObsController().observe(modifyEvent);
-        //Auswerten des Events nach Controllerbehandlung
-        if(!modifyEvent.isSuccess()){
-            JOptionPane.showMessageDialog(focusLost.getParent(), modifyEvent.getErrorMessage(),
-                    "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-            View.forcesFocus = UIProduktFunktion.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
-            focusLost.requestFocus();
-        }else{
-            View.forcesFocus = null;
-        }
-    }
-
-    /**
      * Getter Methode für ID der Produktfunktion
      * @return DataId der Produktfunktion
      */
     public DataId getId(){
         return this.dataId;
-   }
+    }
 }
 

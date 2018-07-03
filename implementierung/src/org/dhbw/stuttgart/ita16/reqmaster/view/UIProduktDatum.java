@@ -2,6 +2,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktDatumEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktDatumEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
@@ -53,29 +54,40 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         /**Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
          * um ein Produktdatum zu löschen
          */
-        delete.addActionListener(actionEvent -> {
-            if(View.forcesFocus == null || UIProduktDatum.this == View.forcesFocus) { //falls keine andere Komponente den Fokus behalten muss, bzw. der Fokus auf der Komponente liegt
-                getView().getObsController().observe(new UIActionDeleteProduktDatumEvent(dataId));
+        delete.addActionListener(new ActionListenerEventTriggering(view) {
+            @Override
+            public UIEvent generateEvent(Object source) {
+                return new UIActionDeleteProduktDatumEvent(dataId);
+            }
+            @Override
+            public void finishedAction(){
                 View.forcesFocus = null;
             }
         });
+
 
         /**
          * Definition eines ActionListeners, um ein Attribut zu einem Produktdatum hinzuzufügen,
          * wenn Button gedrückt wird
          */
-        addAttr.addActionListener(actionEvent -> {
-            attributModel.addElement(attribute.getText());
-            wasModified(null);
+        addAttr.addActionListener(new ActionListenerEventTriggering(view) {
+            @Override
+            public UIEvent generateEvent(Object source) {
+                attributModel.addElement(attribute.getText());
+                return UIProduktDatum.this.generateModifyEvent();
+            }
         });
 
         /**
          * Definition eines ActionListeners, um ein Attribut von einem Produktdatum zu entfernen,
          * wenn Button gedrückt wird
          */
-        deleteAttr.addActionListener(actionEvent -> {
-            attributModel.remove(attributList.getSelectedIndex());
-            wasModified(null);
+        deleteAttr.addActionListener(new ActionListenerEventTriggering(view) {
+            @Override
+            public UIEvent generateEvent(Object source) {
+                attributModel.remove(attributList.getSelectedIndex());
+                return UIProduktDatum.this.generateModifyEvent();
+            }
         });
     }
 
@@ -86,18 +98,13 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         /**
          * Für jedes UITextField in ProduktDatum wird einmalig ein
          * FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
-         * focusLost und focusGained sind Components
          */
-        UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
-                if(focusGained != null) {
-                    if (focusLost.getParent() == focusGained.getParent()) {
-                        if(focusGained instanceof  UITextField) {
-                            return; //do nothing if new component has same parent
-                        }
-                    }
-                }
-                wasModified(focusLost); // falls die angeklickte Komponente einen anderen Parent hat, wird das Produktdatum validiert
-            };
+        FocusListenerEventTriggering listener = new FocusListenerEventTriggering(getView()) {
+            @Override
+            public UIEvent generateEvent(Component lostFocus, Component gotFocus) {
+                return UIProduktDatum.this.generateModifyEvent();
+            }
+        };
         //Panel mit Gridlayout fuer alles ausser Attribute
         datumPanel = new UIPanel();
         datumPanel.add(new UILabel());
@@ -128,6 +135,19 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         this.add(scrollPaneAttr);
     }
 
+    private UIEvent generateModifyEvent(){
+        // Erstellen einer Liste mit den aktuellen Attributen
+        List<DataAttribut> dataAttributeList = new ArrayList<>();
+        for(int i = 0; i< attributModel.size(); i++){
+            String attribut = attributModel.elementAt(i);
+            dataAttributeList.add(new DataAttribut(attribut));
+        }
+        //Erstellen des geänderten Produktdatums und des Events
+        DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
+        UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
+        return modifyEvent;
+    }
+
     /**
      *  Methode zum Setzen des Inhalts der Komponenten sowie weitere Einstellungen der Komponenten
      */
@@ -143,35 +163,6 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         title.setForeground(Color.BLUE);
         attributList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         attributList.setSelectedIndex(0);
-    }
-
-    /**
-     * Wenn diese Methode aufgerufen wird, sendet sie ein Event an den Controller,
-     * um das veränderte Produktdatum vom Controller überprüfen zu lassen
-     * @param focusLost Komponente, die zu validieren ist, da Benutzer versucht, Fokus auf andere Komponente zu legen
-     */
-    private void wasModified(Component focusLost){
-        // Erstellen einer Liste mit den aktuellen Attributen
-        List<DataAttribut> dataAttributeList = new ArrayList<>();
-        for(int i = 0; i< attributModel.size(); i++){
-            String attribut = attributModel.elementAt(i);
-            dataAttributeList.add(new DataAttribut(attribut));
-        }
-        //Erstellen des geänderten Produktdatums und des Events
-        DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
-        UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
-        getView().getObsController().observe(modifyEvent);
-        //Auswerten des Events nach Controllerbehandlung
-        if(focusLost != null) {
-            if (!modifyEvent.isSuccess()) {
-                JOptionPane.showMessageDialog(focusLost.getParent(), modifyEvent.getErrorMessage(),
-                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                View.forcesFocus = UIProduktDatum.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
-                focusLost.requestFocus();
-            } else {
-                View.forcesFocus = null;
-            }
-        }
     }
 
     /**

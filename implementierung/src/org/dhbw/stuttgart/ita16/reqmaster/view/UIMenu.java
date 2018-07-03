@@ -1,8 +1,11 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import org.dhbw.stuttgart.ita16.reqmaster.components.ActionListenerCustom;
+import org.dhbw.stuttgart.ita16.reqmaster.components.ActionListenerEventTriggering;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuBar;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIMenuItem;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionMenuSaveEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,34 +44,22 @@ public class UIMenu extends UIMenuBar {
         this.add(functionPointAnz, FlowLayout.LEFT);
 
         //ActionListener definieren
-        docExportXml.addActionListener(new ActionListener() {
-            /**
-             * definiert, dass ein Event an den Controller gesendet wird,
-             * wenn auf den Button geklickt wird, um das Dokument zu exportieren
-             * @param e ActionEvent Event, auf das reagiert werden soll
-             */
+        docExportXml.addActionListener(new ActionListenerEventTriggering(view) {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (View.forcesFocus == null) {
-                    UIActionMenuSaveEvent safeEvent = new UIActionMenuSaveEvent();
-                    getView().getObsController().observe(safeEvent);
-                    //Anzeige der Information, dass Dokument gespeichert wurde
-                    JOptionPane.showMessageDialog(UIMenu.this, "Ihr Dokument wurde gespeichert",
-                            "Speichern", JOptionPane.INFORMATION_MESSAGE);
-                }
+            public UIEvent generateEvent(Object source) {
+                return new UIActionMenuSaveEvent();
+            }
+            @Override
+            public void finishedAction(){
+                JOptionPane.showMessageDialog(UIMenu.this, "Ihr Dokument wurde gespeichert",
+                        "Speichern", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
-        functionPointAnz.addActionListener(new ActionListener() {
-            /**
-             * wenn auf den Button geklickt wird, wird zur Aufwandsabschätzung umgeschalten
-             * @param e ActionEvent Event, auf das reagiert werden soll
-             */
+        functionPointAnz.addActionListener(new ActionListenerCustom() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (View.forcesFocus == null) {
-                    mainFrame.toggleMode(functionPointAnz);
-                }
+            public void executeAction(ActionEvent e) {
+                mainFrame.toggleMode(functionPointAnz);
             }
         });
     }
