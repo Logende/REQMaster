@@ -54,7 +54,6 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
         setBorder(BorderFactory.createTitledBorder("Einflussfaktoren"));
         addComponents();
         setComponents();
-        this.update(view.getModel());
     }
 
     /**
