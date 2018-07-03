@@ -96,7 +96,7 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
             }
         });
 
-        realerAufwand.addFocusListener(new FocusListenerEventTriggering(view) {
+        realerAufwand.addFocusListener(new FocusListenerEventTriggering(view, false) {
             @Override
             public UIEvent generateEvent(Component lostFocus, Component gotFocus) {
                 try {

@@ -3,11 +3,19 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import java.util.Map;
 
+/**
+ * Datenstruktur einer FunctionPoint analyse.
+ */
 public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 
+    //durch Anwender eingegebene Einstufungen der versch. ProduktDaten/-Funktionen in Funktionstyp, Klassifizierung und Komplexität
 	private Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen;
-	private double realerAufwand, aufwandFp, aufwandMm;
-	private double summeAufwand, summEinflussFaktoren, faktorEinflussBewertung;
+
+	//wird durch Anwender eingegeben
+	private double realerAufwand;
+
+	//wird durch Programm ermittelt
+	private double summeAufwand, summEinflussFaktoren, faktorEinflussBewertung, aufwandFp, aufwandMm;
 
 	public DataFunctionPointAnalyse(Map<IIdentifiable, IDataFunctionPointEinstufung> einstufungen, double realerAufwand) {
 		this.einstufungen = einstufungen;
@@ -15,7 +23,7 @@ public class DataFunctionPointAnalyse implements IDataFunctionPointAnalyse {
 	}
 
 
-
+	@Override
 	public double getRealerAufwand() {
 		return this.realerAufwand;
 	}

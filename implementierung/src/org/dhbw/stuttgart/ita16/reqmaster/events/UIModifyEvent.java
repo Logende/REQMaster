@@ -1,5 +1,8 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
+/**
+ * Klasse für Modifyevents. Kann fehlschlagen, wenn z.B. vom Anwender eingebene Ids  bereits vorhanden sind.
+ */
 class UIModifyEvent extends UIEvent implements IEventFailable{
 
 	private boolean success;

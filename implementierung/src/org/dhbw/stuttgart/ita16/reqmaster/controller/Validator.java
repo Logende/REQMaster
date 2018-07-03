@@ -2,6 +2,10 @@ package org.dhbw.stuttgart.ita16.reqmaster.controller;
 
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
+/**
+ * Implementierung eines IValidators.
+ * Lässt sehr viel Freiraum für Eingabewerte und prüft v.a. Einzigartigkeit von Ids.
+ */
 public class Validator implements  IValidator{
 
 

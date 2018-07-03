@@ -1,8 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.controller;
 
-import java.io.*;
-import java.util.*;
 
+/**
+ * Interface für den Controller des MVC pattern.
+ */
 public interface IController {
 
 }

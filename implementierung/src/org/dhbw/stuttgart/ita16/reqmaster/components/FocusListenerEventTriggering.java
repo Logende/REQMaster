@@ -9,13 +9,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Random;
 
+/**
+ * Implementierung des FokusListeners, welche die Fokus-Regeln von REQ-Master beherrscht:
+ * Komponenten, die ihren Fokus verlieren (v.a. Textfelder), senden Modify Events an den Controller,
+ * welcher diese akzeptieren und den Datenbestand ändern, oder ablehnen kann.
+ * Wenn der Controller ein Event ablehnt, wird automatisch eine Fehlermeldung ausgegeben und die ursprüngliche Komponente,
+ * deren Änderung abgelehnt wurde, erzwingt erneut ihren Fokus. Damit wird gewährleistet, dass der Fokus erst dann gewechselt werden kann,
+ * sobald alle Eingabewerte valide sind.
+ */
 public abstract class FocusListenerEventTriggering implements FocusListener{
 
     private IView view;
+    private boolean allowNeighbourFocus;
 
     public FocusListenerEventTriggering(IView view){
+        this(view, true);
+    }
+
+    public FocusListenerEventTriggering(IView view, boolean allowNeighbourFocus){
         this.view = view;
+        this.allowNeighbourFocus = allowNeighbourFocus;
     }
 
 
@@ -29,8 +44,7 @@ public abstract class FocusListenerEventTriggering implements FocusListener{
     }
 
     private void lostFocus(Component lostFocus, Component gotFocus){
-        String d = String.valueOf((int)(100.0*Math.random()));
-        if(gotFocus != null) {
+        if(gotFocus != null && allowNeighbourFocus) {
             if (lostFocus.getParent() == gotFocus.getParent()) {
                 return; //do nothing if new component has same parent
             }
@@ -39,6 +53,7 @@ public abstract class FocusListenerEventTriggering implements FocusListener{
         UIEvent event = this.generateEvent(lostFocus, gotFocus);
         if(event == null) {
             View.forcesFocus = lostFocus;
+            View.allowNeighbourFocus = this.allowNeighbourFocus;
             lostFocus.requestFocus();
             JOptionPane.showMessageDialog(lostFocus.getParent(), "Invalide Eingabewerte",
                     "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
@@ -52,6 +67,7 @@ public abstract class FocusListenerEventTriggering implements FocusListener{
                 View.forcesFocus = null;
             }else{
                 View.forcesFocus = lostFocus;
+                View.allowNeighbourFocus = this.allowNeighbourFocus;
                 lostFocus.requestFocus();
                 JOptionPane.showMessageDialog(lostFocus.getParent(), failable.getErrorMessage(),
                         "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
@@ -60,6 +76,13 @@ public abstract class FocusListenerEventTriggering implements FocusListener{
 
     }
 
+    /**
+     * Zu implementierende Methode, die bei Focus Änderungen Events generiert, welche an den Controller gesendet werden.
+     * Falls Events fehlschlagen sollten, wird automatisch deren Fehlermeldung ausgegeben und die Komponente lostFocus fordert ihren Fokus erneut an.
+     * @param lostFocus Komponente die Fokus hatte, ihn aber (temporär) verloren hat.
+     * @param  gotFocus Komponente, die Fokus neu bekommen hat.
+     * @return UIEvent, dass an Controller  gesendet werden soll.
+     */
     public abstract UIEvent generateEvent(Component lostFocus, Component gotFocus);
 
 }

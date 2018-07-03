@@ -1,6 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 
+/**
+ * Id von z.B. einer ProduktFunktion/eines ProduktDatums.
+ */
 public class DataId {
 
 	private String id;

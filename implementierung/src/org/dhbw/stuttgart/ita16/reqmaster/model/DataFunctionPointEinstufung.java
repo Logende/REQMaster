@@ -1,5 +1,8 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
+/**
+ * Einstufung einer ProduktFunktion / eines Datums im Rahmen einer FP analyse.
+ */
 public class DataFunctionPointEinstufung implements IDataFunctionPointEinstufung {
 
 	private FPFunktionsTyp funktionstyp;

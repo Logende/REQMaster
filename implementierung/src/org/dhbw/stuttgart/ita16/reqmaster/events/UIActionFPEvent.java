@@ -1,6 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
 
+/**
+ * Klasse für FunctionPoint events. Kann fehlschlagen, wenn z.B. Eingabewerte invalide sind.
+ */
 class UIActionFPEvent extends UIActionEvent implements IEventFailable{
 
 

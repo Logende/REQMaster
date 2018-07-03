@@ -8,6 +8,11 @@ import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Exporter Implementierung, welche eine Bibliothek verwendet,
+ * um die zu exportierenden Java-Objekte aus dem Arbeitspeicher in XML-Dateien zu schreiben
+ * bzw. um Java-Objekte aus XML-Dateien zu importieren.
+ */
 public class XMLExporter implements IExporter {
 
 
@@ -23,14 +28,6 @@ public class XMLExporter implements IExporter {
 	            e.printStackTrace();
             }
         }
-		/*XMLEncoder encoder=null;
-		try{
-			encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream(f)));
-		}catch(FileNotFoundException fileNotFound){
-			System.out.println("Exception when trying to save object. File not found: " + f.getPath()+".");
-		}
-		encoder.writeObject(o);
-		encoder.close();*/
 		try {
 			xStream.toXML(o, new FileOutputStream(f));
 			System.out.println("Saved Object of type " + o.getClass().getName() + " to file " + f.getPath());
@@ -39,32 +36,18 @@ public class XMLExporter implements IExporter {
 		}
 	}
 	public Object loadFromXML(File f){
-		/*XMLDecoder decoder= null;
-		try {
-			decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(f)));
-		} catch (FileNotFoundException e) {
-			System.out.println("Exception when trying to load object. File not found: " + f.getName()+".");
-		}
-		return decoder.readObject();*/
 		XStream xStream = new XStream(new DomDriver());
 		return xStream.fromXML(f);
 	}
 
 	public IDataAnforderungssammlung loadAnforderungssammlung(File f) {
 		return (IDataAnforderungssammlung) loadFromXML(f);
-	};
+	}
 
 	public void saveAnforderungssammlung(IDataAnforderungssammlung anforderungsSammlung, File f) {
 		saveToXML(f, anforderungsSammlung);
 	}
 
-	public IDataFunctionPointAnalyse loadFunctionPointAnalyse(File f) {
-		return (IDataFunctionPointAnalyse) loadFromXML(f);
-	}
-
-	public void saveFunctionPointAnalyse(IDataFunctionPointAnalyse analyse, File f) {
-		saveToXML(f, analyse);
-	};
 
 	@Override
 	public IDataSchaetzKonfiguration loadSchaetzkonfiguration(File f) {

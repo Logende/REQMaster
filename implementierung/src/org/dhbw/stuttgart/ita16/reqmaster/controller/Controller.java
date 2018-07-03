@@ -7,6 +7,10 @@ import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 import java.io.File;
 import java.util.*;
 
+/**
+ * Controller des MVC Pattern.
+ * In der lage, auf UIEvents zu reagieren, in dem er z.B. Daten im Model ändert oder Fehlermeldungen zurückgibt.
+ */
 public class Controller implements IObserverController, IController{
 
 
@@ -16,8 +20,27 @@ public class Controller implements IObserverController, IController{
     private IValidator validator;
     private IAufwandRechner aufwandRechner;
 
+    /**
+     * Hinweis zu Eventhandling:
+     * Damit nicht in einer riesigen Methode auf alle Events separat reagiert werden muss (riesige Fallunterscheidung),
+     * wird hier die dazugehörige Reaktion auf ein Event für alle möglichen Eventklassen gelagert.
+     * Wieso Event Reaktionen überhaupt im Controller stehen und nicht in den Event Klassen selbst?
+     * Separation of concerns: Die Events werden von der View erstellt und verwaltet, sie gehören zur View.
+     * Reaktionen sind allerdings Aufgabe des Controllers und müssen deswegen unabhängig von den Events (die zur View gehören) sein.
+     *
+     * Gleichzeitig erlaubt dieser Ansatz enorme Erweiterbarkeit: Es könnten theoretisch dynamisch bzw. durch außenstehende Komponenten
+     * neue Event-Reaktionen registriert oder bestehende ersetzt werden.
+     * Damit könnte der Controller von außen durch neue Funktionalität erweitert werden.
+     */
     private Map<Class<? extends UIEvent>, EventReaction> reactions;
 
+    /**
+     * Erstellt neue Controller Instanz.
+     * @param iModel Model mit allen Daten.
+     * @param iView View, welche Events senden wird.
+     * @param validator Der Validator ermöglicht es zu prüfen, ob Eingabedaten von Nutzer valide sind.
+     * @param aufwandRechner Damit kann der Controller den Aufwand einer Anforderungssammlung bestimmen oder Gewichtsfaktoren optimieren.
+     */
     public Controller(IModel iModel, IView iView, IValidator validator, IAufwandRechner aufwandRechner) {
         reactions = new HashMap<>();
         this.validator = validator;
@@ -180,6 +203,7 @@ public class Controller implements IObserverController, IController{
             double proposal = e.getProposal();
             String errorMessage = validator.isValid(model, proposal);
             if(errorMessage == null){
+                System.out.println("set realer aufwand to " + proposal);
                 model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().setRealerAufwand(proposal);
                 e.setSuccess(true);
                 return true;
@@ -247,6 +271,8 @@ public class Controller implements IObserverController, IController{
             model.saveSchaetzkonfiguration();
             return false;
         });
+
+        reactions.put(UIErrorEvent.class, (model, view, event)->false);
     }
 
     @Override

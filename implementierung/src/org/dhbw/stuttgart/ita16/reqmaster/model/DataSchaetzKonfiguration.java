@@ -2,6 +2,10 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import java.util.Map;
 
+/**
+ * Beinhaltet sowohl die Gewichtungsmatrix der FP Einstufungen (Funktionstyp, Klassifizierung, Komplexität),
+ * als auch die vom Anwender veränderbaren Gewichtsfaktoren.
+ */
 public class DataSchaetzKonfiguration implements IDataSchaetzKonfiguration {
 
 

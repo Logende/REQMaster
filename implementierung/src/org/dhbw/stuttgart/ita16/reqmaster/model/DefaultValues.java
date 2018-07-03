@@ -4,6 +4,11 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Diese Klasse beinhaltet alle Default-Werte des kompletten Projektes:
+ * Standardwerte für neu angelegte Objekte (wie neue ProduktFunktionen), sowie die Komplexitätsmatrix, als auch Anfangswerte,
+ * welche durch den Anwender im Laufe der Programmausführung geändert werden können.
+ */
 public class DefaultValues {
 
     public static final String PRODUKTDATUM_NAME = "Produktdatumname";

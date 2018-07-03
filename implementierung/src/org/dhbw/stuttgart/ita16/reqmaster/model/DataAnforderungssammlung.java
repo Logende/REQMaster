@@ -2,6 +2,9 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import java.util.*;
 
+/**
+ * Enthält alle Daten einer Anforderungssammlung
+ */
 public class DataAnforderungssammlung implements IDataAnforderungssammlung {
 
 	private DataZielbestimmung zielbestimmung;
