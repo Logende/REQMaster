@@ -5,6 +5,10 @@ import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyFunctionPointEinstufung
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import java.awt.*;
 
+/**
+ * Grafikkomponente: enthält den Namen einer Produktfunktion oder eines Produktdatums,
+ * um es klassifizieren zu können und eine Komplexität zuweisen zu können
+ */
 public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse

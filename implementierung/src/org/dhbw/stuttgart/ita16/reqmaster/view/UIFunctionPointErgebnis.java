@@ -85,13 +85,21 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         addGB(vaf,ergebnisPanel,  2,  5,  1, 1, insets, constraints);
 
         aufwandAnzeigen.addActionListener(new ActionListener() {
+            /**
+             * Wenn der Benutzer auf den Aufwand anzeigen Button klickt,
+             * wird ein Event an den Controller gesendet, um den Aufwand zu berechnen
+             * @param e Event, auf das reagiert werden soll
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (View.forcesFocus == null) {
+                    // falls kein double im Textfeld des VAF-Faktors steht, wird eine Exception geworfen
                     try {
                         double vaf = Double.parseDouble(UIFunctionPointErgebnis.this.vaf.getText());
+                        //Erstellen des Events
                         UIActionFPAufwandAnzeigenEvent event = new UIActionFPAufwandAnzeigenEvent(vaf);
                         getView().getObsController().observe(event);
+                        //Auswerten des Events nach Controllerbehandlung
                         if(!event.isSuccess()){
                             JOptionPane.showMessageDialog(UIFunctionPointErgebnis.this, event.getErrorMessage(),
                                     "Fehler", JOptionPane.WARNING_MESSAGE);
@@ -109,13 +117,17 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
             public void focusGained(FocusEvent e) {
             }
 
+            /**
+             *
+             * @param e
+             */
             @Override
             public void focusLost(FocusEvent e) {
                 try {
                     double value = Double.parseDouble(realerAufwand.getText());
                     UIModifyRealerAufwandEvent modifyEvent = new UIModifyRealerAufwandEvent(value);
                     getView().getObsController().observe(modifyEvent);
-
+                    // Auswertung des Events nach Controllerbehandlung
                     if (!modifyEvent.isSuccess()) {
                         JOptionPane.showMessageDialog(e.getComponent().getParent(), modifyEvent.getErrorMessage(),
                                 "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);

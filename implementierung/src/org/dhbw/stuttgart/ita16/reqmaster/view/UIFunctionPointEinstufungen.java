@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Grafikkomponente: enthält alle FunctionPointEinstufung, um Produktfunktionen und Produktdaten
+ * klassifizieren und eine Komplexität zuzuweisen
+ */
 public class UIFunctionPointEinstufungen extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
