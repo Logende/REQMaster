@@ -4,76 +4,76 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
 
 /**
- * Interface for validators, which validate user input for the model.
- * Used by the controller to validate user input and deny invalid input.
+ * Interface für Validator, der User Input bzw. Vorschläge des User für neue Model-Werte validiert.
+ * Verwendet vom Controller um User Input zu prüfen und zu akzeptieren/ablehnen.
  */
 public interface IValidator {
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param current
 	 * @param proposal
-	 * @return null if valid, error message if invalid.
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, DataProduktDatum current, DataProduktDatum proposal);
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param proposal
-	 * @return
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, DataZielbestimmung proposal);
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param proposal
-	 * @return null if valid, error message if invalid.
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, DataProdukteinsatz proposal);
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param proposal
-	 * @return null if valid, error message if invalid.
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, DataUmgebung proposal);
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param current
 	 * @param proposal
-	 * @return null if valid, error message if invalid.
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, DataProduktFunktion current, DataProduktFunktion proposal);
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param current
 	 * @param proposal
 	 * @param iIdentifiable
-	 * @return null if valid, error message if invalid.
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, IDataFunctionPointEinstufung current, IDataFunctionPointEinstufung proposal, IIdentifiable iIdentifiable);
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param realerAufwand
-	 * @return null if valid, error message if invalid.
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, double realerAufwand);
 
 	/**
-	 * Checks whether proposal is valid.
+	 * Prüft ob Eingabewerte valide sind.
 	 * @param model
 	 * @param schaetzKonfiguration
-	 * @return null if valid, error message if invalid.
+	 * @return null falls valide; Fehlermeldung (String), falls invalide
 	 */
 	String isValid(IModel model, IDataSchaetzKonfiguration schaetzKonfiguration);
 

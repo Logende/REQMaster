@@ -44,9 +44,9 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
         this.add(idText = new UILabel());
         this.add(nameText = new UILabel());
         this.add(klassifizierungText = new UILabel());
-        this.add(klassifizierungUIChoice = new UIChoice<>(FPKlassifizierung.values(), (component, selected) -> this.changedValue(false)));
+        this.add(klassifizierungUIChoice = new UIChoice<>(FPKlassifizierung.values(), (component, selected) -> this.changedValue()));
         this.add(komplexitaetText = new UILabel());
-        this.add(komplexitaetUIChoice = new UIChoice<>(FPKomplexitaet.values(), (component, selected) -> this.changedValue(false)));
+        this.add(komplexitaetUIChoice = new UIChoice<>(FPKomplexitaet.values(), (component, selected) -> this.changedValue()));
     }
 
     /**
@@ -59,11 +59,7 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
         komplexitaetText.setText("Komplexitaet");
     }
 
-    /**
-     *
-     * @param changedFunktionstyp
-     */
-    public void changedValue(boolean changedFunktionstyp){
+    public void changedValue(){
         FPKlassifizierung klassifizierung = (FPKlassifizierung) klassifizierungUIChoice.getSelectedItem();
         String klassifizierungName = klassifizierung.name();
         FPFunktionsTyp funktionsTyp = FPFunktionsTyp.valueOf(klassifizierungName.substring(0, klassifizierungName.indexOf("_")));
@@ -73,10 +69,6 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
         IDataFunctionPointEinstufung einstufung = getView().getModel().getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getEinstufung(iIdentifiable);
         if(einstufung.getFunktionstyp() == funktionsTyp && einstufung.getKlassifizierung() == klassifizierung && einstufung.getKomplexitaet() == komplexitaet){
             return; //no changes to make
-        }
-
-        if(changedFunktionstyp){
-            klassifizierung = funktionsTyp.getDefaultKlassifizierung();
         }
 
         IDataFunctionPointEinstufung proposal = new DataFunctionPointEinstufung(funktionsTyp, klassifizierung, komplexitaet);

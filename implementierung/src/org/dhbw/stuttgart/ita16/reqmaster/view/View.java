@@ -14,6 +14,7 @@ public class View implements IView, IObserverView {
 
     //Variablen der Klasse
     public static Component forcesFocus;
+    public static boolean allowNeighbourFocus;
     private IModel model;
     private IObserverController obsController;
     private UIMainFrame mainFrame;

@@ -1,6 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 
+/**
+ * Klasse für die Attribute eines DataProduktDatums.
+ */
 public class DataAttribut {
 
 

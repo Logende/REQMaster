@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Model implements IModel {
 
-	IObserverView obsView;
+	private IObserverView obsView;
 	private IExporter exporter;
 	private IDataSchaetzKonfiguration schaetzKonfiguration;
 	private IDataAnforderungssammlung anforderungsSammlung;

@@ -2,6 +2,10 @@ package org.dhbw.stuttgart.ita16.reqmaster.controller;
 
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 
+/**
+ * AufwandRechner Implementierung.
+ * In der Lage, Aufwand in FP/MM zu berechnen und Gewichtsfaktoren zu optimieren.
+ */
 public class AufwandRechner implements IAufwandRechner {
 
     @Override

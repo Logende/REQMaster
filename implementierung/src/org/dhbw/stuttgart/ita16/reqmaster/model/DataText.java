@@ -1,8 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
 
+/**
+ * Abstrakte Klasse für alle Datenobjekte im Model, die nur reiner Text sind.
+ */
 public abstract class DataText {
 
 	private String text;

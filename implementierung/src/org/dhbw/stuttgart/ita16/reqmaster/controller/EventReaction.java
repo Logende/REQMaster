@@ -5,6 +5,9 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.view.IView;
 
 @FunctionalInterface
+/**
+ * Interface für eine vordefinierte Reaktion auf eine bestimmte Art von Event.
+ */
 public interface EventReaction<T extends UIEvent> {
 
     /**
