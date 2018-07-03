@@ -23,6 +23,7 @@ public class UIMenu extends UIMenuBar {
     /**
      * Konstruktor der Klasse
      * @param view Instanz der View des MVC-Patterns
+     * @param mainFrame Instanz des Hauptfensters, um zwischen Anforderungssammlung und FP-Analyse umzuschalten
      */
     public UIMenu(IView view, UIMainFrame mainFrame) {
         super(view);
@@ -60,8 +61,7 @@ public class UIMenu extends UIMenuBar {
 
         functionPointAnz.addActionListener(new ActionListener() {
             /**
-             * definiert, dass ein Event an den Controller gesendet wird,
-             * wenn auf den Button geklickt wird, um zur Aufwandsabschätzung umzuschalten
+             * wenn auf den Button geklickt wird, wird zur Aufwandsabschätzung umgeschalten
              * @param e ActionEvent Event, auf das reagiert werden soll
              */
             @Override

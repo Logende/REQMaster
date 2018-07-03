@@ -7,7 +7,6 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.DataProdukteinsatz;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
-
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -46,7 +45,7 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 			public void focusGained(FocusEvent e) { }
 
 			/**
-			 * Wenn der Fokus verloren wird, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
+			 * Wenn die TextArea den Fokus verliert, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
 			 * Der Controller kann bei invaliden Daten das Event ablehnen, woraufhin die Komponente den Fokus erneut anfordert,
 			 * damit der Anwender valide Daten eingibt.
 			 * @param e auf zu reagierendes Event
@@ -54,8 +53,10 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 			@Override
 			public void focusLost(FocusEvent e) {
 				UIModifyProdukteinsatzEvent modifyEvent;
+				//Erstellen des Events
 				getView().getObsController().observe(modifyEvent =
 						new UIModifyProdukteinsatzEvent(new DataProdukteinsatz(text.getText())));
+				//Auswerten des Events nach Controllerbehandlung
 				if(!(modifyEvent.isSuccess())){
 					JOptionPane.showMessageDialog(scrollPane, "Falsche Eingabe",
 							"Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
@@ -69,13 +70,11 @@ public class UIProdukteinsatz extends UIPanel implements IUIUpdateable {
 	}
 
 	/**
-	 * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
+	 * Aktualisiert die TextArea mit dem Wert im Model
 	 * @param model Istanz des Model des MVC-Patterns
 	 */
 	@Override
 	public void update(IModel model) {
 		text.setText(model.getIDataAnforderungssammlung().getDataProdukteinsatz().getText());
 	}
-
-
 }

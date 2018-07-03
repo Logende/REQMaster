@@ -27,7 +27,6 @@ public class UIMainFrame extends UIFrame implements IUIUpdateable {
 	 */
 	public UIMainFrame(View view) {
 		super("REQ-Master");
-
 		//Instanzierung
 		mainPanel = new UIMainPanel(view);
 		functionPointPanel = new UIFunctionPointPanel(view);

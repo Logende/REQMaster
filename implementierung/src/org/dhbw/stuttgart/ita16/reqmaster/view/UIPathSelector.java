@@ -21,7 +21,7 @@ public class UIPathSelector {
      * statische Methode des FileChooser zur Auswahl einer Datei
      * @param title Titel des Fensters
      * @param description Filterung der Dateien nach diesem String
-     * @param ending Dateiendung
+     * @param ending gewünschte Dateiendung
      * @param default_directory Verzeichnis, in dem man sich aktuell befindet bei Fensteröffnung
      * @param type_save boolean: true: Speicherdialog, false: Öffnendialog
      * @return File, das geöffnet oder gespeichert werden soll

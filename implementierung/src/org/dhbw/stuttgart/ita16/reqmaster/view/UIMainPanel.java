@@ -47,7 +47,4 @@ public class UIMainPanel extends UIPanel implements IUIUpdateable {
 		panelUmgebung.update(model);
 		this.validate(); // aktualisiere Layout
 	}
-
-
-
 }

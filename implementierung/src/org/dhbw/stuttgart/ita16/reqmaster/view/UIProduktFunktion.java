@@ -3,21 +3,16 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionDeleteProduktFunktionEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyProduktFunktionEvent;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataId;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
-import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
-import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
-
+import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 /**
  * Grafikkomponente: Ermöglicht es dem Anwender, eine Produktfunktion seiner Anforderungssammlung zu definieren.
  */
 public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
 
+    //Variablen der Klasse
     private final DataId dataId; //always the real DataId instance, as being used within the model
     private UILabel title;
     private UIButton delete;
@@ -50,10 +45,10 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
         // Definition eines ActionListeners für den Delete Button, der ein Event an den Controller schickt,
         // um eine Produktfunktion zu löschen
         delete.addActionListener(actionEvent -> {
-        if(View.forcesFocus == null || UIProduktFunktion.this == View.forcesFocus) {
-            getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(this.dataId));
-            View.forcesFocus = null;
-        }
+            if(View.forcesFocus == null || UIProduktFunktion.this == View.forcesFocus) {    //falls keine andere Komponente den Fokus behalten muss, bzw. der Fokus auf der Komponente liegt
+                getView().getObsController().observe(new UIActionDeleteProduktFunktionEvent(this.dataId));
+                View.forcesFocus = null;
+            }
         });
     }
 
@@ -69,24 +64,11 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
          */
         UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
             if(focusGained != null) {
-                    if (focusLost.getParent() == focusGained.getParent()) {
-                        return; //do nothing if new component has same parent
-                    }
+                if (focusLost.getParent() == focusGained.getParent()) {
+                    return; //do nothing if new component has same parent
+                }
             }
-            // Wenn der Fokus von einer Komponente der Produktfunktion auf irgendeine andere Komponente der GUI gelegt wird,
-            // wird zur Validierung der Produktfunktion, ein Event an den Controller gesendet
-            DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
-                    quelle.getText(), verweise.getText(), new DataId(id.getText()));
-            UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
-            getView().getObsController().observe(modifyEvent);
-            if(!modifyEvent.isSuccess()){
-                JOptionPane.showMessageDialog(focusLost.getParent(), modifyEvent.getErrorMessage(),
-                        "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                View.forcesFocus = UIProduktFunktion.this; // falls Validierung der Produktfunktion negativ, Fokus zurück auf Komponente
-                focusLost.requestFocus();
-            }else{
-                View.forcesFocus = null;
-            }
+            wasModified(focusLost);
         };
 
         this.add(new UILabel());
@@ -127,14 +109,36 @@ public class UIProduktFunktion extends UIPanel implements IUIUpdateable {
      */
     @Override
     public void update(IModel model){
-            DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
-            id.setText(dataId.getId());
-            name.setText(newFunktion.getName());
-            quelle.setText(newFunktion.getQuelle());
-            akteur.setText(newFunktion.getAkteur());
-            beschreibung.setText(newFunktion.getBeschreibung());
-            verweise.setText(newFunktion.getVerweise());
-            title.setText(newFunktion.getId().getId());
+        DataProduktFunktion newFunktion = model.getIDataAnforderungssammlung().getDataProduktFunktionen().get(dataId);
+        id.setText(dataId.getId());
+        name.setText(newFunktion.getName());
+        quelle.setText(newFunktion.getQuelle());
+        akteur.setText(newFunktion.getAkteur());
+        beschreibung.setText(newFunktion.getBeschreibung());
+        verweise.setText(newFunktion.getVerweise());
+        title.setText(newFunktion.getId().getId());
+    }
+
+    /**
+     * Wenn diese Methode aufgerufen wird, sendet sie ein Event an den Controller,
+     * um die veränderte Produktfunktion vom Controller überprüfen zu lassen
+     * @param focusLost Komponente, die zu validieren ist, da Benutzer versucht, Fokus auf andere Komponente zu legen
+     */
+    private void wasModified(Component focusLost){
+        //Erstellen des geänderten Produktdatums und des Events
+        DataProduktFunktion proposal = new DataProduktFunktion(name.getText(), beschreibung.getText(), akteur.getText(),
+                quelle.getText(), verweise.getText(), new DataId(id.getText()));
+        UIModifyProduktFunktionEvent modifyEvent = new UIModifyProduktFunktionEvent(dataId, proposal);
+        getView().getObsController().observe(modifyEvent);
+        //Auswerten des Events nach Controllerbehandlung
+        if(!modifyEvent.isSuccess()){
+            JOptionPane.showMessageDialog(focusLost.getParent(), modifyEvent.getErrorMessage(),
+                    "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
+            View.forcesFocus = UIProduktFunktion.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
+            focusLost.requestFocus();
+        }else{
+            View.forcesFocus = null;
+        }
     }
 
     /**

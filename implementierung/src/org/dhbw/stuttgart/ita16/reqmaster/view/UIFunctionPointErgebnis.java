@@ -13,16 +13,17 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * Die Klasse enthält alle Eingabefelder der Function-Ponit analyse, welche nicht zur Klasse UIFunktionenDaten oder UIGewichtsfaktoren gehören.
+ * Grafikkomponente: Die Klasse enthält Eingabe- und Anzeigeelemente
+ * für die Ergebniskalkulation der Function-Point-Analyse
  */
 public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
 
     //Variablen der Klasse
     private UIButton aufwandAnzeigen;
     private UIButton gewichtsfaktorOpt;
-    private UILabel aufwandFP;
-    private UILabel aufwandMM;
-    private UILabel aufwandMMLabel;
+    private UILabel aufwandFp;
+    private UILabel aufwandMm;
+    private UILabel aufwandMmLabel;
     private UILabel realerAufwandLabel;
     private UITextField realerAufwand;
     private UILabel vafText;
@@ -31,17 +32,21 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
     private UIScrollPane scrollPane;
     private UIPanel ergebnisPanel;
 
+    /**
+     * Konstruktor der Klasse
+     * @param view Instanz der View des MVC-Patterns
+     */
     public UIFunctionPointErgebnis(IView view) {
-
         super(view);
         //Die Klassenvariablen instanzieren
         ergebnisPanel = new UIPanel();
-        scrollPane = new UIScrollPane(ergebnisPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane = new UIScrollPane(ergebnisPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         aufwandAnzeigen = new UIButton();
         gewichtsfaktorOpt = new UIButton();
-        aufwandMM = new UILabel();
-        aufwandFP = new UILabel();
-        aufwandMMLabel = new UILabel();
+        aufwandMm = new UILabel();
+        aufwandFp = new UILabel();
+        aufwandMmLabel = new UILabel();
         realerAufwand = new UITextField();
         realerAufwandLabel = new UILabel();
         vaf = new UITextField();
@@ -56,7 +61,7 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         scrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         ergebnisPanel.setLayout(new GridBagLayout());
         aufwandAnzeigen.setText("Aufwand in FP anzeigen");
-        aufwandMM.setText("Aufwand in MM");
+        aufwandMm.setText("Aufwand in MM");
         gewichtsfaktorOpt.setText("Optimieren");
         realerAufwandLabel.setText("Realer Aufwand");
         vafText.setText("VAF-Faktor");
@@ -69,9 +74,9 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         //Definieren des Layout wegen GridBagLayout
         GridBagConstraints constraints = new GridBagConstraints();
         addGB(aufwandAnzeigen,ergebnisPanel, 1, 1, 1,  1, GridBagConstraints.HORIZONTAL, insets, constraints);
-        addGB(aufwandFP,ergebnisPanel,  2,  1, 1, 1, insets, constraints);
-        addGB(aufwandMMLabel,ergebnisPanel,  1,  2,  1, 1, insets, constraints);
-        addGB(aufwandMM,ergebnisPanel,  2,  2,  1, 1, insets, constraints);
+        addGB(aufwandFp,ergebnisPanel,  2,  1, 1, 1, insets, constraints);
+        addGB(aufwandMmLabel,ergebnisPanel,  1,  2,  1, 1, insets, constraints);
+        addGB(aufwandMm,ergebnisPanel,  2,  2,  1, 1, insets, constraints);
         addGB(gewichtsfaktorOpt,ergebnisPanel, 1,  3,  1, 1, fill = GridBagConstraints.HORIZONTAL, insets, constraints);
         addGB(choice, ergebnisPanel, 2,3,2,1,fill = GridBagConstraints.BOTH, insets, constraints);
         addGB(realerAufwandLabel,ergebnisPanel,  1,  4,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
@@ -176,8 +181,8 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
 
     @Override
     public void update(IModel model) {
-        aufwandFP.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInFP()));
-        aufwandMM.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInMM()));
+        aufwandFp.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInFP()));
+        aufwandMm.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getAufwandInMM()));
         realerAufwand.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getRealerAufwand()));
     }
 }

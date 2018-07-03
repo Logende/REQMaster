@@ -18,6 +18,7 @@ public class UITextField extends JTextField {
     public UITextField(final UIListenerComponentLostFocus listener)
     {
         super();
+
         this.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {

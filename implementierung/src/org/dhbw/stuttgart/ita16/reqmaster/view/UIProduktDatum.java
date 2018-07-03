@@ -54,7 +54,7 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
          * um ein Produktdatum zu löschen
          */
         delete.addActionListener(actionEvent -> {
-            if(View.forcesFocus == null || UIProduktDatum.this == View.forcesFocus) {
+            if(View.forcesFocus == null || UIProduktDatum.this == View.forcesFocus) { //falls keine andere Komponente den Fokus behalten muss, bzw. der Fokus auf der Komponente liegt
                 getView().getObsController().observe(new UIActionDeleteProduktDatumEvent(dataId));
                 View.forcesFocus = null;
             }
@@ -83,8 +83,11 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
      * Hinzufügen der Grafikkomponenten sowie Definition eines FokusListener
      */
     private void addComponents() {
-        // Für jedes UITextField in ProduktDatum wird einmalig ein
-        // FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+        /**
+         * Für jedes UITextField in ProduktDatum wird einmalig ein
+         * FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
+         * focusLost und focusGained sind Components
+         */
         UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
                 if(focusGained != null) {
                     if (focusLost.getParent() == focusGained.getParent()) {
@@ -93,11 +96,10 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
                         }
                     }
                 }
-                wasModified(focusLost);
+                wasModified(focusLost); // falls die angeklickte Komponente einen anderen Parent hat, wird das Produktdatum validiert
             };
         //Panel mit Gridlayout fuer alles ausser Attribute
         datumPanel = new UIPanel();
-        datumPanel.setLayout(new GridLayout(9,2));
         datumPanel.add(new UILabel());
         datumPanel.add(new UILabel());
         datumPanel.add(new UILabel());
@@ -121,17 +123,16 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         //Aufbau der Attributliste
         attributModel = new DefaultListModel<>();
         attributList = new UIList(attributModel);
-        attributList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        attributList.setSelectedIndex(0);
         scrollPaneAttr = new UIScrollPane(attributList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPaneAttr);
     }
 
     /**
-     *  Methode zum Setzen des Inhalts der Komponenten
+     *  Methode zum Setzen des Inhalts der Komponenten sowie weitere Einstellungen der Komponenten
      */
     private void setComponents() {
+        datumPanel.setLayout(new GridLayout(9,2));
         delete.setText("Löschen");
         addAttr.setText("Attribut hinzufügen");
         deleteAttr.setText("Attribut löschen");
@@ -140,12 +141,14 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
         attributeText.setText(DefaultValues.PRODUKTDATUM_ATTRIBUTE);
         verweiseText.setText(DefaultValues.PRODUKTDATUM_VERWEISE);
         title.setForeground(Color.BLUE);
+        attributList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        attributList.setSelectedIndex(0);
     }
 
     /**
      * Wenn diese Methode aufgerufen wird, sendet sie ein Event an den Controller,
      * um das veränderte Produktdatum vom Controller überprüfen zu lassen
-     * @param focusLost
+     * @param focusLost Komponente, die zu validieren ist, da Benutzer versucht, Fokus auf andere Komponente zu legen
      */
     private void wasModified(Component focusLost){
         // Erstellen einer Liste mit den aktuellen Attributen
@@ -154,9 +157,11 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
             String attribut = attributModel.elementAt(i);
             dataAttributeList.add(new DataAttribut(attribut));
         }
+        //Erstellen des geänderten Produktdatums und des Events
         DataProduktDatum proposal = new DataProduktDatum(name.getText(), new DataId(id.getText()), dataAttributeList, verweise.getText());
         UIModifyProduktDatumEvent modifyEvent = new UIModifyProduktDatumEvent(dataId, proposal);
         getView().getObsController().observe(modifyEvent);
+        //Auswerten des Events nach Controllerbehandlung
         if(focusLost != null) {
             if (!modifyEvent.isSuccess()) {
                 JOptionPane.showMessageDialog(focusLost.getParent(), modifyEvent.getErrorMessage(),
@@ -187,7 +192,7 @@ public class UIProduktDatum extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     * getter-Methode für die ID des Produktdatums
+     * Getter Methode für die ID des Produktdatums
      * @return DataId des Produktdatum
      */
     public DataId getId() {

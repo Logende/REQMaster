@@ -3,9 +3,7 @@ package org.dhbw.stuttgart.ita16.reqmaster.view;
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyFunctionPointEinstufungEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
-
 import java.awt.*;
-
 
 public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable {
 
@@ -13,10 +11,8 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
     private final DataId dataId; //always the real DataId instance, as being used within the model
     private UILabel idText;
     private UILabel nameText;
-    //private UILabel funktionsTypText;
     private UILabel klassifizierungText;
     private UILabel komplexitaetText;
-    //private UIChoice<FPFunktionsTyp> funktionsTypUIChoice;
     private UIChoice<FPKlassifizierung> klassifizierungUIChoice;
     private UIChoice<FPKomplexitaet> komplexitaetUIChoice;
 
@@ -25,7 +21,6 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
      * @param view Instanz der View des MVC-Patterns
      * @param dataId ID des Produktdatums
      */
-
     public UIFunctionPointEinstufung(IView view, DataId dataId) {
         super(view);
         this.dataId = dataId;
@@ -44,23 +39,26 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
     private void addComponents() {
         this.add(idText = new UILabel());
         this.add(nameText = new UILabel());
-        //this.add(funktionsTypText = new UILabel());
-        //this.add(funktionsTypUIChoice = new UIChoice<>(FPFunktionsTyp.values(), (component, selected) -> this.changedValue(true)));
         this.add(klassifizierungText = new UILabel());
         this.add(klassifizierungUIChoice = new UIChoice<>(FPKlassifizierung.values(), (component, selected) -> this.changedValue(false)));
         this.add(komplexitaetText = new UILabel());
         this.add(komplexitaetUIChoice = new UIChoice<>(FPKomplexitaet.values(), (component, selected) -> this.changedValue(false)));
     }
 
-
+    /**
+     * Settings der Komponenten
+     */
     private void setComponents() {
         this.idText.setForeground(Color.BLUE);
         this.nameText.setForeground(Color.BLUE);
-        //funktionsTypText.setText("Funktionstyp");
         klassifizierungText.setText("Klassifizierung");
         komplexitaetText.setText("Komplexitaet");
     }
 
+    /**
+     *
+     * @param changedFunktionstyp
+     */
     public void changedValue(boolean changedFunktionstyp){
         FPKlassifizierung klassifizierung = (FPKlassifizierung) klassifizierungUIChoice.getSelectedItem();
         String klassifizierungName = klassifizierung.name();
@@ -86,7 +84,7 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
     }
 
     /**
-     * Implementierung der Update-Methode
+     * Implementierung der update-Methode
      * wenn sich ein Produktdatum geändert hat, wird diese Methode aufgerufen,
      * um die GUI zu aktualisieren
      * @param model Instanz des Models des MVC-Patterns
@@ -104,7 +102,7 @@ public class UIFunctionPointEinstufung extends UIPanel implements IUIUpdateable 
     }
 
     /**
-     * getter-Methode für die ID des Produktdatums
+     * Getter Methode für die ID des Produktdatums
      * @return DataId des Produktdatum
      */
     public DataId getId() {

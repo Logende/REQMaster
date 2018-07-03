@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 /**
  * Adaption der Swing JButton-Klasse fuer individuelle Anpassungen an das Projekt
  */
-
 public class UIButton extends JButton {
 
     /**
