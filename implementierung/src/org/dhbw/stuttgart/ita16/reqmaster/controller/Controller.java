@@ -271,6 +271,8 @@ public class Controller implements IObserverController, IController{
             model.saveSchaetzkonfiguration();
             return false;
         });
+
+        reactions.put(UIErrorEvent.class, (model, view, event)->false);
     }
 
     @Override
