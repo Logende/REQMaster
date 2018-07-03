@@ -34,7 +34,6 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
      */
     public UIProduktDaten(IView view){
         super(view);
-
         //Instanzierung
         produktDaten = new ArrayList<>();
         add = new UIButton();
@@ -53,7 +52,7 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
 
-        //Definition eines ActionListener
+        //ActionListener fuer Hinzufügen-Button
         add.addActionListener(new ActionListener() {
             /**
              * Wenn Button gedrückt wird, wird ein Event an den Controller geschickt, um ein neues
@@ -105,7 +104,7 @@ public class UIProduktDaten extends UIPanel implements IUIUpdateable {
                 produktDaten.add(new UIProduktDatum(getView(), dataProduktDatum.getId()));
             }
         }
-        //datenPanel aktualisieren, indem alle Produktdatum des Panel entfernt werden und dann
+        //datenPanel aktualisieren, indem alle Produktdatum Instanzen vom Panel entfernt werden und dann
         //wieder hinzugefügt werden
         datenPanel.removeAll();
         for (UIProduktDatum i : produktDaten) {

@@ -44,5 +44,4 @@ public class UIFrame extends JFrame{
     public IView getView() {
         return view;
     }
-
 }

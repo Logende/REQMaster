@@ -46,7 +46,7 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
             @Override
             public void focusGained(FocusEvent e) { }
             /**
-             * Wenn der Fokus verloren wird, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
+             * Wenn die TextArea den Fokus verliert, werden alle Daten-Änderungen über ein Modify-Event an den Controller gereicht.
              * Der Controller kann bei invaliden Daten das Event ablehnen, woraufhin die Komponente den Fokus erneut anfordert,
              * damit der Anwender valide Daten eingibt.
              * @param e auf zu reagierendes Event
@@ -54,8 +54,10 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
             @Override
             public void focusLost(FocusEvent e) {
                UIModifyUmgebungEvent modifyEvent;
+               //Erstellen des Events
                 getView().getObsController().observe(modifyEvent =
                         new UIModifyUmgebungEvent(new DataUmgebung(text.getText())));
+                //Auswerten des Events nach Controllerbehandlung
                if(!(modifyEvent.isSuccess())){
                    JOptionPane.showMessageDialog(scrollPane, modifyEvent.getErrorMessage(),
                            "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
@@ -70,11 +72,10 @@ public class UIUmgebung extends UIPanel implements IUIUpdateable {
     }
 
     /**
-     * Aktualisiert alle dazugehörigen UI Komponenten mit den neuen Daten des Models.
-     * @param model Model des MVC-Patterns
+     * Aktualisiert die TextArea mit dem Wert im Model
+     * @param model Istanz des Model des MVC-Patterns
      */
     public void update(IModel model) {
         text.setText(model.getIDataAnforderungssammlung().getDataUmgebung().getText());
     }
-
 }

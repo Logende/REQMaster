@@ -22,12 +22,10 @@ public class UIFunctionPointPanel extends UIPanel {
      */
     public UIFunctionPointPanel(IView view) {
         super(view);
-
         setLayout(new GridLayout(2,2));
         this.add(einstufungen = new UIFunctionPointEinstufungen(view));
         this.add(gewichtsfaktoren = new UIGewichtsfaktoren(view));
-        fpErgebnis = new UIFunctionPointErgebnis(view);
-        this.add(fpErgebnis);
+        this.add(fpErgebnis = new UIFunctionPointErgebnis(view));
         this.setVisible(true);
     }
 

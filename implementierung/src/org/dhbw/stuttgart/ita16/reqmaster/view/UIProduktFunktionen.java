@@ -18,7 +18,6 @@ import java.util.List;
  * Grafikkomponente: Beinhaltet alle durch den Anwender hinzufgefügten Produktfunktionen (durch UIProduktFunktion dargestellt)
  * und ermöglicht Löschen/Hinzufügen/Bearbeiten von Produktfunktionen.
  */
-
 public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
 
     //Variablen der Klasse
@@ -102,8 +101,8 @@ public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
                 produktFunktionen.add(new UIProduktFunktion(getView(), dataProduktFunktion.getId()));
             }
         }
-
-        //Entfernen aller Produktfunktionen vom Panel und danach neu hinzufügen
+        //funktionsPanel aktualisieren, indem alle Produktfunktion Instanzen vom Panel entfernt werden und dann
+        //wieder hinzugefügt werden
         funktionsPanel.removeAll();
         for (UIProduktFunktion i : produktFunktionen){
             funktionsPanel.add(i);
