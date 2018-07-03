@@ -61,7 +61,7 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         scrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         ergebnisPanel.setLayout(new GridBagLayout());
         aufwandAnzeigen.setText("Aufwand in FP anzeigen");
-        aufwandMm.setText("Aufwand in MM");
+        aufwandMmLabel.setText("Aufwand in MM");
         gewichtsfaktorOpt.setText("Optimieren");
         realerAufwandLabel.setText("Realer Aufwand");
         vafText.setText("VAF-Faktor");
@@ -79,7 +79,7 @@ public class UIFunctionPointErgebnis extends UIPanel implements  IUIUpdateable{
         addGB(aufwandMm,ergebnisPanel,  2,  2,  1, 1, insets, constraints);
         addGB(gewichtsfaktorOpt,ergebnisPanel, 1,  3,  1, 1, fill = GridBagConstraints.HORIZONTAL, insets, constraints);
         addGB(choice, ergebnisPanel, 2,3,2,1,fill = GridBagConstraints.BOTH, insets, constraints);
-        addGB(realerAufwandLabel,ergebnisPanel,  1,  4,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
+        addGB(realerAufwandLabel,ergebnisPanel,  1,  4,  1, 1, insets, constraints);
         addGB(realerAufwand,ergebnisPanel,  2,  4,  1, 1, fill = GridBagConstraints.BOTH, insets, constraints);
         addGB(vafText,ergebnisPanel,  1,  5,  1, 1, insets, constraints);
         addGB(vaf,ergebnisPanel,  2,  5,  1, 1, insets, constraints);
