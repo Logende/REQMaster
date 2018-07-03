@@ -1,10 +1,13 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
 import org.dhbw.stuttgart.ita16.reqmaster.components.*;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIErrorEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIModifyGewichtsfaktorenEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusListener;
 
 /**
  * Grafikkomponente: Die Klasse enthält alle Komponenten, um die Gewichtsfaktoren
@@ -51,7 +54,6 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
         setBorder(BorderFactory.createTitledBorder("Einflussfaktoren"));
         addComponents();
         setComponents();
-        this.update(view.getModel());
     }
 
     /**
@@ -63,15 +65,11 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
          * FocusListener definiert, den die Textfelder im Konstruktor übergeben bekommen
          * focusLost und focusGained sind Components
          */
-        UIListenerComponentLostFocus listener = (focusLost, focusGained) -> {
-            if(focusGained != null) {
-                if (focusLost.getParent() == focusGained.getParent()) {
-                    if(focusGained instanceof  UITextField) {
-                        return; //do nothing if new component has same parent
-                    }
-                }
+        FocusListener listener = new FocusListenerEventTriggering(getView()) {
+            @Override
+            public UIEvent generateEvent(Component lostFocus, Component gotFocus) {
+                return generateModifyEvent();
             }
-            wasModified(focusLost);
         };
 
         gewichtsPanel = new UIPanel();
@@ -148,43 +146,11 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
         faktorFuenf.setText(String.valueOf(gewichte[7]));
         faktorSechs.setText(String.valueOf(gewichte[8]));
         faktorSieben.setText(String.valueOf(gewichte[9]));
-    //    sumEinflussZahl.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getSummEinflussFaktoren()));
-    //    faktorEinflussZahl.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getFaktorEinflussBewertung()));
+        sumEinflussZahl.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getSummEinflussFaktoren()));
+        faktorEinflussZahl.setText(String.valueOf(model.getIDataAnforderungssammlung().getIDataFunctionPointAnalyse().getFaktorEinflussBewertung()));
     }
 
-    /**
-     * Wenn diese Methode aufgerufen wird, sendet sie ein Event an den Controller,
-     * um die veränderten Gewichtsfaktoren vom Controller überprüfen zu lassen
-     * @param focusLost Komponente, die zu validieren ist, da Benutzer versucht, Fokus auf andere Komponente zu legen
-     */
-    private void wasModified(Component focusLost) {
-        // Erstellen einer Liste mit den aktuellen Attributen
-        double[] gewichte = createGewichte();
-        //Erstellen des geänderten Produktdatums und des Events
-        DataSchaetzKonfiguration proposal = new DataSchaetzKonfiguration(getView().getModel().getSchaetzKonfiguration().getGewichte1(), gewichte);
-        UIModifyGewichtsfaktorenEvent optimierenEvent = new UIModifyGewichtsfaktorenEvent(proposal);
-        if (gewichte != null) {
-            getView().getObsController().observe(optimierenEvent);
-            if (focusLost != null) {
-                //Auswerten des Events nach Controllerbehandlung
-                if (!optimierenEvent.isSuccess()) {
-                    JOptionPane.showMessageDialog(focusLost.getParent(), optimierenEvent.getErrorMessage(),
-                            "Änderung nicht valide", JOptionPane.WARNING_MESSAGE);
-                    View.forcesFocus = UIGewichtsfaktoren.this; // Wenn Änderung nicht richtig, Fokus wieder auf die Komponente setzen
-                    focusLost.requestFocus();
-                } else {
-                    View.forcesFocus = null;
-                }
-            }
-        }
-    }
-
-    /**
-     * Erstellen eines Arrays, das die Werte der Gewichtsfaktoren enthält
-     * @return Array, das die Werte der Gewichtsfaktoren enthält
-     */
-    private double[] createGewichte(){
-        //falls kein double in einem Textfeld steht, wird Exception geworfen
+    private UIEvent generateModifyEvent(){
         try {
             double[] gewichte = new double[11];
             gewichte[0] = Double.parseDouble(faktorEins.getText());
@@ -197,11 +163,15 @@ public class UIGewichtsfaktoren extends UIPanel implements  IUIUpdateable{
             gewichte[7] = Double.parseDouble(faktorFuenf.getText());
             gewichte[8] = Double.parseDouble(faktorSechs.getText());
             gewichte[9] = Double.parseDouble(faktorSieben.getText());
-            return gewichte;
-        } catch (NumberFormatException exception) {
-            JOptionPane.showMessageDialog(this, "Einer der Gewichtsfaktoren ist keine Zahl!",
-                    "Fehler in Gewichtsfaktoren", JOptionPane.WARNING_MESSAGE);
-            return null;
+
+            //Erstellen des geänderten Produktdatums und des Events
+            DataSchaetzKonfiguration proposal = new DataSchaetzKonfiguration(getView().getModel().getSchaetzKonfiguration().getGewichte1(), gewichte);
+            UIModifyGewichtsfaktorenEvent optimierenEvent = new UIModifyGewichtsfaktorenEvent(proposal);
+            return optimierenEvent;
+
+        } catch (NumberFormatException exception) { //falls kein double in einem Textfeld steht: return event null. Das wird dann vom Listener als Eingabefehler gewertet.
+            return new UIErrorEvent("Invalide Gewichtsfaktoren.");
         }
     }
+
 }

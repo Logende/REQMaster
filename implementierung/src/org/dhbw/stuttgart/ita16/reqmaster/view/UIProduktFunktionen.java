@@ -1,9 +1,11 @@
 package org.dhbw.stuttgart.ita16.reqmaster.view;
 
+import org.dhbw.stuttgart.ita16.reqmaster.components.ActionListenerEventTriggering;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIButton;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIPanel;
 import org.dhbw.stuttgart.ita16.reqmaster.components.UIScrollPane;
 import org.dhbw.stuttgart.ita16.reqmaster.events.UIActionAddProduktFunktionEvent;
+import org.dhbw.stuttgart.ita16.reqmaster.events.UIEvent;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DataProduktFunktion;
 import org.dhbw.stuttgart.ita16.reqmaster.model.DefaultValues;
 import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
@@ -51,17 +53,10 @@ public class UIProduktFunktionen extends UIPanel implements IUIUpdateable {
         add.setText("Hinzufügen");
 
         //ActionListener fuer Hinzufügen-Button
-        add.addActionListener(new ActionListener() {
-            /**
-             * Wenn der Button gedrückt wird,
-             * wird ein Event an den Controller gesendet, um eine neue Produktfunktion hinzuzufügen
-             * @param e Event, auf das reagiert werden soll
-             */
+        add.addActionListener(new ActionListenerEventTriggering(view) {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (View.forcesFocus == null) {
-                    getView().getObsController().observe(new UIActionAddProduktFunktionEvent());
-                }
+            public UIEvent generateEvent(Object source) {
+                return new UIActionAddProduktFunktionEvent();
             }
         });
     }

@@ -1,7 +1,7 @@
 package org.dhbw.stuttgart.ita16.reqmaster.events;
 
 
-class UIActionFPEvent extends UIActionEvent {
+class UIActionFPEvent extends UIActionEvent implements IEventFailable{
 
 
     private boolean success;
