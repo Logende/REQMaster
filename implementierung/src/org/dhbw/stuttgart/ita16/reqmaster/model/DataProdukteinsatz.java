@@ -1,8 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
 
+/**
+ * Datenklasse für Produkteinsatz.
+ */
 public class DataProdukteinsatz extends DataText {
 
 

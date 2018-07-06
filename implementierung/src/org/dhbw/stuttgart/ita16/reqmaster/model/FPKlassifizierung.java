@@ -1,8 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
-import java.io.*;
-import java.util.*;
-
+/**
+ * FPKlassifizierungen werden im Rahmen der FP-Analyse verwendet.
+ * Jeder ProduktFunktion bzw. jedem -Datum wird vom Anwender eine Klassifizierung zugeordnet.
+ */
 public enum FPKlassifizierung {
 
 	TRANSAKTION_EI,

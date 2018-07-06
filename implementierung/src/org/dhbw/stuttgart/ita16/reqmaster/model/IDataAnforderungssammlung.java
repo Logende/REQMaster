@@ -2,6 +2,9 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import java.util.*;
 
+/**
+ * Interface für Anforderungssammlung.
+ */
 public interface IDataAnforderungssammlung {
 
     DataProdukteinsatz getDataProdukteinsatz();

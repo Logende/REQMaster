@@ -4,6 +4,9 @@ import org.dhbw.stuttgart.ita16.reqmaster.view.IObserverView;
 
 import java.io.*;
 
+/**
+ * Implementierung des IModels.
+ */
 public class Model implements IModel {
 
 	private IObserverView obsView;
@@ -28,22 +31,26 @@ public class Model implements IModel {
     	this.obsView = obsView;
 	}
 
+	@Override
     public void createAnforderungssammlung(File f){
     	this.anforderungsSammlungFile = f;
     	this.anforderungsSammlung = DefaultValues.createAnforderungsSammlung();
     	this.wasModified();
 	}
 
+	@Override
 	public void loadAnforderungssammlung(File f) {
     	this.anforderungsSammlungFile = f;
 		this.anforderungsSammlung = this.exporter.loadAnforderungssammlung(f);
 		this.wasModified();
 	}
 
+	@Override
 	public void saveAnforderungssammlung() {
 		this.exporter.saveAnforderungssammlung(anforderungsSammlung, anforderungsSammlungFile);
 	}
 
+	@Override
 	public void saveSchaetzkonfiguration(){
     	this.exporter.saveSchaetzKonfiguration(schaetzKonfiguration, schaetzKonfigurationFile);
 	}
@@ -60,10 +67,12 @@ public class Model implements IModel {
     	return anforderungsSammlung;
     }
 
+	@Override
 	public IDataSchaetzKonfiguration getSchaetzKonfiguration() {
 		return schaetzKonfiguration;
 	}
 
+	@Override
 	public void setSchaetzKonfiguration(IDataSchaetzKonfiguration schaetzKonfiguration) {
 		this.schaetzKonfiguration = schaetzKonfiguration;
 	}

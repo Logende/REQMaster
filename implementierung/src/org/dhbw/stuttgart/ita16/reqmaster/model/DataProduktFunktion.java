@@ -1,6 +1,9 @@
 package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 
+/**
+ * Datenklasse für Produktfunktionen.
+ */
 public class DataProduktFunktion implements IIdentifiable {
 
 	private String name;

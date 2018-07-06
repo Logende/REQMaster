@@ -2,6 +2,10 @@ package org.dhbw.stuttgart.ita16.reqmaster.model;
 
 import java.util.*;
 
+
+/**
+ * Datenklasse für Produktdaten.
+ */
 public class DataProduktDatum implements IIdentifiable {
 
 	private String name;

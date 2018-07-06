@@ -8,6 +8,6 @@ import org.dhbw.stuttgart.ita16.reqmaster.model.IModel;
  * Zugriff auf das Model und den Observer des Controllers haben
  */
 public interface IView {
-    public IModel getModel();
-    public IObserverController getObsController();
+    IModel getModel();
+    IObserverController getObsController();
 }
